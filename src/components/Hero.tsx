@@ -138,8 +138,8 @@ export default function Hero() {
           animate="visible"
           className="mx-auto max-w-2xl text-base sm:text-lg text-white/60 leading-relaxed mb-10 drop-shadow-md"
         >
-          Premium LED display solutions for business, healthcare, and events.
-          Custom-engineered, factory-direct, and professionally managed in the Philippines.
+          Custom LED display solutions for any space — corporate, retail, outdoor,
+          residential, and beyond. Factory-direct, professionally installed, and locally managed in the Philippines.
         </motion.p>
 
         {/* CTA Group */}

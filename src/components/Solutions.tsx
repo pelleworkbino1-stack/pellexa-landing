@@ -13,8 +13,8 @@ const solutions = [
     tag: 'Indoor Excellence',
     title: 'Crystal-Clear Indoor Displays',
     description:
-      'Ultra-fine pixel pitch screens for corporate boardrooms, hospital lobbies, retail showrooms, and command centers.',
-    highlights: ['Corporate Halls', 'Healthcare', 'Retail'],
+      'Ultra-fine pixel pitch screens for corporate boardrooms, churches, retail showrooms, private residences, and command centers.',
+    highlights: ['Corporate', 'Churches', 'Retail', 'Homes'],
     accent: 'text-blue-400',
     accentBg: 'bg-blue-500/10',
     borderHover: 'group-hover:border-blue-500/30',
