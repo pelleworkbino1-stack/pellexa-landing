@@ -22,7 +22,7 @@ const steps = [
     number: '03',
     title: 'Logistics & Last-Mile Delivery',
     description:
-      'We handle the complex logistics of the Philippines so you don\'t have to — RORO, inter-island trucking, and ferry coordination across Luzon, Visayas, and Mindanao, direct to your site.',
+      'We manage RORO, inter-island trucking, and ferry coordination across Luzon, Visayas, and Mindanao with real-time tracking and local coordination for every shipment — delivered direct to your site.',
   },
   {
     icon: Wrench,

@@ -154,7 +154,7 @@ export default function Hero() {
             href="#contact"
             className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 px-7 py-3.5 text-sm font-semibold text-dark-950 shadow-lg shadow-gold-500/20 hover:shadow-gold-500/40 transition-all duration-300 hover:scale-[1.03]"
           >
-            Book a Site Assessment
+            Request a Technical Consultation
             <ArrowRight
               size={16}
               className="transition-transform duration-300 group-hover:translate-x-1"

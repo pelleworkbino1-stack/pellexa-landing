@@ -6,32 +6,32 @@ const faqs = [
   {
     question: 'What pixel pitch do I need?',
     answer:
-      'Pixel pitch depends on your viewing distance. A simple rule of thumb: the pixel pitch number (e.g., P3.91) represents the minimum viewing distance in meters for a clear image. For high-end corporate boardrooms, we recommend P1.2–P2.1. For general indoor halls, hospitals, and churches, P2.6–P3.91 offers the best balance of clarity and value. For outdoor billboards, P4–P10 is ideal. While P3.91 is a popular versatile choice, we provide a full range from P0.9 to P10 depending on your specific architectural requirements. Our team will calculate the optimal resolution based on your site assessment.',
+      'A straightforward rule of thumb: the pixel pitch number represents the minimum comfortable viewing distance in meters. For example, a P3.91 display delivers a crisp image from approximately 4 meters and beyond. For executive boardrooms and control rooms, we recommend P1.2–P2.1. For conference halls, houses of worship, and medical facilities, P2.6–P3.91 provides an optimal balance of resolution and value. For outdoor installations and billboards, P4–P10 is ideal. While P3.91 is a popular versatile choice, we offer a full range from P0.9 to P10, selected based on your specific architectural requirements and site assessment.',
   },
   {
-    question: 'How long does the entire project take?',
+    question: 'How long does a project take from order to installation?',
     answer:
-      'Custom manufacturing takes 10–15 days, followed by international shipping and local logistics. Typically, a project is completed within 4–6 weeks from order confirmation to final installation. The physical on-site installation itself usually takes 2–4 days.',
+      'Total delivery and installation typically take 4 to 6 weeks. This includes precision manufacturing in our Tier-1 partner facilities, international freight, and secure inter-island logistics coordinated by our local team. The physical on-site installation itself is completed within 2–4 days.',
   },
   {
     question: 'Do you offer warranty and maintenance?',
     answer:
-      "Yes. Pellexa provides a 3-year manufacturer warranty on parts. We don't just ship boxes; we provide local technical support. We can also provide on-site technicians for the initial setup to ensure everything is calibrated perfectly.",
+      'Yes. Pellexa provides a 2-year comprehensive warranty backed by local technician support. Our PH-based team handles calibration, troubleshooting, and on-site service — ensuring your display performs at peak quality long after installation.',
   },
   {
     question: "What's the lifespan of an LED display?",
     answer:
-      'Our displays are built with premium lamps (like Kinglight or Nationstar) rated for 100,000+ hours. This means if you run your screen 24/7, it will last over 11 years. In a typical business environment, these screens often perform beautifully for 15+ years.',
+      'Our displays are engineered with premium-grade LED lamps (such as Kinglight or Nationstar) rated for 100,000+ hours of continuous operation. In practical terms, this translates to over 11 years of 24/7 use. In a typical commercial environment, these displays perform reliably for 15+ years.',
   },
   {
-    question: 'Can you handle projects outside Metro Manila?',
+    question: 'Can you deliver to hard-to-reach locations?',
     answer:
-      "Yes, we specialize in nationwide delivery. From the busy streets of Cebu to the provinces of Samar and Mindanao, we handle the complex inter-island logistics (trucking and ferries) so you don't have to worry about the distance.",
+      "This is one of our core specializations. We manage the entire RORO and inter-island ferry logistics chain across Luzon, Visayas, and Mindanao. Our recent deployment to a Private Medical Center in Eastern Samar is a testament to this capability — we coordinated trucking, ferry transfers, and final-mile delivery to ensure the installation was completed on schedule, regardless of location.",
   },
   {
     question: "What's the process for custom projects?",
     answer:
-      "Every project at Pellexa is bespoke. We consult with your architects, provide structural drawings for mounting, and customize the screen dimensions to fit your exact wall space. We are not a 'one-size-fits-all' shop; we engineer the solution for you.",
+      "Every engagement with Pellexa is bespoke. We collaborate with your architects and engineers, provide structural drawings for mounting, and customize screen dimensions to fit your precise specifications. We are the strategic bridge between world-class engineering and local Philippine implementation — not a one-size-fits-all provider.",
   },
 ]
 
