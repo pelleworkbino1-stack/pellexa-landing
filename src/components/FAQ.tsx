@@ -6,7 +6,7 @@ const faqs = [
   {
     question: 'What pixel pitch do I need?',
     answer:
-      'Pixel pitch depends on your viewing distance. For high-end corporate boardrooms, we recommend P1.2–P2.1. For general indoor halls, hospitals, and churches, P2.6–P3.91 offers the best balance of clarity and value. For outdoor billboards, P4–P10 is ideal. Our team will calculate the optimal resolution based on your specific floor plan.',
+      'Pixel pitch depends on your viewing distance. A simple rule of thumb: the pixel pitch number (e.g., P3.91) represents the minimum viewing distance in meters for a clear image. For high-end corporate boardrooms, we recommend P1.2–P2.1. For general indoor halls, hospitals, and churches, P2.6–P3.91 offers the best balance of clarity and value. For outdoor billboards, P4–P10 is ideal. Our team will calculate the optimal resolution based on your specific floor plan.',
   },
   {
     question: 'How long does installation take?',

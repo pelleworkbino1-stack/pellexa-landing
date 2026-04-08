@@ -44,9 +44,9 @@ const projects = [
   {
     image: healthcareImg,
     category: 'Indoor',
-    title: 'Hospital Information Display',
-    location: 'Samar Provincial Hospital',
-    specs: '3.6m x 2m — P2',
+    title: 'Medical Center LED Display',
+    location: 'Private Medical Center, Eastern Samar',
+    specs: '5m x 3m — P3.91',
     span: '',
   },
   {

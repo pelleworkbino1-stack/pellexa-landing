@@ -6,14 +6,14 @@ const stats = [
   {
     icon: Factory,
     value: '28+',
-    label: 'Years of LED Engineering',
-    description: 'Decades of manufacturing expertise behind every display',
+    label: 'Years of Manufacturing Expertise',
+    description: 'Backed by Tier-1 global manufacturing partners with decades of LED engineering heritage',
   },
   {
     icon: Globe,
     value: '150+',
     label: 'Countries Served',
-    description: 'Trusted by businesses across the globe',
+    description: 'Our manufacturing partners supply displays to businesses across the globe',
   },
   {
     icon: Zap,
@@ -29,15 +29,15 @@ const stats = [
   },
   {
     icon: Award,
-    value: '10,000+',
-    label: 'Projects Completed',
-    description: 'A proven track record of successful installations',
+    value: 'Last-Mile',
+    label: 'Nationwide PH Delivery',
+    description: 'Specialized logistics across Luzon, Visayas, and Mindanao — including remote provinces via trucking and ferry',
   },
   {
     icon: Headphones,
     value: '24/7',
     label: 'Local PH Support',
-    description: 'On-ground technicians across the Philippines',
+    description: 'On-ground technicians across the Philippines for installation and maintenance',
   },
 ]
 
@@ -68,12 +68,12 @@ export default function WhyPellexa() {
             Why Pellexa
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
-            Factory-Direct.{' '}
-            <span className="text-dark-400">Zero Middlemen.</span>
+            Optimized Supply Chain.{' '}
+            <span className="text-dark-400">Factory-Direct Pricing.</span>
           </h2>
           <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
-            We own the supply chain from component sourcing to final installation,
-            delivering premium LED solutions at competitive prices.
+            We bridge world-class manufacturing with local expertise,
+            delivering premium LED solutions through an optimized supply chain.
           </p>
         </motion.div>
 

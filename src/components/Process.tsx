@@ -20,9 +20,9 @@ const steps = [
   {
     icon: Truck,
     number: '03',
-    title: 'Logistics',
+    title: 'Logistics & Last-Mile Delivery',
     description:
-      'Factory-direct manufacturing with full quality control. We manage the entire supply chain from production floor to your doorstep.',
+      'Factory-direct manufacturing with full quality control. We specialize in last-mile delivery across the Philippines — Luzon, Visayas, and Mindanao, including remote provinces.',
   },
   {
     icon: Wrench,
