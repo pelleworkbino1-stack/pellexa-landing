@@ -22,7 +22,7 @@ const steps = [
     number: '03',
     title: 'Logistics & Last-Mile Delivery',
     description:
-      'Factory-direct manufacturing with full quality control. We specialize in last-mile delivery across the Philippines — Luzon, Visayas, and Mindanao, including remote provinces.',
+      'We handle the complex logistics of the Philippines so you don\'t have to — RORO, inter-island trucking, and ferry coordination across Luzon, Visayas, and Mindanao, direct to your site.',
   },
   {
     icon: Wrench,

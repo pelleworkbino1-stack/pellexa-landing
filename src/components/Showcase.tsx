@@ -46,7 +46,7 @@ const projects = [
     category: 'Indoor',
     title: 'Medical Center LED Display',
     location: 'Private Medical Center, Eastern Samar',
-    specs: '5m x 3m — P3.91',
+    specs: '5m x 3m — Optimized Pixel Pitch',
     span: '',
   },
   {

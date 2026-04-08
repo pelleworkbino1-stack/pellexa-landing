@@ -6,12 +6,12 @@ const faqs = [
   {
     question: 'What pixel pitch do I need?',
     answer:
-      'Pixel pitch depends on your viewing distance. A simple rule of thumb: the pixel pitch number (e.g., P3.91) represents the minimum viewing distance in meters for a clear image. For high-end corporate boardrooms, we recommend P1.2–P2.1. For general indoor halls, hospitals, and churches, P2.6–P3.91 offers the best balance of clarity and value. For outdoor billboards, P4–P10 is ideal. Our team will calculate the optimal resolution based on your specific floor plan.',
+      'Pixel pitch depends on your viewing distance. A simple rule of thumb: the pixel pitch number (e.g., P3.91) represents the minimum viewing distance in meters for a clear image. For high-end corporate boardrooms, we recommend P1.2–P2.1. For general indoor halls, hospitals, and churches, P2.6–P3.91 offers the best balance of clarity and value. For outdoor billboards, P4–P10 is ideal. While P3.91 is a popular versatile choice, we provide a full range from P0.9 to P10 depending on your specific architectural requirements. Our team will calculate the optimal resolution based on your site assessment.',
   },
   {
-    question: 'How long does installation take?',
+    question: 'How long does the entire project take?',
     answer:
-      'The physical installation usually takes 2–4 days once the goods are on-site. The total journey from your first deposit to a working screen is typically 5–7 weeks, covering custom factory production, sea freight, and local logistics.',
+      'Custom manufacturing takes 10–15 days, followed by international shipping and local logistics. Typically, a project is completed within 4–6 weeks from order confirmation to final installation. The physical on-site installation itself usually takes 2–4 days.',
   },
   {
     question: 'Do you offer warranty and maintenance?',

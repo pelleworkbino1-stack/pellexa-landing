@@ -6,14 +6,14 @@ const stats = [
   {
     icon: Factory,
     value: '28+',
-    label: 'Years of Manufacturing Expertise',
-    description: 'Backed by Tier-1 global manufacturing partners with decades of LED engineering heritage',
+    label: 'Years of Engineering Heritage',
+    description: 'Our manufacturing partners carry over 28 years of engineering heritage — Pellexa is your strategic bridge to Tier-1 global factories',
   },
   {
     icon: Globe,
     value: '150+',
     label: 'Countries Served',
-    description: 'Our manufacturing partners supply displays to businesses across the globe',
+    description: 'Our Tier-1 manufacturing partners supply displays to organizations across the globe',
   },
   {
     icon: Zap,
@@ -31,7 +31,7 @@ const stats = [
     icon: Award,
     value: 'Last-Mile',
     label: 'Nationwide PH Delivery',
-    description: 'Specialized logistics across Luzon, Visayas, and Mindanao — including remote provinces via trucking and ferry',
+    description: 'We manage RORO, inter-island trucking, and ferry logistics across Luzon, Visayas, and Mindanao — so you don\'t have to',
   },
   {
     icon: Headphones,
@@ -72,8 +72,8 @@ export default function WhyPellexa() {
             <span className="text-dark-400">Factory-Direct Pricing.</span>
           </h2>
           <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
-            We bridge world-class manufacturing with local expertise,
-            delivering premium LED solutions through an optimized supply chain.
+            Your strategic nexus between Tier-1 global factories and the Philippine market —
+            delivering premium LED solutions through an optimized, end-to-end supply chain.
           </p>
         </motion.div>
 

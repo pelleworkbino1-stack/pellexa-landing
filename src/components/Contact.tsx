@@ -84,10 +84,10 @@ export default function Contact() {
 
             <div className="space-y-4">
               {[
-                'Free consultation & site assessment',
-                'Custom engineering for your exact requirements',
-                'Factory-direct pricing with no middlemen',
-                'Professional installation across the Philippines',
+                'Complimentary consultation and site assessment',
+                'Custom engineering for your exact architectural requirements',
+                'Optimized supply chain with factory-direct pricing',
+                'Professional installation and last-mile delivery nationwide',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3">
                   <CheckCircle size={18} className="text-gold-500 mt-0.5 shrink-0" />
