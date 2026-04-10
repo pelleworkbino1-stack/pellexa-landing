@@ -19,7 +19,7 @@ const stats = [
     icon: Zap,
     value: '100+',
     label: 'Premium Installations',
-    description: 'Delivering high-standard visual solutions custom-engineered and tailored for the Philippine market.',
+    description: 'Delivering high-standard visual solutions tailored for the Philippine market.',
   },
   {
     icon: ShieldCheck,
