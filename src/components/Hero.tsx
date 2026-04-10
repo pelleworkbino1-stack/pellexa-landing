@@ -107,7 +107,7 @@ export default function Hero() {
         >
           <Sparkles size={14} className="text-gold-400" />
           <span className="text-xs font-medium tracking-wide text-gold-400 uppercase">
-            Factory-Direct LED Solutions
+            Custom-Engineered LED Solutions
           </span>
         </motion.div>
 
@@ -138,8 +138,8 @@ export default function Hero() {
           animate="visible"
           className="mx-auto max-w-2xl text-base sm:text-lg text-white/60 leading-relaxed mb-10 drop-shadow-md"
         >
-          Custom LED display solutions for any space — corporate, retail, outdoor,
-          residential, and beyond. Factory-direct, professionally installed, and locally managed in the Philippines.
+          Premium LED display solutions custom-engineered for any space — corporate, healthcare, outdoor,
+          and events. Managed end-to-end: from vision and engineering to installation and local support in the Philippines.
         </motion.p>
 
         {/* CTA Group */}
@@ -178,7 +178,7 @@ export default function Hero() {
           className="mt-16 sm:mt-20 grid grid-cols-3 gap-6 sm:gap-12 max-w-xl mx-auto"
         >
           {[
-            { value: '100+', label: 'Projects Delivered' },
+            { value: '100+', label: 'Premium Installations' },
             { value: 'P0.9–P10', label: 'Pixel Pitch Range' },
             { value: '24/7', label: 'Local PH Support' },
           ].map((stat) => (

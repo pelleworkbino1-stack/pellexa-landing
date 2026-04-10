@@ -61,8 +61,8 @@ export default function Advantage() {
             <span className="text-dark-400">We design systems.</span>
           </h2>
           <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
-            Every Pellexa LED display is custom-engineered for your unique space,
-            audience, and vision. No off-the-shelf compromises.
+            As your Strategic Partner, every Pellexa LED display is custom-engineered
+            for your unique space, audience, and vision. No off-the-shelf compromises.
           </p>
         </motion.div>
 

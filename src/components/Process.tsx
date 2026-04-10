@@ -6,30 +6,30 @@ const steps = [
   {
     icon: MessageSquare,
     number: '01',
-    title: 'Consultation',
+    title: 'Strategic Consultation',
     description:
-      'We start by understanding your space, audience, and goals. Our team conducts a thorough site assessment — virtually or on-location in the Philippines.',
+      'We begin by understanding your space, audience, and goals. Our team conducts a thorough site assessment — virtually or on-location — to define the optimal solution.',
   },
   {
     icon: Cpu,
     number: '02',
-    title: 'Engineering',
+    title: 'Custom Engineering',
     description:
-      'Custom specifications are drafted: optimal pixel pitch, cabinet dimensions, brightness, and mounting design — all tailored to your project.',
+      'Precision specifications are drafted: optimal pixel pitch, cabinet dimensions, brightness, and mounting design — all custom-engineered for your project.',
   },
   {
     icon: Truck,
     number: '03',
-    title: 'Logistics & Last-Mile Delivery',
+    title: 'Managed Logistics',
     description:
-      'We manage RORO, inter-island trucking, and ferry coordination across Luzon, Visayas, and Mindanao with real-time tracking and local coordination for every shipment — delivered direct to your site.',
+      'We own the entire delivery chain — RORO, inter-island trucking, and ferry coordination across the Philippines with real-time tracking, delivered direct to your site.',
   },
   {
     icon: Wrench,
     number: '04',
-    title: 'Local Support',
+    title: 'Local Implementation',
     description:
-      'Professional installation by our PH-based technicians. Ongoing maintenance, calibration, and 24/7 support keep your display performing flawlessly.',
+      'Professional installation by our dedicated PH-based technicians. Ongoing maintenance, calibration, and priority 24/7 support keep your display performing flawlessly.',
   },
 ]
 
@@ -53,8 +53,8 @@ export default function Process() {
             From Vision to Reality
           </h2>
           <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
-            A proven, transparent process that turns your concept into a
-            world-class LED installation.
+            As your Project Lead, we manage every phase — Vision, Engineering, and
+            Implementation — turning your concept into a premium LED installation.
           </p>
         </motion.div>
 

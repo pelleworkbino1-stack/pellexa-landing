@@ -16,6 +16,8 @@ const projects = [
     location: 'Makati City, Philippines',
     specs: '4.8m x 2.7m — P1.5',
     span: 'lg:col-span-2',
+    featured: false,
+    badge: '',
   },
   {
     image: outdoorImg,
@@ -24,6 +26,18 @@ const projects = [
     location: 'BGC, Taguig',
     specs: '12m x 8m — P6',
     span: '',
+    featured: false,
+    badge: '',
+  },
+  {
+    image: healthcareImg,
+    category: 'Healthcare',
+    title: 'Medical Center LED Display',
+    location: 'Private Medical Center, Eastern Samar',
+    specs: '5m x 3m — Optimized Pixel Pitch',
+    span: 'lg:col-span-2',
+    featured: true,
+    badge: 'Last-Mile Logistics Showcase',
   },
   {
     image: retailImg,
@@ -32,6 +46,8 @@ const projects = [
     location: 'SM Mall of Asia',
     specs: '3m x 1.2m — P2.5',
     span: '',
+    featured: false,
+    badge: '',
   },
   {
     image: sportsImg,
@@ -40,14 +56,8 @@ const projects = [
     location: 'Philippine Arena, Bulacan',
     specs: '20m x 6m — P8',
     span: 'lg:col-span-2',
-  },
-  {
-    image: healthcareImg,
-    category: 'Indoor',
-    title: 'Medical Center LED Display',
-    location: 'Private Medical Center, Eastern Samar',
-    specs: '5m x 3m — Optimized Pixel Pitch',
-    span: '',
+    featured: false,
+    badge: '',
   },
   {
     image: conferenceImg,
@@ -55,7 +65,9 @@ const projects = [
     title: 'Tech Conference Stage',
     location: 'SMX Convention Center, Pasay',
     specs: '8m x 4m — P3.91',
-    span: 'lg:col-span-2',
+    span: '',
+    featured: false,
+    badge: '',
   },
 ]
 
@@ -95,7 +107,11 @@ export default function Showcase() {
                 delay: i * 0.1,
                 ease: [0.22, 1, 0.36, 1] as const,
               }}
-              className={`group relative rounded-2xl overflow-hidden ${project.span} aspect-[16/10]`}
+              className={`group relative rounded-2xl overflow-hidden ${project.span} aspect-[16/10] ${
+                project.featured
+                  ? 'ring-1 ring-gold-500/30 shadow-lg shadow-gold-500/10'
+                  : ''
+              }`}
             >
               <img
                 src={project.image}
@@ -109,11 +125,21 @@ export default function Showcase() {
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-dark-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
+              {/* Featured glow accent */}
+              {project.featured && (
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-gold-500/10 via-transparent to-transparent pointer-events-none" />
+              )}
+
               {/* Category badge */}
-              <div className="absolute top-4 left-4">
+              <div className="absolute top-4 left-4 flex items-center gap-2">
                 <span className="inline-block rounded-full bg-gold-500/15 backdrop-blur-sm border border-gold-500/20 px-3 py-1 text-xs font-semibold text-gold-400">
                   {project.category}
                 </span>
+                {project.featured && project.badge && (
+                  <span className="inline-block rounded-full bg-gold-500/90 px-3 py-1 text-xs font-bold text-dark-950 shadow-md shadow-gold-500/30">
+                    {project.badge}
+                  </span>
+                )}
               </div>
 
               {/* Bottom info */}

@@ -6,38 +6,38 @@ const stats = [
   {
     icon: Factory,
     value: '28+',
-    label: 'Years of Engineering Heritage',
-    description: 'Our manufacturing partners carry over 28 years of engineering heritage — Pellexa is your strategic bridge to Tier-1 global factories',
+    label: 'Years of Manufacturing Excellence',
+    description: 'Our solutions are powered by Tier-1 engineering infrastructure with nearly three decades of heritage.',
   },
   {
     icon: Globe,
     value: '150+',
-    label: 'Countries Served',
-    description: 'Our Tier-1 manufacturing partners supply displays to organizations across the globe',
+    label: 'Globally Proven Technology',
+    description: 'Our display systems are trusted by organizations in over 150 countries.',
   },
   {
     icon: Zap,
-    value: '5',
-    label: 'Production Facilities',
-    description: 'State-of-the-art factories ensuring quality at scale',
+    value: '100+',
+    label: 'Premium Installations',
+    description: 'Delivering high-standard visual solutions custom-engineered and tailored for the Philippine market.',
   },
   {
     icon: ShieldCheck,
     value: 'ISO 9001',
     label: 'Certified Quality',
-    description: 'International standards in every step of production',
+    description: 'International standards integrated into every stage of our managed solutions pipeline.',
   },
   {
     icon: Award,
     value: 'Last-Mile',
     label: 'Nationwide PH Delivery',
-    description: 'We manage RORO, inter-island trucking, and ferry logistics across Luzon, Visayas, and Mindanao — so you don\'t have to',
+    description: 'We own the entire logistics chain — RORO, inter-island trucking, and ferry coordination across Luzon, Visayas, and Mindanao.',
   },
   {
     icon: Headphones,
     value: '24/7',
     label: 'Local PH Support',
-    description: 'On-ground technicians across the Philippines for installation and maintenance',
+    description: 'Dedicated on-ground technicians across the Philippines for installation, calibration, and priority maintenance.',
   },
 ]
 
@@ -68,12 +68,12 @@ export default function WhyPellexa() {
             Why Pellexa
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
-            Optimized Supply Chain.{' '}
-            <span className="text-dark-400">Factory-Direct Pricing.</span>
+            Vision. Engineering.{' '}
+            <span className="text-dark-400">Implementation.</span>
           </h2>
           <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
-            Your strategic nexus between Tier-1 global factories and the Philippine market —
-            delivering premium LED solutions through an optimized, end-to-end supply chain.
+            Pellexa is your Strategic Partner for premium LED solutions — we lead every project
+            from custom engineering through managed logistics to professional local installation.
           </p>
         </motion.div>
 
