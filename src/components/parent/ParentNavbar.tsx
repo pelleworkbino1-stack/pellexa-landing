@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronLeft } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { label: 'Solutions', href: '#solutions' },
-  { label: 'Advantage', href: '#advantage' },
-  { label: 'Process', href: '#process' },
+  { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ]
 
-export default function Navbar() {
+export default function ParentNavbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -24,7 +22,7 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -80 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? 'bg-dark-950/80 backdrop-blur-xl border-b border-white/5 shadow-2xl'
@@ -33,28 +31,16 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex h-18 items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-1 text-dark-400 hover:text-white transition-colors" title="Back to Pellexa">
-              <ChevronLeft size={16} />
-            </Link>
-            <a href="/led" className="flex items-center gap-2 group">
-              <div className="relative flex items-center justify-center w-9 h-9">
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-gold-500 to-gold-400 opacity-20 group-hover:opacity-40 transition-opacity" />
-                <span className="font-display font-bold text-lg text-gold-400">P</span>
-              </div>
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-display font-semibold text-lg tracking-tight text-white">
-                  Pellexa
-                </span>
-                <span className="font-display font-medium text-sm text-gold-400/70">
-                  LED
-                </span>
-              </div>
-            </a>
-          </div>
+          <a href="/" className="flex items-center gap-2.5 group">
+            <div className="relative flex items-center justify-center w-9 h-9">
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-gold-500 to-gold-400 opacity-20 group-hover:opacity-40 transition-opacity" />
+              <span className="font-display font-bold text-lg text-gold-400">P</span>
+            </div>
+            <span className="font-display font-semibold text-lg tracking-tight text-white">
+              Pellexa
+            </span>
+          </a>
 
-          {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
@@ -70,11 +56,10 @@ export default function Navbar() {
               href="#contact"
               className="ml-2 inline-flex items-center gap-2 rounded-full bg-gold-500/10 border border-gold-500/20 px-5 py-2 text-sm font-medium text-gold-400 hover:bg-gold-500/20 hover:border-gold-500/40 transition-all duration-300"
             >
-              Get a Quote
+              Get in Touch
             </a>
           </div>
 
-          {/* Mobile toggle */}
           <button
             className="md:hidden relative z-50 p-2 text-white"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -86,7 +71,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -112,7 +96,7 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="mt-3 block rounded-full bg-gold-500/10 border border-gold-500/20 px-5 py-3 text-center text-sm font-medium text-gold-400 hover:bg-gold-500/20 transition-all"
               >
-                Get a Quote
+                Get in Touch
               </a>
             </div>
           </motion.div>
