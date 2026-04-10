@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { hubUrl, isLedSubdomain } from '../lib/site'
 
 const navLinks = [
   { label: 'Solutions', href: '#solutions' },
@@ -35,10 +36,24 @@ export default function Navbar() {
         <div className="flex h-18 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-1 text-dark-400 hover:text-white transition-colors" title="Back to Pellexa">
-              <ChevronLeft size={16} />
-            </Link>
-            <a href="/led" className="flex items-center gap-2 group">
+            {isLedSubdomain() ? (
+              <a
+                href={hubUrl()}
+                className="flex items-center gap-1 text-dark-400 hover:text-white transition-colors"
+                title="Back to Pellexa"
+              >
+                <ChevronLeft size={16} />
+              </a>
+            ) : (
+              <Link
+                to="/"
+                className="flex items-center gap-1 text-dark-400 hover:text-white transition-colors"
+                title="Back to Pellexa"
+              >
+                <ChevronLeft size={16} />
+              </Link>
+            )}
+            <a href={isLedSubdomain() ? '/' : '/led'} className="flex items-center gap-2 group">
               <div className="relative flex items-center justify-center w-9 h-9">
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-gold-500 to-gold-400 opacity-20 group-hover:opacity-40 transition-opacity" />
                 <span className="font-display font-bold text-lg text-gold-400">P</span>
