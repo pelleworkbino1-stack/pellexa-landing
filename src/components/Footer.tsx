@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { hubUrl, isLedSubdomain } from '../lib/site'
+import { useMarket } from '../hooks/useMarket'
 
 const logoBlock = (
   <>
@@ -15,6 +16,9 @@ const logoBlock = (
 )
 
 export default function Footer() {
+  const { market } = useMarket()
+  const c = market.footer
+
   return (
     <footer className="border-t border-white/5 bg-dark-950 py-12">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -30,15 +34,15 @@ export default function Footer() {
           )}
 
           <p className="text-sm text-dark-300 text-center max-w-md">
-            Strategic local partner for high-profile visual installations in the Philippines.
+            {c.tagline}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
             <p className="text-xs text-dark-500">
-              &copy; {new Date().getFullYear()} Pellexa LED Solutions. All rights reserved.
+              {c.copyright.replace('{year}', String(new Date().getFullYear()))}
             </p>
             <div className="flex items-center gap-6">
-              {['Privacy', 'Terms'].map((link) => (
+              {[c.privacy, c.terms].map((link) => (
                 <a
                   key={link}
                   href="#"

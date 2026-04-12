@@ -3,15 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { hubUrl, isLedSubdomain } from '../lib/site'
-
-const navLinks = [
-  { label: 'Solutions', href: '#solutions' },
-  { label: 'Advantage', href: '#advantage' },
-  { label: 'Process', href: '#process' },
-  { label: 'Contact', href: '#contact' },
-]
+import { useMarket } from '../hooks/useMarket'
+import MarketToggle from './MarketSelector'
 
 export default function Navbar() {
+  const { market } = useMarket()
+  const c = market.nav
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -34,23 +31,22 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex h-18 items-center justify-between">
-          {/* Logo */}
           <div className="flex items-center gap-3">
             {isLedSubdomain() ? (
               <a
                 href={hubUrl()}
                 className="flex items-center gap-1 text-dark-400 hover:text-white transition-colors"
-                title="Back to Pellexa"
+                title={c.backTitle}
               >
-                <ChevronLeft size={16} />
+                <ChevronLeft size={16} className="rtl:rotate-180" />
               </a>
             ) : (
               <Link
                 to="/"
                 className="flex items-center gap-1 text-dark-400 hover:text-white transition-colors"
-                title="Back to Pellexa"
+                title={c.backTitle}
               >
-                <ChevronLeft size={16} />
+                <ChevronLeft size={16} className="rtl:rotate-180" />
               </Link>
             )}
             <a href={isLedSubdomain() ? '/' : '/led'} className="flex items-center gap-2 group">
@@ -69,9 +65,8 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {c.links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -81,15 +76,15 @@ export default function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-500 group-hover:w-full transition-all duration-300" />
               </a>
             ))}
+            <MarketToggle />
             <a
               href="#contact"
-              className="ml-2 inline-flex items-center gap-2 rounded-full bg-gold-500/10 border border-gold-500/20 px-5 py-2 text-sm font-medium text-gold-400 hover:bg-gold-500/20 hover:border-gold-500/40 transition-all duration-300"
+              className="inline-flex items-center gap-2 rounded-full bg-gold-500/10 border border-gold-500/20 px-5 py-2 text-sm font-medium text-gold-400 hover:bg-gold-500/20 hover:border-gold-500/40 transition-all duration-300"
             >
-              Get a Quote
+              {c.cta}
             </a>
           </div>
 
-          {/* Mobile toggle */}
           <button
             className="md:hidden relative z-50 p-2 text-white"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -101,7 +96,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -112,7 +106,7 @@ export default function Navbar() {
             className="md:hidden absolute inset-x-0 top-full bg-dark-900/98 backdrop-blur-2xl border-b border-white/5"
           >
             <div className="flex flex-col gap-1 p-5">
-              {navLinks.map((link) => (
+              {c.links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -122,12 +116,15 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <div className="flex items-center gap-3 px-4 py-3">
+                <MarketToggle />
+              </div>
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
                 className="mt-3 block rounded-full bg-gold-500/10 border border-gold-500/20 px-5 py-3 text-center text-sm font-medium text-gold-400 hover:bg-gold-500/20 transition-all"
               >
-                Get a Quote
+                {c.cta}
               </a>
             </div>
           </motion.div>

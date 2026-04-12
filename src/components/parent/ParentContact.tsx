@@ -1,8 +1,11 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Mail, ArrowRight } from 'lucide-react'
+import { useLang } from '../../context/LangContext'
 
 export default function ParentContact() {
+  const { content } = useLang()
+  const c = content.contact
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -18,21 +21,20 @@ export default function ParentContact() {
             <Mail size={28} className="text-gold-400" />
           </div>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-white leading-tight mb-4">
-            Ready to Start a Project?
+            {c.title}
           </h2>
           <p className="text-dark-400 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
-            Whether you need LED displays, or want to explore our upcoming verticals —
-            our team is ready to provide a tailored consultation.
+            {c.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="mailto:info@pellexa.com"
               className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 px-7 py-3.5 text-sm font-semibold text-dark-950 shadow-lg shadow-gold-500/20 hover:shadow-gold-500/40 transition-all duration-300 hover:scale-[1.03]"
             >
-              Contact Us
+              {c.cta1}
               <ArrowRight
                 size={16}
-                className="transition-transform duration-300 group-hover:translate-x-1"
+                className="transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180"
               />
               <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
@@ -40,7 +42,7 @@ export default function ParentContact() {
               href="/led#contact"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-7 py-3.5 text-sm font-medium text-white hover:bg-white/10 hover:border-white/25 transition-all duration-300"
             >
-              LED Inquiry Form
+              {c.cta2}
             </a>
           </div>
         </motion.div>

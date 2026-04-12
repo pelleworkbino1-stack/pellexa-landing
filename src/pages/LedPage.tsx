@@ -10,6 +10,8 @@ import FAQ from '../components/FAQ'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 import ScrollProgress from '../components/ScrollProgress'
+import { MarketBanner } from '../components/MarketSelector'
+import { useMarket } from '../hooks/useMarket'
 import { isLedSubdomain } from '../lib/site'
 
 function setMeta(property: string, content: string) {
@@ -19,22 +21,25 @@ function setMeta(property: string, content: string) {
 }
 
 export default function LedPage() {
+  const { market } = useMarket()
+
   useEffect(() => {
-    document.title = 'Pellexa LED — Custom LED Display Solutions | Philippines'
-    setMeta('description', 'Custom LED display solutions for any space in the Philippines — indoor, outdoor, corporate, retail, residential, and more. Precision-manufactured, professionally installed, locally supported.')
-    setMeta('og:title', 'Pellexa LED — Custom LED Display Solutions')
-    setMeta('og:description', 'Next-generation LED displays, custom-engineered from our manufacturing facility. Indoor, outdoor, rental & event solutions professionally managed in the Philippines.')
+    document.title = market.meta.title
+    setMeta('description', market.meta.description)
+    setMeta('og:title', market.meta.ogTitle)
+    setMeta('og:description', market.meta.ogDescription)
     setMeta(
       'og:url',
       isLedSubdomain() ? `${window.location.origin}/` : 'https://pellexa.com/led',
     )
-    setMeta('twitter:title', 'Pellexa LED — Custom LED Display Solutions')
-    setMeta('twitter:description', 'Premium LED displays from our manufacturing facility, delivered across the Philippines. Custom sizes, pixel pitches, and mounting solutions.')
+    setMeta('twitter:title', market.meta.twitterTitle)
+    setMeta('twitter:description', market.meta.twitterDescription)
     window.scrollTo(0, 0)
-  }, [])
+  }, [market])
 
   return (
     <div className="min-h-screen bg-dark-950 text-white antialiased">
+      <MarketBanner />
       <ScrollProgress />
       <Navbar />
       <main>
@@ -42,7 +47,7 @@ export default function LedPage() {
         <WhyPellexa />
         <Advantage />
         <Solutions />
-        <Showcase />
+        {market.showcase.visible && <Showcase />}
         <Process />
         <FAQ />
         <Contact />

@@ -1,14 +1,25 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Globe } from 'lucide-react'
+import { useLang } from '../../context/LangContext'
 
-const navLinks = [
-  { label: 'Solutions', href: '#solutions' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
-]
+function LangToggle() {
+  const { lang, setLang } = useLang()
+  return (
+    <button
+      onClick={() => setLang(lang === 'en' ? 'he' : 'en')}
+      className="inline-flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-xs font-medium text-dark-300 hover:bg-white/10 hover:text-white transition-all"
+      aria-label="Switch language"
+    >
+      <Globe size={14} />
+      <span>{lang === 'en' ? 'עב' : 'EN'}</span>
+    </button>
+  )
+}
 
 export default function ParentNavbar() {
+  const { content } = useLang()
+  const c = content.nav
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -42,7 +53,7 @@ export default function ParentNavbar() {
           </a>
 
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {c.links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -52,11 +63,12 @@ export default function ParentNavbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-500 group-hover:w-full transition-all duration-300" />
               </a>
             ))}
+            <LangToggle />
             <a
               href="#contact"
-              className="ml-2 inline-flex items-center gap-2 rounded-full bg-gold-500/10 border border-gold-500/20 px-5 py-2 text-sm font-medium text-gold-400 hover:bg-gold-500/20 hover:border-gold-500/40 transition-all duration-300"
+              className="inline-flex items-center gap-2 rounded-full bg-gold-500/10 border border-gold-500/20 px-5 py-2 text-sm font-medium text-gold-400 hover:bg-gold-500/20 hover:border-gold-500/40 transition-all duration-300"
             >
-              Get in Touch
+              {c.cta}
             </a>
           </div>
 
@@ -81,7 +93,7 @@ export default function ParentNavbar() {
             className="md:hidden absolute inset-x-0 top-full bg-dark-900/98 backdrop-blur-2xl border-b border-white/5"
           >
             <div className="flex flex-col gap-1 p-5">
-              {navLinks.map((link) => (
+              {c.links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -91,12 +103,15 @@ export default function ParentNavbar() {
                   {link.label}
                 </a>
               ))}
+              <div className="flex items-center gap-3 px-4 py-3">
+                <LangToggle />
+              </div>
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
                 className="mt-3 block rounded-full bg-gold-500/10 border border-gold-500/20 px-5 py-3 text-center text-sm font-medium text-gold-400 hover:bg-gold-500/20 transition-all"
               >
-                Get in Touch
+                {c.cta}
               </a>
             </div>
           </motion.div>

@@ -1,4 +1,9 @@
+import { useLang } from '../../context/LangContext'
+
 export default function ParentFooter() {
+  const { content } = useLang()
+  const c = content.footer
+
   return (
     <footer className="border-t border-white/5 bg-dark-950 py-12">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -14,16 +19,15 @@ export default function ParentFooter() {
           </div>
 
           <p className="text-sm text-dark-300 text-center max-w-lg">
-            The strategic nexus between world-class global engineering
-            and local Philippine implementation.
+            {c.tagline}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
             <p className="text-xs text-dark-500">
-              &copy; {new Date().getFullYear()} Pellexa. All rights reserved.
+              {c.copyright.replace('{year}', String(new Date().getFullYear()))}
             </p>
             <div className="flex items-center gap-6">
-              {['Privacy', 'Terms'].map((link) => (
+              {[c.privacy, c.terms].map((link) => (
                 <a
                   key={link}
                   href="#"

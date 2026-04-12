@@ -9,13 +9,11 @@ import {
   ChevronDown,
   ArrowLeft,
   Camera,
+  MessageCircle,
 } from 'lucide-react'
+import { useMarket } from '../hooks/useMarket'
 
 const EMAIL = 'led.sales@pellexa.com'
-
-/* ------------------------------------------------------------------ */
-/*  Types & initial state                                              */
-/* ------------------------------------------------------------------ */
 
 interface D {
   environment: string
@@ -78,10 +76,6 @@ const init: D = {
   contactPhone: '',
   notes: '',
 }
-
-/* ------------------------------------------------------------------ */
-/*  Build the email body                                               */
-/* ------------------------------------------------------------------ */
 
 function val(selected: string, custom: string) {
   if (selected === 'Other' && custom) return custom
@@ -161,10 +155,6 @@ function buildEmail(d: D): string {
   return l.join('\n')
 }
 
-/* ------------------------------------------------------------------ */
-/*  Reusable sub-components                                            */
-/* ------------------------------------------------------------------ */
-
 function OptionCard({
   label,
   desc,
@@ -180,7 +170,7 @@ function OptionCard({
     <button
       type="button"
       onClick={onClick}
-      className={`flex-1 min-w-[140px] text-left px-5 py-4.5 rounded-xl border-2 transition-all ${
+      className={`flex-1 min-w-[140px] text-left rtl:text-right px-5 py-4.5 rounded-xl border-2 transition-all ${
         selected
           ? 'bg-gold-500/10 border-gold-500/40 shadow-lg shadow-gold-500/5'
           : 'bg-dark-900/50 border-white/8 hover:border-white/20'
@@ -209,7 +199,7 @@ function BigCheckbox({
     <button
       type="button"
       onClick={() => onChange(!checked)}
-      className={`w-full flex items-start gap-4 p-4.5 rounded-xl border-2 text-left transition-all ${
+      className={`w-full flex items-start gap-4 p-4.5 rounded-xl border-2 text-left rtl:text-right transition-all ${
         checked
           ? 'bg-gold-500/8 border-gold-500/30'
           : 'bg-dark-900/40 border-white/8 hover:border-white/15'
@@ -234,10 +224,6 @@ function BigCheckbox({
   )
 }
 
-/* ------------------------------------------------------------------ */
-/*  Layout sub-components (defined outside to avoid remount on render)  */
-/* ------------------------------------------------------------------ */
-
 function Section({
   num,
   title,
@@ -257,8 +243,8 @@ function Section({
         </span>
         <h4 className="text-lg sm:text-xl font-semibold text-white">{title}</h4>
       </div>
-      <p className="text-sm sm:text-base text-dark-400 mb-5 ml-[3.15rem]">{desc}</p>
-      <div className="space-y-5 ml-0 sm:ml-[3.15rem]">{children}</div>
+      <p className="text-sm sm:text-base text-dark-400 mb-5 ms-[3.15rem]">{desc}</p>
+      <div className="space-y-5 ms-0 sm:ms-[3.15rem]">{children}</div>
     </div>
   )
 }
@@ -278,21 +264,21 @@ function SelectWrap({ children }: { children: React.ReactNode }) {
       {children}
       <ChevronDown
         size={18}
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-dark-400 pointer-events-none"
+        className="absolute end-4 top-1/2 -translate-y-1/2 text-dark-400 pointer-events-none"
       />
     </div>
   )
 }
 
-/* ------------------------------------------------------------------ */
-/*  Main component                                                     */
-/* ------------------------------------------------------------------ */
-
 const inputClass =
   'w-full rounded-xl border-2 border-white/10 bg-dark-900/60 px-5 py-4 text-lg text-white placeholder:text-dark-500 focus:outline-none focus:border-gold-500/40 focus:ring-2 focus:ring-gold-500/20 transition-all'
-const selectClass = `${inputClass} pr-11 appearance-none cursor-pointer`
+const selectClass = `${inputClass} pe-11 appearance-none cursor-pointer`
 
 export default function Contact() {
+  const { market } = useMarket()
+  const t = market.contact
+  const f = t.form
+
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [d, setD] = useState<D>(init)
@@ -320,41 +306,32 @@ export default function Contact() {
     }
   }
 
-  /* ---------- Render ---------- */
-
   return (
     <section id="contact" className="relative py-24 sm:py-32 bg-dark-900/50">
       <div className="mx-auto max-w-7xl px-5 sm:px-8" ref={ref}>
         <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-14 items-start">
-          {/* ============ LEFT COLUMN ============ */}
+          {/* Left column */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: market.dir === 'rtl' ? 30 : -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
             className="lg:sticky lg:top-24"
           >
             <span className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-3 block">
-              Start Your Project
+              {t.sectionLabel}
             </span>
             <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
-              Let's Build Something{' '}
+              {t.title}{' '}
               <span className="bg-gradient-to-r from-gold-400 to-gold-300 bg-clip-text text-transparent">
-                Extraordinary
+                {t.titleHighlight}
               </span>
             </h2>
             <p className="text-dark-400 text-base sm:text-lg leading-relaxed mb-8">
-              Use the guided form to tell us about your project. We'll create a
-              ready-to-send email for you — just copy and send. You can also
-              write directly to us.
+              {t.subtitle}
             </p>
 
             <div className="space-y-4 mb-8">
-              {[
-                'Complimentary consultation and site assessment',
-                'Custom engineering for your exact architectural requirements',
-                'Direct pricing from our manufacturing facility',
-                'Professional installation and delivery nationwide',
-              ].map((item) => (
+              {t.benefits.map((item) => (
                 <div key={item} className="flex items-start gap-3">
                   <CheckCircle size={18} className="text-gold-500 mt-0.5 shrink-0" />
                   <span className="text-sm text-dark-300">{item}</span>
@@ -362,10 +339,9 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Quick email card */}
             <div className="rounded-xl border border-white/5 bg-dark-800/40 p-5">
               <p className="text-xs text-dark-500 mb-2.5 font-medium uppercase tracking-wider">
-                Send directly to
+                {t.emailCardLabel}
               </p>
               <div className="flex items-center gap-3">
                 <Mail size={18} className="text-gold-500 shrink-0" />
@@ -386,27 +362,48 @@ export default function Contact() {
                 >
                   {copiedEmail ? (
                     <>
-                      <Check size={14} /> Copied
+                      <Check size={14} /> {t.copied}
                     </>
                   ) : (
                     <>
-                      <Copy size={14} /> Copy
+                      <Copy size={14} /> {t.copy}
                     </>
                   )}
                 </button>
               </div>
             </div>
+
+            {t.whatsapp && (
+              <div className="rounded-xl border border-white/5 bg-dark-800/40 p-5 mt-4">
+                <p className="text-xs text-dark-500 mb-2.5 font-medium uppercase tracking-wider">
+                  {t.whatsapp.label}
+                </p>
+                <div className="flex items-center gap-3">
+                  <MessageCircle size={18} className="text-emerald-500 shrink-0" />
+                  <span className="text-base text-white font-semibold flex-1">
+                    {t.whatsapp.displayNumber}
+                  </span>
+                  <a
+                    href={`https://wa.me/${t.whatsapp.number}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg text-emerald-400 hover:bg-emerald-500/10 transition-all"
+                  >
+                    <ExternalLink size={14} /> {t.whatsapp.chatText}
+                  </a>
+                </div>
+              </div>
+            )}
           </motion.div>
 
-          {/* ============ RIGHT COLUMN ============ */}
+          {/* Right column */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: market.dir === 'rtl' ? -30 : 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
             <div className="rounded-2xl border border-white/5 bg-dark-800/40 backdrop-blur-sm p-6 sm:p-8">
               {preview ? (
-                /* ======== PREVIEW MODE ======== */
                 <>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-11 h-11 rounded-full bg-emerald-500/10 flex items-center justify-center">
@@ -414,22 +411,22 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-display font-semibold text-xl text-white">
-                        Your Email is Ready!
+                        {t.preview.ready}
                       </h3>
                       <p className="text-sm text-dark-400">
-                        Copy the text below and paste it into your email.
+                        {t.preview.readySub}
                       </p>
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-dark-900/80 border border-white/5 p-5 max-h-96 overflow-y-auto mb-5">
+                  <div className="rounded-xl bg-dark-900/80 border border-white/5 p-5 max-h-96 overflow-y-auto mb-5" dir="ltr">
                     <pre className="text-sm text-dark-300 whitespace-pre-wrap font-mono leading-relaxed">
                       {emailBody}
                     </pre>
                   </div>
 
                   <p className="text-sm text-dark-400 mb-5">
-                    Send to:{' '}
+                    {t.preview.sendTo}{' '}
                     <span className="text-white font-semibold">{EMAIL}</span>
                   </p>
 
@@ -448,11 +445,11 @@ export default function Contact() {
                     >
                       {copied ? (
                         <>
-                          <Check size={18} /> Copied to Clipboard!
+                          <Check size={18} /> {t.preview.copiedClipboard}
                         </>
                       ) : (
                         <>
-                          <Copy size={18} /> Copy Email Text
+                          <Copy size={18} /> {t.preview.copyText}
                         </>
                       )}
                     </button>
@@ -461,7 +458,7 @@ export default function Contact() {
                       href={mailtoHref}
                       className="flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl border-2 border-gold-500/30 bg-gold-500/5 px-5 py-4 text-base font-semibold text-gold-400 hover:bg-gold-500/10 hover:border-gold-500/50 transition-all duration-300 hover:scale-[1.01]"
                     >
-                      <ExternalLink size={18} /> Open Email App
+                      <ExternalLink size={18} /> {t.preview.openEmail}
                     </a>
                   </div>
 
@@ -469,65 +466,57 @@ export default function Contact() {
                     onClick={() => setPreview(false)}
                     className="inline-flex items-center gap-2 text-sm text-dark-400 hover:text-dark-200 transition-colors"
                   >
-                    <ArrowLeft size={15} /> Go back and edit answers
+                    <ArrowLeft size={15} className="rtl:rotate-180" /> {t.preview.goBack}
                   </button>
 
                   <div className="mt-6 rounded-xl bg-gold-500/5 border-2 border-gold-500/15 px-5 py-4 flex items-start gap-3.5">
                     <Camera size={20} className="text-gold-500 mt-0.5 shrink-0" />
                     <div>
                       <p className="text-sm font-semibold text-gold-400 mb-1">
-                        Don't forget to attach:
+                        {t.preview.attachTitle}
                       </p>
                       <ul className="text-sm text-dark-400 space-y-0.5 list-disc list-inside">
-                        <li>Photos of the installation location</li>
-                        <li>Architectural or structural drawings (if available)</li>
+                        <li>{t.preview.attachPhotos}</li>
+                        <li>{t.preview.attachDrawings}</li>
                       </ul>
                     </div>
                   </div>
                 </>
               ) : (
-                /* ======== FORM MODE ======== */
                 <>
                   <div className="flex items-center gap-3 mb-1.5">
                     <Mail size={22} className="text-gold-400" />
                     <h3 className="font-display font-semibold text-xl text-white">
-                      Build Your Project Inquiry
+                      {f.title}
                     </h3>
                   </div>
                   <p className="text-base text-dark-400 mb-2">
-                    Answer what you can — we'll create a professional email
-                    template you can copy and send. No account needed.
+                    {f.subtitle}
                   </p>
                   <p className="text-sm text-dark-500 mb-5 italic">
-                    All fields are optional. Fill in as much as you know.
+                    {f.allOptional}
                   </p>
 
-                  {/* ---- Section 1: Environment ---- */}
-                  <Section
-                    num={1}
-                    title="Environment & Purpose"
-                    desc="Where will the screen be used and what for?"
-                  >
+                  {/* Section 1: Environment */}
+                  <Section num={1} title={f.sections[0].title} desc={f.sections[0].desc}>
                     <div>
-                      <Label hint="This determines the pixel density and weatherproofing your screen needs.">
-                        Where will the screen be installed?
-                      </Label>
+                      <Label hint={f.installHint}>{f.installLabel}</Label>
                       <div className="flex flex-wrap gap-3">
                         <OptionCard
-                          label="Indoor"
-                          desc="Malls, cinemas, lobbies, conference rooms"
+                          label={f.indoorLabel}
+                          desc={f.indoorDesc}
                           selected={d.environment === 'Indoor'}
                           onClick={() => set('environment', 'Indoor')}
                         />
                         <OptionCard
-                          label="Outdoor"
-                          desc="Billboards, building facades, stadiums"
+                          label={f.outdoorLabel}
+                          desc={f.outdoorDesc}
                           selected={d.environment === 'Outdoor'}
                           onClick={() => set('environment', 'Outdoor')}
                         />
                         <OptionCard
-                          label="Other"
-                          desc="Semi-outdoor, covered area, etc."
+                          label={f.otherLabel}
+                          desc={f.otherDesc}
                           selected={d.environment === 'Other'}
                           onClick={() => set('environment', 'Other')}
                         />
@@ -537,32 +526,24 @@ export default function Contact() {
                           type="text"
                           value={d.environmentCustom}
                           onChange={(e) => set('environmentCustom', e.target.value)}
-                          placeholder="Describe the location..."
+                          placeholder={f.describePlaceholder}
                           className={`${inputClass} mt-3`}
                         />
                       )}
                     </div>
 
                     <div>
-                      <Label hint='Examples: "Advertising in a shopping mall", "Cinema screen", "Church stage backdrop"'>
-                        What is the primary use?
-                      </Label>
+                      <Label hint={f.primaryUseHint}>{f.primaryUseLabel}</Label>
                       <SelectWrap>
                         <select
                           value={d.primaryUse}
                           onChange={(e) => set('primaryUse', e.target.value)}
                           className={selectClass}
                         >
-                          <option value="">Choose an option...</option>
-                          <option value="Advertising">Advertising / Digital signage</option>
-                          <option value="Cinema">Cinema / Theater screen</option>
-                          <option value="Event Hall">Event hall / Concert venue</option>
-                          <option value="Storefront">Storefront / Window display</option>
-                          <option value="Conference Room">Conference room / Boardroom</option>
-                          <option value="Control Room">Control room / Command center</option>
-                          <option value="Church / Worship">Church / Place of worship</option>
-                          <option value="Sports Venue">Sports venue / Scoreboard</option>
-                          <option value="Other">Other — I'll describe below</option>
+                          <option value="">{f.chooseOption}</option>
+                          {f.primaryUseOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                          ))}
                         </select>
                       </SelectWrap>
                       {d.primaryUse === 'Other' && (
@@ -570,363 +551,179 @@ export default function Contact() {
                           type="text"
                           value={d.primaryUseCustom}
                           onChange={(e) => set('primaryUseCustom', e.target.value)}
-                          placeholder="Describe the intended use..."
+                          placeholder={f.describeUse}
                           className={`${inputClass} mt-3`}
                         />
                       )}
                     </div>
 
                     <div>
-                      <Label hint="How far will the audience typically be from the screen? This helps us choose the right pixel pitch.">
-                        Average viewing distance
-                      </Label>
+                      <Label hint={f.viewingHint}>{f.viewingLabel}</Label>
                       <div className="flex items-center gap-3">
                         <input
                           type="text"
                           value={d.viewingDistance}
                           onChange={(e) => set('viewingDistance', e.target.value)}
-                          placeholder='e.g. "5" or "10-15" or "not sure"'
+                          placeholder={f.viewingPlaceholder}
                           className={inputClass}
                         />
-                        <span className="text-base text-dark-400 font-medium shrink-0">meters</span>
+                        <span className="text-base text-dark-400 font-medium shrink-0">{f.meters}</span>
                       </div>
                     </div>
                   </Section>
 
-                  {/* ---- Section 2: Dimensions ---- */}
-                  <Section
-                    num={2}
-                    title="Dimensions & Shape"
-                    desc="How big should the screen be and what shape?"
-                  >
+                  {/* Section 2: Dimensions */}
+                  <Section num={2} title={f.sections[1].title} desc={f.sections[1].desc}>
                     <div>
-                      <Label hint='Approximate is fine. You can also write "not sure yet".'>
-                        Desired screen size
-                      </Label>
+                      <Label hint={f.sizeHint}>{f.sizeLabel}</Label>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <span className="block text-sm text-dark-400 font-medium mb-1.5">Width</span>
+                          <span className="block text-sm text-dark-400 font-medium mb-1.5">{f.widthLabel}</span>
                           <div className="flex items-center gap-2.5">
-                            <input
-                              type="text"
-                              value={d.width}
-                              onChange={(e) => set('width', e.target.value)}
-                              placeholder='e.g. "5" or "not sure"'
-                              className={inputClass}
-                            />
-                            <span className="text-base text-dark-400 font-medium shrink-0">m</span>
+                            <input type="text" value={d.width} onChange={(e) => set('width', e.target.value)} placeholder={f.sizePlaceholder} className={inputClass} />
+                            <span className="text-base text-dark-400 font-medium shrink-0">{f.mUnit}</span>
                           </div>
                         </div>
                         <div>
-                          <span className="block text-sm text-dark-400 font-medium mb-1.5">Height</span>
+                          <span className="block text-sm text-dark-400 font-medium mb-1.5">{f.heightLabel}</span>
                           <div className="flex items-center gap-2.5">
-                            <input
-                              type="text"
-                              value={d.height}
-                              onChange={(e) => set('height', e.target.value)}
-                              placeholder='e.g. "3" or "not sure"'
-                              className={inputClass}
-                            />
-                            <span className="text-base text-dark-400 font-medium shrink-0">m</span>
+                            <input type="text" value={d.height} onChange={(e) => set('height', e.target.value)} placeholder={f.sizePlaceholder} className={inputClass} />
+                            <span className="text-base text-dark-400 font-medium shrink-0">{f.mUnit}</span>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div>
-                      <Label hint="Are the dimensions above for the screen itself, or for the total available wall/ceiling space?">
-                        What do the measurements refer to?
-                      </Label>
+                      <Label hint={f.measureHint}>{f.measureLabel}</Label>
                       <div className="flex flex-wrap gap-3">
-                        <OptionCard
-                          label="Display Area"
-                          desc="The screen itself should be this size"
-                          selected={d.measurementType === 'Display Area only'}
-                          onClick={() => set('measurementType', 'Display Area only')}
-                        />
-                        <OptionCard
-                          label="Total Wall Space"
-                          desc="This is how much space is available"
-                          selected={d.measurementType === 'Total Wall Space'}
-                          onClick={() => set('measurementType', 'Total Wall Space')}
-                        />
-                        <OptionCard
-                          label="Not Sure"
-                          desc="I'll need help figuring this out"
-                          selected={d.measurementType === 'Not Sure'}
-                          onClick={() => set('measurementType', 'Not Sure')}
-                        />
+                        <OptionCard label={f.displayArea} desc={f.displayAreaDesc} selected={d.measurementType === 'Display Area only'} onClick={() => set('measurementType', 'Display Area only')} />
+                        <OptionCard label={f.totalWall} desc={f.totalWallDesc} selected={d.measurementType === 'Total Wall Space'} onClick={() => set('measurementType', 'Total Wall Space')} />
+                        <OptionCard label={f.notSureLabel} desc={f.notSureDesc} selected={d.measurementType === 'Not Sure'} onClick={() => set('measurementType', 'Not Sure')} />
                       </div>
                     </div>
 
                     <div>
-                      <Label hint="Most screens are flat. Curved or corner screens are possible but require custom engineering.">
-                        Screen shape
-                      </Label>
+                      <Label hint={f.shapeHint}>{f.shapeLabel}</Label>
                       <SelectWrap>
-                        <select
-                          value={d.shape}
-                          onChange={(e) => set('shape', e.target.value)}
-                          className={selectClass}
-                        >
-                          <option value="">Choose an option...</option>
-                          <option value="Standard Flat">Standard flat screen</option>
-                          <option value="Curved (Concave)">Curved inward (Concave) — like a cinema</option>
-                          <option value="Curved (Convex)">Curved outward (Convex) — wrapping a pillar</option>
-                          <option value="Corner (90°)">Corner screen (90° angle)</option>
-                          <option value="Other">Other — I'll describe below</option>
+                        <select value={d.shape} onChange={(e) => set('shape', e.target.value)} className={selectClass}>
+                          <option value="">{f.chooseOption}</option>
+                          {f.shapeOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                          ))}
                         </select>
                       </SelectWrap>
                       {d.shape === 'Other' && (
-                        <input
-                          type="text"
-                          value={d.shapeCustom}
-                          onChange={(e) => set('shapeCustom', e.target.value)}
-                          placeholder="Describe the shape you need..."
-                          className={`${inputClass} mt-3`}
-                        />
+                        <input type="text" value={d.shapeCustom} onChange={(e) => set('shapeCustom', e.target.value)} placeholder={f.describeShape} className={`${inputClass} mt-3`} />
                       )}
                     </div>
                   </Section>
 
-                  {/* ---- Section 3: Installation ---- */}
-                  <Section
-                    num={3}
-                    title="Installation & Maintenance"
-                    desc="How will the screen be mounted and serviced?"
-                  >
+                  {/* Section 3: Installation */}
+                  <Section num={3} title={f.sections[2].title} desc={f.sections[2].desc}>
                     <div>
-                      <Label hint="This determines the mounting hardware and structural requirements.">
-                        How will the screen be mounted?
-                      </Label>
+                      <Label hint={f.mountHint}>{f.mountLabel}</Label>
                       <SelectWrap>
-                        <select
-                          value={d.mounting}
-                          onChange={(e) => set('mounting', e.target.value)}
-                          className={selectClass}
-                        >
-                          <option value="">Choose an option...</option>
-                          <option value="Wall-mounted">Wall-mounted — attached flat to a wall</option>
-                          <option value="Ceiling-hung">Ceiling-hung — suspended from above</option>
-                          <option value="Floor-standing">Floor-standing — on a base or frame</option>
-                          <option value="Pole-mounted">Pole-mounted — on a pole or mast</option>
-                          <option value="Not Sure">Not sure yet — I need advice</option>
-                          <option value="Other">Other — I'll describe below</option>
+                        <select value={d.mounting} onChange={(e) => set('mounting', e.target.value)} className={selectClass}>
+                          <option value="">{f.chooseOption}</option>
+                          {f.mountOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                          ))}
                         </select>
                       </SelectWrap>
                       {d.mounting === 'Other' && (
-                        <input
-                          type="text"
-                          value={d.mountingCustom}
-                          onChange={(e) => set('mountingCustom', e.target.value)}
-                          placeholder="Describe the mounting..."
-                          className={`${inputClass} mt-3`}
-                        />
+                        <input type="text" value={d.mountingCustom} onChange={(e) => set('mountingCustom', e.target.value)} placeholder={f.describeMount} className={`${inputClass} mt-3`} />
                       )}
                     </div>
 
                     <div>
-                      <Label hint="Front-access screens can sit flush against a wall. Rear-access screens need space behind for servicing.">
-                        How will the screen be maintained?
-                      </Label>
+                      <Label hint={f.maintenanceHint}>{f.maintenanceLabel}</Label>
                       <div className="flex flex-wrap gap-3">
-                        <OptionCard
-                          label="Front Access"
-                          desc="Screen is against a wall — service from the front"
-                          selected={d.maintenanceAccess === 'Front access'}
-                          onClick={() => set('maintenanceAccess', 'Front access')}
-                        />
-                        <OptionCard
-                          label="Rear Access"
-                          desc="There's space behind — service from the back"
-                          selected={d.maintenanceAccess === 'Rear access'}
-                          onClick={() => set('maintenanceAccess', 'Rear access')}
-                        />
-                        <OptionCard
-                          label="Not Sure"
-                          desc="I'll need your recommendation"
-                          selected={d.maintenanceAccess === 'Not sure'}
-                          onClick={() => set('maintenanceAccess', 'Not sure')}
-                        />
+                        <OptionCard label={f.frontAccess} desc={f.frontAccessDesc} selected={d.maintenanceAccess === 'Front access'} onClick={() => set('maintenanceAccess', 'Front access')} />
+                        <OptionCard label={f.rearAccess} desc={f.rearAccessDesc} selected={d.maintenanceAccess === 'Rear access'} onClick={() => set('maintenanceAccess', 'Rear access')} />
+                        <OptionCard label={f.maintenanceNotSure} desc={f.maintenanceNotSureDesc} selected={d.maintenanceAccess === 'Not sure'} onClick={() => set('maintenanceAccess', 'Not sure')} />
                       </div>
                     </div>
 
                     <div>
-                      <Label hint="LED screens are heavy. If you're not sure whether your wall or ceiling can support the weight, we can help assess.">
-                        Is the wall/ceiling reinforced to support the weight?
-                      </Label>
+                      <Label hint={f.reinforcedHint}>{f.reinforcedLabel}</Label>
                       <div className="flex flex-wrap gap-3">
-                        {(['Yes', 'No', 'Not Sure'] as const).map((opt) => (
+                        {([
+                          [f.yes, 'Yes'],
+                          [f.no, 'No'],
+                          [f.notSure, 'Not Sure'],
+                        ] as const).map(([label, value]) => (
                           <button
-                            key={opt}
+                            key={value}
                             type="button"
-                            onClick={() => set('reinforced', opt)}
+                            onClick={() => set('reinforced', value)}
                             className={`px-6 py-3.5 rounded-xl border-2 text-base font-semibold transition-all ${
-                              d.reinforced === opt
+                              d.reinforced === value
                                 ? 'bg-gold-500/10 border-gold-500/40 text-gold-400'
                                 : 'bg-dark-900/50 border-white/8 text-dark-300 hover:border-white/20'
                             }`}
                           >
-                            {opt}
+                            {label}
                           </button>
                         ))}
                       </div>
                     </div>
                   </Section>
 
-                  {/* ---- Section 4: Special Requirements ---- */}
-                  <Section
-                    num={4}
-                    title="Special Requirements"
-                    desc="Any special features needed? Check all that apply."
-                  >
+                  {/* Section 4: Special Requirements */}
+                  <Section num={4} title={f.sections[3].title} desc={f.sections[3].desc}>
                     <div>
-                      <Label>Custom features</Label>
+                      <Label>{f.featuresLabel}</Label>
                       <div className="space-y-2.5">
-                        <BigCheckbox
-                          checked={d.transparent}
-                          onChange={(v) => set('transparent', v)}
-                          label="Transparent Screen"
-                          desc="See-through display — great for storefronts and glass walls where you want to show content while still seeing through"
-                        />
-                        <BigCheckbox
-                          checked={d.flexible}
-                          onChange={(v) => set('flexible', v)}
-                          label="Flexible / Bendable LED"
-                          desc="Panels that can bend and wrap around curved surfaces, pillars, or unconventional shapes"
-                        />
-                        <BigCheckbox
-                          checked={d.ultraBright}
-                          onChange={(v) => set('ultraBright', v)}
-                          label="Ultra-High Brightness"
-                          desc="Extra-bright panels for areas with strong ambient light or direct sunlight (typically 5,000+ nits)"
-                        />
+                        <BigCheckbox checked={d.transparent} onChange={(v) => set('transparent', v)} label={f.transparentLabel} desc={f.transparentDesc} />
+                        <BigCheckbox checked={d.flexible} onChange={(v) => set('flexible', v)} label={f.flexibleLabel} desc={f.flexibleDesc} />
+                        <BigCheckbox checked={d.ultraBright} onChange={(v) => set('ultraBright', v)} label={f.ultraBrightLabel} desc={f.ultraBrightDesc} />
                       </div>
-                      <input
-                        type="text"
-                        value={d.featureNote}
-                        onChange={(e) => set('featureNote', e.target.value)}
-                        placeholder="Other features or notes..."
-                        className={`${inputClass} mt-3`}
-                      />
+                      <input type="text" value={d.featureNote} onChange={(e) => set('featureNote', e.target.value)} placeholder={f.otherFeatures} className={`${inputClass} mt-3`} />
                     </div>
 
                     <div>
-                      <Label hint="What kind of content will be displayed? This helps us recommend the right resolution.">
-                        Content type
-                      </Label>
+                      <Label hint={f.contentTypeHint}>{f.contentTypeLabel}</Label>
                       <div className="space-y-2.5">
-                        <BigCheckbox
-                          checked={d.contentLive}
-                          onChange={(v) => set('contentLive', v)}
-                          label="Live Video / Camera Feeds"
-                          desc="Real-time video from cameras, live broadcasts, or video conferencing"
-                        />
-                        <BigCheckbox
-                          checked={d.contentStatic}
-                          onChange={(v) => set('contentStatic', v)}
-                          label="Static Images / Slideshows"
-                          desc="Photos, graphics, menus, schedules, or rotating promotional images"
-                        />
-                        <BigCheckbox
-                          checked={d.content4k}
-                          onChange={(v) => set('content4k', v)}
-                          label="4K / High-Resolution Content"
-                          desc="Ultra-sharp content that requires very fine pixel pitch (close viewing)"
-                        />
+                        <BigCheckbox checked={d.contentLive} onChange={(v) => set('contentLive', v)} label={f.liveVideoLabel} desc={f.liveVideoDesc} />
+                        <BigCheckbox checked={d.contentStatic} onChange={(v) => set('contentStatic', v)} label={f.staticLabel} desc={f.staticDesc} />
+                        <BigCheckbox checked={d.content4k} onChange={(v) => set('content4k', v)} label={f.highResLabel} desc={f.highResDesc} />
                       </div>
-                      <input
-                        type="text"
-                        value={d.contentNote}
-                        onChange={(e) => set('contentNote', e.target.value)}
-                        placeholder="Other content types or notes..."
-                        className={`${inputClass} mt-3`}
-                      />
+                      <input type="text" value={d.contentNote} onChange={(e) => set('contentNote', e.target.value)} placeholder={f.otherContent} className={`${inputClass} mt-3`} />
                     </div>
                   </Section>
 
-                  {/* ---- Section 5: Logistics ---- */}
-                  <Section
-                    num={5}
-                    title="Logistics"
-                    desc="Where should we deliver and when do you need it?"
-                  >
+                  {/* Section 5: Logistics */}
+                  <Section num={5} title={f.sections[4].title} desc={f.sections[4].desc}>
                     <div>
-                      <Label hint='The city or full address where the screen will be shipped and installed. Example: "Makati City, Metro Manila"'>
-                        Delivery location
-                      </Label>
-                      <input
-                        type="text"
-                        value={d.deliveryLocation}
-                        onChange={(e) => set('deliveryLocation', e.target.value)}
-                        placeholder="City or full address..."
-                        className={inputClass}
-                      />
+                      <Label hint={f.locationHint}>{f.locationLabel}</Label>
+                      <input type="text" value={d.deliveryLocation} onChange={(e) => set('deliveryLocation', e.target.value)} placeholder={f.locationPlaceholder} className={inputClass} />
                     </div>
-
                     <div>
-                      <Label hint='When do you need the screen installed? Approximate is fine. Example: "August 2026" or "ASAP"'>
-                        Target installation date
-                      </Label>
-                      <input
-                        type="text"
-                        value={d.targetDate}
-                        onChange={(e) => set('targetDate', e.target.value)}
-                        placeholder='e.g. "August 2026" or "As soon as possible"'
-                        className={inputClass}
-                      />
+                      <Label hint={f.dateHint}>{f.dateLabel}</Label>
+                      <input type="text" value={d.targetDate} onChange={(e) => set('targetDate', e.target.value)} placeholder={f.datePlaceholder} className={inputClass} />
                     </div>
                   </Section>
 
-                  {/* ---- Section 6: Contact Info ---- */}
-                  <Section
-                    num={6}
-                    title="Your Contact Info"
-                    desc="So we can get back to you with a proposal."
-                  >
+                  {/* Section 6: Contact Info */}
+                  <Section num={6} title={f.sections[5].title} desc={f.sections[5].desc}>
                     <div>
-                      <Label>Your name</Label>
-                      <input
-                        type="text"
-                        value={d.contactName}
-                        onChange={(e) => set('contactName', e.target.value)}
-                        placeholder="Full name"
-                        className={inputClass}
-                      />
+                      <Label>{f.nameLabel}</Label>
+                      <input type="text" value={d.contactName} onChange={(e) => set('contactName', e.target.value)} placeholder={f.namePlaceholder} className={inputClass} />
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <Label>Email address</Label>
-                        <input
-                          type="email"
-                          value={d.contactEmail}
-                          onChange={(e) => set('contactEmail', e.target.value)}
-                          placeholder="you@company.com"
-                          className={inputClass}
-                        />
+                        <Label>{f.emailLabel}</Label>
+                        <input type="email" value={d.contactEmail} onChange={(e) => set('contactEmail', e.target.value)} placeholder={f.emailPlaceholder} className={inputClass} />
                       </div>
                       <div>
-                        <Label>Phone number</Label>
-                        <input
-                          type="tel"
-                          value={d.contactPhone}
-                          onChange={(e) => set('contactPhone', e.target.value)}
-                          placeholder="+63 917 123 4567"
-                          className={inputClass}
-                        />
+                        <Label>{f.phoneLabel}</Label>
+                        <input type="tel" value={d.contactPhone} onChange={(e) => set('contactPhone', e.target.value)} placeholder={f.phonePlaceholder} className={inputClass} />
                       </div>
                     </div>
                     <div>
-                      <Label hint="Anything else we should know? Special requests, budget range, questions...">
-                        Additional notes
-                      </Label>
-                      <textarea
-                        value={d.notes}
-                        onChange={(e) => set('notes', e.target.value)}
-                        rows={3}
-                        placeholder="Write anything else here..."
-                        className={`${inputClass} resize-none`}
-                      />
+                      <Label hint={f.notesHint}>{f.notesLabel}</Label>
+                      <textarea value={d.notes} onChange={(e) => set('notes', e.target.value)} rows={3} placeholder={f.notesPlaceholder} className={`${inputClass} resize-none`} />
                     </div>
                   </Section>
 
@@ -935,18 +732,14 @@ export default function Contact() {
                     <Camera size={20} className="text-gold-500 mt-0.5 shrink-0" />
                     <div>
                       <p className="text-sm font-semibold text-gold-400 mb-1">
-                        Important — Please Attach:
+                        {f.importantAttach}
                       </p>
                       <ul className="text-sm text-dark-400 space-y-1 list-disc list-inside">
                         <li>
-                          <span className="font-medium text-dark-300">Site photos</span> — a
-                          photo of the exact wall or space where the screen will go
+                          <span className="font-medium text-dark-300">{f.sitePhotos}</span> — {f.sitePhotosDetail}
                         </li>
                         <li>
-                          <span className="font-medium text-dark-300">
-                            Architectural drawings
-                          </span>{' '}
-                          — structural or design plans of the space (if available)
+                          <span className="font-medium text-dark-300">{f.archDrawings}</span> — {f.archDrawingsDetail}
                         </li>
                       </ul>
                     </div>
@@ -964,7 +757,7 @@ export default function Contact() {
                     className="group mt-10 w-full inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 px-6 py-5 text-lg font-bold text-dark-950 hover:shadow-xl hover:shadow-gold-500/20 transition-all duration-300 hover:scale-[1.01]"
                   >
                     <Copy size={20} />
-                    Generate & Copy Email Template
+                    {f.generateBtn}
                   </button>
                 </>
               )}

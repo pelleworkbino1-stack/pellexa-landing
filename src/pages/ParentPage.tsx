@@ -5,12 +5,15 @@ import SolutionsGrid from '../components/parent/SolutionsGrid'
 import ParentAbout from '../components/parent/ParentAbout'
 import ParentContact from '../components/parent/ParentContact'
 import ParentFooter from '../components/parent/ParentFooter'
+import { LangProvider, useLang } from '../context/LangContext'
 
-export default function ParentPage() {
+function ParentInner() {
+  const { content } = useLang()
+
   useEffect(() => {
-    document.title = 'Pellexa — Strategic Technology Solutions for the Philippines'
+    document.title = content.meta.title
     window.scrollTo(0, 0)
-  }, [])
+  }, [content])
 
   return (
     <div className="min-h-screen bg-dark-950 text-white antialiased">
@@ -23,5 +26,13 @@ export default function ParentPage() {
       </main>
       <ParentFooter />
     </div>
+  )
+}
+
+export default function ParentPage() {
+  return (
+    <LangProvider>
+      <ParentInner />
+    </LangProvider>
   )
 }

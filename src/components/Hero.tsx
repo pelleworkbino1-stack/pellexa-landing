@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import heroBg from '../assets/images/hero-bg.png'
+import { useMarket } from '../hooks/useMarket'
 
 function GlowOrbs() {
   return (
@@ -40,6 +41,9 @@ const fadeUp = {
 }
 
 export default function Hero() {
+  const { market } = useMarket()
+  const c = market.hero
+
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -55,7 +59,6 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background image with Ken Burns + parallax */}
       <motion.div
         style={{ y: bgY, scale: bgScale }}
         className="absolute inset-0"
@@ -71,13 +74,11 @@ export default function Hero() {
           />
         </div>
 
-        {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-dark-950/70" />
         <div className="absolute inset-0 bg-gradient-to-b from-dark-950/60 via-transparent to-dark-950" />
 
         <GlowOrbs />
 
-        {/* Subtle grid overlay */}
         <div
           className="absolute inset-0"
           style={{
@@ -89,15 +90,12 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* Gradient vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(3,3,5,0.85)_100%)]" />
 
-      {/* Content */}
       <motion.div
         style={{ opacity: contentOpacity }}
         className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pt-24 pb-16 text-center"
       >
-        {/* Badge */}
         <motion.div
           custom={0}
           variants={fadeUp}
@@ -107,11 +105,10 @@ export default function Hero() {
         >
           <Sparkles size={14} className="text-gold-400" />
           <span className="text-xs font-medium tracking-wide text-gold-400 uppercase">
-            Custom-Engineered LED Solutions
+            {c.badge}
           </span>
         </motion.div>
 
-        {/* Headline */}
         <motion.h1
           custom={1}
           variants={fadeUp}
@@ -119,18 +116,17 @@ export default function Hero() {
           animate="visible"
           className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-white mb-6 drop-shadow-lg"
         >
-          Next-Generation{' '}
+          {c.headlineTop}{' '}
           <span className="relative inline-block">
             <span className="relative z-10 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent">
-              Visual Experiences
+              {c.headlineHighlight}
             </span>
             <span className="absolute -inset-x-2 -inset-y-1 bg-gold-500/5 rounded-lg -skew-y-1" />
           </span>
           <br />
-          <span className="text-dark-300">Tailored for Your Vision</span>
+          <span className="text-dark-300">{c.headlineBottom}</span>
         </motion.h1>
 
-        {/* Sub-headline */}
         <motion.p
           custom={2}
           variants={fadeUp}
@@ -138,11 +134,9 @@ export default function Hero() {
           animate="visible"
           className="mx-auto max-w-2xl text-base sm:text-lg text-white/60 leading-relaxed mb-10 drop-shadow-md"
         >
-          Premium LED display solutions custom-engineered for any space — corporate, healthcare, outdoor,
-          and events. Managed end-to-end: from vision and engineering to installation and local support in the Philippines.
+          {c.sub}
         </motion.p>
 
-        {/* CTA Group */}
         <motion.div
           custom={3}
           variants={fadeUp}
@@ -154,10 +148,10 @@ export default function Hero() {
             href="#contact"
             className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 px-7 py-3.5 text-sm font-semibold text-dark-950 shadow-lg shadow-gold-500/20 hover:shadow-gold-500/40 transition-all duration-300 hover:scale-[1.03]"
           >
-            Request a Technical Consultation
+            {c.cta1}
             <ArrowRight
               size={16}
-              className="transition-transform duration-300 group-hover:translate-x-1"
+              className="transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180"
             />
             <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
@@ -165,11 +159,10 @@ export default function Hero() {
             href="#solutions"
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-7 py-3.5 text-sm font-medium text-white hover:bg-white/10 hover:border-white/25 transition-all duration-300"
           >
-            Explore Solutions
+            {c.cta2}
           </a>
         </motion.div>
 
-        {/* Stats strip */}
         <motion.div
           custom={4}
           variants={fadeUp}
@@ -177,11 +170,7 @@ export default function Hero() {
           animate="visible"
           className="mt-16 sm:mt-20 grid grid-cols-3 gap-6 sm:gap-12 max-w-xl mx-auto"
         >
-          {[
-            { value: '100+', label: 'Premium Installations' },
-            { value: 'P0.9–P10', label: 'Pixel Pitch Range' },
-            { value: '24/7', label: 'Local PH Support' },
-          ].map((stat) => (
+          {c.stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="font-display font-bold text-xl sm:text-2xl text-white drop-shadow-sm">
                 {stat.value}
@@ -192,7 +181,6 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-dark-950 to-transparent" />
     </section>
   )

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import { useLang } from '../../context/LangContext'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -13,9 +14,11 @@ const fadeUp = {
 }
 
 export default function ParentHero() {
+  const { content } = useLang()
+  const c = content.hero
+
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-dark-950" />
         <div
@@ -47,7 +50,6 @@ export default function ParentHero() {
         </div>
       </div>
 
-      {/* Content */}
       <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 pt-24 pb-16 text-center">
         <motion.div
           custom={0}
@@ -57,7 +59,7 @@ export default function ParentHero() {
           className="inline-flex items-center gap-2 rounded-full bg-gold-500/8 border border-gold-500/15 px-4 py-1.5 mb-8 backdrop-blur-sm"
         >
           <span className="text-xs font-medium tracking-wide text-gold-400 uppercase">
-            Strategic Partner for the Philippines
+            {c.badge}
           </span>
         </motion.div>
 
@@ -68,12 +70,12 @@ export default function ParentHero() {
           animate="visible"
           className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-white mb-6"
         >
-          Your Bridge to{' '}
+          {c.headlineTop}{' '}
           <span className="bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent">
-            World-Class
+            {c.headlineHighlight}
           </span>
           <br />
-          <span className="text-dark-300">Technology Solutions</span>
+          <span className="text-dark-300">{c.headlineBottom}</span>
         </motion.h1>
 
         <motion.p
@@ -83,9 +85,7 @@ export default function ParentHero() {
           animate="visible"
           className="mx-auto max-w-2xl text-base sm:text-lg text-white/60 leading-relaxed mb-10"
         >
-          Pellexa connects Tier-1 global manufacturers with the Philippine market.
-          From precision LED displays to emerging technology verticals — we handle
-          sourcing, logistics, and local implementation so you don't have to.
+          {c.subtitle}
         </motion.p>
 
         <motion.div
@@ -99,10 +99,10 @@ export default function ParentHero() {
             href="#solutions"
             className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 px-7 py-3.5 text-sm font-semibold text-dark-950 shadow-lg shadow-gold-500/20 hover:shadow-gold-500/40 transition-all duration-300 hover:scale-[1.03]"
           >
-            Explore Our Solutions
+            {c.cta1}
             <ArrowRight
               size={16}
-              className="transition-transform duration-300 group-hover:translate-x-1"
+              className="transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180"
             />
             <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </a>
@@ -110,7 +110,7 @@ export default function ParentHero() {
             href="#contact"
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-7 py-3.5 text-sm font-medium text-white hover:bg-white/10 hover:border-white/25 transition-all duration-300"
           >
-            Get in Touch
+            {c.cta2}
           </a>
         </motion.div>
       </div>

@@ -1,42 +1,10 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-
-const faqs = [
-  {
-    question: 'What pixel pitch do I need?',
-    answer:
-      'A straightforward rule of thumb: the pixel pitch number represents the minimum comfortable viewing distance in meters. For example, a P3.91 display delivers a crisp image from approximately 4 meters and beyond. For executive boardrooms and control rooms, we recommend P1.2–P2.1. For conference halls, houses of worship, and medical facilities, P2.6–P3.91 provides an optimal balance of resolution and value. For outdoor installations and billboards, P4–P10 is ideal. While P3.91 is a popular versatile choice, we offer a full range from P0.9 to P10, selected based on your specific architectural requirements and site assessment.',
-  },
-  {
-    question: 'How long does a project take?',
-    answer:
-      'Typically 4 to 6 weeks from technical consultation to final installation, including precision manufacturing and inter-island logistics.',
-  },
-  {
-    question: 'Do you offer warranty?',
-    answer:
-      'Yes, we provide a 2-year comprehensive warranty on all LED systems, supported by our local PH technical team.',
-  },
-  {
-    question: "What's the lifespan?",
-    answer:
-      'Our premium LED systems are engineered for a lifespan of 100,000 hours (approx. 10 years of continuous use).',
-  },
-  {
-    question: 'Can you deliver to hard-to-reach locations?',
-    answer:
-      'Absolutely. We specialize in last-mile delivery across Luzon, Visayas, and Mindanao, managing all RORO and ferry coordination.',
-  },
-  {
-    question: "What's the process for custom projects?",
-    answer:
-      "Every engagement with Pellexa is bespoke. As your Project Lead, we collaborate with your architects and engineers, provide structural drawings for mounting, and customize screen dimensions to fit your precise specifications. We handle the Vision, Engineering, and Implementation — delivering managed solutions, not off-the-shelf products.",
-  },
-]
+import { useMarket } from '../hooks/useMarket'
 
 function FAQItem({ faq, isOpen, onToggle }: {
-  faq: typeof faqs[0]
+  faq: { question: string; answer: string }
   isOpen: boolean
   onToggle: () => void
 }) {
@@ -44,7 +12,7 @@ function FAQItem({ faq, isOpen, onToggle }: {
     <div className="border-b border-white/5 last:border-b-0">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between gap-4 py-5 text-left group"
+        className="w-full flex items-center justify-between gap-4 py-5 text-left rtl:text-right group"
         aria-expanded={isOpen}
       >
         <span className="font-display font-medium text-base text-white group-hover:text-gold-400 transition-colors">
@@ -66,7 +34,7 @@ function FAQItem({ faq, isOpen, onToggle }: {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-sm text-dark-400 leading-relaxed pr-8">
+            <p className="pb-5 text-sm text-dark-400 leading-relaxed pe-8">
               {faq.answer}
             </p>
           </motion.div>
@@ -77,6 +45,8 @@ function FAQItem({ faq, isOpen, onToggle }: {
 }
 
 export default function FAQ() {
+  const { market } = useMarket()
+  const c = market.faq
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [openIndex, setOpenIndex] = useState<number | null>(0)
@@ -91,13 +61,13 @@ export default function FAQ() {
           className="text-center mb-12"
         >
           <span className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-3 block">
-            FAQ
+            {c.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-white leading-tight mb-4">
-            Common Questions
+            {c.title}
           </h2>
           <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
-            Everything you need to know about our LED display solutions.
+            {c.subtitle}
           </p>
         </motion.div>
 
@@ -107,7 +77,7 @@ export default function FAQ() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="rounded-2xl border border-white/5 bg-dark-800/30 px-6 sm:px-8"
         >
-          {faqs.map((faq, i) => (
+          {c.items.map((faq, i) => (
             <FAQItem
               key={faq.question}
               faq={faq}
