@@ -19,7 +19,7 @@ const pillars = [
     icon: ShieldCheck,
     title: 'Quality Assurance',
     description:
-      'Full factory QC, pre-shipment inspection, and comprehensive warranties backed by local technician support in the Philippines.',
+      'Full manufacturing facility QC, pre-shipment inspection, and comprehensive warranties backed by local technician support in the Philippines.',
   },
   {
     icon: Headphones,

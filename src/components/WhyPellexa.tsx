@@ -13,7 +13,7 @@ const stats = [
     icon: Globe,
     value: '150+',
     label: 'Globally Proven Technology',
-    description: 'Our display systems are trusted by organizations in over 150 countries.',
+    description: 'Our core technology is battle-tested and trusted by organizations in over 150 countries worldwide.',
   },
   {
     icon: Zap,
@@ -31,7 +31,7 @@ const stats = [
     icon: Award,
     value: 'Last-Mile',
     label: 'Nationwide PH Delivery',
-    description: 'We own the entire logistics chain — RORO, inter-island trucking, and ferry coordination across Luzon, Visayas, and Mindanao.',
+    description: 'We manage and oversee the entire logistics chain — RORO, inter-island trucking, and ferry coordination across Luzon, Visayas, and Mindanao.',
   },
   {
     icon: Headphones,

@@ -11,22 +11,22 @@ const faqs = [
   {
     question: 'How long does a project take?',
     answer:
-      'Typically, 4 to 6 weeks. This includes custom factory engineering, rigorous quality testing, and secure international shipping followed by local installation.',
+      'Typically 4 to 6 weeks from technical consultation to final installation, including precision manufacturing and inter-island logistics.',
   },
   {
     question: 'Do you offer warranty?',
     answer:
-      'Yes. All Pellexa installations come with a 2-year comprehensive local warranty and priority technical support.',
+      'Yes, we provide a 2-year comprehensive warranty on all LED systems, supported by our local PH technical team.',
   },
   {
     question: "What's the lifespan?",
     answer:
-      'Our Tier-1 LED panels are rated for 100,000 hours of operation, ensuring over 10 years of performance under proper maintenance.',
+      'Our premium LED systems are engineered for a lifespan of 100,000 hours (approx. 10 years of continuous use).',
   },
   {
     question: 'Can you deliver to hard-to-reach locations?',
     answer:
-      "Yes. We specialize in complex 'Last-Mile' logistics. From Metro Manila to remote areas like Eastern Samar, we manage the entire RORO and inter-island trucking chain to ensure your screen arrives safely.",
+      'Absolutely. We specialize in last-mile delivery across Luzon, Visayas, and Mindanao, managing all RORO and ferry coordination.',
   },
   {
     question: "What's the process for custom projects?",

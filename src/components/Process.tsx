@@ -22,7 +22,7 @@ const steps = [
     number: '03',
     title: 'Managed Logistics',
     description:
-      'We own the entire delivery chain — RORO, inter-island trucking, and ferry coordination across the Philippines with real-time tracking, delivered direct to your site.',
+      'We manage and oversee the entire delivery chain — RORO, inter-island trucking, and ferry coordination across the Philippines with real-time tracking, delivered direct to your site.',
   },
   {
     icon: Wrench,

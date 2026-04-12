@@ -18,7 +18,7 @@ const solutions: Solution[] = [
     icon: Monitor,
     title: 'Pellexa LED',
     description:
-      'Custom LED display solutions — indoor, outdoor, rental, and event installations. Factory-direct from Tier-1 manufacturers, with last-mile delivery and professional installation across the Philippines.',
+      'Custom LED display solutions — indoor, outdoor, rental, and event installations. Precision-manufactured by our engineering partner, with last-mile delivery and professional installation across the Philippines.',
     href: '/led',
     available: true,
     accent: 'text-gold-400',

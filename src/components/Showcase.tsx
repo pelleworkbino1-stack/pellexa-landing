@@ -18,6 +18,7 @@ const projects = [
     span: 'lg:col-span-2',
     featured: false,
     badge: '',
+    caption: 'Powered by our Tier-1 Manufacturing Infrastructure',
   },
   {
     image: outdoorImg,
@@ -28,6 +29,7 @@ const projects = [
     span: '',
     featured: false,
     badge: '',
+    caption: 'Powered by our Tier-1 Manufacturing Infrastructure',
   },
   {
     image: healthcareImg,
@@ -37,7 +39,8 @@ const projects = [
     specs: '5m x 3m — Optimized Pixel Pitch',
     span: 'lg:col-span-2',
     featured: true,
-    badge: 'Last-Mile Logistics Showcase',
+    badge: 'Local Success Story',
+    caption: '',
   },
   {
     image: retailImg,
@@ -48,6 +51,7 @@ const projects = [
     span: '',
     featured: false,
     badge: '',
+    caption: 'Powered by our Tier-1 Manufacturing Infrastructure',
   },
   {
     image: sportsImg,
@@ -58,6 +62,7 @@ const projects = [
     span: 'lg:col-span-2',
     featured: false,
     badge: '',
+    caption: 'Powered by our Tier-1 Manufacturing Infrastructure',
   },
   {
     image: conferenceImg,
@@ -68,6 +73,7 @@ const projects = [
     span: '',
     featured: false,
     badge: '',
+    caption: 'Powered by our Tier-1 Manufacturing Infrastructure',
   },
 ]
 
@@ -85,7 +91,7 @@ export default function Showcase() {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <span className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-3 block">
-            Our Work
+            Technology & Capability Showcase
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
             Projects That Speak
@@ -152,6 +158,11 @@ export default function Showcase() {
                   <span className="w-1 h-1 rounded-full bg-white/30" />
                   <span>{project.specs}</span>
                 </div>
+                {project.caption && (
+                  <span className="inline-block mt-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 text-[10px] font-medium tracking-wide uppercase text-white/60">
+                    {project.caption}
+                  </span>
+                )}
               </div>
             </motion.div>
           ))}

@@ -21,15 +21,15 @@ function setMeta(property: string, content: string) {
 export default function LedPage() {
   useEffect(() => {
     document.title = 'Pellexa LED — Custom LED Display Solutions | Philippines'
-    setMeta('description', 'Custom LED display solutions for any space in the Philippines — indoor, outdoor, corporate, retail, residential, and more. Factory-direct, professionally installed, locally supported.')
+    setMeta('description', 'Custom LED display solutions for any space in the Philippines — indoor, outdoor, corporate, retail, residential, and more. Precision-manufactured, professionally installed, locally supported.')
     setMeta('og:title', 'Pellexa LED — Custom LED Display Solutions')
-    setMeta('og:description', 'Next-generation LED displays, custom-engineered and factory-direct. Indoor, outdoor, rental & event solutions professionally managed in the Philippines.')
+    setMeta('og:description', 'Next-generation LED displays, custom-engineered from our manufacturing facility. Indoor, outdoor, rental & event solutions professionally managed in the Philippines.')
     setMeta(
       'og:url',
       isLedSubdomain() ? `${window.location.origin}/` : 'https://pellexa.com/led',
     )
     setMeta('twitter:title', 'Pellexa LED — Custom LED Display Solutions')
-    setMeta('twitter:description', 'Premium LED displays, factory-direct in the Philippines. Custom sizes, pixel pitches, and mounting solutions.')
+    setMeta('twitter:description', 'Premium LED displays from our manufacturing facility, delivered across the Philippines. Custom sizes, pixel pitches, and mounting solutions.')
     window.scrollTo(0, 0)
   }, [])
 
