@@ -23,23 +23,38 @@ export interface MarketContextValue {
 
 export const MarketContext = createContext<MarketContextValue>(null!)
 
-export function MarketProvider({ children }: { children: ReactNode }) {
+interface MarketProviderProps {
+  children: ReactNode
+  /**
+   * When provided, the provider bypasses URL-param/cookie resolution and exposes
+   * the given config directly. Used by non-regional verticals (e.g. /food) so
+   * existing market-driven section components can render against vertical data
+   * without polluting the regional cookie or the MarketSelector UI.
+   */
+  override?: MarketConfig
+}
+
+export function MarketProvider({ children, override }: MarketProviderProps) {
   const { market: urlMarket } = useParams<{ market?: string }>()
 
   const marketId = useMemo<MarketId>(() => {
+    if (override) return override.id
     if (urlMarket && isValidMarket(urlMarket)) return urlMarket
     const saved = getCookie(COOKIE_KEY)
     if (saved && isValidMarket(saved)) return saved
     return 'global'
-  }, [urlMarket])
+  }, [urlMarket, override])
 
-  const market = useMemo(() => getMarket(marketId), [marketId])
+  const market = useMemo(
+    () => override ?? getMarket(marketId),
+    [marketId, override],
+  )
 
   useEffect(() => {
     document.documentElement.lang = market.lang
     document.documentElement.dir = market.dir
-    setCookie(COOKIE_KEY, marketId)
-  }, [market, marketId])
+    if (!override) setCookie(COOKIE_KEY, marketId)
+  }, [market, marketId, override])
 
   const setMarketId = (id: MarketId) => {
     setCookie(COOKIE_KEY, id)

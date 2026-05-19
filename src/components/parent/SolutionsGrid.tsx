@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Monitor, ArrowRight, Clock } from 'lucide-react'
+import { Monitor, Leaf, ArrowRight, Clock } from 'lucide-react'
 import { useLang } from '../../context/LangContext'
 
 export default function SolutionsGrid() {
@@ -56,25 +56,47 @@ export default function SolutionsGrid() {
             </Link>
           </motion.div>
 
-          {[1, 2].map((n) => (
-            <motion.div
-              key={`placeholder-${n}`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.6,
-                delay: (1 + n) * 0.12,
-                ease: [0.22, 1, 0.36, 1] as const,
-              }}
-              className="relative rounded-2xl border border-dashed border-white/5 bg-dark-800/10 p-8 flex flex-col items-center justify-center min-h-[280px]"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.24, ease: [0.22, 1, 0.36, 1] as const }}
+          >
+            <Link
+              to="/food"
+              className="group block relative rounded-2xl border border-white/5 bg-dark-800/30 p-8 hover:border-green-500/20 transition-all duration-500 h-full"
             >
-              <div className="w-12 h-12 rounded-xl bg-white/3 flex items-center justify-center mb-4">
-                <Clock size={20} className="text-dark-500" />
+              <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <Leaf size={24} className="text-green-400" />
               </div>
-              <p className="text-sm text-dark-500 font-medium">{c.newVertical}</p>
-              <p className="text-xs text-dark-600 mt-1">{c.comingSoon}</p>
-            </motion.div>
-          ))}
+              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-green-400 transition-colors">
+                {c.foodTitle}
+              </h3>
+              <p className="text-sm text-dark-400 leading-relaxed mb-6">
+                {c.foodDescription}
+              </p>
+              <div className="flex items-center gap-2 text-sm font-medium text-green-400 group-hover:gap-3 transition-all duration-300">
+                {c.learnMore}
+                <ArrowRight size={16} className="rtl:rotate-180" />
+              </div>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{
+              duration: 0.6,
+              delay: 0.36,
+              ease: [0.22, 1, 0.36, 1] as const,
+            }}
+            className="relative rounded-2xl border border-dashed border-white/5 bg-dark-800/10 p-8 flex flex-col items-center justify-center min-h-[280px]"
+          >
+            <div className="w-12 h-12 rounded-xl bg-white/3 flex items-center justify-center mb-4">
+              <Clock size={20} className="text-dark-500" />
+            </div>
+            <p className="text-sm text-dark-500 font-medium">{c.newVertical}</p>
+            <p className="text-xs text-dark-600 mt-1">{c.comingSoon}</p>
+          </motion.div>
         </div>
       </div>
     </section>

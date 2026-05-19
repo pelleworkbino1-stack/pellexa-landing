@@ -1,4 +1,4 @@
-export type MarketId = 'il' | 'ph' | 'global'
+export type MarketId = 'il' | 'ph' | 'global' | 'matcha'
 
 export interface SelectOption {
   value: string
@@ -57,6 +57,12 @@ export interface SolutionsContent {
     description: string
     highlights: string[]
     requestQuote: string
+    /** Optional content-driven icon name. Falls back to the position-based LED icon set when omitted. */
+    icon?: string
+    /** Optional content-driven image path. When omitted, an abstract icon-only banner is rendered. */
+    image?: string
+    /** Optional accent palette key. Falls back to the position-based LED accent set when omitted. */
+    accent?: 'blue' | 'gold' | 'purple' | 'green'
   }[]
 }
 
@@ -259,6 +265,8 @@ export interface ParentContent {
     subtitle: string
     ledTitle: string
     ledDescription: string
+    foodTitle: string
+    foodDescription: string
     learnMore: string
     newVertical: string
     comingSoon: string

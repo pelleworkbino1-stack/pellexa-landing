@@ -8,12 +8,31 @@ const stepIcons = [MessageSquare, Cpu, Truck, Wrench]
 export default function Process() {
   const { market } = useMarket()
   const c = market.process
+  const isMatcha = market.id === 'matcha'
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section id="process" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8" ref={ref}>
+    <section id="process" className="relative py-24 sm:py-32 overflow-hidden">
+      {isMatcha && (
+        <>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-[0.12]"
+            style={{
+              backgroundImage: `linear-gradient(rgba(212,160,107,0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,160,107,0.08) 1px, transparent 1px)`,
+              backgroundSize: '64px 64px',
+            }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute bottom-0 left-1/4 h-[550px] w-[550px] rounded-full bg-accent-400/10 blur-[130px] mix-blend-screen"
+            style={{ animation: 'matcha-breathe 11s ease-in-out 2s infinite' }}
+          />
+        </>
+      )}
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -48,9 +67,22 @@ export default function Process() {
                 }}
                 className="relative text-center group"
               >
-                <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-dark-800 border border-white/5 mb-6 group-hover:border-gold-500/20 transition-colors duration-500">
-                  <div className="absolute inset-0 rounded-2xl bg-gold-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <Icon size={24} className="text-gold-400 relative z-10" />
+                <div
+                  className={`relative inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 transition-colors duration-500 ${
+                    isMatcha
+                      ? 'matcha-elevated-soft shadow-2xl group-hover:border-gold-500/20'
+                      : 'bg-dark-800 border border-white/5 group-hover:border-gold-500/20'
+                  }`}
+                >
+                  <div
+                    className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                      isMatcha ? 'bg-accent-500/5' : 'bg-gold-500/5'
+                    }`}
+                  />
+                  <Icon
+                    size={24}
+                    className={`relative z-10 ${isMatcha ? 'text-accent-400' : 'text-gold-400'}`}
+                  />
                 </div>
 
                 <div className="text-xs font-mono text-gold-500/50 mb-2">

@@ -24,6 +24,7 @@ const cardVariants = {
 export default function Advantage() {
   const { market } = useMarket()
   const c = market.advantage
+  const isMatcha = market.id === 'matcha'
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -58,12 +59,29 @@ export default function Advantage() {
                 variants={cardVariants}
                 initial="hidden"
                 animate={inView ? 'visible' : 'hidden'}
-                className="group relative rounded-2xl border border-white/5 bg-dark-800/50 backdrop-blur-sm p-8 hover:border-gold-500/20 hover:bg-dark-800/80 transition-all duration-500"
+                className={
+                  isMatcha
+                    ? 'group relative matcha-elevated rounded-2xl p-8 shadow-2xl hover:border-gold-500/20 transition-all duration-500'
+                    : 'group relative rounded-2xl border border-white/5 bg-dark-800/50 backdrop-blur-sm p-8 hover:border-gold-500/20 hover:bg-dark-800/80 transition-all duration-500'
+                }
               >
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-gold-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div
+                  className={`absolute inset-0 rounded-2xl bg-gradient-to-b to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                    isMatcha ? 'from-accent-500/[0.04]' : 'from-gold-500/[0.03]'
+                  }`}
+                />
                 <div className="relative">
-                  <div className="w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center mb-5 group-hover:bg-gold-500/15 transition-colors">
-                    <Icon size={22} className="text-gold-400" />
+                  <div
+                    className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors ${
+                      isMatcha
+                        ? 'bg-accent-500/10 group-hover:bg-accent-500/15'
+                        : 'bg-gold-500/10 group-hover:bg-gold-500/15'
+                    }`}
+                  >
+                    <Icon
+                      size={22}
+                      className={isMatcha ? 'text-accent-400' : 'text-gold-400'}
+                    />
                   </div>
                   <h3 className="font-display font-semibold text-lg text-white mb-3">
                     {feature.title}

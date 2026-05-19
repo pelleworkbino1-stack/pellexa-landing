@@ -59,3 +59,76 @@ body {
   0% { transform: scale(1) translate(0, 0); }
   100% { transform: scale(1.12) translate(-1.5%, -1%); }
 }
+
+/*
+ * Matcha vertical theme — volcanic charcoal base, cream body copy,
+ * bamboo-gold structure, vibrant leaf-green for interactive accents only.
+ */
+.theme-matcha {
+  /* Volcanic charcoal-forest scale (elevation layers, not saturated green) */
+  --color-dark-950: #050e0a;
+  --color-dark-900: #0a1612;
+  --color-dark-800: #111f19;
+  --color-dark-700: #1a2b24;
+  --color-dark-600: #2a3f36;
+  --color-dark-500: #4a6358;
+  --color-dark-400: #94a89e;
+  --color-dark-300: #cbd5e1;
+  --color-dark-200: #e2e8f0;
+  --color-dark-100: #f1f5f9;
+  --color-dark-50:  #f8fafc;
+
+  /* Warm bamboo / wood — subtitles, borders, secondary highlights */
+  --color-gold-500: #d4a06b;
+  --color-gold-400: #e5bf95;
+  --color-gold-300: #f0d4b8;
+
+  /* Vibrant leaf green — CTAs, icons, ambient orbs only */
+  --color-accent-500: #22c55e;
+  --color-accent-400: #4ade80;
+  --color-accent-300: #86efac;
+
+  --matcha-body: #e2e8f0;
+  --matcha-body-muted: #cbd5e1;
+
+  background-color: var(--color-dark-950);
+  color: var(--matcha-body);
+}
+
+.theme-matcha ::selection {
+  background-color: rgba(34, 197, 94, 0.28);
+  color: #f8fafc;
+}
+
+/* Force scannable body copy — no green-on-green text */
+.theme-matcha p,
+.theme-matcha .text-dark-400,
+.theme-matcha .text-white\/60 {
+  color: var(--matcha-body-muted);
+}
+
+.theme-matcha .text-dark-300 {
+  color: var(--matcha-body);
+}
+
+/* Elevated card surface pattern for matcha sections */
+.theme-matcha .matcha-elevated {
+  background-color: color-mix(in srgb, var(--color-dark-900) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-gold-500) 12%, transparent);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  backdrop-filter: blur(12px);
+}
+
+.theme-matcha .matcha-elevated-soft {
+  background-color: color-mix(in srgb, var(--color-dark-950) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-gold-500) 12%, transparent);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+}
+
+@keyframes matcha-breathe {
+  0%, 100% { opacity: 0.08; transform: scale(1); }
+  50% { opacity: 0.12; transform: scale(1.04); }
+}

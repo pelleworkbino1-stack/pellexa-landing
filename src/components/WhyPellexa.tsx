@@ -8,6 +8,7 @@ const icons = [Factory, Globe, Zap, ShieldCheck, Award, Headphones]
 export default function WhyPellexa() {
   const { market } = useMarket()
   const c = market.whyPellexa
+  const isMatcha = market.id === 'matcha'
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -54,12 +55,25 @@ export default function WhyPellexa() {
                   delay: i * 0.1,
                   ease: [0.22, 1, 0.36, 1] as const,
                 }}
-                className="group relative rounded-2xl border border-white/5 bg-dark-800/30 p-6 hover:border-gold-500/15 transition-all duration-500"
+                className={
+                  isMatcha
+                    ? 'group relative matcha-elevated rounded-2xl p-6 shadow-2xl hover:border-gold-500/20 transition-all duration-500'
+                    : 'group relative rounded-2xl border border-white/5 bg-dark-800/30 p-6 hover:border-gold-500/15 transition-all duration-500'
+                }
               >
                 <div className="flex items-start gap-4">
-                  <div className="shrink-0 w-11 h-11 rounded-xl bg-gold-500/10 flex items-center justify-center group-hover:bg-gold-500/15 transition-colors">
-                    <Icon size={20} className="text-gold-400" />
-                  </div>
+                  <motion.div
+                    className={`shrink-0 w-11 h-11 rounded-xl flex items-center justify-center transition-colors ${
+                      isMatcha
+                        ? 'bg-accent-500/10 group-hover:bg-accent-500/15'
+                        : 'bg-gold-500/10 group-hover:bg-gold-500/15'
+                    }`}
+                  >
+                    <Icon
+                      size={20}
+                      className={isMatcha ? 'text-accent-400' : 'text-gold-400'}
+                    />
+                  </motion.div>
                   <div>
                     <div className="font-display font-bold text-2xl text-white mb-0.5">
                       {stat.value}

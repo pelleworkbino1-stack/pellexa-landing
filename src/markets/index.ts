@@ -2,11 +2,13 @@ import type { MarketConfig, MarketId } from './types'
 import { ph } from './ph'
 import { il } from './il'
 import { globalMarket } from './global'
+import { matcha } from './matcha'
 
 const MARKETS: Record<MarketId, MarketConfig> = {
   ph,
   il,
   global: globalMarket,
+  matcha,
 }
 
 export function getMarket(id: MarketId): MarketConfig {

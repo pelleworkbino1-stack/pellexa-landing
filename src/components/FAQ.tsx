@@ -3,10 +3,11 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { useMarket } from '../hooks/useMarket'
 
-function FAQItem({ faq, isOpen, onToggle }: {
+function FAQItem({ faq, isOpen, onToggle, isMatcha }: {
   faq: { question: string; answer: string }
   isOpen: boolean
   onToggle: () => void
+  isMatcha?: boolean
 }) {
   return (
     <div className="border-b border-white/5 last:border-b-0">
@@ -15,13 +16,17 @@ function FAQItem({ faq, isOpen, onToggle }: {
         className="w-full flex items-center justify-between gap-4 py-5 text-left rtl:text-right group"
         aria-expanded={isOpen}
       >
-        <span className="font-display font-medium text-base text-white group-hover:text-gold-400 transition-colors">
+        <span
+          className={`font-display font-medium text-base text-white transition-colors ${
+            isMatcha ? 'group-hover:text-accent-400' : 'group-hover:text-gold-400'
+          }`}
+        >
           {faq.question}
         </span>
         <ChevronDown
           size={18}
           className={`shrink-0 text-dark-400 transition-transform duration-300 ${
-            isOpen ? 'rotate-180 text-gold-400' : ''
+            isOpen ? `rotate-180 ${isMatcha ? 'text-accent-400' : 'text-gold-400'}` : ''
           }`}
         />
       </button>
@@ -47,6 +52,7 @@ function FAQItem({ faq, isOpen, onToggle }: {
 export default function FAQ() {
   const { market } = useMarket()
   const c = market.faq
+  const isMatcha = market.id === 'matcha'
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [openIndex, setOpenIndex] = useState<number | null>(0)
@@ -75,7 +81,11 @@ export default function FAQ() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="rounded-2xl border border-white/5 bg-dark-800/30 px-6 sm:px-8"
+          className={
+            isMatcha
+              ? 'matcha-elevated rounded-2xl shadow-2xl px-6 sm:px-8'
+              : 'rounded-2xl border border-white/5 bg-dark-800/30 px-6 sm:px-8'
+          }
         >
           {c.items.map((faq, i) => (
             <FAQItem
@@ -83,6 +93,7 @@ export default function FAQ() {
               faq={faq}
               isOpen={openIndex === i}
               onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+              isMatcha={isMatcha}
             />
           ))}
         </motion.div>

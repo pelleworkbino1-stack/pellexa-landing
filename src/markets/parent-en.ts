@@ -5,6 +5,7 @@ export const parentEn: ParentContent = {
   nav: {
     links: [
       { label: 'Solutions', href: '#solutions' },
+      { label: 'Agri-Food Sourcing', href: '/food' },
       { label: 'About', href: '#about' },
       { label: 'Contact', href: '#contact' },
     ],
@@ -28,6 +29,9 @@ export const parentEn: ParentContent = {
     ledTitle: 'Pellexa LED',
     ledDescription:
       'Custom LED display solutions — indoor, outdoor, rental, and event installations. Precision-manufactured by our engineering partner, with last-mile delivery and professional installation.',
+    foodTitle: 'Pellexa Agri-Food',
+    foodDescription:
+      'Precision-sourced global agri-food procurement, specialty raw materials, and agricultural supply chains — direct from certified facilities to enterprise markets.',
     learnMore: 'Learn More',
     newVertical: 'New Vertical',
     comingSoon: 'Coming Soon',

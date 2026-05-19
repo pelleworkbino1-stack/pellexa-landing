@@ -5,6 +5,7 @@ export const parentHe: ParentContent = {
   nav: {
     links: [
       { label: 'פתרונות', href: '#solutions' },
+      { label: 'רכש מזון וחקלאות', href: '/food' },
       { label: 'אודות', href: '#about' },
       { label: 'צור קשר', href: '#contact' },
     ],
@@ -28,6 +29,9 @@ export const parentHe: ParentContent = {
     ledTitle: 'Pellexa LED',
     ledDescription:
       'פתרונות תצוגת LED בהתאמה אישית — פנים, חוץ, השכרה והתקנות לאירועים. ייצור מדויק, משלוח והתקנה מקצועית.',
+    foodTitle: 'Pellexa Agri-Food',
+    foodDescription:
+      'רכש וסורסינג מדויק למוצרי מזון גלובליים, חומרי גלם ושרשראות אספקה חקלאיות — ישירות ממפעלים מוסמכים לשווקים מוסדיים וארגוניים.',
     learnMore: 'למידע נוסף',
     newVertical: 'ורטיקל חדש',
     comingSoon: 'בקרוב',
