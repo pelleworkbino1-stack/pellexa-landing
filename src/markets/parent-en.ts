@@ -68,8 +68,9 @@ export const parentEn: ParentContent = {
   contact: {
     title: 'Ready to Start a Project?',
     subtitle:
-      'Whether you need LED displays, or want to explore our upcoming verticals — our team is ready to provide a tailored consultation.',
-    cta1: 'Contact Us',
+      'Whether you need LED displays, agri-food sourcing, or want to explore any of our upcoming verticals — reach out directly and we\'ll get back to you personally.',
+    email: 'pelle@pellexa.com',
+    cta1: 'Send Us an Email',
     cta2: 'LED Inquiry Form',
   },
   footer: {

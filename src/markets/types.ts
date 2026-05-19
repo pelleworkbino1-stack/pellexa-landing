@@ -278,7 +278,7 @@ export interface ParentContent {
     subtitle: string
     pillars: { title: string; description: string }[]
   }
-  contact: { title: string; subtitle: string; cta1: string; cta2: string }
+  contact: { title: string; subtitle: string; email: string; cta1: string; cta2: string }
   footer: { tagline: string; copyright: string; privacy: string; terms: string }
 }
 

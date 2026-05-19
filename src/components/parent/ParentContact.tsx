@@ -23,12 +23,24 @@ export default function ParentContact() {
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-white leading-tight mb-4">
             {c.title}
           </h2>
-          <p className="text-dark-400 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
+          <p className="text-dark-400 text-base sm:text-lg leading-relaxed mb-6 max-w-xl mx-auto">
             {c.subtitle}
           </p>
+
+          {/* Prominent email address display */}
+          <a
+            href={`mailto:${c.email}`}
+            className="group inline-flex items-center gap-3 rounded-2xl border border-gold-500/25 bg-gold-500/5 px-6 py-4 mb-8 hover:border-gold-500/50 hover:bg-gold-500/10 transition-all duration-300"
+          >
+            <Mail size={18} className="text-gold-400 shrink-0" />
+            <span className="font-mono text-base sm:text-lg font-medium text-gold-300 group-hover:text-gold-200 transition-colors">
+              {c.email}
+            </span>
+          </a>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="mailto:info@pellexa.com"
+              href={`mailto:${c.email}`}
               className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 px-7 py-3.5 text-sm font-semibold text-dark-950 shadow-lg shadow-gold-500/20 hover:shadow-gold-500/40 transition-all duration-300 hover:scale-[1.03]"
             >
               {c.cta1}
