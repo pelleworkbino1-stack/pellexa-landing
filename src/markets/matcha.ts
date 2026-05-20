@@ -15,10 +15,14 @@ import type { MarketConfig } from './types'
  * instead of the LED `Contact` component, so most form fields are never
  * consumed at runtime.
  *
- * The accompanying `.theme-matcha` CSS scope (see `src/index.css`) overrides
- * the Tailwind v4 `--color-gold-*` and `--color-dark-*` tokens so every utility
- * class compiled against them automatically rebrands to the matcha green
- * palette within the MatchaPage subtree.
+ * Brand identity for the matcha product line is now resolved by the route-based
+ * ThemeProvider, which emits `.theme-agri` on `<html>` for any `/food/*` path.
+ * That scope rebinds the Tier 3 `--brand-*` token group to Deep Matcha
+ * (#0F5257) and activates `--brand-secondary-*` for the Cocoa Brown runway
+ * (#8B5A2B). The legacy `.theme-matcha` CSS scope was retired in Phase 3
+ * Target 3 — all per-component matcha rendering now flows through the
+ * standard brand tokens with `market.id === 'matcha'` conditional branches
+ * applying the 80/20 matcha/cocoa hierarchy.
  */
 export const matcha: MarketConfig = {
   id: 'matcha',

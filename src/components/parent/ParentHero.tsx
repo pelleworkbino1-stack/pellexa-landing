@@ -20,12 +20,12 @@ export default function ParentHero() {
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-dark-950" />
+        <div className="absolute inset-0 bg-canvas-base" />
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(var(--brand-glow), 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(var(--brand-glow), 0.03) 1px, transparent 1px)`,
             backgroundSize: '80px 80px',
             animation: 'grid-pulse 8s ease-in-out infinite',
           }}
@@ -36,14 +36,14 @@ export default function ParentHero() {
           <div
             className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full"
             style={{
-              background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(var(--brand-glow), 0.08) 0%, transparent 70%)',
               animation: 'glow-drift 12s ease-in-out infinite',
             }}
           />
           <div
             className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] rounded-full"
             style={{
-              background: 'radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(var(--brand-glow), 0.06) 0%, transparent 70%)',
               animation: 'glow-drift 15s ease-in-out 3s infinite',
             }}
           />
@@ -56,9 +56,9 @@ export default function ParentHero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="inline-flex items-center gap-2 rounded-full bg-gold-500/8 border border-gold-500/15 px-4 py-1.5 mb-8 backdrop-blur-sm"
+          className="inline-flex items-center gap-2 rounded-full bg-brand-500/8 border border-brand-500/15 px-4 py-1.5 mb-8 backdrop-blur-sm"
         >
-          <span className="text-xs font-medium tracking-wide text-gold-400 uppercase">
+          <span className="text-xs font-medium tracking-wide text-brand-400 uppercase">
             {c.badge}
           </span>
         </motion.div>
@@ -71,11 +71,11 @@ export default function ParentHero() {
           className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-white mb-6"
         >
           {c.headlineTop}{' '}
-          <span className="bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-brand-400 via-brand-300 to-brand-500 bg-clip-text text-transparent">
             {c.headlineHighlight}
           </span>
           <br />
-          <span className="text-dark-300">{c.headlineBottom}</span>
+          <span className="text-ink-muted">{c.headlineBottom}</span>
         </motion.h1>
 
         <motion.p
@@ -83,7 +83,7 @@ export default function ParentHero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="mx-auto max-w-2xl text-base sm:text-lg text-white/60 leading-relaxed mb-10"
+          className="mx-auto max-w-2xl text-base sm:text-lg text-ink-muted leading-relaxed mb-10"
         >
           {c.subtitle}
         </motion.p>
@@ -97,7 +97,7 @@ export default function ParentHero() {
         >
           <a
             href="#solutions"
-            className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 px-7 py-3.5 text-sm font-semibold text-dark-950 shadow-lg shadow-gold-500/20 hover:shadow-gold-500/40 transition-all duration-300 hover:scale-[1.03]"
+            className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-brand-400 px-7 py-3.5 text-sm font-semibold text-canvas-base shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40 transition-all duration-300 hover:scale-[1.03]"
           >
             {c.cta1}
             <ArrowRight
@@ -108,14 +108,14 @@ export default function ParentHero() {
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-7 py-3.5 text-sm font-medium text-white hover:bg-white/10 hover:border-white/25 transition-all duration-300"
+            className="inline-flex items-center gap-2 rounded-full border border-silver-anchor/15 bg-silver-anchor/5 backdrop-blur-sm px-7 py-3.5 text-sm font-medium text-white hover:bg-silver-anchor/10 hover:border-silver-anchor/25 transition-all duration-300"
           >
             {c.cta2}
           </a>
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark-950 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-canvas-base to-transparent" />
     </section>
   )
 }

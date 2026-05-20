@@ -18,7 +18,7 @@ export default function WhyPellexa() {
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 60%)',
+            background: 'radial-gradient(circle, rgba(var(--brand-glow), 0.04) 0%, transparent 60%)',
           }}
         />
       </div>
@@ -30,14 +30,14 @@ export default function WhyPellexa() {
           transition={{ duration: 0.7 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-3 block">
+          <span className="text-xs font-semibold tracking-widest uppercase text-brand-500 mb-3 block">
             {c.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
             {c.titleMain}{' '}
-            <span className="text-dark-400">{c.titleFaded}</span>
+            <span className="text-ink-dim">{c.titleFaded}</span>
           </h2>
-          <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
+          <p className="text-ink-dim text-base sm:text-lg leading-relaxed">
             {c.subtitle}
           </p>
         </motion.div>
@@ -57,22 +57,15 @@ export default function WhyPellexa() {
                 }}
                 className={
                   isMatcha
-                    ? 'group relative matcha-elevated rounded-2xl p-6 shadow-2xl hover:border-gold-500/20 transition-all duration-500'
-                    : 'group relative rounded-2xl border border-white/5 bg-dark-800/30 p-6 hover:border-gold-500/15 transition-all duration-500'
+                    ? 'group relative rounded-2xl border border-brand-secondary-500/15 bg-canvas-elevated/90 backdrop-blur-md p-6 shadow-2xl hover:border-brand-500/20 transition-all duration-500'
+                    : 'group relative rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 p-6 hover:border-brand-500/15 transition-all duration-500'
                 }
               >
                 <div className="flex items-start gap-4">
                   <motion.div
-                    className={`shrink-0 w-11 h-11 rounded-xl flex items-center justify-center transition-colors ${
-                      isMatcha
-                        ? 'bg-accent-500/10 group-hover:bg-accent-500/15'
-                        : 'bg-gold-500/10 group-hover:bg-gold-500/15'
-                    }`}
+                    className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center bg-brand-500/10 group-hover:bg-brand-500/15 transition-colors"
                   >
-                    <Icon
-                      size={20}
-                      className={isMatcha ? 'text-accent-400' : 'text-gold-400'}
-                    />
+                    <Icon size={20} className="text-brand-400" />
                   </motion.div>
                   <div>
                     <div className="font-display font-bold text-2xl text-white mb-0.5">
@@ -81,7 +74,7 @@ export default function WhyPellexa() {
                     <div className="text-sm font-medium text-white/80 mb-1">
                       {stat.label}
                     </div>
-                    <p className="text-xs text-dark-400 leading-relaxed">
+                    <p className="text-xs text-ink-dim leading-relaxed">
                       {stat.description}
                     </p>
                   </div>

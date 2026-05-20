@@ -25,14 +25,14 @@ function HubHero() {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
           style={{
             background:
-              'radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 60%)',
+              'radial-gradient(circle, rgba(var(--brand-glow), 0.06) 0%, transparent 60%)',
           }}
         />
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(rgba(16,185,129,0.025) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(16,185,129,0.025) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(var(--brand-secondary-glow), 0.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(var(--brand-secondary-glow), 0.04) 1px, transparent 1px)`,
             backgroundSize: '80px 80px',
             animation: 'grid-pulse 8s ease-in-out infinite',
           }}
@@ -44,10 +44,10 @@ function HubHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-          className="inline-flex items-center gap-2 rounded-full bg-green-500/8 border border-green-500/15 px-4 py-1.5 mb-8 backdrop-blur-sm"
+          className="inline-flex items-center gap-2 rounded-full bg-brand-secondary-500/10 border border-brand-secondary-400/15 px-4 py-1.5 mb-8 backdrop-blur-sm"
         >
-          <Leaf size={14} className="text-green-400" />
-          <span className="text-xs font-medium tracking-wide text-green-400 uppercase">
+          <Leaf size={14} className="text-brand-400" />
+          <span className="text-xs font-medium tracking-wide text-brand-secondary-400 uppercase">
             Pellexa Agri-Food
           </span>
         </motion.div>
@@ -63,7 +63,7 @@ function HubHero() {
           className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-tight text-white mb-6"
         >
           Sourcing Portfolio{' '}
-          <span className="bg-gradient-to-r from-green-300 via-emerald-300 to-green-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-brand-300 via-brand-400 to-brand-500 bg-clip-text text-transparent">
             Hub
           </span>
         </motion.h1>
@@ -76,7 +76,7 @@ function HubHero() {
             delay: 0.3,
             ease: [0.22, 1, 0.36, 1] as const,
           }}
-          className="mx-auto max-w-2xl text-base sm:text-lg text-white/60 leading-relaxed"
+          className="mx-auto max-w-2xl text-base sm:text-lg text-ink-muted leading-relaxed"
         >
           Pellexa's Agri-Food division operates dedicated procurement product
           lines across matcha and specialty raw materials. Select a product line
@@ -106,23 +106,23 @@ function HubGrid() {
           >
             <Link
               to="/food/matcha"
-              className="group block relative rounded-2xl border border-white/5 bg-dark-800/30 p-8 hover:border-green-500/30 transition-all duration-500 h-full"
+              className="group block relative rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 p-8 hover:border-brand-500/30 transition-all duration-500 h-full"
             >
-              <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <Leaf size={24} className="text-green-400" />
+              <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <Leaf size={24} className="text-brand-400" />
               </div>
-              <span className="inline-block rounded-full bg-green-500/10 border border-green-500/15 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase text-green-400 mb-3">
+              <span className="inline-block rounded-full bg-brand-secondary-500/10 border border-brand-secondary-400/15 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase text-brand-secondary-400 mb-3">
                 Active Product Line
               </span>
-              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-green-400 transition-colors">
+              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-brand-400 transition-colors">
                 Matcha Sourcing
               </h3>
-              <p className="text-sm text-dark-400 leading-relaxed mb-6">
+              <p className="text-sm text-ink-dim leading-relaxed mb-6">
                 Tiered procurement models for ceremonial, beverage, and
                 industrial grades. Certified Organic & High-Consistency
                 Non-Organic lines.
               </p>
-              <div className="flex items-center gap-2 text-sm font-medium text-green-400 group-hover:gap-3 transition-all duration-300">
+              <div className="flex items-center gap-2 text-sm font-medium text-brand-400 group-hover:gap-3 transition-all duration-300">
                 Enter Matcha Portfolio
                 <ArrowRight size={16} className="rtl:rotate-180" />
               </div>
@@ -137,15 +137,15 @@ function HubGrid() {
               delay: 0.24,
               ease: [0.22, 1, 0.36, 1] as const,
             }}
-            className="relative rounded-2xl border border-dashed border-white/5 bg-dark-800/10 p-8 flex flex-col items-center justify-center text-center min-h-[300px]"
+            className="relative rounded-2xl border border-dashed border-silver-anchor/5 bg-canvas-overlay/10 p-8 flex flex-col items-center justify-center text-center min-h-[300px]"
           >
-            <div className="w-12 h-12 rounded-xl bg-white/3 flex items-center justify-center mb-4">
-              <Clock size={20} className="text-dark-500" />
+            <div className="w-12 h-12 rounded-xl bg-silver-anchor/[0.03] flex items-center justify-center mb-4">
+              <Clock size={20} className="text-silver-trace" />
             </div>
-            <p className="text-sm text-dark-500 font-medium">
+            <p className="text-sm text-silver-trace font-medium">
               Specialty Ingredients
             </p>
-            <p className="text-xs text-dark-600 mt-1">Coming Soon</p>
+            <p className="text-xs text-silver-trace/70 mt-1">Coming Soon</p>
           </motion.div>
 
           <motion.div
@@ -156,15 +156,15 @@ function HubGrid() {
               delay: 0.36,
               ease: [0.22, 1, 0.36, 1] as const,
             }}
-            className="relative rounded-2xl border border-dashed border-white/5 bg-dark-800/10 p-8 flex flex-col items-center justify-center text-center min-h-[300px]"
+            className="relative rounded-2xl border border-dashed border-silver-anchor/5 bg-canvas-overlay/10 p-8 flex flex-col items-center justify-center text-center min-h-[300px]"
           >
-            <div className="w-12 h-12 rounded-xl bg-white/3 flex items-center justify-center mb-4">
-              <Clock size={20} className="text-dark-500" />
+            <div className="w-12 h-12 rounded-xl bg-silver-anchor/[0.03] flex items-center justify-center mb-4">
+              <Clock size={20} className="text-silver-trace" />
             </div>
-            <p className="text-sm text-dark-500 font-medium">
+            <p className="text-sm text-silver-trace font-medium">
               Specialty Ingredients
             </p>
-            <p className="text-xs text-dark-600 mt-1">Coming Soon</p>
+            <p className="text-xs text-silver-trace/70 mt-1">Coming Soon</p>
           </motion.div>
         </div>
       </div>
@@ -186,7 +186,7 @@ export default function FoodPage() {
 
   return (
     <LangProvider>
-      <div className="min-h-screen bg-dark-950 text-white antialiased">
+      <div className="min-h-screen bg-canvas-base text-white antialiased">
         <ParentNavbar />
         <main>
           <HubHero />

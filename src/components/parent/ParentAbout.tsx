@@ -12,7 +12,7 @@ export default function ParentAbout() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section id="about" className="relative py-24 sm:py-32 bg-dark-900/50">
+    <section id="about" className="relative py-24 sm:py-32 bg-canvas-elevated/50">
       <div className="mx-auto max-w-7xl px-5 sm:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -20,14 +20,14 @@ export default function ParentAbout() {
           transition={{ duration: 0.7 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-3 block">
+          <span className="text-xs font-semibold tracking-widest uppercase text-brand-500 mb-3 block">
             {c.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
             {c.titleMain}{' '}
-            <span className="text-dark-400">{c.titleFaded}</span>
+            <span className="text-ink-dim">{c.titleFaded}</span>
           </h2>
-          <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
+          <p className="text-ink-dim text-base sm:text-lg leading-relaxed">
             {c.subtitle}
           </p>
         </motion.div>
@@ -45,15 +45,15 @@ export default function ParentAbout() {
                   delay: i * 0.1,
                   ease: [0.22, 1, 0.36, 1] as const,
                 }}
-                className="group text-center rounded-2xl border border-white/5 bg-dark-800/30 p-6 hover:border-gold-500/15 transition-all duration-500"
+                className="group text-center rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 p-6 hover:border-brand-500/15 transition-all duration-500"
               >
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gold-500/10 mb-5 group-hover:bg-gold-500/15 transition-colors">
-                  <Icon size={24} className="text-gold-400" />
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-500/10 mb-5 group-hover:bg-brand-500/15 transition-colors">
+                  <Icon size={24} className="text-brand-400" />
                 </div>
                 <h3 className="font-display font-semibold text-base text-white mb-2">
                   {pillar.title}
                 </h3>
-                <p className="text-sm text-dark-400 leading-relaxed">
+                <p className="text-sm text-ink-dim leading-relaxed">
                   {pillar.description}
                 </p>
               </motion.div>

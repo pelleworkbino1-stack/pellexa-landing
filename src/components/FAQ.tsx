@@ -10,23 +10,23 @@ function FAQItem({ faq, isOpen, onToggle, isMatcha }: {
   isMatcha?: boolean
 }) {
   return (
-    <div className="border-b border-white/5 last:border-b-0">
+    <div
+      className={`border-b last:border-b-0 ${
+        isMatcha ? 'border-brand-secondary-400/15' : 'border-silver-anchor/5'
+      }`}
+    >
       <button
         onClick={onToggle}
         className="w-full flex items-center justify-between gap-4 py-5 text-left rtl:text-right group"
         aria-expanded={isOpen}
       >
-        <span
-          className={`font-display font-medium text-base text-white transition-colors ${
-            isMatcha ? 'group-hover:text-accent-400' : 'group-hover:text-gold-400'
-          }`}
-        >
+        <span className="font-display font-medium text-base text-white transition-colors group-hover:text-brand-400">
           {faq.question}
         </span>
         <ChevronDown
           size={18}
-          className={`shrink-0 text-dark-400 transition-transform duration-300 ${
-            isOpen ? `rotate-180 ${isMatcha ? 'text-accent-400' : 'text-gold-400'}` : ''
+          className={`shrink-0 text-ink-dim transition-transform duration-300 ${
+            isOpen ? 'rotate-180 text-brand-400' : ''
           }`}
         />
       </button>
@@ -39,7 +39,7 @@ function FAQItem({ faq, isOpen, onToggle, isMatcha }: {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-sm text-dark-400 leading-relaxed pe-8">
+            <p className="pb-5 text-sm text-ink-dim leading-relaxed pe-8">
               {faq.answer}
             </p>
           </motion.div>
@@ -66,13 +66,13 @@ export default function FAQ() {
           transition={{ duration: 0.7 }}
           className="text-center mb-12"
         >
-          <span className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-3 block">
+          <span className="text-xs font-semibold tracking-widest uppercase text-brand-500 mb-3 block">
             {c.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-white leading-tight mb-4">
             {c.title}
           </h2>
-          <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
+          <p className="text-ink-dim text-base sm:text-lg leading-relaxed">
             {c.subtitle}
           </p>
         </motion.div>
@@ -83,8 +83,8 @@ export default function FAQ() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className={
             isMatcha
-              ? 'matcha-elevated rounded-2xl shadow-2xl px-6 sm:px-8'
-              : 'rounded-2xl border border-white/5 bg-dark-800/30 px-6 sm:px-8'
+              ? 'rounded-2xl border border-brand-secondary-500/15 bg-canvas-elevated/90 backdrop-blur-md shadow-2xl px-6 sm:px-8'
+              : 'rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 px-6 sm:px-8'
           }
         >
           {c.items.map((faq, i) => (

@@ -38,7 +38,7 @@ export default function LedPage() {
   }, [market])
 
   return (
-    <div className="min-h-screen bg-dark-950 text-white antialiased">
+    <div className="min-h-screen bg-canvas-base text-white antialiased">
       <MarketBanner />
       <ScrollProgress />
       <Navbar />

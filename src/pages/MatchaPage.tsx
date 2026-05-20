@@ -22,9 +22,12 @@ function setMeta(property: string, content: string) {
 /**
  * Pellexa Matcha Sourcing — dedicated product-line page (/food/matcha).
  *
- * The root container applies `.theme-matcha`, rebinding Tailwind v4 tokens to a
- * volcanic charcoal base, cream body copy, bamboo-gold structure, and leaf-green
- * accents (see `src/index.css`).
+ * Brand identity is resolved at the document root by the route-based
+ * `ThemeProvider`, which emits `.theme-agri` on `<html>` for every `/food/*`
+ * path. That scope rebinds the Tier 3 `--brand-*` token group to Deep Matcha
+ * (#0F5257) and unlocks `--brand-secondary-*` for the Cocoa Brown runway
+ * (#8B5A2B) used by tier badges, eyebrow labels, and 1px structural rules.
+ * Tier 1 canvas + silver-anchor are global and never touched.
  */
 export default function MatchaPage() {
   useEffect(() => {
@@ -41,7 +44,7 @@ export default function MatchaPage() {
   return (
     <LangProvider>
       <MarketProvider override={matcha}>
-        <div className="theme-matcha relative min-h-screen text-white antialiased">
+        <div className="relative min-h-screen bg-canvas-base text-white antialiased">
           <ParentNavbar />
 
           <div
@@ -49,16 +52,16 @@ export default function MatchaPage() {
             className="pointer-events-none absolute inset-0 overflow-hidden"
           >
             <div
-              className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-accent-500/10 blur-[130px] mix-blend-screen"
+              className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-brand-500/10 blur-[130px] mix-blend-screen"
               style={{ animation: 'matcha-breathe 8s ease-in-out infinite' }}
             />
-            <div className="absolute top-1/3 right-1/4 h-[600px] w-[600px] rounded-full bg-accent-400/10 blur-[150px] mix-blend-screen" />
+            <div className="absolute top-1/3 right-1/4 h-[600px] w-[600px] rounded-full bg-brand-400/10 blur-[150px] mix-blend-screen" />
             <div
-              className="absolute top-2/3 left-1/3 h-[550px] w-[550px] rounded-full bg-accent-500/10 blur-[140px] mix-blend-screen"
+              className="absolute top-2/3 left-1/3 h-[550px] w-[550px] rounded-full bg-brand-500/10 blur-[140px] mix-blend-screen"
               style={{ animation: 'matcha-breathe 11s ease-in-out 2.5s infinite' }}
             />
             <div
-              className="absolute bottom-0 right-1/4 h-[500px] w-[500px] rounded-full bg-accent-400/10 blur-[130px] mix-blend-screen"
+              className="absolute bottom-0 right-1/4 h-[500px] w-[500px] rounded-full bg-brand-400/10 blur-[130px] mix-blend-screen"
               style={{ animation: 'matcha-breathe 9s ease-in-out 1s infinite' }}
             />
           </div>

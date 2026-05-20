@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Globe } from 'lucide-react'
 import { useLang } from '../../context/LangContext'
+import PellexaLogo from '../PellexaLogo'
 
 function LangToggle() {
   const { lang, setLang } = useLang()
   return (
     <button
       onClick={() => setLang(lang === 'en' ? 'he' : 'en')}
-      className="inline-flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-xs font-medium text-dark-300 hover:bg-white/10 hover:text-white transition-all"
+      className="inline-flex items-center gap-1.5 rounded-full bg-silver-anchor/5 border border-silver-anchor/10 px-3 py-1.5 text-xs font-medium text-ink-muted hover:bg-silver-anchor/10 hover:text-white transition-all"
       aria-label="Switch language"
     >
       <Globe size={14} />
@@ -36,20 +37,14 @@ export default function ParentNavbar() {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-dark-950/80 backdrop-blur-xl border-b border-white/5 shadow-2xl'
+          ? 'bg-canvas-base/80 backdrop-blur-xl border-b border-silver-anchor/5 shadow-2xl'
           : 'bg-transparent'
       }`}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex h-18 items-center justify-between">
-          <a href="/" className="flex items-center gap-2.5 group">
-            <div className="relative flex items-center justify-center w-9 h-9">
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-gold-500 to-gold-400 opacity-20 group-hover:opacity-40 transition-opacity" />
-              <span className="font-display font-bold text-lg text-gold-400">P</span>
-            </div>
-            <span className="font-display font-semibold text-lg tracking-tight text-white">
-              Pellexa
-            </span>
+          <a href="/" className="group transition-opacity hover:opacity-90">
+            <PellexaLogo />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
@@ -57,16 +52,16 @@ export default function ParentNavbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-dark-300 hover:text-white transition-colors duration-300 relative group"
+                className="text-sm text-ink-muted hover:text-white transition-colors duration-300 relative group"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-500 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-brand-400 group-hover:w-full transition-all duration-300" />
               </a>
             ))}
             <LangToggle />
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-gold-500/10 border border-gold-500/20 px-5 py-2 text-sm font-medium text-gold-400 hover:bg-gold-500/20 hover:border-gold-500/40 transition-all duration-300"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-500/10 border border-brand-500/20 px-5 py-2 text-sm font-medium text-brand-400 hover:bg-brand-500/20 hover:border-brand-500/40 transition-all duration-300"
             >
               {c.cta}
             </a>
@@ -90,7 +85,7 @@ export default function ParentNavbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden absolute inset-x-0 top-full bg-dark-900/98 backdrop-blur-2xl border-b border-white/5"
+            className="md:hidden absolute inset-x-0 top-full bg-canvas-elevated/95 backdrop-blur-2xl border-b border-silver-anchor/5"
           >
             <div className="flex flex-col gap-1 p-5">
               {c.links.map((link) => (
@@ -98,7 +93,7 @@ export default function ParentNavbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-base text-dark-300 hover:text-white hover:bg-white/5 transition-all"
+                  className="block rounded-lg px-4 py-3 text-base text-ink-muted hover:text-white hover:bg-silver-anchor/5 transition-all"
                 >
                   {link.label}
                 </a>
@@ -109,7 +104,7 @@ export default function ParentNavbar() {
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
-                className="mt-3 block rounded-full bg-gold-500/10 border border-gold-500/20 px-5 py-3 text-center text-sm font-medium text-gold-400 hover:bg-gold-500/20 transition-all"
+                className="mt-3 block rounded-full bg-brand-500/10 border border-brand-500/20 px-5 py-3 text-center text-sm font-medium text-brand-400 hover:bg-brand-500/20 transition-all"
               >
                 {c.cta}
               </a>

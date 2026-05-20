@@ -29,51 +29,38 @@ const iconRegistry: Record<string, ComponentType<LucideProps>> = {
   flask: FlaskConical,
 }
 
-interface AccentTokens {
-  text: string
-  bg: string
-  border: string
-  bannerFrom: string
-  bannerVia: string
-  bannerTo: string
-}
+/**
+ * Card accent applied uniformly across every solution card.
+ *
+ * Phase 3 Target 2 collapsed the legacy three-color `accentRegistry`
+ * (blue / gold / purple) into one cohesive brand token system. The card
+ * resolves its branch identity dynamically through the `.theme-*` scope at
+ * the document root — Electric Cyan on /led, Sky Blue on /, Matcha on /food.
+ * Visual differentiation between sibling cards is now carried strictly by
+ * the existing screen-installation imagery and Lucide structural icons.
+ *
+ * Phase 3 Target 3 introduced the `agriAccent` sibling to enforce the 80/20
+ * matcha/cocoa hierarchy: tag pill (a category badge per the directive) goes
+ * to cocoa, banner glow + hover border stay on matcha (action / luminous
+ * depth). Banner backdrop never blends matcha and cocoa — separation kept.
+ */
+const ledAccent = {
+  text: 'text-brand-400',
+  bg: 'bg-brand-500/10',
+  border: 'group-hover:border-brand-500/30',
+  bannerFrom: 'from-brand-500/15',
+  bannerVia: 'via-brand-500/5',
+  bannerTo: 'to-transparent',
+} as const
 
-const accentRegistry: Record<NonNullable<AccentTokens['text']> | string, AccentTokens> = {
-  blue: {
-    text: 'text-blue-400',
-    bg: 'bg-blue-500/10',
-    border: 'group-hover:border-blue-500/30',
-    bannerFrom: 'from-blue-500/15',
-    bannerVia: 'via-blue-500/5',
-    bannerTo: 'to-transparent',
-  },
-  gold: {
-    text: 'text-gold-400',
-    bg: 'bg-gold-500/10',
-    border: 'group-hover:border-gold-500/30',
-    bannerFrom: 'from-gold-500/15',
-    bannerVia: 'via-gold-500/5',
-    bannerTo: 'to-transparent',
-  },
-  purple: {
-    text: 'text-purple-400',
-    bg: 'bg-purple-500/10',
-    border: 'group-hover:border-purple-500/30',
-    bannerFrom: 'from-purple-500/15',
-    bannerVia: 'via-purple-500/5',
-    bannerTo: 'to-transparent',
-  },
-  green: {
-    text: 'text-green-400',
-    bg: 'bg-green-500/10',
-    border: 'group-hover:border-green-500/30',
-    bannerFrom: 'from-green-500/15',
-    bannerVia: 'via-emerald-500/5',
-    bannerTo: 'to-transparent',
-  },
-}
-
-const ledAccentOrder: Array<keyof typeof accentRegistry> = ['blue', 'gold', 'purple']
+const agriAccent = {
+  text: 'text-brand-secondary-400',
+  bg: 'bg-brand-secondary-500/10',
+  border: 'group-hover:border-brand-500/30',
+  bannerFrom: 'from-brand-500/15',
+  bannerVia: 'via-brand-500/5',
+  bannerTo: 'to-transparent',
+} as const
 
 export default function Solutions() {
   const { market } = useMarket()
@@ -86,7 +73,7 @@ export default function Solutions() {
     <section
       id="solutions"
       className={`relative py-24 sm:py-32 overflow-hidden ${
-        isMatcha ? 'bg-dark-900/30' : 'bg-dark-900/50'
+        isMatcha ? 'bg-canvas-elevated/30' : 'bg-canvas-elevated/50'
       }`}
     >
       {isMatcha && (
@@ -103,7 +90,7 @@ export default function Solutions() {
       {isMatcha && (
         <div
           aria-hidden
-          className="pointer-events-none absolute top-1/4 right-0 h-[500px] w-[500px] rounded-full bg-accent-500/10 blur-[130px] mix-blend-screen"
+          className="pointer-events-none absolute top-1/4 right-0 h-[500px] w-[500px] rounded-full bg-brand-500/10 blur-[130px] mix-blend-screen"
           style={{ animation: 'matcha-breathe 12s ease-in-out infinite' }}
         />
       )}
@@ -114,13 +101,17 @@ export default function Solutions() {
           transition={{ duration: 0.7 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-3 block">
+          <span
+            className={`text-xs font-semibold tracking-widest uppercase mb-3 block ${
+              isMatcha ? 'text-brand-secondary-400' : 'text-brand-500'
+            }`}
+          >
             {c.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
             {c.title}
           </h2>
-          <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
+          <p className="text-ink-dim text-base sm:text-lg leading-relaxed">
             {c.subtitle}
           </p>
         </motion.div>
@@ -130,8 +121,7 @@ export default function Solutions() {
             const Icon: ComponentType<LucideProps> = sol.icon
               ? (iconRegistry[sol.icon] ?? ledIcons[i] ?? Building2)
               : (ledIcons[i] ?? Building2)
-            const accent =
-              accentRegistry[sol.accent ?? ledAccentOrder[i] ?? 'gold']
+            const accent = isMatcha ? agriAccent : ledAccent
             const image = sol.image ?? ledImages[i]
             const hasImage = Boolean(image) && !sol.icon
 
@@ -147,8 +137,8 @@ export default function Solutions() {
                 }}
                 className={`group relative overflow-hidden transition-all duration-500 ${accent.border} ${
                   isMatcha
-                    ? 'matcha-elevated rounded-2xl shadow-2xl'
-                    : 'rounded-2xl border border-white/5 bg-dark-800/40 backdrop-blur-sm'
+                    ? 'rounded-2xl border border-brand-secondary-500/15 bg-canvas-elevated/90 backdrop-blur-md shadow-2xl'
+                    : 'rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/40 backdrop-blur-sm'
                 }`}
               >
                 {hasImage ? (
@@ -158,7 +148,7 @@ export default function Solutions() {
                       alt={sol.tag}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark-800 via-dark-800/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-canvas-overlay via-canvas-overlay/40 to-transparent" />
                     <div
                       className={`absolute top-4 left-4 rtl:left-auto rtl:right-4 inline-flex items-center gap-1.5 rounded-full ${accent.bg} backdrop-blur-sm px-3 py-1`}
                     >
@@ -206,7 +196,7 @@ export default function Solutions() {
                   <h3 className="font-display font-semibold text-lg text-white mb-2">
                     {sol.title}
                   </h3>
-                  <p className="text-sm text-dark-400 leading-relaxed mb-5">
+                  <p className="text-sm text-ink-dim leading-relaxed mb-5">
                     {sol.description}
                   </p>
 
@@ -214,7 +204,7 @@ export default function Solutions() {
                     {sol.highlights.map((h) => (
                       <span
                         key={h}
-                        className="inline-block rounded-full bg-white/5 border border-white/5 px-3 py-1 text-xs text-dark-300"
+                        className="inline-block rounded-full bg-silver-anchor/5 border border-silver-anchor/5 px-3 py-1 text-xs text-ink-muted"
                       >
                         {h}
                       </span>

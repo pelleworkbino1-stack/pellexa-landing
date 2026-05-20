@@ -172,7 +172,7 @@ function buildEmail(d: FoodInquiry): string {
   return l.join('\n')
 }
 
-// --- Primitives (mirrored from Contact.tsx, green accent) ---
+// --- Primitives (mirror Contact.tsx structure; agri tokenization) ---
 
 function OptionCard({
   label,
@@ -191,22 +191,32 @@ function OptionCard({
       onClick={onClick}
       className={`flex-1 min-w-[180px] text-left rtl:text-right px-5 py-4.5 rounded-xl border-2 transition-all ${
         selected
-          ? 'bg-green-500/10 border-green-500/40 shadow-lg shadow-green-500/5'
-          : 'bg-dark-900/50 border-white/8 hover:border-white/20'
+          ? 'bg-brand-500/10 border-brand-500/40 shadow-lg shadow-brand-500/5'
+          : 'bg-canvas-elevated/50 border-silver-anchor/8 hover:border-silver-anchor/20'
       }`}
     >
       <span
         className={`block text-base font-semibold ${
-          selected ? 'text-green-400' : 'text-dark-100'
+          selected ? 'text-brand-400' : 'text-ink-primary'
         }`}
       >
         {label}
       </span>
-      <span className="block text-sm text-dark-400 mt-1 leading-snug">{desc}</span>
+      <span className="block text-sm text-ink-dim mt-1 leading-snug">{desc}</span>
     </button>
   )
 }
 
+/**
+ * Documentation checklist box — Phase 3 Target 3 spec:
+ *   Unchecked  → Silver Anchor framework (corporate compliance border).
+ *   Checked    → Matcha fill (#0F5257) with a clean Silver check icon.
+ *
+ * The silver check on matcha fill is the literal visual signature of the
+ * three-layer system: Canvas (background), Silver Anchor (the check mark
+ * itself), Brand (the matcha fill). Every checkbox in this form is a
+ * one-cell demo of the architecture working as designed.
+ */
 function BigCheckbox({
   checked,
   onChange,
@@ -224,28 +234,28 @@ function BigCheckbox({
       onClick={() => onChange(!checked)}
       className={`w-full flex items-start gap-4 p-4.5 rounded-xl border-2 text-left rtl:text-right transition-all ${
         checked
-          ? 'bg-green-500/8 border-green-500/30'
-          : 'bg-dark-900/40 border-white/8 hover:border-white/15'
+          ? 'bg-brand-500/8 border-brand-500/30'
+          : 'bg-canvas-elevated/40 border-silver-anchor/10 hover:border-silver-anchor/20'
       }`}
     >
       <div
         className={`mt-0.5 w-6 h-6 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
           checked
-            ? 'bg-green-500/25 border-green-500/60'
-            : 'border-white/20 bg-dark-900/60'
+            ? 'bg-brand-500/60 border-brand-400/70'
+            : 'border-silver-anchor/30 bg-canvas-elevated/60'
         }`}
       >
-        {checked && <Check size={14} className="text-green-400" />}
+        {checked && <Check size={14} className="text-silver-anchor" strokeWidth={3} />}
       </div>
       <div className="min-w-0">
         <span
           className={`block text-base font-medium ${
-            checked ? 'text-green-300' : 'text-dark-100'
+            checked ? 'text-brand-300' : 'text-ink-primary'
           }`}
         >
           {label}
         </span>
-        <span className="block text-sm text-dark-400 mt-1 leading-snug">{desc}</span>
+        <span className="block text-sm text-ink-dim mt-1 leading-snug">{desc}</span>
       </div>
     </button>
   )
@@ -265,12 +275,12 @@ function Section({
   return (
     <div className="mt-10 first:mt-0">
       <div className="flex items-center gap-3.5 mb-2">
-        <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-green-500/15 text-base font-bold text-green-400 shrink-0">
+        <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-brand-secondary-500/15 text-base font-bold text-brand-secondary-400 shrink-0">
           {num}
         </span>
         <h4 className="text-lg sm:text-xl font-semibold text-white">{title}</h4>
       </div>
-      <p className="text-sm sm:text-base text-dark-400 mb-5 ms-[3.15rem]">{desc}</p>
+      <p className="text-sm sm:text-base text-ink-dim mb-5 ms-[3.15rem]">{desc}</p>
       <div className="space-y-5 ms-0 sm:ms-[3.15rem]">{children}</div>
     </div>
   )
@@ -279,8 +289,8 @@ function Section({
 function Label({ children, hint }: { children: React.ReactNode; hint?: string }) {
   return (
     <div className="mb-2.5">
-      <label className="block text-base font-medium text-dark-100">{children}</label>
-      {hint && <p className="text-sm text-dark-500 mt-1 leading-snug">{hint}</p>}
+      <label className="block text-base font-medium text-ink-primary">{children}</label>
+      {hint && <p className="text-sm text-silver-trace mt-1 leading-snug">{hint}</p>}
     </div>
   )
 }
@@ -291,14 +301,14 @@ function SelectWrap({ children }: { children: React.ReactNode }) {
       {children}
       <ChevronDown
         size={18}
-        className="absolute end-4 top-1/2 -translate-y-1/2 text-dark-400 pointer-events-none"
+        className="absolute end-4 top-1/2 -translate-y-1/2 text-ink-dim pointer-events-none"
       />
     </div>
   )
 }
 
 const inputClass =
-  'w-full rounded-xl border-2 border-white/10 bg-dark-900/60 px-5 py-4 text-lg text-white placeholder:text-dark-500 focus:outline-none focus:border-green-500/40 focus:ring-2 focus:ring-green-500/20 transition-all'
+  'w-full rounded-xl border-2 border-silver-anchor/10 bg-canvas-elevated/60 px-5 py-4 text-lg text-white placeholder:text-silver-trace focus:outline-none focus:border-brand-500/40 focus:ring-2 focus:ring-brand-500/20 transition-all'
 const selectClass = `${inputClass} pe-11 appearance-none cursor-pointer`
 
 export default function FoodContact() {
@@ -335,7 +345,7 @@ export default function FoodContact() {
   }
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 bg-dark-900/50">
+    <section id="contact" className="relative py-24 sm:py-32 bg-canvas-elevated/50">
       <div className="mx-auto max-w-7xl px-5 sm:px-8" ref={ref}>
         <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-14 items-start">
           {/* Left column */}
@@ -345,34 +355,34 @@ export default function FoodContact() {
             transition={{ duration: 0.7 }}
             className="lg:sticky lg:top-24"
           >
-            <span className="text-xs font-semibold tracking-widest uppercase text-green-400 mb-3 block">
+            <span className="text-xs font-semibold tracking-widest uppercase text-brand-secondary-400 mb-3 block">
               {t.sectionLabel}
             </span>
             <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
               {t.title}{' '}
-              <span className="bg-gradient-to-r from-green-300 to-emerald-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-brand-300 to-brand-400 bg-clip-text text-transparent">
                 {t.titleHighlight}
               </span>
             </h2>
-            <p className="text-dark-400 text-base sm:text-lg leading-relaxed mb-8">
+            <p className="text-ink-dim text-base sm:text-lg leading-relaxed mb-8">
               {t.subtitle}
             </p>
 
             <div className="space-y-4 mb-8">
               {t.benefits.map((item) => (
                 <div key={item} className="flex items-start gap-3">
-                  <CheckCircle size={18} className="text-green-400 mt-0.5 shrink-0" />
-                  <span className="text-sm text-dark-300">{item}</span>
+                  <CheckCircle size={18} className="text-brand-400 mt-0.5 shrink-0" />
+                  <span className="text-sm text-ink-muted">{item}</span>
                 </div>
               ))}
             </div>
 
-            <div className="rounded-xl border border-white/5 bg-dark-800/40 p-5">
-              <p className="text-xs text-dark-500 mb-2.5 font-medium uppercase tracking-wider">
+            <div className="rounded-xl border border-silver-anchor/5 bg-canvas-overlay/40 p-5">
+              <p className="text-xs text-silver-trace mb-2.5 font-medium uppercase tracking-wider">
                 {t.emailCardLabel}
               </p>
               <div className="flex items-center gap-3">
-                <Mail size={18} className="text-green-400 shrink-0" />
+                <Mail size={18} className="text-brand-400 shrink-0" />
                 <span className="text-base text-white font-semibold select-all flex-1 break-all">
                   {EMAIL}
                 </span>
@@ -385,7 +395,7 @@ export default function FoodContact() {
                   className={`inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg transition-all ${
                     copiedEmail
                       ? 'bg-emerald-500/15 text-emerald-400'
-                      : 'text-dark-400 hover:text-green-400 hover:bg-white/5'
+                      : 'text-ink-dim hover:text-brand-400 hover:bg-silver-anchor/5'
                   }`}
                 >
                   {copiedEmail ? (
@@ -408,7 +418,7 @@ export default function FoodContact() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <div className="rounded-2xl border border-white/5 bg-dark-800/40 backdrop-blur-sm p-6 sm:p-8">
+            <div className="rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/40 backdrop-blur-sm p-6 sm:p-8">
               {preview ? (
                 <>
                   <div className="flex items-center gap-3 mb-6">
@@ -419,22 +429,22 @@ export default function FoodContact() {
                       <h3 className="font-display font-semibold text-xl text-white">
                         Your Procurement Brief is Ready
                       </h3>
-                      <p className="text-sm text-dark-400">
+                      <p className="text-sm text-ink-dim">
                         Copy the text below, or open it directly in your email client.
                       </p>
                     </div>
                   </div>
 
                   <div
-                    className="rounded-xl bg-dark-900/80 border border-white/5 p-5 max-h-96 overflow-y-auto mb-5"
+                    className="rounded-xl bg-canvas-elevated/80 border border-silver-anchor/5 p-5 max-h-96 overflow-y-auto mb-5"
                     dir="ltr"
                   >
-                    <pre className="text-sm text-dark-300 whitespace-pre-wrap font-mono leading-relaxed">
+                    <pre className="text-sm text-ink-muted whitespace-pre-wrap font-mono leading-relaxed">
                       {emailBody}
                     </pre>
                   </div>
 
-                  <p className="text-sm text-dark-400 mb-5">
+                  <p className="text-sm text-ink-dim mb-5">
                     Send to: <span className="text-white font-semibold">{EMAIL}</span>
                   </p>
 
@@ -448,7 +458,7 @@ export default function FoodContact() {
                       className={`flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl px-5 py-4 text-base font-semibold transition-all duration-300 ${
                         copied
                           ? 'bg-emerald-500/20 border-2 border-emerald-500/30 text-emerald-400'
-                          : 'bg-gradient-to-r from-green-400 to-emerald-400 text-dark-950 hover:shadow-lg hover:shadow-green-500/20 hover:scale-[1.01]'
+                          : 'bg-gradient-to-r from-brand-400 to-brand-500 text-canvas-base hover:shadow-lg hover:shadow-brand-500/20 hover:scale-[1.01]'
                       }`}
                     >
                       {copied ? (
@@ -464,7 +474,7 @@ export default function FoodContact() {
 
                     <a
                       href={mailtoHref}
-                      className="flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl border-2 border-green-500/30 bg-green-500/5 px-5 py-4 text-base font-semibold text-green-400 hover:bg-green-500/10 hover:border-green-500/50 transition-all duration-300 hover:scale-[1.01]"
+                      className="flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl border-2 border-brand-500/30 bg-brand-500/5 px-5 py-4 text-base font-semibold text-brand-400 hover:bg-brand-500/10 hover:border-brand-500/50 transition-all duration-300 hover:scale-[1.01]"
                     >
                       <ExternalLink size={18} /> Open Email Client
                     </a>
@@ -472,7 +482,7 @@ export default function FoodContact() {
 
                   <button
                     onClick={() => setPreview(false)}
-                    className="inline-flex items-center gap-2 text-sm text-dark-400 hover:text-dark-200 transition-colors"
+                    className="inline-flex items-center gap-2 text-sm text-ink-dim hover:text-ink-primary transition-colors"
                   >
                     <ArrowLeft size={15} /> Back to procurement form
                   </button>
@@ -480,16 +490,16 @@ export default function FoodContact() {
               ) : (
                 <>
                   <div className="flex items-center gap-3 mb-1.5">
-                    <Leaf size={22} className="text-green-400" />
+                    <Leaf size={22} className="text-brand-400" />
                     <h3 className="font-display font-semibold text-xl text-white">
                       B2B Procurement Intake
                     </h3>
                   </div>
-                  <p className="text-base text-dark-400 mb-2">
+                  <p className="text-base text-ink-dim mb-2">
                     Submit a structured profile so we can align you with the appropriate
                     tier, documentation pipeline, and pricing band.
                   </p>
-                  <p className="text-sm text-dark-500 mb-5 italic">
+                  <p className="text-sm text-silver-trace mb-5 italic">
                     All fields optional. Qualified accounts receive a tier-aligned commercial brief within 2 business days.
                   </p>
 
@@ -756,7 +766,7 @@ export default function FoodContact() {
                       setCopied(true)
                       setTimeout(() => setCopied(false), 2500)
                     }}
-                    className="group mt-10 w-full inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-green-400 to-emerald-400 px-6 py-5 text-lg font-bold text-dark-950 hover:shadow-xl hover:shadow-green-500/20 transition-all duration-300 hover:scale-[1.01]"
+                    className="group mt-10 w-full inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-brand-400 to-brand-500 px-6 py-5 text-lg font-bold text-canvas-base hover:shadow-xl hover:shadow-brand-500/20 transition-all duration-300 hover:scale-[1.01]"
                   >
                     <Copy size={20} />
                     Generate Procurement Brief

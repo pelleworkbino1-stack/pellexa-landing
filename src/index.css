@@ -1,9 +1,108 @@
 @import "tailwindcss";
 
+/* =============================================================================
+ * PELLEXA MULTI-BRANCH COLOR SYSTEM — Phase 1 (Foundation)
+ *
+ * Three-tier token architecture:
+ *
+ *   Tier 1 (LOCKED globally):
+ *     --canvas-*  — Universal Obsidian Black canvas + slate elevation layers.
+ *     --silver-*  — Industrial Silver corporate anchor (borders, structural
+ *                   strokes, compliance UI). Identical across every branch.
+ *
+ *   Tier 2 (semantic, branch-neutral):
+ *     --ink-*     — Body / muted / dim text scale that reads correctly on the
+ *                   canvas regardless of which brand class is active.
+ *
+ *   Tier 3 (DYNAMIC per branch):
+ *     --brand-*           — Primary highlight, swapped by .theme-* scope.
+ *     --brand-glow        — RGB triplet for rgba() glow/orb compositions.
+ *     --brand-secondary-* — Cocoa runway (Agri only; inert elsewhere).
+ *
+ * Branch class registry — applied by the route-based ThemeProvider (Phase 2):
+ *   .theme-parent → Premium Sky Blue   (#00A3FF) — Pellexa corporate root
+ *   .theme-led    → Electric Cyan      (#00F2FE) — LED Screen Solutions
+ *   .theme-agri   → Deep Matcha Green  (#0F5257) + Cocoa Brown (#8B5A2B)
+ *
+ * MIGRATION POLICY (Phase 1):
+ *   Legacy tokens (--color-gold-*, --color-dark-*, --color-accent-*) remain
+ *   in @theme as dead-but-defined entries pending Phase 4 cleanup so any
+ *   unmigrated code path continues to compile. The `.theme-matcha` scope was
+ *   retired at Phase 3 Target 3 — the matcha product line now resolves
+ *   identity through .theme-agri (Tier 3 dynamic) + Tier 1 canvas/silver,
+ *   with cocoa-runway grounding via --brand-secondary-*.
+ * ============================================================================= */
+
 @theme {
   --font-sans: "Inter", system-ui, sans-serif;
   --font-display: "Space Grotesk", system-ui, sans-serif;
 
+  /* ---------------------------------------------------------------------------
+   * TIER 1 — Universal Canvas (LOCKED)
+   * Obsidian Black landscape. Slightly cool-blue bias gives silver and brand
+   * glows measurable headroom that pure-black cannot provide on OLED.
+   * `--canvas-base` will replace the legacy `--color-dark-950` (#030305) in
+   * Phase 5; introduced here as a parallel token so nothing breaks today.
+   * ------------------------------------------------------------------------- */
+  --canvas-base:      #0A0C10;
+  --canvas-deep:      #05070A;
+  --canvas-elevated:  #11141A;
+  --canvas-overlay:   #181C24;
+  --canvas-raised:    #1F2430;
+
+  /* ---------------------------------------------------------------------------
+   * TIER 1 — Industrial Silver Corporate Anchor (LOCKED)
+   * Permanent corporate signature. Every branch, every page, every layout grid
+   * line, every structural icon stroke, every documentation checkbox border.
+   * Never swapped. Never tinted. The framework that proves brand compliance.
+   * ------------------------------------------------------------------------- */
+  --silver-anchor:    #E5E7EB;
+  --silver-muted:     #C7CAD1;
+  --silver-dim:       #8A8F99;
+  --silver-trace:     #3A3F4A;
+  --silver-hairline:  #242832;
+
+  /* ---------------------------------------------------------------------------
+   * TIER 2 — Semantic Ink Scale (branch-neutral)
+   * Body copy hierarchy that reads correctly on canvas regardless of branch.
+   * Migrates the existing `text-dark-300 / text-dark-400 / text-white/60`
+   * patterns onto named semantic tokens without altering their visual values.
+   * ------------------------------------------------------------------------- */
+  --ink-primary:      #F4F5F7;
+  --ink-body:         #C7CAD1;
+  --ink-muted:        #8A8F99;
+  --ink-dim:          #5A5F6B;
+
+  /* ---------------------------------------------------------------------------
+   * TIER 3 — Brand (default = Pellexa Parent / Premium Sky Blue)
+   * Overridden inside .theme-led and .theme-agri scopes below. The default
+   * binding here ensures any component rendered outside an explicit theme
+   * scope still receives the corporate parent identity.
+   * ------------------------------------------------------------------------- */
+  --brand-500:        #00A3FF;
+  --brand-400:        #33B5FF;
+  --brand-300:        #66C8FF;
+  --brand-600:        #0085D6;
+  --brand-glow:       0, 163, 255;
+
+  /* ---------------------------------------------------------------------------
+   * TIER 3 — Brand Secondary (Agri runway; inert by default)
+   * Reserved for the Agri vertical's Cocoa accent and forthcoming bulk
+   * commodity expansions. Bound to transparent here so any utility class
+   * accidentally referencing it outside .theme-agri renders as a no-op
+   * rather than leaking a stray color into LED or Parent surfaces.
+   * ------------------------------------------------------------------------- */
+  --brand-secondary-500: transparent;
+  --brand-secondary-400: transparent;
+  --brand-secondary-300: transparent;
+  --brand-secondary-glow: 0, 0, 0;
+
+  /* ---------------------------------------------------------------------------
+   * LEGACY TOKENS — preserved verbatim for Phase 1 compatibility.
+   * Components currently consume these directly (e.g. text-gold-400,
+   * bg-dark-800, text-accent-500). Do not remove until Phase 4 migration
+   * sweeps each component onto the brand-* / canvas-* / silver-* tokens.
+   * ------------------------------------------------------------------------- */
   --color-dark-950: #030305;
   --color-dark-900: #0a0a0f;
   --color-dark-800: #111118;
@@ -20,6 +119,36 @@
   --color-accent-500: #3b82f6;
   --color-accent-400: #60a5fa;
   --color-accent-300: #93c5fd;
+
+  /* Tailwind v4 colour-namespace aliases — expose the new tier tokens as
+   * first-class utility colours so authors can write `bg-canvas-base`,
+   * `border-silver-anchor`, `text-brand-400`, etc. The CSS custom properties
+   * above remain the single source of truth; these aliases are pointers. */
+  --color-canvas-base:      var(--canvas-base);
+  --color-canvas-deep:      var(--canvas-deep);
+  --color-canvas-elevated:  var(--canvas-elevated);
+  --color-canvas-overlay:   var(--canvas-overlay);
+  --color-canvas-raised:    var(--canvas-raised);
+
+  --color-silver-anchor:    var(--silver-anchor);
+  --color-silver-muted:     var(--silver-muted);
+  --color-silver-dim:       var(--silver-dim);
+  --color-silver-trace:     var(--silver-trace);
+  --color-silver-hairline:  var(--silver-hairline);
+
+  --color-ink-primary:      var(--ink-primary);
+  --color-ink-body:         var(--ink-body);
+  --color-ink-muted:        var(--ink-muted);
+  --color-ink-dim:          var(--ink-dim);
+
+  --color-brand-300:        var(--brand-300);
+  --color-brand-400:        var(--brand-400);
+  --color-brand-500:        var(--brand-500);
+  --color-brand-600:        var(--brand-600);
+
+  --color-brand-secondary-300: var(--brand-secondary-300);
+  --color-brand-secondary-400: var(--brand-secondary-400);
+  --color-brand-secondary-500: var(--brand-secondary-500);
 }
 
 html {
@@ -60,74 +189,75 @@ body {
   100% { transform: scale(1.12) translate(-1.5%, -1%); }
 }
 
-/*
- * Matcha vertical theme — volcanic charcoal base, cream body copy,
- * bamboo-gold structure, vibrant leaf-green for interactive accents only.
- */
-.theme-matcha {
-  /* Volcanic charcoal-forest scale (elevation layers, not saturated green) */
-  --color-dark-950: #050e0a;
-  --color-dark-900: #0a1612;
-  --color-dark-800: #111f19;
-  --color-dark-700: #1a2b24;
-  --color-dark-600: #2a3f36;
-  --color-dark-500: #4a6358;
-  --color-dark-400: #94a89e;
-  --color-dark-300: #cbd5e1;
-  --color-dark-200: #e2e8f0;
-  --color-dark-100: #f1f5f9;
-  --color-dark-50:  #f8fafc;
+/* =============================================================================
+ * BRANCH SCOPES — Tier 3 dynamic rebinding
+ *
+ * Each .theme-* class rebinds the --brand-* token group within its subtree.
+ * The route-based ThemeProvider (Phase 2) applies exactly one of these
+ * classes to a root container based on the active URL path. Canvas (Tier 1)
+ * and Silver Anchor (Tier 1) are deliberately NOT redefined inside any
+ * branch scope — they are locked global signatures.
+ * ============================================================================= */
 
-  /* Warm bamboo / wood — subtitles, borders, secondary highlights */
-  --color-gold-500: #d4a06b;
-  --color-gold-400: #e5bf95;
-  --color-gold-300: #f0d4b8;
-
-  /* Vibrant leaf green — CTAs, icons, ambient orbs only */
-  --color-accent-500: #22c55e;
-  --color-accent-400: #4ade80;
-  --color-accent-300: #86efac;
-
-  --matcha-body: #e2e8f0;
-  --matcha-body-muted: #cbd5e1;
-
-  background-color: var(--color-dark-950);
-  color: var(--matcha-body);
+/* ---------------------------------------------------------------------------
+ * .theme-parent — Pellexa corporate root (Premium Sky Blue)
+ * Applied on the marketing root path (`/`). Default identity of the Pellexa
+ * holding brand. Explicit scope class (even though it matches the @theme
+ * defaults) so the dispatcher always emits a class — prevents ambiguity
+ * during SSR / deep-link / route transitions.
+ * ------------------------------------------------------------------------- */
+.theme-parent {
+  --brand-500: #00A3FF;
+  --brand-400: #33B5FF;
+  --brand-300: #66C8FF;
+  --brand-600: #0085D6;
+  --brand-glow: 0, 163, 255;
 }
 
-.theme-matcha ::selection {
-  background-color: rgba(34, 197, 94, 0.28);
-  color: #f8fafc;
+/* ---------------------------------------------------------------------------
+ * .theme-led — Pellexa LED Screen Solutions (High-Contrast Electric Cyan)
+ * Applied on /led and the led.* subdomain. Electric cyan is intentionally
+ * paired with a slightly desaturated --brand-600 to prevent the "neon sign"
+ * effect on large solid surfaces — gradient CTAs interpolate 500→600,
+ * preserving the emissive LED identity without sacrificing premium feel.
+ * ------------------------------------------------------------------------- */
+.theme-led {
+  --brand-500: #00F2FE;
+  --brand-400: #4DF6FE;
+  --brand-300: #80F9FF;
+  --brand-600: #0BC9D6;
+  --brand-glow: 0, 242, 254;
 }
 
-/* Force scannable body copy — no green-on-green text */
-.theme-matcha p,
-.theme-matcha .text-dark-400,
-.theme-matcha .text-white\/60 {
-  color: var(--matcha-body-muted);
+/* ---------------------------------------------------------------------------
+ * .theme-agri — Pellexa Agri-Food (Deep Matcha + Cocoa runway)
+ * Applied on /food and /food/* paths. Implements the 80/20 distribution:
+ *   --brand-*           = Matcha (CTAs, hovers, glows, links, gradients)
+ *   --brand-secondary-* = Cocoa  (eyebrows, tier badges, shelf strokes,
+ *                                 grounding rules — structural chrome only,
+ *                                 never interactive)
+ * Matcha owns vertical motion (luminous gradients, glows). Cocoa owns
+ * horizontal grounding (hairline rules, badge fills ≤10% alpha). They are
+ * never blurred or gradient-mixed together — see consultation §2.
+ * ------------------------------------------------------------------------- */
+.theme-agri {
+  --brand-500: #0F5257;
+  --brand-400: #1F7A82;
+  --brand-300: #4FA8AF;
+  --brand-600: #093A3E;
+  --brand-glow: 15, 82, 87;
+
+  --brand-secondary-500: #8B5A2B;
+  --brand-secondary-400: #A87045;
+  --brand-secondary-300: #C28A5C;
+  --brand-secondary-glow: 139, 90, 43;
 }
 
-.theme-matcha .text-dark-300 {
-  color: var(--matcha-body);
-}
-
-/* Elevated card surface pattern for matcha sections */
-.theme-matcha .matcha-elevated {
-  background-color: color-mix(in srgb, var(--color-dark-900) 92%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-gold-500) 12%, transparent);
-  box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.02) inset;
-  backdrop-filter: blur(12px);
-}
-
-.theme-matcha .matcha-elevated-soft {
-  background-color: color-mix(in srgb, var(--color-dark-950) 40%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-gold-500) 12%, transparent);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(16px);
-}
-
+/* =============================================================================
+ * Ambient depth motion — used by .theme-agri glow orbs (matcha luminous depth)
+ * and any vertical surface that wants subtle breathing parallax. Kept at the
+ * root because multiple branches consume it; not bound to any scope.
+ * ============================================================================= */
 @keyframes matcha-breathe {
   0%, 100% { opacity: 0.08; transform: scale(1); }
   50% { opacity: 0.12; transform: scale(1.04); }

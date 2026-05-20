@@ -5,6 +5,7 @@ import FoodPage from './pages/FoodPage'
 import MatchaPage from './pages/MatchaPage'
 import { isLedSubdomain } from './lib/site'
 import { MarketProvider } from './context/MarketContext'
+import { ThemeProvider } from './theme/ThemeProvider'
 
 function LedWithMarket() {
   return (
@@ -37,7 +38,9 @@ function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <ThemeProvider>
+        <AppRoutes />
+      </ThemeProvider>
     </BrowserRouter>
   )
 }

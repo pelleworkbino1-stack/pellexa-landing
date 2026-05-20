@@ -172,14 +172,14 @@ function OptionCard({
       onClick={onClick}
       className={`flex-1 min-w-[140px] text-left rtl:text-right px-5 py-4.5 rounded-xl border-2 transition-all ${
         selected
-          ? 'bg-gold-500/10 border-gold-500/40 shadow-lg shadow-gold-500/5'
-          : 'bg-dark-900/50 border-white/8 hover:border-white/20'
+          ? 'bg-brand-500/10 border-brand-500/40 shadow-lg shadow-brand-500/5'
+          : 'bg-canvas-elevated/50 border-silver-anchor/8 hover:border-silver-anchor/20'
       }`}
     >
-      <span className={`block text-base font-semibold ${selected ? 'text-gold-400' : 'text-dark-100'}`}>
+      <span className={`block text-base font-semibold ${selected ? 'text-brand-400' : 'text-ink-primary'}`}>
         {label}
       </span>
-      <span className="block text-sm text-dark-400 mt-1 leading-snug">{desc}</span>
+      <span className="block text-sm text-ink-dim mt-1 leading-snug">{desc}</span>
     </button>
   )
 }
@@ -201,24 +201,24 @@ function BigCheckbox({
       onClick={() => onChange(!checked)}
       className={`w-full flex items-start gap-4 p-4.5 rounded-xl border-2 text-left rtl:text-right transition-all ${
         checked
-          ? 'bg-gold-500/8 border-gold-500/30'
-          : 'bg-dark-900/40 border-white/8 hover:border-white/15'
+          ? 'bg-brand-500/8 border-brand-500/30'
+          : 'bg-canvas-elevated/40 border-silver-anchor/8 hover:border-silver-anchor/15'
       }`}
     >
       <div
         className={`mt-0.5 w-6 h-6 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
           checked
-            ? 'bg-gold-500/25 border-gold-500/60'
-            : 'border-white/20 bg-dark-900/60'
+            ? 'bg-brand-500/25 border-brand-500/60'
+            : 'border-silver-anchor/20 bg-canvas-elevated/60'
         }`}
       >
-        {checked && <Check size={14} className="text-gold-400" />}
+        {checked && <Check size={14} className="text-brand-400" />}
       </div>
       <div className="min-w-0">
-        <span className={`block text-base font-medium ${checked ? 'text-gold-300' : 'text-dark-100'}`}>
+        <span className={`block text-base font-medium ${checked ? 'text-brand-300' : 'text-ink-primary'}`}>
           {label}
         </span>
-        <span className="block text-sm text-dark-400 mt-1 leading-snug">{desc}</span>
+        <span className="block text-sm text-ink-dim mt-1 leading-snug">{desc}</span>
       </div>
     </button>
   )
@@ -238,12 +238,12 @@ function Section({
   return (
     <div className="mt-10 first:mt-0">
       <div className="flex items-center gap-3.5 mb-2">
-        <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gold-500/15 text-base font-bold text-gold-500 shrink-0">
+        <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-brand-500/15 text-base font-bold text-brand-500 shrink-0">
           {num}
         </span>
         <h4 className="text-lg sm:text-xl font-semibold text-white">{title}</h4>
       </div>
-      <p className="text-sm sm:text-base text-dark-400 mb-5 ms-[3.15rem]">{desc}</p>
+      <p className="text-sm sm:text-base text-ink-dim mb-5 ms-[3.15rem]">{desc}</p>
       <div className="space-y-5 ms-0 sm:ms-[3.15rem]">{children}</div>
     </div>
   )
@@ -252,8 +252,8 @@ function Section({
 function Label({ children, hint }: { children: React.ReactNode; hint?: string }) {
   return (
     <div className="mb-2.5">
-      <label className="block text-base font-medium text-dark-100">{children}</label>
-      {hint && <p className="text-sm text-dark-500 mt-1 leading-snug">{hint}</p>}
+      <label className="block text-base font-medium text-ink-primary">{children}</label>
+      {hint && <p className="text-sm text-silver-trace mt-1 leading-snug">{hint}</p>}
     </div>
   )
 }
@@ -264,14 +264,14 @@ function SelectWrap({ children }: { children: React.ReactNode }) {
       {children}
       <ChevronDown
         size={18}
-        className="absolute end-4 top-1/2 -translate-y-1/2 text-dark-400 pointer-events-none"
+        className="absolute end-4 top-1/2 -translate-y-1/2 text-ink-dim pointer-events-none"
       />
     </div>
   )
 }
 
 const inputClass =
-  'w-full rounded-xl border-2 border-white/10 bg-dark-900/60 px-5 py-4 text-lg text-white placeholder:text-dark-500 focus:outline-none focus:border-gold-500/40 focus:ring-2 focus:ring-gold-500/20 transition-all'
+  'w-full rounded-xl border-2 border-silver-anchor/10 bg-canvas-elevated/60 px-5 py-4 text-lg text-white placeholder:text-silver-trace focus:outline-none focus:border-brand-500/40 focus:ring-2 focus:ring-brand-500/20 transition-all'
 const selectClass = `${inputClass} pe-11 appearance-none cursor-pointer`
 
 export default function Contact() {
@@ -307,7 +307,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 bg-dark-900/50">
+    <section id="contact" className="relative py-24 sm:py-32 bg-canvas-elevated/50">
       <div className="mx-auto max-w-7xl px-5 sm:px-8" ref={ref}>
         <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-14 items-start">
           {/* Left column */}
@@ -317,34 +317,34 @@ export default function Contact() {
             transition={{ duration: 0.7 }}
             className="lg:sticky lg:top-24"
           >
-            <span className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-3 block">
+            <span className="text-xs font-semibold tracking-widest uppercase text-brand-500 mb-3 block">
               {t.sectionLabel}
             </span>
             <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
               {t.title}{' '}
-              <span className="bg-gradient-to-r from-gold-400 to-gold-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">
                 {t.titleHighlight}
               </span>
             </h2>
-            <p className="text-dark-400 text-base sm:text-lg leading-relaxed mb-8">
+            <p className="text-ink-dim text-base sm:text-lg leading-relaxed mb-8">
               {t.subtitle}
             </p>
 
             <div className="space-y-4 mb-8">
               {t.benefits.map((item) => (
                 <div key={item} className="flex items-start gap-3">
-                  <CheckCircle size={18} className="text-gold-500 mt-0.5 shrink-0" />
-                  <span className="text-sm text-dark-300">{item}</span>
+                  <CheckCircle size={18} className="text-brand-500 mt-0.5 shrink-0" />
+                  <span className="text-sm text-ink-muted">{item}</span>
                 </div>
               ))}
             </div>
 
-            <div className="rounded-xl border border-white/5 bg-dark-800/40 p-5">
-              <p className="text-xs text-dark-500 mb-2.5 font-medium uppercase tracking-wider">
+            <div className="rounded-xl border border-silver-anchor/5 bg-canvas-overlay/40 p-5">
+              <p className="text-xs text-silver-trace mb-2.5 font-medium uppercase tracking-wider">
                 {t.emailCardLabel}
               </p>
               <div className="flex items-center gap-3">
-                <Mail size={18} className="text-gold-500 shrink-0" />
+                <Mail size={18} className="text-brand-500 shrink-0" />
                 <span className="text-base text-white font-semibold select-all flex-1 break-all">
                   {EMAIL}
                 </span>
@@ -357,7 +357,7 @@ export default function Contact() {
                   className={`inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg transition-all ${
                     copiedEmail
                       ? 'bg-emerald-500/15 text-emerald-400'
-                      : 'text-dark-400 hover:text-gold-400 hover:bg-white/5'
+                      : 'text-ink-dim hover:text-brand-400 hover:bg-silver-anchor/5'
                   }`}
                 >
                   {copiedEmail ? (
@@ -374,8 +374,8 @@ export default function Contact() {
             </div>
 
             {t.whatsapp && (
-              <div className="rounded-xl border border-white/5 bg-dark-800/40 p-5 mt-4">
-                <p className="text-xs text-dark-500 mb-2.5 font-medium uppercase tracking-wider">
+              <div className="rounded-xl border border-silver-anchor/5 bg-canvas-overlay/40 p-5 mt-4">
+                <p className="text-xs text-silver-trace mb-2.5 font-medium uppercase tracking-wider">
                   {t.whatsapp.label}
                 </p>
                 <div className="flex items-center gap-3">
@@ -402,7 +402,7 @@ export default function Contact() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <div className="rounded-2xl border border-white/5 bg-dark-800/40 backdrop-blur-sm p-6 sm:p-8">
+            <div className="rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/40 backdrop-blur-sm p-6 sm:p-8">
               {preview ? (
                 <>
                   <div className="flex items-center gap-3 mb-6">
@@ -413,19 +413,19 @@ export default function Contact() {
                       <h3 className="font-display font-semibold text-xl text-white">
                         {t.preview.ready}
                       </h3>
-                      <p className="text-sm text-dark-400">
+                      <p className="text-sm text-ink-dim">
                         {t.preview.readySub}
                       </p>
                     </div>
                   </div>
 
-                  <div className="rounded-xl bg-dark-900/80 border border-white/5 p-5 max-h-96 overflow-y-auto mb-5" dir="ltr">
-                    <pre className="text-sm text-dark-300 whitespace-pre-wrap font-mono leading-relaxed">
+                  <div className="rounded-xl bg-canvas-elevated/80 border border-silver-anchor/5 p-5 max-h-96 overflow-y-auto mb-5" dir="ltr">
+                    <pre className="text-sm text-ink-muted whitespace-pre-wrap font-mono leading-relaxed">
                       {emailBody}
                     </pre>
                   </div>
 
-                  <p className="text-sm text-dark-400 mb-5">
+                  <p className="text-sm text-ink-dim mb-5">
                     {t.preview.sendTo}{' '}
                     <span className="text-white font-semibold">{EMAIL}</span>
                   </p>
@@ -440,7 +440,7 @@ export default function Contact() {
                       className={`flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl px-5 py-4 text-base font-semibold transition-all duration-300 ${
                         copied
                           ? 'bg-emerald-500/20 border-2 border-emerald-500/30 text-emerald-400'
-                          : 'bg-gradient-to-r from-gold-500 to-gold-400 text-dark-950 hover:shadow-lg hover:shadow-gold-500/20 hover:scale-[1.01]'
+                          : 'bg-gradient-to-r from-brand-500 to-brand-400 text-canvas-base hover:shadow-lg hover:shadow-brand-500/20 hover:scale-[1.01]'
                       }`}
                     >
                       {copied ? (
@@ -456,7 +456,7 @@ export default function Contact() {
 
                     <a
                       href={mailtoHref}
-                      className="flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl border-2 border-gold-500/30 bg-gold-500/5 px-5 py-4 text-base font-semibold text-gold-400 hover:bg-gold-500/10 hover:border-gold-500/50 transition-all duration-300 hover:scale-[1.01]"
+                      className="flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl border-2 border-brand-500/30 bg-brand-500/5 px-5 py-4 text-base font-semibold text-brand-400 hover:bg-brand-500/10 hover:border-brand-500/50 transition-all duration-300 hover:scale-[1.01]"
                     >
                       <ExternalLink size={18} /> {t.preview.openEmail}
                     </a>
@@ -464,18 +464,18 @@ export default function Contact() {
 
                   <button
                     onClick={() => setPreview(false)}
-                    className="inline-flex items-center gap-2 text-sm text-dark-400 hover:text-dark-200 transition-colors"
+                    className="inline-flex items-center gap-2 text-sm text-ink-dim hover:text-ink-primary transition-colors"
                   >
                     <ArrowLeft size={15} className="rtl:rotate-180" /> {t.preview.goBack}
                   </button>
 
-                  <div className="mt-6 rounded-xl bg-gold-500/5 border-2 border-gold-500/15 px-5 py-4 flex items-start gap-3.5">
-                    <Camera size={20} className="text-gold-500 mt-0.5 shrink-0" />
+                  <div className="mt-6 rounded-xl bg-brand-500/5 border-2 border-brand-500/15 px-5 py-4 flex items-start gap-3.5">
+                    <Camera size={20} className="text-brand-500 mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-sm font-semibold text-gold-400 mb-1">
+                      <p className="text-sm font-semibold text-brand-400 mb-1">
                         {t.preview.attachTitle}
                       </p>
-                      <ul className="text-sm text-dark-400 space-y-0.5 list-disc list-inside">
+                      <ul className="text-sm text-ink-dim space-y-0.5 list-disc list-inside">
                         <li>{t.preview.attachPhotos}</li>
                         <li>{t.preview.attachDrawings}</li>
                       </ul>
@@ -485,15 +485,15 @@ export default function Contact() {
               ) : (
                 <>
                   <div className="flex items-center gap-3 mb-1.5">
-                    <Mail size={22} className="text-gold-400" />
+                    <Mail size={22} className="text-brand-400" />
                     <h3 className="font-display font-semibold text-xl text-white">
                       {f.title}
                     </h3>
                   </div>
-                  <p className="text-base text-dark-400 mb-2">
+                  <p className="text-base text-ink-dim mb-2">
                     {f.subtitle}
                   </p>
-                  <p className="text-sm text-dark-500 mb-5 italic">
+                  <p className="text-sm text-silver-trace mb-5 italic">
                     {f.allOptional}
                   </p>
 
@@ -567,7 +567,7 @@ export default function Contact() {
                           placeholder={f.viewingPlaceholder}
                           className={inputClass}
                         />
-                        <span className="text-base text-dark-400 font-medium shrink-0">{f.meters}</span>
+                        <span className="text-base text-ink-dim font-medium shrink-0">{f.meters}</span>
                       </div>
                     </div>
                   </Section>
@@ -578,17 +578,17 @@ export default function Contact() {
                       <Label hint={f.sizeHint}>{f.sizeLabel}</Label>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <span className="block text-sm text-dark-400 font-medium mb-1.5">{f.widthLabel}</span>
+                          <span className="block text-sm text-ink-dim font-medium mb-1.5">{f.widthLabel}</span>
                           <div className="flex items-center gap-2.5">
                             <input type="text" value={d.width} onChange={(e) => set('width', e.target.value)} placeholder={f.sizePlaceholder} className={inputClass} />
-                            <span className="text-base text-dark-400 font-medium shrink-0">{f.mUnit}</span>
+                            <span className="text-base text-ink-dim font-medium shrink-0">{f.mUnit}</span>
                           </div>
                         </div>
                         <div>
-                          <span className="block text-sm text-dark-400 font-medium mb-1.5">{f.heightLabel}</span>
+                          <span className="block text-sm text-ink-dim font-medium mb-1.5">{f.heightLabel}</span>
                           <div className="flex items-center gap-2.5">
                             <input type="text" value={d.height} onChange={(e) => set('height', e.target.value)} placeholder={f.sizePlaceholder} className={inputClass} />
-                            <span className="text-base text-dark-400 font-medium shrink-0">{f.mUnit}</span>
+                            <span className="text-base text-ink-dim font-medium shrink-0">{f.mUnit}</span>
                           </div>
                         </div>
                       </div>
@@ -659,8 +659,8 @@ export default function Contact() {
                             onClick={() => set('reinforced', value)}
                             className={`px-6 py-3.5 rounded-xl border-2 text-base font-semibold transition-all ${
                               d.reinforced === value
-                                ? 'bg-gold-500/10 border-gold-500/40 text-gold-400'
-                                : 'bg-dark-900/50 border-white/8 text-dark-300 hover:border-white/20'
+                                ? 'bg-brand-500/10 border-brand-500/40 text-brand-400'
+                                : 'bg-canvas-elevated/50 border-silver-anchor/8 text-ink-muted hover:border-silver-anchor/20'
                             }`}
                           >
                             {label}
@@ -728,18 +728,18 @@ export default function Contact() {
                   </Section>
 
                   {/* Attachment reminder */}
-                  <div className="mt-8 rounded-xl bg-gold-500/5 border-2 border-gold-500/15 px-5 py-4 flex items-start gap-3.5">
-                    <Camera size={20} className="text-gold-500 mt-0.5 shrink-0" />
+                  <div className="mt-8 rounded-xl bg-brand-500/5 border-2 border-brand-500/15 px-5 py-4 flex items-start gap-3.5">
+                    <Camera size={20} className="text-brand-500 mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-sm font-semibold text-gold-400 mb-1">
+                      <p className="text-sm font-semibold text-brand-400 mb-1">
                         {f.importantAttach}
                       </p>
-                      <ul className="text-sm text-dark-400 space-y-1 list-disc list-inside">
+                      <ul className="text-sm text-ink-dim space-y-1 list-disc list-inside">
                         <li>
-                          <span className="font-medium text-dark-300">{f.sitePhotos}</span> — {f.sitePhotosDetail}
+                          <span className="font-medium text-ink-muted">{f.sitePhotos}</span> — {f.sitePhotosDetail}
                         </li>
                         <li>
-                          <span className="font-medium text-dark-300">{f.archDrawings}</span> — {f.archDrawingsDetail}
+                          <span className="font-medium text-ink-muted">{f.archDrawings}</span> — {f.archDrawingsDetail}
                         </li>
                       </ul>
                     </div>
@@ -754,7 +754,7 @@ export default function Contact() {
                       setCopied(true)
                       setTimeout(() => setCopied(false), 2500)
                     }}
-                    className="group mt-10 w-full inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 px-6 py-5 text-lg font-bold text-dark-950 hover:shadow-xl hover:shadow-gold-500/20 transition-all duration-300 hover:scale-[1.01]"
+                    className="group mt-10 w-full inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 px-6 py-5 text-lg font-bold text-canvas-base hover:shadow-xl hover:shadow-brand-500/20 transition-all duration-300 hover:scale-[1.01]"
                   >
                     <Copy size={20} />
                     {f.generateBtn}

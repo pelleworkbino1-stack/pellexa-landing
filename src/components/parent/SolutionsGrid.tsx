@@ -19,13 +19,13 @@ export default function SolutionsGrid() {
           transition={{ duration: 0.7 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-3 block">
+          <span className="text-xs font-semibold tracking-widest uppercase text-brand-500 mb-3 block">
             {c.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
             {c.title}
           </h2>
-          <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
+          <p className="text-ink-dim text-base sm:text-lg leading-relaxed">
             {c.subtitle}
           </p>
         </motion.div>
@@ -38,18 +38,18 @@ export default function SolutionsGrid() {
           >
             <Link
               to="/led"
-              className="group block relative rounded-2xl border border-white/5 bg-dark-800/30 p-8 hover:border-gold-500/20 transition-all duration-500 h-full"
+              className="group block relative rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 p-8 hover:border-brand-500/20 transition-all duration-500 h-full"
             >
-              <div className="w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <Monitor size={24} className="text-gold-400" />
+              <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <Monitor size={24} className="text-brand-400" />
               </div>
-              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-gold-400 transition-colors">
+              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-brand-400 transition-colors">
                 {c.ledTitle}
               </h3>
-              <p className="text-sm text-dark-400 leading-relaxed mb-6">
+              <p className="text-sm text-ink-dim leading-relaxed mb-6">
                 {c.ledDescription}
               </p>
-              <div className="flex items-center gap-2 text-sm font-medium text-gold-400 group-hover:gap-3 transition-all duration-300">
+              <div className="flex items-center gap-2 text-sm font-medium text-brand-400 group-hover:gap-3 transition-all duration-300">
                 {c.learnMore}
                 <ArrowRight size={16} className="rtl:rotate-180" />
               </div>
@@ -63,18 +63,18 @@ export default function SolutionsGrid() {
           >
             <Link
               to="/food"
-              className="group block relative rounded-2xl border border-white/5 bg-dark-800/30 p-8 hover:border-green-500/20 transition-all duration-500 h-full"
+              className="group block relative rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 p-8 hover:border-brand-500/20 transition-all duration-500 h-full"
             >
-              <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <Leaf size={24} className="text-green-400" />
+              <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <Leaf size={24} className="text-brand-400" />
               </div>
-              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-green-400 transition-colors">
+              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-brand-400 transition-colors">
                 {c.foodTitle}
               </h3>
-              <p className="text-sm text-dark-400 leading-relaxed mb-6">
+              <p className="text-sm text-ink-dim leading-relaxed mb-6">
                 {c.foodDescription}
               </p>
-              <div className="flex items-center gap-2 text-sm font-medium text-green-400 group-hover:gap-3 transition-all duration-300">
+              <div className="flex items-center gap-2 text-sm font-medium text-brand-400 group-hover:gap-3 transition-all duration-300">
                 {c.learnMore}
                 <ArrowRight size={16} className="rtl:rotate-180" />
               </div>
@@ -89,13 +89,13 @@ export default function SolutionsGrid() {
               delay: 0.36,
               ease: [0.22, 1, 0.36, 1] as const,
             }}
-            className="relative rounded-2xl border border-dashed border-white/5 bg-dark-800/10 p-8 flex flex-col items-center justify-center min-h-[280px]"
+            className="relative rounded-2xl border border-dashed border-silver-anchor/5 bg-canvas-overlay/10 p-8 flex flex-col items-center justify-center min-h-[280px]"
           >
-            <div className="w-12 h-12 rounded-xl bg-white/3 flex items-center justify-center mb-4">
-              <Clock size={20} className="text-dark-500" />
+            <div className="w-12 h-12 rounded-xl bg-silver-anchor/[0.03] flex items-center justify-center mb-4">
+              <Clock size={20} className="text-silver-trace" />
             </div>
-            <p className="text-sm text-dark-500 font-medium">{c.newVertical}</p>
-            <p className="text-xs text-dark-600 mt-1">{c.comingSoon}</p>
+            <p className="text-sm text-silver-trace font-medium">{c.newVertical}</p>
+            <p className="text-xs text-silver-trace/70 mt-1">{c.comingSoon}</p>
           </motion.div>
         </div>
       </div>

@@ -37,14 +37,14 @@ export default function Advantage() {
           transition={{ duration: 0.7 }}
           className="max-w-2xl mb-16"
         >
-          <span className="text-xs font-semibold tracking-widest uppercase text-gold-500 mb-3 block">
+          <span className="text-xs font-semibold tracking-widest uppercase text-brand-500 mb-3 block">
             {c.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">
             {c.titleMain}{' '}
-            <span className="text-dark-400">{c.titleFaded}</span>
+            <span className="text-ink-dim">{c.titleFaded}</span>
           </h2>
-          <p className="text-dark-400 text-base sm:text-lg leading-relaxed">
+          <p className="text-ink-dim text-base sm:text-lg leading-relaxed">
             {c.subtitle}
           </p>
         </motion.div>
@@ -61,32 +61,21 @@ export default function Advantage() {
                 animate={inView ? 'visible' : 'hidden'}
                 className={
                   isMatcha
-                    ? 'group relative matcha-elevated rounded-2xl p-8 shadow-2xl hover:border-gold-500/20 transition-all duration-500'
-                    : 'group relative rounded-2xl border border-white/5 bg-dark-800/50 backdrop-blur-sm p-8 hover:border-gold-500/20 hover:bg-dark-800/80 transition-all duration-500'
+                    ? 'group relative rounded-2xl border border-brand-secondary-500/15 bg-canvas-elevated/90 backdrop-blur-md p-8 shadow-2xl hover:border-brand-500/20 transition-all duration-500'
+                    : 'group relative rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/50 backdrop-blur-sm p-8 hover:border-brand-500/20 hover:bg-canvas-overlay/80 transition-all duration-500'
                 }
               >
                 <div
-                  className={`absolute inset-0 rounded-2xl bg-gradient-to-b to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
-                    isMatcha ? 'from-accent-500/[0.04]' : 'from-gold-500/[0.03]'
-                  }`}
+                  className={`absolute inset-0 rounded-2xl bg-gradient-to-b from-brand-500/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                 />
                 <div className="relative">
-                  <div
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors ${
-                      isMatcha
-                        ? 'bg-accent-500/10 group-hover:bg-accent-500/15'
-                        : 'bg-gold-500/10 group-hover:bg-gold-500/15'
-                    }`}
-                  >
-                    <Icon
-                      size={22}
-                      className={isMatcha ? 'text-accent-400' : 'text-gold-400'}
-                    />
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-brand-500/10 group-hover:bg-brand-500/15 transition-colors">
+                    <Icon size={22} className="text-brand-400" />
                   </div>
                   <h3 className="font-display font-semibold text-lg text-white mb-3">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-dark-400 leading-relaxed">
+                  <p className="text-sm text-ink-dim leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
