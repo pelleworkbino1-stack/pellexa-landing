@@ -8,6 +8,7 @@ import {
   Leaf,
   Sprout,
   FlaskConical,
+  Package,
   type LucideProps,
 } from 'lucide-react'
 import { useMarket } from '../hooks/useMarket'
@@ -27,6 +28,7 @@ const iconRegistry: Record<string, ComponentType<LucideProps>> = {
   leaf: Leaf,
   sprout: Sprout,
   flask: FlaskConical,
+  package: Package,
 }
 
 /**

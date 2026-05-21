@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Leaf, Clock, ArrowRight } from 'lucide-react'
+import { Leaf, ArrowRight, Bean, TreePalm } from 'lucide-react'
 import ParentNavbar from '../components/parent/ParentNavbar'
 import ParentFooter from '../components/parent/ParentFooter'
 import { LangProvider } from '../context/LangContext'
@@ -129,6 +129,9 @@ function HubGrid() {
             </Link>
           </motion.div>
 
+          {/* Filipino Cacao / Cocoa — anchor of the cocoa runway. The card itself
+              renders in heavy brand-secondary-* (cocoa) tones to claim the
+              structural / provenance layer of the agri portfolio. */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -137,17 +140,46 @@ function HubGrid() {
               delay: 0.24,
               ease: [0.22, 1, 0.36, 1] as const,
             }}
-            className="relative rounded-2xl border border-dashed border-silver-anchor/5 bg-canvas-overlay/10 p-8 flex flex-col items-center justify-center text-center min-h-[300px]"
           >
-            <div className="w-12 h-12 rounded-xl bg-silver-anchor/[0.03] flex items-center justify-center mb-4">
-              <Clock size={20} className="text-silver-trace" />
-            </div>
-            <p className="text-sm text-silver-trace font-medium">
-              Specialty Ingredients
-            </p>
-            <p className="text-xs text-silver-trace/70 mt-1">Coming Soon</p>
+            <Link
+              to="#contact"
+              className="group block relative rounded-2xl border border-brand-secondary-400/20 bg-brand-secondary-500/[0.04] p-8 hover:border-brand-secondary-400/40 hover:bg-brand-secondary-500/[0.08] transition-all duration-500 h-full"
+            >
+              <div className="w-12 h-12 rounded-xl bg-brand-secondary-500/15 border border-brand-secondary-400/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <Bean size={24} className="text-brand-secondary-300" />
+              </div>
+              <span className="inline-block rounded-full bg-brand-secondary-500/10 border border-brand-secondary-400/20 px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase text-brand-secondary-300 mb-3">
+                Cocoa Runway
+              </span>
+              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-brand-secondary-300 transition-colors">
+                Filipino Cacao / Cocoa
+              </h3>
+              <p className="text-sm text-ink-dim leading-relaxed mb-5">
+                Premium raw-material supply chains direct from Filipino
+                cacao-producing regions — fermented bean lots, processed nibs,
+                liquor, and butter for industrial chocolate and specialty
+                beverage manufacturing.
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {['Raw Beans', 'Nibs', 'Liquor', 'Butter'].map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-block rounded-full bg-silver-anchor/5 border border-brand-secondary-400/15 px-2.5 py-0.5 text-[11px] text-ink-muted"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center gap-2 text-sm font-medium text-brand-secondary-300 group-hover:gap-3 transition-all duration-300">
+                Request Procurement Brief
+                <ArrowRight size={16} className="rtl:rotate-180" />
+              </div>
+            </Link>
           </motion.div>
 
+          {/* Filipino Coconut — high-volume wholesale estate sourcing. Dominated
+              by the primary brand-* (matcha) accent line, mirroring the matcha
+              card's vibrant identity. */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -156,15 +188,43 @@ function HubGrid() {
               delay: 0.36,
               ease: [0.22, 1, 0.36, 1] as const,
             }}
-            className="relative rounded-2xl border border-dashed border-silver-anchor/5 bg-canvas-overlay/10 p-8 flex flex-col items-center justify-center text-center min-h-[300px]"
           >
-            <div className="w-12 h-12 rounded-xl bg-silver-anchor/[0.03] flex items-center justify-center mb-4">
-              <Clock size={20} className="text-silver-trace" />
-            </div>
-            <p className="text-sm text-silver-trace font-medium">
-              Specialty Ingredients
-            </p>
-            <p className="text-xs text-silver-trace/70 mt-1">Coming Soon</p>
+            <Link
+              to="#contact"
+              className="group block relative rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 p-8 hover:border-brand-500/30 transition-all duration-500 h-full"
+            >
+              <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <TreePalm size={24} className="text-brand-400" />
+              </div>
+              <span className="inline-block rounded-full bg-brand-secondary-500/10 border border-brand-secondary-400/15 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase text-brand-secondary-400 mb-3">
+                Estate Wholesale
+              </span>
+              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-brand-400 transition-colors">
+                Filipino Coconut
+              </h3>
+              <p className="text-sm text-ink-dim leading-relaxed mb-5">
+                High-volume wholesale estate sourcing across the Filipino
+                coconut belt — copra, virgin coconut oil, desiccated coconut,
+                and coconut water concentrate, contracted at industrial
+                pricing tiers.
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {['Copra', 'Virgin Oil', 'Desiccated', 'Water Concentrate'].map(
+                  (tag) => (
+                    <span
+                      key={tag}
+                      className="inline-block rounded-full bg-silver-anchor/5 border border-silver-anchor/10 px-2.5 py-0.5 text-[11px] text-ink-muted"
+                    >
+                      {tag}
+                    </span>
+                  ),
+                )}
+              </div>
+              <div className="flex items-center gap-2 text-sm font-medium text-brand-400 group-hover:gap-3 transition-all duration-300">
+                Request Estate Quote
+                <ArrowRight size={16} className="rtl:rotate-180" />
+              </div>
+            </Link>
           </motion.div>
         </div>
       </div>

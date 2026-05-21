@@ -32,6 +32,13 @@ export const parentEn: ParentContent = {
     foodTitle: 'Pellexa Agri-Food',
     foodDescription:
       'Precision-sourced global agri-food procurement, specialty raw materials, and agricultural supply chains — direct from certified facilities to enterprise markets.',
+    generalTitle: 'Pellexa General Sourcing',
+    generalDescription:
+      'Opportunistic mass-manufacturing channel direct from Asia production hubs — custom boxes, furniture, toys, and lifestyle accessories engineered for global brands, luxury hotels, and large enterprise accounts.',
+    generalCategories: ['Custom Boxes', 'Furniture', 'Toys', 'Lifestyle'],
+    generalOriginLabel: 'Asia Manufacturing Hubs',
+    generalMOQBadge: 'High MOQ — Minimum 1,000 Units',
+    generalTargetLabel: 'Enterprise & Luxury Accounts',
     learnMore: 'Learn More',
     newVertical: 'New Vertical',
     comingSoon: 'Coming Soon',

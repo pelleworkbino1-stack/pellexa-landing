@@ -148,6 +148,15 @@ export const ph: MarketConfig = {
         highlights: ['Concert Stages', 'Conferences', 'Live Shows'],
         requestQuote: 'Request Quote',
       },
+      {
+        tag: 'Premium Acrylic',
+        title: 'Custom Acrylic Boxes & Containers',
+        description:
+          'Factory-direct premium acrylic enclosures, display cases, and high-end protective containers — custom-engineered for luxury packaging, retail display, and industrial product protection.',
+        highlights: ['Custom Sizing', 'Factory-Direct', 'High-Margin', 'Premium-Grade'],
+        requestQuote: 'Request Quote',
+        icon: 'package',
+      },
     ],
   },
 

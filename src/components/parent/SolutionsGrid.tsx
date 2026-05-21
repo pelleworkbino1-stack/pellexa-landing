@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Monitor, Leaf, ArrowRight, Clock } from 'lucide-react'
+import { Monitor, Leaf, ArrowRight, Globe2, Info } from 'lucide-react'
 import { useLang } from '../../context/LangContext'
 
 export default function SolutionsGrid() {
@@ -84,18 +84,48 @@ export default function SolutionsGrid() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.6,
-              delay: 0.36,
-              ease: [0.22, 1, 0.36, 1] as const,
-            }}
-            className="relative rounded-2xl border border-dashed border-silver-anchor/5 bg-canvas-overlay/10 p-8 flex flex-col items-center justify-center min-h-[280px]"
+            transition={{ duration: 0.6, delay: 0.36, ease: [0.22, 1, 0.36, 1] as const }}
           >
-            <div className="w-12 h-12 rounded-xl bg-silver-anchor/[0.03] flex items-center justify-center mb-4">
-              <Clock size={20} className="text-silver-trace" />
-            </div>
-            <p className="text-sm text-silver-trace font-medium">{c.newVertical}</p>
-            <p className="text-xs text-silver-trace/70 mt-1">{c.comingSoon}</p>
+            <Link
+              to="#contact"
+              className="group block relative rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 p-8 hover:border-brand-500/20 transition-all duration-500 h-full"
+            >
+              <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <Globe2 size={24} className="text-brand-400" />
+              </div>
+              <span className="text-[10px] font-semibold tracking-widest uppercase text-brand-secondary-400 mb-2 block">
+                {c.generalOriginLabel}
+              </span>
+              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-brand-400 transition-colors">
+                {c.generalTitle}
+              </h3>
+              <p className="text-sm text-ink-dim leading-relaxed mb-4">
+                {c.generalDescription}
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {c.generalCategories.map((cat) => (
+                  <span
+                    key={cat}
+                    className="inline-block rounded-full bg-silver-anchor/5 border border-silver-anchor/10 px-2.5 py-0.5 text-[11px] text-ink-muted"
+                  >
+                    {cat}
+                  </span>
+                ))}
+              </div>
+              <div className="inline-flex items-center gap-1.5 rounded-md bg-brand-secondary-500/10 border border-brand-secondary-400/30 px-3 py-1.5 mb-4">
+                <Info size={12} className="text-brand-secondary-300 shrink-0" />
+                <span className="text-[11px] font-bold tracking-wide uppercase text-brand-secondary-300">
+                  {c.generalMOQBadge}
+                </span>
+              </div>
+              <p className="text-xs text-silver-trace mb-5 italic">
+                {c.generalTargetLabel}
+              </p>
+              <div className="flex items-center gap-2 text-sm font-medium text-brand-400 group-hover:gap-3 transition-all duration-300">
+                {c.learnMore}
+                <ArrowRight size={16} className="rtl:rotate-180" />
+              </div>
+            </Link>
           </motion.div>
         </div>
       </div>

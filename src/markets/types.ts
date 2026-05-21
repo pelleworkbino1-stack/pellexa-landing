@@ -265,6 +265,17 @@ export interface ParentContent {
     ledDescription: string
     foodTitle: string
     foodDescription: string
+    /** General Sourcing macro-category — opportunistic global mass-manufacturing channel. */
+    generalTitle: string
+    generalDescription: string
+    /** Comma-separated category labels rendered as silver-anchor pill chips. */
+    generalCategories: string[]
+    /** Origin footprint, e.g. "Asia Manufacturing Hubs". */
+    generalOriginLabel: string
+    /** Bold structural-gate badge ("High MOQ — Min. 1,000 Units"). */
+    generalMOQBadge: string
+    /** Target market label, e.g. "Enterprise & Luxury Accounts". */
+    generalTargetLabel: string
     learnMore: string
     newVertical: string
     comingSoon: string

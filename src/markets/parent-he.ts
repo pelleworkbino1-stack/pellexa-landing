@@ -32,6 +32,13 @@ export const parentHe: ParentContent = {
     foodTitle: 'Pellexa Agri-Food',
     foodDescription:
       'רכש וסורסינג מדויק למוצרי מזון גלובליים, חומרי גלם ושרשראות אספקה חקלאיות — ישירות ממפעלים מוסמכים לשווקים מוסדיים וארגוניים.',
+    generalTitle: 'Pellexa General Sourcing',
+    generalDescription:
+      'ערוץ ייצור המוני אופורטוניסטי ישירות ממרכזי הייצור באסיה — קופסאות מותאמות, רהיטים, צעצועים ואקססוריז לייפסטייל. מותאם למותגים גלובליים, מלונות יוקרה וחשבונות ארגוניים גדולים.',
+    generalCategories: ['קופסאות מותאמות', 'רהיטים', 'צעצועים', 'לייפסטייל'],
+    generalOriginLabel: 'מרכזי ייצור באסיה',
+    generalMOQBadge: 'MOQ גבוה — מינימום 1,000 יחידות',
+    generalTargetLabel: 'חשבונות ארגוניים ויוקרתיים',
     learnMore: 'למידע נוסף',
     newVertical: 'ורטיקל חדש',
     comingSoon: 'בקרוב',
