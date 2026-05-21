@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* =============================================================================
- * PELLEXA MULTI-BRANCH COLOR SYSTEM — Phase 1 (Foundation)
+ * PELLEXA MULTI-BRANCH COLOR SYSTEM — finalized (Phases 1-5 complete)
  *
  * Three-tier token architecture:
  *
@@ -19,18 +19,18 @@
  *     --brand-glow        — RGB triplet for rgba() glow/orb compositions.
  *     --brand-secondary-* — Cocoa runway (Agri only; inert elsewhere).
  *
- * Branch class registry — applied by the route-based ThemeProvider (Phase 2):
- *   .theme-parent → Premium Sky Blue   (#00A3FF) — Pellexa corporate root
- *   .theme-led    → Electric Cyan      (#00F2FE) — LED Screen Solutions
- *   .theme-agri   → Deep Matcha Green  (#0F5257) + Cocoa Brown (#8B5A2B)
+ * Branch class registry — applied by src/theme/ThemeProvider.tsx:
+ *   .theme-parent → Premium Sky Blue        (#00A3FF) — Pellexa corporate root
+ *   .theme-led    → Electric Cyan           (#00F2FE) — LED Screen Solutions
+ *   .theme-agri   → Vibrant Ceremonial Matcha (#22C55E) + Cocoa runway (#8B5A2B)
  *
- * MIGRATION POLICY (Phase 1):
- *   Legacy tokens (--color-gold-*, --color-dark-*, --color-accent-*) remain
- *   in @theme as dead-but-defined entries pending Phase 4 cleanup so any
- *   unmigrated code path continues to compile. The `.theme-matcha` scope was
- *   retired at Phase 3 Target 3 — the matcha product line now resolves
- *   identity through .theme-agri (Tier 3 dynamic) + Tier 1 canvas/silver,
- *   with cocoa-runway grounding via --brand-secondary-*.
+ * ARCHITECTURE INVARIANTS:
+ *   - No component imports a theme value or branches on a route key.
+ *   - Tier 1 + Tier 2 are byte-identical across every branch.
+ *   - Cocoa is inert on parent/LED (--brand-secondary-* = transparent).
+ *   - All legacy --color-gold-*, --color-dark-*, --color-accent-* tokens
+ *     and the .theme-matcha scope were retired in Phase 4. Body canvas
+ *     officially transitioned to #0A0C10 in Phase 5.
  * ============================================================================= */
 
 @theme {
@@ -41,8 +41,7 @@
    * TIER 1 — Universal Canvas (LOCKED)
    * Obsidian Black landscape. Slightly cool-blue bias gives silver and brand
    * glows measurable headroom that pure-black cannot provide on OLED.
-   * `--canvas-base` will replace the legacy `--color-dark-950` (#030305) in
-   * Phase 5; introduced here as a parallel token so nothing breaks today.
+   * `--canvas-base` is the official global body background as of Phase 5.
    * ------------------------------------------------------------------------- */
   --canvas-base:      #0A0C10;
   --canvas-deep:      #05070A;
@@ -97,29 +96,6 @@
   --brand-secondary-300: transparent;
   --brand-secondary-glow: 0, 0, 0;
 
-  /* ---------------------------------------------------------------------------
-   * LEGACY TOKENS — preserved verbatim for Phase 1 compatibility.
-   * Components currently consume these directly (e.g. text-gold-400,
-   * bg-dark-800, text-accent-500). Do not remove until Phase 4 migration
-   * sweeps each component onto the brand-* / canvas-* / silver-* tokens.
-   * ------------------------------------------------------------------------- */
-  --color-dark-950: #030305;
-  --color-dark-900: #0a0a0f;
-  --color-dark-800: #111118;
-  --color-dark-700: #1a1a24;
-  --color-dark-600: #252530;
-  --color-dark-500: #3a3a4a;
-  --color-dark-400: #5a5a6e;
-  --color-dark-300: #8a8a9e;
-
-  --color-gold-500: #c9a84c;
-  --color-gold-400: #dbbf6a;
-  --color-gold-300: #e8d48f;
-
-  --color-accent-500: #3b82f6;
-  --color-accent-400: #60a5fa;
-  --color-accent-300: #93c5fd;
-
   /* Tailwind v4 colour-namespace aliases — expose the new tier tokens as
    * first-class utility colours so authors can write `bg-canvas-base`,
    * `border-silver-anchor`, `text-brand-400`, etc. The CSS custom properties
@@ -157,13 +133,17 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-dark-950);
-  color: #e4e4e7;
+  background-color: var(--canvas-base);
+  color: var(--ink-body);
   overflow-x: hidden;
 }
 
+/* Selection picks up the active branch's brand-glow at low alpha. On /, the
+ * highlight reads Premium Sky Blue; on /led, Electric Cyan; on /food, vibrant
+ * matcha. The dispatcher's class on <html> drives this through CSS variable
+ * inheritance — no JS subscription, no flash. */
 ::selection {
-  background-color: rgba(201, 168, 76, 0.3);
+  background-color: rgba(var(--brand-glow), 0.28);
   color: #fff;
 }
 
@@ -230,7 +210,7 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
- * .theme-agri — Pellexa Agri-Food (Deep Matcha + Cocoa runway)
+ * .theme-agri — Pellexa Agri-Food (Vibrant Ceremonial Matcha + Cocoa runway)
  * Applied on /food and /food/* paths. Implements the 80/20 distribution:
  *   --brand-*           = Matcha (CTAs, hovers, glows, links, gradients)
  *   --brand-secondary-* = Cocoa  (eyebrows, tier badges, shelf strokes,
@@ -239,13 +219,20 @@ body {
  * Matcha owns vertical motion (luminous gradients, glows). Cocoa owns
  * horizontal grounding (hairline rules, badge fills ≤10% alpha). They are
  * never blurred or gradient-mixed together — see consultation §2.
+ *
+ * Post-consultation tuning (Design Fine-Tuning directive):
+ *   The Phase 3 deep-matte palette (#0F5257) read as too institutional
+ *   against the obsidian canvas. Lifted to the exact vibrant ceremonial
+ *   matcha luminance ladder that powered the original matcha vertical
+ *   (Tailwind green-500/400/300/600). The 80/20 hierarchy and all cocoa
+ *   runway tokens are preserved verbatim — only the brand layer was lifted.
  * ------------------------------------------------------------------------- */
 .theme-agri {
-  --brand-500: #0F5257;
-  --brand-400: #1F7A82;
-  --brand-300: #4FA8AF;
-  --brand-600: #093A3E;
-  --brand-glow: 15, 82, 87;
+  --brand-500: #22C55E;
+  --brand-400: #4ADE80;
+  --brand-300: #86EFAC;
+  --brand-600: #16A34A;
+  --brand-glow: 34, 197, 94;
 
   --brand-secondary-500: #8B5A2B;
   --brand-secondary-400: #A87045;

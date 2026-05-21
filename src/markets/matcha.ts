@@ -161,7 +161,6 @@ export const matcha: MarketConfig = {
         highlights: ['JAS', 'USDA NOP', 'EU Organic', 'Stone-Milled'],
         requestQuote: 'Request Tier Brief',
         icon: 'leaf',
-        accent: 'green',
       },
       {
         tag: 'Tier 02',
@@ -171,7 +170,6 @@ export const matcha: MarketConfig = {
         highlights: ['USDA NOP', 'EU Organic', 'Roller-Milled', 'Color-Stable'],
         requestQuote: 'Request Tier Brief',
         icon: 'sprout',
-        accent: 'green',
       },
       {
         tag: 'Tier 03',
@@ -181,7 +179,6 @@ export const matcha: MarketConfig = {
         highlights: ['Food-Grade', 'HACCP', 'FDA-Ready', 'Thermal-Stable'],
         requestQuote: 'Request Tier Brief',
         icon: 'flask',
-        accent: 'green',
       },
     ],
   },

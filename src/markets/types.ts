@@ -61,8 +61,6 @@ export interface SolutionsContent {
     icon?: string
     /** Optional content-driven image path. When omitted, an abstract icon-only banner is rendered. */
     image?: string
-    /** Optional accent palette key. Falls back to the position-based LED accent set when omitted. */
-    accent?: 'blue' | 'gold' | 'purple' | 'green'
   }[]
 }
 

@@ -30,7 +30,7 @@ export default function ParentHero() {
             animation: 'grid-pulse 8s ease-in-out infinite',
           }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(3,3,5,0.9)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(10,12,16,0.9)_100%)]" />
 
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div

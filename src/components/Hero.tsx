@@ -134,7 +134,7 @@ export default function Hero() {
         style={{
           background: isMatcha
             ? 'radial-gradient(ellipse at center, transparent 18%, rgba(10,12,16,0.88) 100%)'
-            : 'radial-gradient(ellipse at center, transparent 20%, rgba(3,3,5,0.85) 100%)',
+            : 'radial-gradient(ellipse at center, transparent 20%, rgba(10,12,16,0.85) 100%)',
         }}
       />
 
