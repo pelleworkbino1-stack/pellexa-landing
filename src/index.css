@@ -180,11 +180,19 @@ body {
  * ============================================================================= */
 
 /* ---------------------------------------------------------------------------
- * .theme-parent — Pellexa corporate root (Premium Sky Blue)
+ * .theme-parent — Pellexa corporate root (Premium Sky Blue + Bronze runway)
  * Applied on the marketing root path (`/`). Default identity of the Pellexa
  * holding brand. Explicit scope class (even though it matches the @theme
  * defaults) so the dispatcher always emits a class — prevents ambiguity
  * during SSR / deep-link / route transitions.
+ *
+ * The parent root carries an 80/20 split that mirrors the agri vertical:
+ *   --brand-*           = Sky Blue   (CTAs, hovers, glows, headline gradient)
+ *   --brand-secondary-* = Bronze-Gold (eyebrows, badge chips, structural
+ *                                       chrome — never interactive)
+ * Bronze is a low-luminance grounding tone deliberately chosen to anchor
+ * the blue luminance without competing for it. Identical separation rules
+ * as cocoa on agri: no gradient blending, no glow-mixing with brand.
  * ------------------------------------------------------------------------- */
 .theme-parent {
   --brand-500: #00A3FF;
@@ -192,6 +200,11 @@ body {
   --brand-300: #66C8FF;
   --brand-600: #0085D6;
   --brand-glow: 0, 163, 255;
+
+  --brand-secondary-500: #967E4E;
+  --brand-secondary-400: #A88F5E;
+  --brand-secondary-300: #BFAA76;
+  --brand-secondary-glow: 150, 126, 78;
 }
 
 /* ---------------------------------------------------------------------------

@@ -19,7 +19,7 @@ export default function SolutionsGrid() {
           transition={{ duration: 0.7 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="text-xs font-semibold tracking-widest uppercase text-brand-500 mb-3 block">
+          <span className="text-xs font-semibold tracking-widest uppercase text-brand-secondary-400 mb-3 block">
             {c.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4">

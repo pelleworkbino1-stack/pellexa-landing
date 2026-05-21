@@ -56,9 +56,9 @@ export default function ParentHero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="inline-flex items-center gap-2 rounded-full bg-brand-500/8 border border-brand-500/15 px-4 py-1.5 mb-8 backdrop-blur-sm"
+          className="inline-flex items-center gap-2 rounded-full bg-brand-secondary-500/8 border border-brand-secondary-400/20 px-4 py-1.5 mb-8 backdrop-blur-sm shadow-[0_0_40px_rgba(var(--brand-secondary-glow),0.15)]"
         >
-          <span className="text-xs font-medium tracking-wide text-brand-400 uppercase">
+          <span className="text-xs font-medium tracking-wide text-brand-secondary-400 uppercase">
             {c.badge}
           </span>
         </motion.div>
