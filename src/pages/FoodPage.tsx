@@ -5,7 +5,6 @@ import { Leaf, ArrowRight, Bean, TreePalm } from 'lucide-react'
 import ParentNavbar from '../components/parent/ParentNavbar'
 import ParentFooter from '../components/parent/ParentFooter'
 import ParentContact from '../components/parent/ParentContact'
-import CocoaPortfolio from '../components/parent/CocoaPortfolio'
 import { LangProvider, useLang } from '../context/LangContext'
 import type { CocoaFamilyId } from '../markets/types'
 
@@ -167,7 +166,7 @@ function HubGrid() {
             }}
           >
             <Link
-              to="#cocoa-portfolio"
+              to="/food/cacao"
               className="group block relative rounded-2xl border border-brand-secondary-400/20 bg-brand-secondary-500/[0.04] p-8 hover:border-brand-secondary-400/40 hover:bg-brand-secondary-500/[0.08] transition-all duration-500 h-full"
             >
               <div className="w-12 h-12 rounded-xl bg-brand-secondary-500/15 border border-brand-secondary-400/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
@@ -276,7 +275,6 @@ export default function FoodPage() {
         <main>
           <HubHero />
           <HubGrid />
-          <CocoaPortfolio />
           <ParentContact />
         </main>
         <ParentFooter />

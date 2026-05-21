@@ -3,6 +3,7 @@ import LedPage from './pages/LedPage'
 import ParentPage from './pages/ParentPage'
 import FoodPage from './pages/FoodPage'
 import MatchaPage from './pages/MatchaPage'
+import CocoaPage from './pages/CocoaPage'
 import GeneralSourcingPage from './pages/GeneralSourcingPage'
 import AcrylicSourcingPage from './pages/AcrylicSourcingPage'
 import { isLedSubdomain } from './lib/site'
@@ -33,6 +34,7 @@ function AppRoutes() {
       <Route path="/led" element={<LedWithMarket />} />
       <Route path="/food" element={<FoodPage />} />
       <Route path="/food/matcha" element={<MatchaPage />} />
+      <Route path="/food/cacao" element={<CocoaPage />} />
       <Route path="/sourcing" element={<GeneralSourcingPage />} />
       <Route path="/acrylic" element={<AcrylicSourcingPage />} />
     </Routes>
