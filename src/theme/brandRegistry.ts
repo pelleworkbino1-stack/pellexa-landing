@@ -35,7 +35,13 @@ export interface BrandProfile {
  *
  * - `/led`, `/led/...`           → Electric Cyan
  * - `/food`, `/food/...`         → Matcha + Cocoa (Agri)
- * - `/` (root)                   → Premium Sky Blue (Pellexa corporate)
+ * - `/`, `/sourcing`, `/acrylic` → Premium Sky Blue + Bronze runway (parent
+ *                                   core). The General Sourcing + dedicated
+ *                                   Acrylic verticals both cascade from the
+ *                                   parent token profile by design — adding
+ *                                   per-route theme scopes for them would
+ *                                   bloat the token system without delivering
+ *                                   a meaningful brand differentiation.
  *
  * NOTE — LED subdomain (`led.pellexa.com`) does NOT carry the `/led` prefix
  * (its paths are `/` and `/:market`). The subdomain override is handled in
@@ -57,8 +63,9 @@ export const brandRegistry: readonly BrandProfile[] = [
   {
     key: 'parent',
     className: 'theme-parent',
-    match: /^\/$/,
-    label: 'Pellexa Corporate — Premium Sky Blue',
+    match: /^\/(sourcing(\/|$)|acrylic(\/|$)|$)/,
+    label:
+      'Pellexa Corporate — Premium Sky Blue + Bronze (root / sourcing / acrylic)',
   },
 ] as const
 

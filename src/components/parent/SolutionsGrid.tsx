@@ -87,7 +87,7 @@ export default function SolutionsGrid() {
             transition={{ duration: 0.6, delay: 0.36, ease: [0.22, 1, 0.36, 1] as const }}
           >
             <Link
-              to="#contact"
+              to="/sourcing"
               className="group block relative rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 p-8 hover:border-brand-500/20 transition-all duration-500 h-full"
             >
               <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">

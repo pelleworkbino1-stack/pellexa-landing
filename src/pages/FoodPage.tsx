@@ -1,10 +1,19 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Leaf, ArrowRight, Bean, TreePalm } from 'lucide-react'
 import ParentNavbar from '../components/parent/ParentNavbar'
 import ParentFooter from '../components/parent/ParentFooter'
-import { LangProvider } from '../context/LangContext'
+import ParentContact from '../components/parent/ParentContact'
+import CocoaPortfolio from '../components/parent/CocoaPortfolio'
+import { LangProvider, useLang } from '../context/LangContext'
+import type { CocoaFamilyId } from '../markets/types'
+
+const COCOA_FAMILY_CHIP: Record<CocoaFamilyId, string> = {
+  powder: 'Cocoa Powder',
+  butter: 'Cocoa Butter',
+  liquor: 'Cocoa Liquor',
+}
 
 function setMeta(property: string, content: string) {
   const el =
@@ -88,8 +97,24 @@ function HubHero() {
 }
 
 function HubGrid() {
+  const { content } = useLang()
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  // Derive the Cacao card's family chips by collapsing the registry's grade
+  // catalog down to its unique family pillars. Keeps the card data-driven
+  // against `parent-en.ts` / `parent-he.ts` so any future grade addition
+  // surfaces automatically as a new chip — no card edit required.
+  const cocoaFamilyChips = useMemo(() => {
+    const seen = new Set<CocoaFamilyId>()
+    const chips: { id: CocoaFamilyId; label: string }[] = []
+    for (const g of content.cocoa.grades) {
+      if (seen.has(g.family)) continue
+      seen.add(g.family)
+      chips.push({ id: g.family, label: COCOA_FAMILY_CHIP[g.family] })
+    }
+    return chips
+  }, [content.cocoa.grades])
 
   return (
     <section id="solutions" className="relative py-16 sm:py-24">
@@ -142,7 +167,7 @@ function HubGrid() {
             }}
           >
             <Link
-              to="#contact"
+              to="#cocoa-portfolio"
               className="group block relative rounded-2xl border border-brand-secondary-400/20 bg-brand-secondary-500/[0.04] p-8 hover:border-brand-secondary-400/40 hover:bg-brand-secondary-500/[0.08] transition-all duration-500 h-full"
             >
               <div className="w-12 h-12 rounded-xl bg-brand-secondary-500/15 border border-brand-secondary-400/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
@@ -161,12 +186,12 @@ function HubGrid() {
                 beverage manufacturing.
               </p>
               <div className="flex flex-wrap gap-1.5 mb-5">
-                {['Raw Beans', 'Nibs', 'Liquor', 'Butter'].map((tag) => (
+                {cocoaFamilyChips.map((chip) => (
                   <span
-                    key={tag}
+                    key={chip.id}
                     className="inline-block rounded-full bg-silver-anchor/5 border border-brand-secondary-400/15 px-2.5 py-0.5 text-[11px] text-ink-muted"
                   >
-                    {tag}
+                    {chip.label}
                   </span>
                 ))}
               </div>
@@ -251,6 +276,8 @@ export default function FoodPage() {
         <main>
           <HubHero />
           <HubGrid />
+          <CocoaPortfolio />
+          <ParentContact />
         </main>
         <ParentFooter />
       </div>

@@ -1,5 +1,6 @@
 import { useRef, type ComponentType } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import {
   Building2,
   Sun,
@@ -213,13 +214,23 @@ export default function Solutions() {
                     ))}
                   </div>
 
-                  <a
-                    href="#contact"
-                    className={`inline-flex items-center gap-1.5 text-sm font-medium ${accent.text} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                  >
-                    {sol.requestQuote}
-                    <ArrowRight size={14} className="rtl:rotate-180" />
-                  </a>
+                  {sol.link ? (
+                    <Link
+                      to={sol.link}
+                      className={`inline-flex items-center gap-1.5 text-sm font-medium ${accent.text} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                    >
+                      {sol.requestQuote}
+                      <ArrowRight size={14} className="rtl:rotate-180" />
+                    </Link>
+                  ) : (
+                    <a
+                      href="#contact"
+                      className={`inline-flex items-center gap-1.5 text-sm font-medium ${accent.text} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                    >
+                      {sol.requestQuote}
+                      <ArrowRight size={14} className="rtl:rotate-180" />
+                    </a>
+                  )}
                 </div>
               </motion.div>
             )
