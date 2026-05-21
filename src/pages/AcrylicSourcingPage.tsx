@@ -35,7 +35,7 @@ import { LangProvider } from '../context/LangContext'
 
 const PAGE_TITLE = 'Pellexa Premium Acrylic — Factory-Direct Sourcing'
 const PAGE_DESCRIPTION =
-  'Factory-direct premium acrylic enclosures, display cases, luxury retail boxes, and heavy-duty storage containers. Custom-engineered for luxury packaging, retail display, and industrial product protection.'
+  'Custom-engineered factory-direct acrylic infrastructure across all domains, with premium specialization in custom display boxes, gallery cases, and high-precision protective enclosures tailored for TCG (Trading Card Games), elite collectibles, and luxury retail.'
 const EMAIL = 'acrylic@pellexa.com'
 
 function setMeta(property: string, content: string) {
@@ -48,11 +48,11 @@ function setMeta(property: string, content: string) {
 const products = [
   {
     icon: Package,
-    tag: 'Custom Boxes',
+    tag: 'TCG & Collectibles',
     title: 'Custom Acrylic Boxes',
     description:
-      'Bespoke acrylic enclosures engineered to client dimensions for packaging, gifting, and brand-controlled presentation.',
-    highlights: ['Custom Sizing', 'Edge Polish', 'Branded'],
+      'Bespoke acrylic enclosures engineered to client dimensions, with deep specialization in TCG & Pokémon ETB Cases, Booster Box Protectors, Graded Card Displays, and Custom Luxury Gift Packaging.',
+    highlights: ['TCG / ETB Fit', 'Graded Slab Ready', 'Luxury Gift Format'],
   },
   {
     icon: ShieldCheck,
@@ -87,7 +87,7 @@ const techSpecs = [
   { label: 'Tolerance', value: '±0.2 mm Precision-Cut' },
   { label: 'Finishes', value: 'Polished / Frosted / Tinted / Mirror' },
   { label: 'Lead Time', value: '4–6 Weeks (Standard Tier)' },
-  { label: 'MOQ', value: '50 Units (Custom) / 500 Units (Catalog)' },
+  { label: 'MOQ', value: 'Scalable Tiers — Project Consultation Required' },
   { label: 'Compliance', value: 'REACH / RoHS / FDA Food-Safe (on request)' },
 ] as const
 
@@ -144,8 +144,10 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
           className="mx-auto max-w-2xl text-base sm:text-lg text-ink-muted leading-relaxed"
         >
-          Custom-engineered acrylic enclosures, display cases, and protective
-          containers — manufactured to spec, shipped factory-direct.
+          Custom-engineered factory-direct acrylic infrastructure across all
+          domains, with premium specialization in custom display boxes, gallery
+          cases, and high-precision protective enclosures tailored for TCG
+          (Trading Card Games), elite collectibles, and luxury retail.
         </motion.p>
       </div>
     </section>
@@ -265,6 +267,12 @@ function TechSpecs() {
               </div>
             ))}
           </dl>
+          <p className="border-t border-brand-secondary-400/15 px-5 sm:px-7 py-4 text-xs sm:text-sm text-ink-dim italic leading-relaxed">
+            Material grades, custom thickness tolerances (up to 6mm+
+            high-impact options), and minimum order configurations are fully
+            variable and engineered based on individual client criteria during
+            exploratory briefs.
+          </p>
         </motion.div>
       </div>
     </section>
