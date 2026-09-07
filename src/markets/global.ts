@@ -86,7 +86,7 @@ export const globalMarket: MarketConfig = {
         value: 'CIF',
         label: 'Managed Freight',
         description:
-          'We coordinate the freight chain — export documentation, ocean transit, and customs clearance support to your port of destination.',
+          'We manage the freight chain — export documentation, ocean transit, and end-to-end customs clearance coordination via licensed customs brokers to your port of destination.',
         icon: 'ship',
       },
       {
@@ -197,7 +197,7 @@ export const globalMarket: MarketConfig = {
         number: '03',
         title: 'Managed Logistics',
         description:
-          'We coordinate the freight chain — export documentation, international shipping, and customs clearance support to your port of destination.',
+          'We manage the freight chain — structured export documentation, international shipping, and end-to-end customs clearance coordination via licensed customs brokers to your port of destination. Import compliance requirements are aligned before departure, and we liaise directly with the appointed broker or your designated clearing agent where you are the importer of record.',
       },
       {
         number: '04',
@@ -241,7 +241,7 @@ export const globalMarket: MarketConfig = {
       {
         question: 'Do you deliver internationally?',
         answer:
-          'Yes. We coordinate the freight chain from the production facility to your port of destination, including export documentation, ocean transit, and customs clearance support, all under ALL RISK cargo insurance. Contact us with your location for a detailed logistics plan.',
+          'Yes. We manage the freight chain from the production facility to your port of destination — structured export documentation preparation, ocean transit, and end-to-end customs clearance coordination via licensed customs brokers — all under ALL RISK cargo insurance. Import compliance requirements are aligned ahead of arrival, and we liaise directly with the licensed broker or your designated clearing agent where you are the importer of record. Contact us with your location for a detailed logistics plan.',
       },
       {
         question: "What's the process for custom projects?",
