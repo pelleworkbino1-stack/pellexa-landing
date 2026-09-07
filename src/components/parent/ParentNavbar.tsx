@@ -1,8 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type MouseEvent, type ReactNode } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Globe } from 'lucide-react'
 import { useLang } from '../../context/LangContext'
 import PellexaLogo from '../PellexaLogo'
+
+/** Home-page section hashes. On other routes these must client-navigate to `/`. */
+const HOME_ONLY_HASHES = new Set(['#solutions', '#about'])
 
 function LangToggle() {
   const { lang, setLang } = useLang()
@@ -15,6 +19,58 @@ function LangToggle() {
       <Globe size={14} />
       <span>{lang === 'en' ? 'עב' : 'EN'}</span>
     </button>
+  )
+}
+
+function scrollToId(hash: string) {
+  const id = hash.startsWith('#') ? hash.slice(1) : hash
+  const el = document.getElementById(id)
+  if (!el) return false
+  el.scrollIntoView({ behavior: 'smooth' })
+  return true
+}
+
+function HashOrPathLink({
+  href,
+  className,
+  children,
+  onNavigate,
+}: {
+  href: string
+  className: string
+  children: ReactNode
+  onNavigate?: () => void
+}) {
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
+  if (href.startsWith('/') && !href.startsWith('/#')) {
+    return (
+      <Link to={href} className={className} onClick={onNavigate}>
+        {children}
+      </Link>
+    )
+  }
+
+  const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    const homeOnly = HOME_ONLY_HASHES.has(href)
+    if (homeOnly && pathname !== '/') {
+      e.preventDefault()
+      onNavigate?.()
+      navigate({ pathname: '/', hash: href })
+      return
+    }
+
+    e.preventDefault()
+    onNavigate?.()
+    scrollToId(href)
+    navigate({ hash: href }, { replace: true })
+  }
+
+  return (
+    <a href={href} className={className} onClick={onClick}>
+      {children}
+    </a>
   )
 }
 
@@ -43,28 +99,28 @@ export default function ParentNavbar() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="flex h-18 items-center justify-between">
-          <a href="/" className="group transition-opacity hover:opacity-90">
+          <Link to="/" className="group transition-opacity hover:opacity-90">
             <PellexaLogo />
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
             {c.links.map((link) => (
-              <a
+              <HashOrPathLink
                 key={link.href}
                 href={link.href}
                 className="text-sm text-ink-muted hover:text-white transition-colors duration-300 relative group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-brand-400 group-hover:w-full transition-all duration-300" />
-              </a>
+              </HashOrPathLink>
             ))}
             <LangToggle />
-            <a
+            <HashOrPathLink
               href="#contact"
               className="inline-flex items-center gap-2 rounded-full bg-brand-500/10 border border-brand-500/20 px-5 py-2 text-sm font-medium text-brand-400 hover:bg-brand-500/20 hover:border-brand-500/40 transition-all duration-300"
             >
               {c.cta}
-            </a>
+            </HashOrPathLink>
           </div>
 
           <button
@@ -89,25 +145,25 @@ export default function ParentNavbar() {
           >
             <div className="flex flex-col gap-1 p-5">
               {c.links.map((link) => (
-                <a
+                <HashOrPathLink
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onNavigate={() => setMobileOpen(false)}
                   className="block rounded-lg px-4 py-3 text-base text-ink-muted hover:text-white hover:bg-silver-anchor/5 transition-all"
                 >
                   {link.label}
-                </a>
+                </HashOrPathLink>
               ))}
               <div className="flex items-center gap-3 px-4 py-3">
                 <LangToggle />
               </div>
-              <a
+              <HashOrPathLink
                 href="#contact"
-                onClick={() => setMobileOpen(false)}
+                onNavigate={() => setMobileOpen(false)}
                 className="mt-3 block rounded-full bg-brand-500/10 border border-brand-500/20 px-5 py-3 text-center text-sm font-medium text-brand-400 hover:bg-brand-500/20 transition-all"
               >
                 {c.cta}
-              </a>
+              </HashOrPathLink>
             </div>
           </motion.div>
         )}

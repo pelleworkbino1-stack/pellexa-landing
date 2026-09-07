@@ -36,7 +36,13 @@ export interface WhyPellexaContent {
   titleMain: string
   titleFaded: string
   subtitle: string
-  stats: { value: string; label: string; description: string }[]
+  stats: {
+    value: string
+    label: string
+    description: string
+    /** Optional content-driven icon name. Falls back to the position-based set when omitted. */
+    icon?: string
+  }[]
 }
 
 export interface AdvantageContent {
@@ -120,129 +126,51 @@ export interface ContactContent {
     chatText: string
   }
 
-  preview: {
-    ready: string
-    readySub: string
-    sendTo: string
-    copyText: string
-    copiedClipboard: string
-    openEmail: string
-    goBack: string
-    attachTitle: string
-    attachPhotos: string
-    attachDrawings: string
+  /**
+   * Hardened sourcing-scope disclaimer. Pellexa is a sourcing agency, not an
+   * installation contractor — this text is the single source of truth for that
+   * boundary and is reproduced verbatim from `parent-en.ts` / `parent-he.ts`.
+   */
+  disclaimer: {
+    title: string
+    body: string
   }
 
   form: {
     title: string
     subtitle: string
-    allOptional: string
-    generateBtn: string
-    importantAttach: string
-    sitePhotos: string
-    sitePhotosDetail: string
-    archDrawings: string
-    archDrawingsDetail: string
-
-    sections: { title: string; desc: string }[]
-
-    installLabel: string
-    installHint: string
-    indoorLabel: string
-    indoorDesc: string
-    outdoorLabel: string
-    outdoorDesc: string
-    otherLabel: string
-    otherDesc: string
-    describePlaceholder: string
-
-    primaryUseLabel: string
-    primaryUseHint: string
-    chooseOption: string
-    primaryUseOptions: SelectOption[]
-    describeUse: string
-
-    viewingLabel: string
-    viewingHint: string
-    viewingPlaceholder: string
-    meters: string
-
-    sizeLabel: string
-    sizeHint: string
-    widthLabel: string
-    heightLabel: string
-    sizePlaceholder: string
-    mUnit: string
-
-    measureLabel: string
-    measureHint: string
-    displayArea: string
-    displayAreaDesc: string
-    totalWall: string
-    totalWallDesc: string
-    notSureLabel: string
-    notSureDesc: string
-
-    shapeLabel: string
-    shapeHint: string
-    shapeOptions: SelectOption[]
-    describeShape: string
-
-    mountLabel: string
-    mountHint: string
-    mountOptions: SelectOption[]
-    describeMount: string
-
-    maintenanceLabel: string
-    maintenanceHint: string
-    frontAccess: string
-    frontAccessDesc: string
-    rearAccess: string
-    rearAccessDesc: string
-    maintenanceNotSure: string
-    maintenanceNotSureDesc: string
-
-    reinforcedLabel: string
-    reinforcedHint: string
-    yes: string
-    no: string
-    notSure: string
-
-    featuresLabel: string
-    transparentLabel: string
-    transparentDesc: string
-    flexibleLabel: string
-    flexibleDesc: string
-    ultraBrightLabel: string
-    ultraBrightDesc: string
-    otherFeatures: string
-
-    contentTypeLabel: string
-    contentTypeHint: string
-    liveVideoLabel: string
-    liveVideoDesc: string
-    staticLabel: string
-    staticDesc: string
-    highResLabel: string
-    highResDesc: string
-    otherContent: string
-
-    locationLabel: string
-    locationHint: string
-    locationPlaceholder: string
-    dateLabel: string
-    dateHint: string
-    datePlaceholder: string
+    requiredNote: string
 
     nameLabel: string
     namePlaceholder: string
     emailLabel: string
     emailPlaceholder: string
-    phoneLabel: string
-    phonePlaceholder: string
-    notesLabel: string
-    notesHint: string
-    notesPlaceholder: string
+    companyLabel: string
+    companyPlaceholder: string
+    countryLabel: string
+    countryHint: string
+    countryPlaceholder: string
+
+    projectTypeLabel: string
+    projectTypeHint: string
+    projectTypeOptions: SelectOption[]
+
+    screenSizeLabel: string
+    screenSizeHint: string
+    screenSizePlaceholder: string
+
+    specsLabel: string
+    specsHint: string
+    specsPlaceholder: string
+
+    submitBtn: string
+    submittingBtn: string
+    successTitle: string
+    successBody: string
+    sendAnother: string
+    errorGeneric: string
+    errorCopy: string
+    errorMailto: string
   }
 }
 
@@ -412,6 +340,133 @@ export interface CocoaPortfolioContent {
   masterCTA: CocoaMasterCTAContent
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Agri-Food Portfolio — public catalog for the /food hub.
+//
+// Source of truth: `docs/Pellexa Profile&Operating Model.MD` §5 (product
+// categories) and §1 (FCL-and-above entry threshold). Every category in this
+// registry operates strictly at Full Container Load volumes and above — no
+// sub-FCL, LCL, or low-MOQ entry exists in the model, and no copy mounted
+// against these types may imply otherwise.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Identifier slug for each public Agri-Food portfolio category. */
+export type FoodCategoryId =
+  | 'matcha'
+  | 'tea'
+  | 'cacao'
+  | 'coconut'
+  | 'seed-oils'
+  | 'rice'
+  | 'pasta'
+  | 'canned'
+  | 'dry-goods'
+
+/**
+ * One public portfolio card on the /food hub. Every card resolves to the
+ * page-local '#contact' anchor — the dedicated product-line routes were
+ * consolidated into the hub, so no card deep-links out of /food any more.
+ * Icons are deliberately absent — the registry stays a pure `.ts` data module;
+ * `FoodPage.tsx` owns the `Record<FoodCategoryId, LucideIcon>` map.
+ */
+export interface FoodCategory {
+  id: FoodCategoryId
+  title: string
+  description: string
+  /** Short form/grade chips, e.g. "Copra", "Virgin Oil". */
+  chips: string[]
+  /** Eyebrow label, e.g. "Active Product Line" / "Bulk Wholesale". */
+  tag: string
+  /** CTA label for the card footer. */
+  cta: string
+  /** Page-local anchor — '#contact' for all nine categories. */
+  href: string
+}
+
+/**
+ * Parent-level operational-scope boundary (freight / customs / importer of
+ * record). Canonical shape for `ParentContent.scopeDisclaimer`, mounted on
+ * `/sourcing` and `/acrylic` by `ScopeDisclaimer`.
+ */
+export interface ScopeDisclaimerContent {
+  title: string
+  body: string
+  points: string[]
+}
+
+/**
+ * Agri-food disclaimer uses the same shape. Alias keeps `FoodPortfolioContent`
+ * and `OperationalDisclaimer` decoupled from the parent field name.
+ */
+export type FoodDisclaimerContent = ScopeDisclaimerContent
+
+/**
+ * One stage of the published Agri-Food operating model. Rendered as a numbered
+ * card by `OperationalDisclaimer` above the scope panel.
+ */
+export interface FoodOperatingStage {
+  /** Ordinal badge, e.g. "01". */
+  label: string
+  title: string
+  body: string
+}
+
+/**
+ * The five-stage B2B execution model: FCL floor, staged verification pipeline,
+ * legal/commercial framework, third-party QC and insurance, and CIF/DDP
+ * shipping coordination. Every stage must stay inside the operational boundary
+ * declared by `ScopeDisclaimerContent` — no stage may imply that Pellexa acts as
+ * freight forwarder, customs broker, or importer of record.
+ */
+export interface FoodOperatingModelContent {
+  sectionLabel: string
+  title: string
+  subtitle: string
+  stages: FoodOperatingStage[]
+}
+
+/**
+ * Header copy for the Agri-Food procurement intake form on /food.
+ *
+ * `FoodContact` previously read these fields off `MarketConfig['contact']` via
+ * `useMarket()`, which coupled the hub-wide form to the matcha market config
+ * and left it English-only. Sourcing them here keeps the form under
+ * `LangProvider` alone and gives it real Hebrew parity.
+ */
+export interface FoodContactContent {
+  sectionLabel: string
+  title: string
+  titleHighlight: string
+  subtitle: string
+  benefits: string[]
+  emailCardLabel: string
+  copy: string
+  copied: string
+  /** Section 2 heading — the nine-category portfolio multi-select. */
+  categorySectionTitle: string
+  categorySectionDesc: string
+  categoryNotePlaceholder: string
+}
+
+/** Top-level Agri-Food portfolio registry mounted on `ParentContent.food`. */
+export interface FoodPortfolioContent {
+  sectionLabel: string
+  title: string
+  subtitle: string
+  /** Hard structural gate rendered as a badge, e.g. "FCL Minimums — 20ft / 40ft". */
+  fclBadge: string
+  /**
+   * Agri-Food vertical inbox. Deliberately separate from the general
+   * `ParentContent.contact.email`, which still serves the homepage across LED,
+   * General Sourcing, and Agri-Food enquiries.
+   */
+  email: string
+  categories: FoodCategory[]
+  contact: FoodContactContent
+  operatingModel: FoodOperatingModelContent
+  disclaimer: FoodDisclaimerContent
+}
+
 export interface ParentContent {
   meta: { title: string }
   nav: { links: { label: string; href: string }[]; cta: string }
@@ -432,14 +487,14 @@ export interface ParentContent {
     ledDescription: string
     foodTitle: string
     foodDescription: string
-    /** General Sourcing macro-category — opportunistic global mass-manufacturing channel. */
+    /** General Sourcing vertical — industrial and specialized partner-sourced lines. */
     generalTitle: string
     generalDescription: string
-    /** Comma-separated category labels rendered as silver-anchor pill chips. */
+    /** Category labels rendered as silver-anchor pill chips. */
     generalCategories: string[]
     /** Origin footprint, e.g. "Asia Manufacturing Hubs". */
     generalOriginLabel: string
-    /** Bold structural-gate badge ("High MOQ — Min. 1,000 Units"). */
+    /** Structural-gate badge ("FCL Minimums — Dynamic MOQ for Specialized Lines"). */
     generalMOQBadge: string
     /** Target market label, e.g. "Enterprise & Luxury Accounts". */
     generalTargetLabel: string
@@ -457,12 +512,23 @@ export interface ParentContent {
   contact: { title: string; subtitle: string; email: string; cta1: string; cta2: string }
   footer: { tagline: string; copyright: string; privacy: string; terms: string }
   /**
+   * Operational-scope disclaimer for industrial sourcing verticals (`/sourcing`,
+   * `/acrylic`). Last bullet states the dual-MOQ policy — not agri-food FCL-only.
+   */
+  scopeDisclaimer: ScopeDisclaimerContent
+  /**
    * Cacao Derivatives Portfolio registry — Phase 1+2 data plumbing.
    * Sourced verbatim from `docs/cocoa_knowlage.md` (Sections 1, 2, 3, 4, 5).
    * Phase 1 mounted §§1/2/3/5; Phase 2 extends with §4 (Trust Infrastructure)
    * and powers the rendered `CocoaPortfolio` component on /food.
    */
   cocoa: CocoaPortfolioContent
+  /**
+   * Public Agri-Food portfolio catalog — powers the nine-category grid on the
+   * /food hub and the operational-scope disclaimer mounted across every
+   * /food route.
+   */
+  food: FoodPortfolioContent
 }
 
 export interface MarketConfig {

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import ParentNavbar from '../components/parent/ParentNavbar'
 import ParentHero from '../components/parent/ParentHero'
 import SolutionsGrid from '../components/parent/SolutionsGrid'
@@ -9,11 +10,25 @@ import { LangProvider, useLang } from '../context/LangContext'
 
 function ParentInner() {
   const { content } = useLang()
+  const { hash } = useLocation()
 
   useEffect(() => {
     document.title = content.meta.title
-    window.scrollTo(0, 0)
   }, [content])
+
+  useEffect(() => {
+    const id = hash.startsWith('#') ? hash.slice(1) : hash
+    if (!id) {
+      window.scrollTo(0, 0)
+      return
+    }
+    const t = window.setTimeout(() => {
+      const el = document.getElementById(id)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+      else window.scrollTo(0, 0)
+    }, 0)
+    return () => window.clearTimeout(t)
+  }, [hash])
 
   return (
     <div className="min-h-screen bg-canvas-base text-white antialiased">

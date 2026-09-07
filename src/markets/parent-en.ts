@@ -133,13 +133,13 @@ const parentEnCocoa: ParentContent['cocoa'] = {
   qualityControl: {
     title: 'Trust Infrastructure: Quality-Control & Corporate Certifications',
     intro:
-      'Pellexa frameworks raw technical data sheet parameters into elite corporate compliance metrics that showcase ironclad regulatory readiness and institutional trust badges across our digital portfolio:',
+      'Pellexa frameworks raw technical data sheet parameters into elite corporate compliance metrics that showcase documented regulatory readiness and institutional trust badges across our digital portfolio:',
     analyticalTitle: 'Quality-Control Benchmarks & Analytical Parameters',
     analyticalGroups: [
       {
         title: 'Chemical & Physical Testing',
         summary:
-          'Our entire supply chain is independently tested and verified against rigorous laboratory and analytical criteria to ensure frictionless entry into major international ports.',
+          'Every contracted lot is independently tested against laboratory and analytical criteria, so the documentation pack your customs broker and regulator receive is complete and defensible at the port of entry.',
         metrics: [
           'Precise monitoring of moisture tolerances (maximum 3.0% – 4.0%)',
           'FFA (Free Fatty Acid) baselines',
@@ -159,7 +159,7 @@ const parentEnCocoa: ParentContent['cocoa'] = {
       {
         title: 'Microbiological Screening',
         summary:
-          'Mandatory sterilization validation and independent laboratory screening across every single contract run.',
+          'Mandatory sterilization validation and independent laboratory screening across each contracted production run.',
         metrics: [
           'Salmonella — absolute negative markers (/25g)',
           'Strict upper limits on standard plate counts',
@@ -178,7 +178,7 @@ const parentEnCocoa: ParentContent['cocoa'] = {
       {
         title: 'Global Market Access',
         description:
-          'Full US-FDA and Local FDA Compliance ensures frictionless customs clearance and regulatory entry.',
+          'Manufacturing partners hold US-FDA and local FDA registration, and per-shipment regulatory documentation is verified before departure. Customs clearance and import filing are executed by your customs broker under your import license, or by a local importer partner — Pellexa is not the importer of record.',
       },
       {
         title: 'Dietary, Cultural, and Ethical Inclusivity',
@@ -191,26 +191,227 @@ const parentEnCocoa: ParentContent['cocoa'] = {
       'Selections are routed to our specification desk together with your contact details so the issued technical pack matches your validation pipeline 1:1.',
   },
   logistics: {
-    title: 'Supply Continuity & Global Maritime Logistics Statement',
+    title: 'Supply Continuity & Logistics Coordination',
     paragraphs: [
-      'Pellexa operates with a highly strategic, localized network to insulate your corporate supply chain from regional market volatility. While our standard pipeline is structurally optimized around high-volume enterprise distribution and Full Container Load (FCL 20ft and 40ft maritime shipping models), routing directly to strategic major marine hubs including Ashdod Port, Israel, and beyond—we recognize that market-leading brands often scale over time. To insulate your brand from restrictive volume requirements, our logistical framework accommodates customized, low-MOQ options and flexible wholesale volume entries tailored to your specific supply phase. To review exact minimum order parameters, clients are required to schedule a technical consultation directly with our logistics team.',
-      'Operating predominantly on professional CIF (Cost, Insurance, and Freight) incoterms to client ports of destination, our logistics framework takes full accountability for origin processing—from initial export declarations and strict pre-shipment phytosanitary inspections to marine cargo insurance and ocean transit routing. Featuring a standard 24-month unopened shelf stability across our powder and liquor lines, we assist your procurement division in structuring stable forward-contracts that lock in volume and insulate your corporate operations against spot-price surges. We ensure your raw materials arrive with their technical integrity entirely intact.',
+      'Pellexa structures supply through a localized partner network to insulate your procurement from regional market volatility. Operations run strictly at Full Container Load volumes and above — 20ft and 40ft maritime models — routed to major marine hubs including Ashdod Port, Israel. We do not offer LCL, sub-container, or low-MOQ entries; container-scale volume is the entry threshold for every cacao line. Exact per-grade minimums, allocation splits, and forward-contract schedules are confirmed with our sourcing desk during commercial qualification.',
+      "Maritime shipments are coordinated under CIF (Cost, Insurance, and Freight) or DDP (Delivered Duty Paid) terms, selected against your import-license setup and local importer partners, and executed by recognized freight forwarders together with the supplier's export desk. Pellexa coordinates and verifies that chain but is not a freight forwarder, customs broker, or importer of record; where DDP is used, the import is carried by a licensed local importer partner. Origin-side export declarations and pre-shipment phytosanitary inspections are performed by the exporting facility and its appointed forwarder; ALL RISK cargo insurance is placed through a third-party insurer. With a standard 24-month unopened shelf stability across our powder and liquor lines, we support your procurement division in structuring forward contracts that lock in volume against spot-price surges.",
     ],
   },
   masterCTA: {
     sectionLabel: 'Conversion-Oriented Lead Generation (The Master CTA)',
     headline: 'Architect Your Custom Factory Run: Optimize Your Supply Chain',
     paragraphs: [
-      'In global ingredient sourcing, standard configurations rarely satisfy the strict requirements of a market-leading product line. At Pellexa, we do not simply sell off-the-shelf commodities—we engineer dedicated, high-margin ingredient pipelines and align factory-level production metrics to your precise corporate formulation targets. Whether your brand requires unique specifications regarding fat melting curves, precise color intensities, specific fat-to-moisture ratios, particular alkalization depths, pH balancing, or localized forward-contract logistical scheduling, our team is equipped to tailor your run.',
-      'Our deployment models are engineered for absolute flexibility; we support high-volume container placements as well as customized, lower-volume runs through adaptive MOQ frameworks designed around your operating reality. To evaluate how we can map factory metrics to your production needs without restrictive volume ceilings, book an exploratory advisory call today.',
+      'In global ingredient sourcing, standard configurations rarely satisfy the strict requirements of a market-leading product line. At Pellexa, we do not place off-the-shelf commodity orders—we engineer dedicated, high-margin ingredient pipelines and align factory-level production metrics to your precise corporate formulation targets. Whether your brand requires unique specifications regarding fat melting curves, precise color intensities, specific fat-to-moisture ratios, particular alkalization depths, pH balancing, or localized forward-contract logistical scheduling, our team is equipped to tailor your run.',
+      'Every engagement runs at Full Container Load volumes and above. That threshold is fixed, and it is precisely what makes factory-level pricing and dedicated production runs possible. Within it, grade allocation, staged delivery schedules, and multi-container forward contracts are structured around your production cadence. To scope your container plan, book an exploratory advisory call.',
       "Do not leave your product chemistry or supply continuity to chance. Contact Pellexa's sourcing division today to register your technical requirements, review comprehensive specification sheets, arrange local sample evaluations, and design a scalable container-load infrastructure engineered directly for your brand.",
     ],
     cta: 'Schedule a Corporate Sourcing Consultation',
   },
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Agri-Food Portfolio — public catalog for the /food hub.
+//
+// Mirrors the category list in `docs/Pellexa Profile&Operating Model.MD` §5.
+// Every line operates strictly at Full Container Load volumes and above (§1);
+// no card, chip, or CTA in this block may imply sub-FCL or low-MOQ entry.
+// All nine categories resolve to the page-local '#contact' anchor — the matcha
+// and cacao product-line routes were consolidated back into the hub.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const parentEnFood: ParentContent['food'] = {
+  sectionLabel: 'Pellexa Agri-Food',
+  title: 'Bulk B2B Food Sourcing Portfolio',
+  subtitle:
+    'Nine dry and bulk food categories sourced direct from authorized facilities. Every line operates at Full Container Load volumes and above, under third-party quality control and back-to-back contract frameworks.',
+  fclBadge: 'FCL Minimums — 20ft / 40ft Maritime Only',
+  email: 'agri-food.sales@pellexa.com',
+  categories: [
+    {
+      id: 'matcha',
+      title: 'Matcha',
+      description:
+        'Tiered procurement across ceremonial, beverage, and industrial grades from authorized milling partners. Certified organic and high-consistency non-organic lines, matched to your milling, cup profile, and thermal-stability requirements — contracted at Full Container Load volumes only.',
+      chips: [
+        'Ceremonial',
+        'Beverage Grade',
+        'Industrial',
+        'JAS / NOP / EU Organic',
+        'FCL Only',
+      ],
+      tag: 'Active Product Line',
+      cta: 'Request FCL Quote',
+      href: '#contact',
+    },
+    {
+      id: 'tea',
+      title: 'Industrial Tea',
+      description:
+        'Bulk leaf and cut tea for blending houses, beverage manufacturers, and private-label packers. Origin, grade, and cut selected against your cup profile and extraction parameters, then locked under forward container contracts.',
+      chips: ['Black', 'Green', 'Oolong', 'CTC / Orthodox', 'FCL Only'],
+      tag: 'Bulk Wholesale',
+      cta: 'Request FCL Quote',
+      href: '#contact',
+    },
+    {
+      id: 'cacao',
+      title: 'Cacao Derivatives',
+      description:
+        'Single-origin Filipino cacao across three technical pillars — powder, butter, and liquor — with verified analytical parameters for industrial chocolate and specialty beverage lines. Specs, samples, and pilot runs precede mass production.',
+      chips: [
+        'Cocoa Powder',
+        'Cocoa Butter',
+        'Cocoa Liquor',
+        'Third-Party QC',
+        'FCL Only',
+      ],
+      tag: 'Cocoa Runway',
+      cta: 'Request FCL Quote',
+      href: '#contact',
+    },
+    {
+      id: 'coconut',
+      title: 'Coconut',
+      description:
+        'Wholesale sourcing across the Filipino coconut belt — oil, dried, and concentrate formats contracted at industrial pricing tiers against your refining and formulation specs, at 20ft / 40ft container scale.',
+      chips: [
+        'Copra',
+        'Virgin Coconut Oil',
+        'Desiccated',
+        'Water Concentrate',
+        'FCL Only',
+      ],
+      tag: 'Bulk Wholesale',
+      cta: 'Request FCL Quote',
+      href: '#contact',
+    },
+    {
+      id: 'seed-oils',
+      title: 'Seed Oils',
+      description:
+        'Crude and refined edible oils in flexitank or drummed FCL format, specified against free fatty acid, peroxide value, and colour thresholds for industrial food processing.',
+      chips: ['Sunflower', 'Soybean', 'Palm', 'Refined / Crude', 'FCL Only'],
+      tag: 'Bulk Wholesale',
+      cta: 'Request FCL Quote',
+      href: '#contact',
+    },
+    {
+      id: 'rice',
+      title: 'Rice',
+      description:
+        'Milled rice contracted by grain length, broken percentage, and moisture tolerance — for repackers, foodservice distributors, and industrial processing lines, shipped as Full Container Loads only.',
+      chips: ['Long Grain', 'Jasmine', 'Parboiled', 'Broken Grades', 'FCL Only'],
+      tag: 'Bulk Wholesale',
+      cta: 'Request FCL Quote',
+      href: '#contact',
+    },
+    {
+      id: 'pasta',
+      title: 'Pasta',
+      description:
+        'Durum semolina pasta in bulk and retail-ready formats, including private-label production runs specified to your cut, packaging, and cooking-tolerance requirements under back-to-back factory contracts.',
+      chips: [
+        'Durum Semolina',
+        'Short Cut',
+        'Long Cut',
+        'Private Label',
+        'FCL Only',
+      ],
+      tag: 'Bulk Wholesale',
+      cta: 'Request FCL Quote',
+      href: '#contact',
+    },
+    {
+      id: 'canned',
+      title: 'Canned Goods',
+      description:
+        'Shelf-stable canned production from audited facilities — brine, oil, and sauce packs specified by can format, drained weight, and label programme, with dual third-party QC before shipment.',
+      chips: ['Vegetables', 'Fruit', 'Fish', 'Legumes', 'FCL Only'],
+      tag: 'Bulk Wholesale',
+      cta: 'Request FCL Quote',
+      href: '#contact',
+    },
+    {
+      id: 'dry-goods',
+      title: 'General Dry Food',
+      description:
+        'The broader dry-goods channel — staples and dry ingredients sourced through authorized suppliers only, contracted at container scale against your technical specification and documentation checklist.',
+      chips: ['Pulses', 'Flours', 'Sugar', 'Dry Mixes', 'FCL Only'],
+      tag: 'Bulk Wholesale',
+      cta: 'Request FCL Quote',
+      href: '#contact',
+    },
+  ],
+  contact: {
+    sectionLabel: 'Institutional Procurement Inquiry',
+    title: 'Qualify Your',
+    titleHighlight: 'Agri-Food Engagement',
+    subtitle:
+      'Submit a structured procurement profile across our nine-category portfolio. Qualified accounts receive a container-aligned commercial brief and access to the staged verification pipeline.',
+    benefits: [
+      'Nine dry and bulk categories under one FCL operating model',
+      'Direct factory pricing — no inventory markup or holding costs',
+      'Staged verification: specs & certs, samples, pilot batch, mass production',
+      'Third-party QC and ALL RISK cargo insurance on every contracted shipment',
+    ],
+    emailCardLabel: 'Direct agri-food procurement contact',
+    copy: 'Copy',
+    copied: 'Copied',
+    categorySectionTitle: 'Portfolio Categories',
+    categorySectionDesc:
+      'Select the category line(s) you are evaluating. Leave blank if you would like a Pellexa recommendation.',
+    categoryNotePlaceholder:
+      'Notes on category preference, grade, or open questions…',
+  },
+  operatingModel: {
+    sectionLabel: 'Operating Model',
+    title: 'How Pellexa Executes Agri-Food Supply',
+    subtitle:
+      'A fixed B2B process from first inquiry to contracted container loads — FCL-only, third-party verified, and commercially mirrored between client and factory.',
+    stages: [
+      {
+        label: '01',
+        title: 'FCL Volume Floor',
+        body: 'Every engagement runs at Full Container Load volumes and above — 20ft and 40ft maritime containers. We do not offer LCL, sub-container, or low-MOQ entries.',
+      },
+      {
+        label: '02',
+        title: 'Staged Verification Pipeline',
+        body: 'Technical specifications and certificates, then physical samples, then a pilot batch, then mass production. Each gate must clear before the next stage is released.',
+      },
+      {
+        label: '03',
+        title: 'Legal & Commercial Framework',
+        body: 'NCNDA first, then back-to-back contracts with payment terms mirrored between client and factory — typically 70/30, or 100% advance where the facility requires it.',
+      },
+      {
+        label: '04',
+        title: 'Third-Party QC & Insurance',
+        body: 'Two standard independent inspections: pre-production and pre-shipment at packing. Cargo is covered by ALL RISK insurance placed through a third-party insurer.',
+      },
+      {
+        label: '05',
+        title: 'Shipping Terms — CIF or DDP',
+        body: 'Maritime shipments are coordinated under CIF or DDP terms depending on your import-license setup and local importer partners. Freight moves via recognized forwarders; Pellexa is not the freight forwarder, customs broker, or importer of record.',
+      },
+    ],
+  },
+  disclaimer: {
+    title: 'Operational Scope',
+    body: 'Pellexa is a sourcing, quality-control, and supply-chain management partner. We are not a freight forwarder, customs broker, or importer of record.',
+    points: [
+      'Import is executed under your import license, or through a local importer partner when you are not the importer of record.',
+      "Maritime shipments are coordinated under CIF or DDP terms depending on import-license setup and local importer partners; freight moves via recognized forwarders or the supplier's forwarder.",
+      'Customs clearance is handled by a licensed customs broker — never by Pellexa.',
+      'Quality control is performed on-site by an independent third party — two standard inspections, at production start and at packing.',
+      'Cargo is covered by ALL RISK insurance placed through a third-party insurer.',
+      'All categories operate strictly at Full Container Load volumes and above — 20ft / 40ft maritime only.',
+    ],
+  },
+}
+
 export const parentEn: ParentContent = {
-  meta: { title: 'Pellexa — Strategic Technology Solutions' },
+  meta: { title: 'Pellexa — Strategic B2B Sourcing, QC & Supply Chain Management' },
   nav: {
     links: [
       { label: 'Solutions', href: '#solutions' },
@@ -221,12 +422,12 @@ export const parentEn: ParentContent = {
     cta: 'Get in Touch',
   },
   hero: {
-    badge: 'Strategic Technology Partner',
+    badge: 'Strategic B2B Sourcing & Supply Chain Partner',
     headlineTop: 'Your Bridge to',
     headlineHighlight: 'World-Class',
-    headlineBottom: 'Technology Solutions',
+    headlineBottom: 'Sourcing & Supply Chains',
     subtitle:
-      'Pellexa connects Tier-1 global manufacturers with your market. From precision LED displays to emerging technology verticals — we handle sourcing, logistics, and local implementation so you don\'t have to.',
+      'Pellexa specializes in B2B sourcing, third-party quality control, and international supply chain management. We connect verified global manufacturers with your market and lower your procurement and import costs through a structured, calculated process.',
     cta1: 'Explore Our Solutions',
     cta2: 'Get in Touch',
   },
@@ -234,19 +435,24 @@ export const parentEn: ParentContent = {
     sectionLabel: 'Our Verticals',
     title: 'Solutions Portfolio',
     subtitle:
-      'Each vertical is backed by dedicated Tier-1 manufacturing partners, optimized supply chains, and local expertise.',
+      'Each vertical is backed by dedicated Tier-1 manufacturing partners, a structured verification process, and third-party quality control.',
     ledTitle: 'Pellexa LED',
     ledDescription:
-      'Custom LED display solutions — indoor, outdoor, rental, and event installations. Precision-manufactured by our engineering partner, with last-mile delivery and professional installation.',
+      'Custom LED display solutions — indoor, outdoor, rental, and events — precision-manufactured by our engineering partner, with dynamic project-based order minimums. Pellexa does not perform installations: on request we can refer vetted local installation contractors, and any installation is contracted, executed, and warranted directly between the client and that contractor.',
     foodTitle: 'Pellexa Agri-Food',
     foodDescription:
-      'Precision-sourced global agri-food procurement, specialty raw materials, and agricultural supply chains — direct from certified facilities to enterprise markets.',
+      'Bulk agri-food sourcing — matcha, industrial tea, cacao, coconut, seed oils, rice, pasta, canned and dry goods — direct from authorized facilities, at Full Container Load (FCL) volumes and above.',
     generalTitle: 'Pellexa General Sourcing',
     generalDescription:
-      'Opportunistic mass-manufacturing channel direct from Asia production hubs — custom boxes, furniture, toys, and lifestyle accessories engineered for global brands, luxury hotels, and large enterprise accounts. Order volumes are scoped per category and industry sector — consult our sourcing team to engineer a custom factory-run profile.',
-    generalCategories: ['Custom Boxes', 'Furniture', 'Toys', 'Lifestyle'],
+      'Industrial and consumer sourcing from audited Asia manufacturing partners — heavy equipment and machinery, building and construction materials, custom acrylic and TCG enclosures, and luxury brand packaging. FCL-scale minimums for standard industrial lines; project-based dynamic MOQ for specialized/custom fabrication lines (such as custom acrylic enclosures and luxury brand packaging). Consult our sourcing team to scope your order.',
+    generalCategories: [
+      'Heavy Equipment & Machinery',
+      'Building & Construction Materials',
+      'Custom Acrylic & TCG Enclosures',
+      'Luxury Brand Packaging',
+    ],
     generalOriginLabel: 'Asia Manufacturing Hubs',
-    generalMOQBadge: 'Variable MOQ — Project Consultation Required',
+    generalMOQBadge: 'FCL Minimums — Dynamic MOQ for Specialized Lines',
     generalTargetLabel: 'Enterprise & Luxury Accounts',
     learnMore: 'Learn More',
     newVertical: 'New Vertical',
@@ -255,29 +461,29 @@ export const parentEn: ParentContent = {
   about: {
     sectionLabel: 'The Pellexa Advantage',
     titleMain: 'The Strategic Bridge Between',
-    titleFaded: 'Global Engineering & Local Execution',
+    titleFaded: 'Verified Global Factories & Your Market',
     subtitle:
-      "Pellexa is the nexus that connects world-class manufacturing capabilities with the unique requirements of your market. We don't just import products — we deliver complete, locally managed solutions.",
+      'Pellexa connects world-class manufacturing with your market through a structured, transparent process. We are not a freight forwarder, customs broker, or importer of record — we structure, verify, and coordinate every transaction under NCNDA and back-to-back contract frameworks.',
     pillars: [
       {
-        title: 'Tier-1 Manufacturing Partners',
+        title: 'Verified Suppliers & Contract Framework',
         description:
-          'We source exclusively from ISO-certified, globally recognized factories with 28+ years of engineering heritage.',
+          'Authorized, certified factories with full supplier disclosure — secured by NCNDA, back-to-back contracts, and structured payment terms (70/30 or 100% advance).',
       },
       {
-        title: 'End-to-End Logistics',
+        title: 'Supply Chain & Logistics Coordination',
         description:
-          'International shipping, customs clearance, and last-mile delivery — with real-time tracking on every shipment.',
+          'Logistics coordination executed under your import license or via local importer partners — with blind shipping available for enterprise buyers.',
       },
       {
-        title: 'Quality Assurance',
+        title: 'Third-Party QC & ALL RISK Insurance',
         description:
-          'Full manufacturing facility QC, pre-shipment inspection, and comprehensive warranties backed by local technician support.',
+          'Independent on-ground QC (two standard inspections: pre-production and packing/pre-shipment) plus comprehensive ALL RISK cargo insurance via 3rd-party insurers.',
       },
       {
-        title: 'Local Implementation',
+        title: 'Staged Verification Pipeline',
         description:
-          'On-ground teams for professional installation, calibration, training, and ongoing maintenance.',
+          'Technical specs and certificates approval, physical samples, pilot batch when needed — moving to mass production only after full sign-off.',
       },
     ],
   },
@@ -289,12 +495,25 @@ export const parentEn: ParentContent = {
     cta1: 'Send Us an Email',
     cta2: 'LED Inquiry Form',
   },
+  scopeDisclaimer: {
+    title: 'Operational Scope',
+    body: 'Pellexa is a sourcing, quality-control, and supply-chain management partner. We are not a freight forwarder, customs broker, or importer of record.',
+    points: [
+      'Import is executed under your import license, or through a local importer partner when you are not the importer of record.',
+      "Maritime shipments are coordinated under CIF or DDP terms depending on import-license setup and local importer partners; freight moves via recognized forwarders or the supplier's forwarder.",
+      'Customs clearance is handled by a licensed customs broker — never by Pellexa.',
+      'Quality control is performed on-site by an independent third party — two standard inspections, at production start and at packing.',
+      'Cargo is covered by ALL RISK insurance placed through a third-party insurer.',
+      'FCL-scale minimums apply to standard industrial lines; specialized/custom fabrication lines (such as custom acrylic enclosures and luxury brand packaging) carry project-based dynamic MOQs confirmed at consultation.',
+    ],
+  },
   footer: {
     tagline:
-      'The strategic nexus between world-class global engineering and local implementation.',
+      'The strategic nexus between world-class manufacturing and structured, verified B2B supply chains.',
     copyright: '© {year} Pellexa. All rights reserved.',
     privacy: 'Privacy',
     terms: 'Terms',
   },
   cocoa: parentEnCocoa,
+  food: parentEnFood,
 }

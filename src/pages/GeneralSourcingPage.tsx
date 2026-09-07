@@ -4,38 +4,41 @@ import { Link } from 'react-router-dom'
 import {
   Globe2,
   Info,
-  Boxes,
-  Sofa,
-  ToyBrick,
-  ShoppingBag,
+  Wrench,
+  HardHat,
   Package,
+  Gem,
   ArrowRight,
   Mail,
-  ExternalLink,
 } from 'lucide-react'
 import ParentNavbar from '../components/parent/ParentNavbar'
 import ParentFooter from '../components/parent/ParentFooter'
+import SourcingProcess from '../components/parent/SourcingProcess'
+import ScopeDisclaimer from '../components/parent/ScopeDisclaimer'
+import MailtoFallback from '../components/parent/MailtoFallback'
 import { LangProvider } from '../context/LangContext'
 
 /**
- * Pellexa General Sourcing — dedicated vertical page (/sourcing).
+ * Pellexa General Sourcing — dedicated vertical page (`/sourcing`).
  *
- * Cascades from the parent core theme profile (.theme-parent → Sky Blue +
- * Bronze runway). All chrome resolves through the locked Tier 1–3 tokens;
- * no per-page theme scope.
+ * B2B sourcing from audited Asia manufacturing partners. Pellexa structures,
+ * verifies, and coordinates — it does not manufacture in-house.
  *
  * Structure:
  *   1. ParentNavbar
- *   2. Hero: Asia-hub eyebrow, headline, 4-cell category grid, MOQ badge
- *   3. Featured "Premium Acrylic Sourcing" card (Link → /acrylic)
- *   4. Inline #contact section (mailto handoff so ParentNavbar CTA scrolls)
- *   5. ParentFooter
+ *   2. Hero: origin eyebrow, dual-MOQ badge, four operating-model categories
+ *   3. Featured acrylic card (Link → /acrylic)
+ *   4. Five-stage partner production pipeline
+ *   5. Operational-scope disclaimer
+ *   6. Inline #contact mailto + copy fallback
+ *   7. ParentFooter
  */
 
-const PAGE_TITLE = 'Pellexa General Sourcing — Asia Manufacturing Hub'
+const PAGE_TITLE = 'Pellexa General Sourcing — Asia Manufacturing Partners'
 const PAGE_DESCRIPTION =
-  'Opportunistic mass-manufacturing channel direct from Asia production hubs. Custom boxes, furniture, toys, and lifestyle accessories. High MOQ — minimum 1,000 units. Enterprise & luxury accounts only.'
-const EMAIL = 'sourcing@pellexa.com'
+  'Industrial and consumer sourcing from audited Asia manufacturing partners — heavy equipment and machinery, building and construction materials, custom acrylic and TCG enclosures, and luxury brand packaging. FCL-scale minimums for standard industrial lines; project-based dynamic MOQ for specialized/custom fabrication lines. Enterprise and luxury accounts.'
+const EMAIL = 'pelle@pellexa.com'
+const MOQ_BADGE = 'FCL Minimums — Dynamic MOQ for Specialized Lines'
 
 function setMeta(property: string, content: string) {
   const el =
@@ -45,10 +48,10 @@ function setMeta(property: string, content: string) {
 }
 
 const categories = [
-  { icon: Boxes, label: 'Custom Boxes', tag: 'Packaging' },
-  { icon: Sofa, label: 'Furniture', tag: 'Hospitality / Retail' },
-  { icon: ToyBrick, label: 'Toys', tag: 'Promotional / Licensed' },
-  { icon: ShoppingBag, label: 'Lifestyle Accessories', tag: 'Branded / Premium' },
+  { icon: Wrench, label: 'Heavy Equipment & Machinery', tag: 'Industrial / FCL-scale' },
+  { icon: HardHat, label: 'Building & Construction Materials', tag: 'Industrial / FCL-scale' },
+  { icon: Package, label: 'Custom Acrylic & TCG Enclosures', tag: 'Specialized / dynamic MOQ' },
+  { icon: Gem, label: 'Luxury Brand Packaging', tag: 'Specialized / dynamic MOQ' },
 ] as const
 
 function Hero() {
@@ -82,7 +85,7 @@ function Hero() {
         >
           <Globe2 size={14} className="text-brand-secondary-400" />
           <span className="text-xs font-medium tracking-wide text-brand-secondary-400 uppercase">
-            Asia Manufacturing Hubs
+            Audited Asia Manufacturing Partners
           </span>
         </motion.div>
 
@@ -104,9 +107,9 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
           className="mx-auto max-w-2xl text-base sm:text-lg text-ink-muted leading-relaxed mb-10"
         >
-          Opportunistic mass-manufacturing channel. Direct from key Asia
-          production hubs to global brands, luxury hotels, and enterprise
-          accounts.
+          B2B sourcing from audited Tier-1 and specialized partner facilities
+          across key Asia production hubs. We structure, verify, and coordinate
+          — we do not manufacture in-house.
         </motion.p>
 
         <motion.div
@@ -117,7 +120,7 @@ function Hero() {
         >
           <Info size={14} className="text-brand-secondary-300 shrink-0" />
           <span className="text-xs font-bold tracking-widest uppercase text-brand-secondary-300">
-            Variable MOQ — Project Consultation Required
+            {MOQ_BADGE}
           </span>
         </motion.div>
 
@@ -180,9 +183,10 @@ function AcrylicFeature() {
                   Premium Acrylic Sourcing
                 </h3>
                 <p className="text-sm text-ink-dim leading-relaxed">
-                  Factory-direct premium acrylic enclosures, display cases,
-                  luxury retail boxes, and heavy-duty storage containers —
-                  custom-engineered for high-margin verticals.
+                  Custom acrylic and TCG enclosures sourced from specialized
+                  fabrication partners — display cases, collector protection,
+                  and luxury retail boxes — scoped under project-based dynamic
+                  MOQ, with staged sampling and third-party QC.
                 </p>
               </div>
               <div className="flex items-center gap-2 text-sm font-semibold text-brand-400 group-hover:gap-3 transition-all duration-300 shrink-0">
@@ -200,6 +204,7 @@ function AcrylicFeature() {
 function ContactPanel() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
+  const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent('Pellexa General Sourcing — Procurement Inquiry')}`
 
   return (
     <section id="contact" className="relative py-16 sm:py-24 bg-canvas-elevated/50">
@@ -217,20 +222,17 @@ function ContactPanel() {
           </h2>
           <p className="text-ink-dim text-base leading-relaxed mb-7 max-w-xl mx-auto">
             Submit volume profile, target market, and category preference.
-            Qualified accounts receive a tier-aligned commercial brief within
-            2 business days.
+            Standard industrial lines run at FCL-scale minimums; specialized
+            fabrication is scoped at a project-based dynamic MOQ. Qualified
+            accounts receive a tier-aligned commercial brief within 2 business
+            days.
           </p>
 
-          <div className="inline-flex flex-col sm:flex-row items-center gap-3">
-            <a
-              href={`mailto:${EMAIL}?subject=${encodeURIComponent('Pellexa General Sourcing — Procurement Inquiry')}`}
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-brand-400 px-7 py-3.5 text-sm font-semibold text-canvas-base shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40 transition-all duration-300 hover:scale-[1.03]"
-            >
-              Request Sourcing Brief
-              <ExternalLink size={14} />
-            </a>
-            <span className="text-xs text-silver-trace font-mono select-all">{EMAIL}</span>
-          </div>
+          <MailtoFallback
+            email={EMAIL}
+            mailtoHref={mailtoHref}
+            ctaLabel="Request Sourcing Brief"
+          />
         </motion.div>
       </div>
     </section>
@@ -253,9 +255,11 @@ export default function GeneralSourcingPage() {
     <LangProvider>
       <div className="min-h-screen bg-canvas-base text-white antialiased">
         <ParentNavbar />
-        <main>
+        <main dir="ltr" lang="en">
           <Hero />
           <AcrylicFeature />
+          <SourcingProcess />
+          <ScopeDisclaimer />
           <ContactPanel />
         </main>
         <ParentFooter />

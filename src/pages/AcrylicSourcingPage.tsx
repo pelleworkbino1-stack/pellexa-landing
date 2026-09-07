@@ -6,44 +6,41 @@ import {
   Gem,
   Container,
   Mail,
-  ExternalLink,
   Check,
-  Factory,
+  Info,
 } from 'lucide-react'
 import ParentNavbar from '../components/parent/ParentNavbar'
 import ParentFooter from '../components/parent/ParentFooter'
+import SourcingProcess from '../components/parent/SourcingProcess'
+import ScopeDisclaimer from '../components/parent/ScopeDisclaimer'
+import MailtoFallback from '../components/parent/MailtoFallback'
 import { LangProvider } from '../context/LangContext'
 
 /**
- * Pellexa Global Acrylic Supply Infrastructure — dedicated page (/acrylic).
+ * Pellexa Acrylic Sourcing — dedicated page (`/acrylic`).
  *
  * Cascades from the parent core theme profile (.theme-parent → Sky Blue +
- * Bronze runway). The page leans heavily on the silver-anchor industrial
- * chrome to project end-to-end macro-supplier authority:
- *   - Silver-anchor hairline borders on every product card
- *   - Bronze structural eyebrows + spec labels
- *   - Sky Blue reserved for primary action surfaces (CTA, focus, hover)
- *
- * Positioning contract: Pellexa is framed as a comprehensive macro-supplier
- * with zero artificial ceilings. Every technical spec is rendered as an
- * open baseline that drives the visitor into a consultation rather than a
- * catalog click. Layout / motion / token system are unchanged — only the
- * data-text strings on this page were rewritten for the macro-supplier pivot.
+ * Bronze runway). Positioning: Pellexa is a B2B sourcing partner. Acrylic is
+ * produced at audited specialized fabrication partners, then verified through
+ * staged sampling and dual third-party QC. Pellexa does not own fabrication
+ * plants and is not the freight forwarder, customs broker, or importer of record.
  *
  * Structure:
  *   1. ParentNavbar
- *   2. Hero (macro-supplier identity + verbatim scope statement)
- *   3. Product grid: 4 capability surfaces — bespoke fabrications, never a catalog
- *   4. Capability spec table — every parameter rendered as an open baseline
- *   5. Consultation intake panel (id="contact", mailto handoff)
- *   6. ParentFooter
+ *   2. Hero (partner-sourced identity + dual-MOQ badge)
+ *   3. Product grid: 4 capability surfaces quoted against partner capability
+ *   4. Capability spec table — partner baselines, confirmed at consultation
+ *   5. Five-stage partner production pipeline
+ *   6. Operational-scope disclaimer
+ *   7. Consultation intake panel (id="contact", mailto + copy fallback)
+ *   8. ParentFooter
  */
 
-const PAGE_TITLE =
-  'Pellexa Global Acrylic Supply Infrastructure — Custom Manufacturing'
+const PAGE_TITLE = 'Pellexa Acrylic Sourcing — Partner Fabrication & QC'
 const PAGE_DESCRIPTION =
-  'Pellexa supplies all things acrylic across the board — custom retail boxes, TCG collectible armor, large-format architectural fixtures, and industrial components. Any layout, any form factor, manufactured directly to order.'
-const EMAIL = 'acrylic@pellexa.com'
+  'Custom acrylic sourced from audited specialized fabrication partners — retail boxes, TCG collectible protection, display architecture, and industrial components. Project-based dynamic MOQ as a specialized fabrication line; FCL-scale minimums for standard industrial lines. Staged sampling, dual third-party QC, back-to-back contracts.'
+const EMAIL = 'pelle@pellexa.com'
+const MOQ_BADGE = 'FCL Minimums — Dynamic MOQ for Specialized Lines'
 
 function setMeta(property: string, content: string) {
   const el =
@@ -58,15 +55,15 @@ const products = [
     tag: 'Custom Retail & TCG',
     title: 'Custom Acrylic Boxes',
     description:
-      'Bespoke acrylic enclosures fabricated to any client dimension or aesthetic brief — premium retail packaging, branded gift architecture, and a deep specialization in TCG & Pokémon ETB cases, booster box protectors, graded card displays, and luxury collector formats. Zero catalog constraints.',
-    highlights: ['Any Form Factor', 'TCG / ETB Engineered', 'Graded Slab Ready'],
+      'Partner-fabricated enclosures to client drawings — premium retail packaging, branded gift architecture, and a deep specialization in TCG & Pokémon ETB cases, booster box protectors, graded card displays, and luxury collector formats. Quoted against partner capability, not a fixed catalog.',
+    highlights: ['Any Form Factor', 'TCG / ETB', 'Partner-Fabricated'],
   },
   {
     icon: ShieldCheck,
     tag: 'Display & Gallery',
     title: 'Protective Display Architecture',
     description:
-      'High-clarity protective frameworks engineered for museums, private galleries, collector networks, brand showrooms, and any premium display footprint requiring tamper resistance, optical fidelity, and bespoke geometry. Built to the asset, not to a stock SKU.',
+      'High-clarity protective frameworks sourced for museums, private galleries, collector networks, brand showrooms, and premium display footprints requiring tamper resistance, optical fidelity, and bespoke geometry. UV-filter, anti-static, and tamper-resistant options per partner capability.',
     highlights: ['UV-Filtered', 'Anti-Static', 'Tamper-Resistant'],
   },
   {
@@ -74,15 +71,15 @@ const products = [
     tag: 'Luxury Retail & Brand',
     title: 'Luxury Retail Enclosures',
     description:
-      'Premium retail display fixtures engineered around the merchandise — jewelry, watches, fragrance, hospitality fixtures, flagship store moments, and any high-margin brand environment that demands a fully tailored fabrication rather than an off-the-shelf cabinet.',
-    highlights: ['Mirror-Polish', 'LED-Integrated', 'Modular at Any Scale'],
+      'Premium retail display fixtures specified around the merchandise — jewelry, watches, fragrance, hospitality fixtures, and flagship store moments — produced at partner facilities rather than as an off-the-shelf cabinet.',
+    highlights: ['Mirror-Polish', 'LED-Integrated', 'Modular'],
   },
   {
     icon: Container,
     tag: 'Architectural & Industrial',
     title: 'Architectural & Industrial Components',
     description:
-      'Large-format architectural fixtures, custom partitioning, signage substrates, lab and warehouse infrastructure, and comprehensive industrial acrylic components engineered to your load dynamics, regulatory environment, and operational cycle. Any form, any scale, any sector.',
+      'Large-format architectural fixtures, custom partitioning, signage substrates, lab and warehouse infrastructure, and industrial acrylic components engineered at partner facilities to your load dynamics, regulatory environment, and operational cycle.',
     highlights: ['Large-Format', 'Load-Engineered', 'Sector-Agnostic'],
   },
 ] as const
@@ -91,30 +88,41 @@ const techSpecs = [
   {
     label: 'Material Thickness',
     value:
-      'Fully Variable | Engineered to Load Dynamics (Up to 30mm+ and multi-layer)',
+      'Variable — specified to load dynamics (including 30mm+ / multi-layer where the partner facility supports it)',
   },
   {
     label: 'Sheet Format',
-    value: 'Completely Unrestrictive | CNC / Laser Cut to Custom Dimensions',
+    value: 'CNC / laser cut to custom dimensions at the partner facility',
   },
   {
     label: 'Optical Clarity',
-    value: '92% Light Transmission (Premium-Grade Virgin PMMA)',
+    value:
+      'Up to 92% light transmission (premium-grade virgin PMMA, grade confirmed per lot)',
   },
-  { label: 'Tolerance', value: 'Up to ±0.1mm Micro-Precision Engineering' },
+  {
+    label: 'Tolerance',
+    value:
+      'Down to ±0.1mm where the partner process allows — confirmed against drawings',
+  },
   {
     label: 'Finishes',
     value:
-      'Full Spectrum (Diamond-Polish, Matte-Frosted, Custom Tinted, Mirror-Backing)',
+      'Diamond-polish, matte-frosted, custom tint, mirror-backing — subject to partner capability',
   },
   {
     label: 'Lead Time',
-    value: 'Mapped to Project Brief — Rush Tracks Available on Consultation',
+    value:
+      'Mapped to project brief and partner load — rush tracks only if the facility can commit',
   },
-  { label: 'MOQ Tiers', value: 'Adaptive Runs — Formulated Around Project Footprint' },
+  {
+    label: 'MOQ Tiers',
+    value:
+      'Project-based dynamic MOQ (specialized/custom fabrication line). Standard industrial lines remain FCL-scale.',
+  },
   {
     label: 'Compliance',
-    value: 'REACH / RoHS / FDA + Sector-Specific Regulatory Tracks (on consultation)',
+    value:
+      'REACH / RoHS / FDA and sector tracks where the partner holds valid certification — verified in the document pack, not assumed',
   },
 ] as const
 
@@ -147,9 +155,9 @@ function Hero() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
           className="inline-flex items-center gap-2 rounded-full bg-brand-secondary-500/8 border border-brand-secondary-400/20 px-4 py-1.5 mb-8 backdrop-blur-sm shadow-[0_0_40px_rgba(var(--brand-secondary-glow),0.15)]"
         >
-          <Factory size={14} className="text-brand-secondary-400" />
+          <ShieldCheck size={14} className="text-brand-secondary-400" />
           <span className="text-xs font-medium tracking-wide text-brand-secondary-400 uppercase">
-            Pellexa Macro Acrylic Supplier
+            Sourced From Audited Fabrication Partners
           </span>
         </motion.div>
 
@@ -159,9 +167,9 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] as const }}
           className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-tight text-white mb-6"
         >
-          Global Acrylic Supply{' '}
+          Acrylic Sourcing{' '}
           <span className="bg-gradient-to-r from-brand-300 via-brand-400 to-brand-500 bg-clip-text text-transparent">
-            Infrastructure
+            Partner Fabrication
           </span>
         </motion.h1>
 
@@ -169,13 +177,26 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
-          className="mx-auto max-w-2xl text-base sm:text-lg text-ink-muted leading-relaxed"
+          className="mx-auto max-w-2xl text-base sm:text-lg text-ink-muted leading-relaxed mb-8"
         >
-          We specialize in all things acrylic across the board—from custom
-          retail boxes and TCG collectible armor to large-format architectural
-          fixtures and comprehensive industrial components. Any layout, any
-          form factor, manufactured directly to order.
+          We source custom acrylic across retail, TCG, display, architectural,
+          and industrial briefs from audited specialized manufacturing partners.
+          Any layout and form factor is quoted against partner capability —
+          Pellexa structures the brief, verification pipeline, and QC. We do not
+          own fabrication plants.
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.45 }}
+          className="inline-flex items-center gap-2 rounded-md bg-brand-secondary-500/10 border-2 border-brand-secondary-400/40 px-4 py-2 shadow-[0_0_30px_rgba(var(--brand-secondary-glow),0.18)]"
+        >
+          <Info size={14} className="text-brand-secondary-300 shrink-0" />
+          <span className="text-xs font-bold tracking-widest uppercase text-brand-secondary-300">
+            {MOQ_BADGE}
+          </span>
+        </motion.div>
       </div>
     </section>
   )
@@ -198,7 +219,7 @@ function ProductGrid() {
             Capabilities Spectrum
           </span>
           <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">
-            All-Domain Acrylic Fabrication
+            Partner-Fabricated Acrylic, Quoted to Brief
           </h2>
         </motion.div>
 
@@ -269,7 +290,7 @@ function TechSpecs() {
             Engineering Capability Baselines
           </span>
           <h2 className="font-display font-bold text-2xl sm:text-3xl text-white leading-tight">
-            Open Parameters — Not a Catalog
+            Partner Parameters — Confirmed at Consultation
           </h2>
         </motion.div>
 
@@ -295,11 +316,11 @@ function TechSpecs() {
             ))}
           </dl>
           <p className="border-t border-brand-secondary-400/15 px-5 sm:px-7 py-4 text-xs sm:text-sm text-ink-dim italic leading-relaxed">
-            Every parameter above is an open baseline, not a ceiling. Material
-            grade, thickness, finish, dimensional envelope, run volume, and
-            lead time are formulated around your project's load dynamics,
-            regulatory environment, and brand brief during a direct
-            consultation with our acrylic engineering desk.
+            Every parameter above is a partner-capability baseline, not a
+            Pellexa-owned plant spec. Material, thickness, finish, envelope, run
+            volume, and lead time are confirmed during consultation against the
+            selected facility, then locked through drawings, samples, and dual
+            third-party QC.
           </p>
         </motion.div>
       </div>
@@ -345,7 +366,7 @@ function QuoteIntake() {
       '   Phone:  ',
       '',
       '—'.repeat(48),
-      'Submitted via Pellexa Acrylic project consultation intake.',
+      'Submitted via Pellexa Acrylic sourcing consultation.',
     ].join('\n'),
   )
 
@@ -367,9 +388,9 @@ function QuoteIntake() {
                 Acrylic Project Consultation
               </h3>
               <p className="text-sm text-ink-dim">
-                Open the consultation brief in your email client — our
-                engineering desk maps your physical, dimensional, and aesthetic
-                goals to a custom production track.
+                Open the consultation brief in your email client — we map your
+                physical, dimensional, and aesthetic goals onto a partner
+                production track.
               </p>
             </div>
           </div>
@@ -377,8 +398,8 @@ function QuoteIntake() {
           <ul className="space-y-2 mb-6 text-sm text-ink-muted">
             {[
               'Pre-filled consultation brief covering organization, capability surface, and project profile',
-              'Engineering desk response within 3 business days',
-              'Custom production track formulated to your project footprint — no catalog ceilings',
+              'Sourcing desk response within 3 business days',
+              'Partner production track scoped to your project footprint — no catalog SKU assumption',
             ].map((b) => (
               <li key={b} className="flex items-start gap-2.5">
                 <Check size={16} className="text-brand-400 mt-0.5 shrink-0" />
@@ -387,31 +408,13 @@ function QuoteIntake() {
             ))}
           </ul>
 
-          <div className="flex flex-col sm:flex-row gap-3 mb-5">
-            <a
-              href={`mailto:${EMAIL}?subject=${subject}&body=${body}`}
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 px-5 py-3.5 text-sm font-semibold text-canvas-base shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40 transition-all duration-300 hover:scale-[1.01]"
-            >
-              <ExternalLink size={16} />
-              Open Consultation Brief
-            </a>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl border border-silver-anchor/15 bg-silver-anchor/5 backdrop-blur-sm px-5 py-3.5 text-sm font-medium text-white hover:bg-silver-anchor/10 hover:border-silver-anchor/25 transition-all duration-300"
-            >
-              <Mail size={16} />
-              Email Direct
-            </a>
-          </div>
-
-          <div className="rounded-lg border border-silver-anchor/10 bg-canvas-overlay/30 px-4 py-3">
-            <p className="text-[11px] tracking-widest uppercase text-brand-secondary-400 font-semibold mb-1">
-              Consultation Channel
-            </p>
-            <p className="text-sm font-mono text-white select-all break-all">
-              {EMAIL}
-            </p>
-          </div>
+          <MailtoFallback
+            email={EMAIL}
+            mailtoHref={`mailto:${EMAIL}?subject=${subject}&body=${body}`}
+            ctaLabel="Open Consultation Brief"
+            secondaryHref={`mailto:${EMAIL}`}
+            secondaryLabel="Email Direct"
+          />
         </motion.div>
       </div>
     </section>
@@ -434,10 +437,12 @@ export default function AcrylicSourcingPage() {
     <LangProvider>
       <div className="min-h-screen bg-canvas-base text-white antialiased">
         <ParentNavbar />
-        <main>
+        <main dir="ltr" lang="en">
           <Hero />
           <ProductGrid />
           <TechSpecs />
+          <SourcingProcess />
+          <ScopeDisclaimer />
           <QuoteIntake />
         </main>
         <ParentFooter />

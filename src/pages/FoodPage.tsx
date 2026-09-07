@@ -1,18 +1,52 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import { Leaf, ArrowRight, Bean, TreePalm } from 'lucide-react'
+import {
+  Leaf,
+  ArrowRight,
+  Bean,
+  TreePalm,
+  CupSoda,
+  Droplets,
+  Wheat,
+  Utensils,
+  Container,
+  Boxes,
+  Info,
+} from 'lucide-react'
 import ParentNavbar from '../components/parent/ParentNavbar'
 import ParentFooter from '../components/parent/ParentFooter'
-import ParentContact from '../components/parent/ParentContact'
+import FoodContact from '../components/food/FoodContact'
+import OperationalDisclaimer from '../components/food/OperationalDisclaimer'
 import { LangProvider, useLang } from '../context/LangContext'
-import type { CocoaFamilyId } from '../markets/types'
+import type { FoodCategory, FoodCategoryId } from '../markets/types'
 
-const COCOA_FAMILY_CHIP: Record<CocoaFamilyId, string> = {
-  powder: 'Cocoa Powder',
-  butter: 'Cocoa Butter',
-  liquor: 'Cocoa Liquor',
+/**
+ * Icon assignment per portfolio category. Lives here rather than in the
+ * registry because `parent-en.ts` / `parent-he.ts` are pure `.ts` data modules
+ * and must not import React components. Keyed by the `FoodCategoryId` union so
+ * adding a category to the registry is a compile error until an icon is chosen.
+ */
+const CATEGORY_ICON: Record<FoodCategoryId, typeof Leaf> = {
+  matcha: Leaf,
+  tea: CupSoda,
+  cacao: Bean,
+  coconut: TreePalm,
+  'seed-oils': Droplets,
+  rice: Wheat,
+  pasta: Utensils,
+  canned: Container,
+  'dry-goods': Boxes,
 }
+
+/**
+ * Flagship lines that keep the cocoa-toned card treatment. Purely a visual
+ * hierarchy now — every card resolves to the same '#contact' anchor since the
+ * dedicated product-line routes were consolidated into this hub.
+ */
+const FEATURED: ReadonlySet<FoodCategoryId> = new Set<FoodCategoryId>([
+  'matcha',
+  'cacao',
+])
 
 function setMeta(property: string, content: string) {
   const el =
@@ -21,11 +55,14 @@ function setMeta(property: string, content: string) {
   if (el) el.setAttribute('content', content)
 }
 
-const HUB_TITLE = 'Pellexa Agri-Food — Sourcing Portfolio'
+const HUB_TITLE = 'Pellexa Agri-Food — Bulk B2B Food Sourcing Portfolio'
 const HUB_DESCRIPTION =
-  'Tiered global procurement for matcha, specialty ingredients, and high-consistency agri-food raw materials. Direct from certified facilities to enterprise markets.'
+  'Bulk B2B sourcing across matcha, industrial tea, cacao derivatives, coconut, seed oils, rice, pasta, canned goods, and general dry food. Direct from authorized facilities at Full Container Load volumes and above, with third-party QC and maritime shipping coordinated under CIF or DDP terms.'
 
 function HubHero() {
+  const { content } = useLang()
+  const food = content.food
+
   return (
     <section className="relative pt-32 pb-16 sm:pt-40 sm:pb-20 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -56,7 +93,7 @@ function HubHero() {
         >
           <Leaf size={14} className="text-brand-400" />
           <span className="text-xs font-medium tracking-wide text-brand-secondary-400 uppercase">
-            Pellexa Agri-Food
+            {food.sectionLabel}
           </span>
         </motion.div>
 
@@ -70,10 +107,7 @@ function HubHero() {
           }}
           className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-tight text-white mb-6"
         >
-          Sourcing Portfolio{' '}
-          <span className="bg-gradient-to-r from-brand-300 via-brand-400 to-brand-500 bg-clip-text text-transparent">
-            Hub
-          </span>
+          {food.title}
         </motion.h1>
 
         <motion.p
@@ -84,14 +118,127 @@ function HubHero() {
             delay: 0.3,
             ease: [0.22, 1, 0.36, 1] as const,
           }}
-          className="mx-auto max-w-2xl text-base sm:text-lg text-ink-muted leading-relaxed"
+          className="mx-auto max-w-2xl text-base sm:text-lg text-ink-muted leading-relaxed mb-8"
         >
-          Pellexa's Agri-Food division operates dedicated procurement product
-          lines across matcha and specialty raw materials. Select a product line
-          to review tier portfolios, certifications, and supply protocols.
+          {food.subtitle}
         </motion.p>
+
+        {/* Structural volume gate for Agri-Food. FCL-only applies to this
+            vertical; /sourcing uses a dual-MOQ badge (FCL for standard
+            industrial lines, dynamic MOQ for specialized fabrication). */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.45 }}
+          className="inline-flex items-center gap-2 rounded-md bg-brand-secondary-500/10 border-2 border-brand-secondary-400/40 px-4 py-2 shadow-[0_0_30px_rgba(var(--brand-secondary-glow),0.18)]"
+        >
+          <Info size={14} className="text-brand-secondary-300 shrink-0" />
+          <span className="text-xs font-bold tracking-widest uppercase text-brand-secondary-300">
+            {food.fclBadge}
+          </span>
+        </motion.div>
       </div>
     </section>
+  )
+}
+
+/**
+ * One portfolio card. All nine resolve to the page-local '#contact' anchor
+ * served by `FoodContact` below; the flagship lines differ only in chrome.
+ */
+function CategoryCard({
+  category,
+  delay,
+  inView,
+}: {
+  category: FoodCategory
+  delay: number
+  inView: boolean
+}) {
+  const Icon = CATEGORY_ICON[category.id]
+  const featured = FEATURED.has(category.id)
+
+  const body = (
+    <>
+      <div
+        className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 ${
+          featured
+            ? 'bg-brand-secondary-500/15 border border-brand-secondary-400/20'
+            : 'bg-brand-500/10'
+        }`}
+      >
+        <Icon
+          size={24}
+          className={featured ? 'text-brand-secondary-300' : 'text-brand-400'}
+        />
+      </div>
+
+      <span
+        className={`inline-block rounded-full bg-brand-secondary-500/10 border px-2.5 py-0.5 text-[10px] uppercase mb-3 ${
+          featured
+            ? 'border-brand-secondary-400/20 font-bold tracking-widest text-brand-secondary-300'
+            : 'border-brand-secondary-400/15 font-semibold tracking-wider text-brand-secondary-400'
+        }`}
+      >
+        {category.tag}
+      </span>
+
+      <h3
+        className={`font-display font-semibold text-xl text-white mb-3 transition-colors ${
+          featured
+            ? 'group-hover:text-brand-secondary-300'
+            : 'group-hover:text-brand-400'
+        }`}
+      >
+        {category.title}
+      </h3>
+
+      <p className="text-sm text-ink-dim leading-relaxed mb-5">
+        {category.description}
+      </p>
+
+      <div className="flex flex-wrap gap-1.5 mb-5">
+        {category.chips.map((chip) => (
+          <span
+            key={chip}
+            className={`inline-block rounded-full bg-silver-anchor/5 border px-2.5 py-0.5 text-[11px] text-ink-muted ${
+              featured
+                ? 'border-brand-secondary-400/15'
+                : 'border-silver-anchor/10'
+            }`}
+          >
+            {chip}
+          </span>
+        ))}
+      </div>
+
+      <div
+        className={`flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all duration-300 ${
+          featured ? 'text-brand-secondary-300' : 'text-brand-400'
+        }`}
+      >
+        {category.cta}
+        <ArrowRight size={16} className="rtl:rotate-180" />
+      </div>
+    </>
+  )
+
+  const className = `group block relative rounded-2xl p-8 transition-all duration-500 h-full ${
+    featured
+      ? 'border border-brand-secondary-400/20 bg-brand-secondary-500/[0.04] hover:border-brand-secondary-400/40 hover:bg-brand-secondary-500/[0.08]'
+      : 'border border-silver-anchor/5 bg-canvas-overlay/30 hover:border-brand-500/30'
+  }`
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const }}
+    >
+      <a href={category.href} className={className}>
+        {body}
+      </a>
+    </motion.div>
   )
 }
 
@@ -100,156 +247,18 @@ function HubGrid() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
-  // Derive the Cacao card's family chips by collapsing the registry's grade
-  // catalog down to its unique family pillars. Keeps the card data-driven
-  // against `parent-en.ts` / `parent-he.ts` so any future grade addition
-  // surfaces automatically as a new chip — no card edit required.
-  const cocoaFamilyChips = useMemo(() => {
-    const seen = new Set<CocoaFamilyId>()
-    const chips: { id: CocoaFamilyId; label: string }[] = []
-    for (const g of content.cocoa.grades) {
-      if (seen.has(g.family)) continue
-      seen.add(g.family)
-      chips.push({ id: g.family, label: COCOA_FAMILY_CHIP[g.family] })
-    }
-    return chips
-  }, [content.cocoa.grades])
-
   return (
     <section id="solutions" className="relative py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8" ref={ref}>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.6,
-              delay: 0.12,
-              ease: [0.22, 1, 0.36, 1] as const,
-            }}
-          >
-            <Link
-              to="/food/matcha"
-              className="group block relative rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 p-8 hover:border-brand-500/30 transition-all duration-500 h-full"
-            >
-              <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <Leaf size={24} className="text-brand-400" />
-              </div>
-              <span className="inline-block rounded-full bg-brand-secondary-500/10 border border-brand-secondary-400/15 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase text-brand-secondary-400 mb-3">
-                Active Product Line
-              </span>
-              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-brand-400 transition-colors">
-                Matcha Sourcing
-              </h3>
-              <p className="text-sm text-ink-dim leading-relaxed mb-6">
-                Tiered procurement models for ceremonial, beverage, and
-                industrial grades. Certified Organic & High-Consistency
-                Non-Organic lines.
-              </p>
-              <div className="flex items-center gap-2 text-sm font-medium text-brand-400 group-hover:gap-3 transition-all duration-300">
-                Enter Matcha Portfolio
-                <ArrowRight size={16} className="rtl:rotate-180" />
-              </div>
-            </Link>
-          </motion.div>
-
-          {/* Filipino Cacao / Cocoa — anchor of the cocoa runway. The card itself
-              renders in heavy brand-secondary-* (cocoa) tones to claim the
-              structural / provenance layer of the agri portfolio. */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.6,
-              delay: 0.24,
-              ease: [0.22, 1, 0.36, 1] as const,
-            }}
-          >
-            <Link
-              to="/food/cacao"
-              className="group block relative rounded-2xl border border-brand-secondary-400/20 bg-brand-secondary-500/[0.04] p-8 hover:border-brand-secondary-400/40 hover:bg-brand-secondary-500/[0.08] transition-all duration-500 h-full"
-            >
-              <div className="w-12 h-12 rounded-xl bg-brand-secondary-500/15 border border-brand-secondary-400/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <Bean size={24} className="text-brand-secondary-300" />
-              </div>
-              <span className="inline-block rounded-full bg-brand-secondary-500/10 border border-brand-secondary-400/20 px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase text-brand-secondary-300 mb-3">
-                Cocoa Runway
-              </span>
-              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-brand-secondary-300 transition-colors">
-                Filipino Cacao / Cocoa
-              </h3>
-              <p className="text-sm text-ink-dim leading-relaxed mb-5">
-                Premium raw-material supply chains direct from Filipino
-                cacao-producing regions — fermented bean lots, processed nibs,
-                liquor, and butter for industrial chocolate and specialty
-                beverage manufacturing.
-              </p>
-              <div className="flex flex-wrap gap-1.5 mb-5">
-                {cocoaFamilyChips.map((chip) => (
-                  <span
-                    key={chip.id}
-                    className="inline-block rounded-full bg-silver-anchor/5 border border-brand-secondary-400/15 px-2.5 py-0.5 text-[11px] text-ink-muted"
-                  >
-                    {chip.label}
-                  </span>
-                ))}
-              </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-brand-secondary-300 group-hover:gap-3 transition-all duration-300">
-                Request Procurement Brief
-                <ArrowRight size={16} className="rtl:rotate-180" />
-              </div>
-            </Link>
-          </motion.div>
-
-          {/* Filipino Coconut — high-volume wholesale estate sourcing. Dominated
-              by the primary brand-* (matcha) accent line, mirroring the matcha
-              card's vibrant identity. */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.6,
-              delay: 0.36,
-              ease: [0.22, 1, 0.36, 1] as const,
-            }}
-          >
-            <Link
-              to="#contact"
-              className="group block relative rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/30 p-8 hover:border-brand-500/30 transition-all duration-500 h-full"
-            >
-              <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <TreePalm size={24} className="text-brand-400" />
-              </div>
-              <span className="inline-block rounded-full bg-brand-secondary-500/10 border border-brand-secondary-400/15 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase text-brand-secondary-400 mb-3">
-                Estate Wholesale
-              </span>
-              <h3 className="font-display font-semibold text-xl text-white mb-3 group-hover:text-brand-400 transition-colors">
-                Filipino Coconut
-              </h3>
-              <p className="text-sm text-ink-dim leading-relaxed mb-5">
-                High-volume wholesale estate sourcing across the Filipino
-                coconut belt — copra, virgin coconut oil, desiccated coconut,
-                and coconut water concentrate, contracted at industrial
-                pricing tiers.
-              </p>
-              <div className="flex flex-wrap gap-1.5 mb-5">
-                {['Copra', 'Virgin Oil', 'Desiccated', 'Water Concentrate'].map(
-                  (tag) => (
-                    <span
-                      key={tag}
-                      className="inline-block rounded-full bg-silver-anchor/5 border border-silver-anchor/10 px-2.5 py-0.5 text-[11px] text-ink-muted"
-                    >
-                      {tag}
-                    </span>
-                  ),
-                )}
-              </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-brand-400 group-hover:gap-3 transition-all duration-300">
-                Request Estate Quote
-                <ArrowRight size={16} className="rtl:rotate-180" />
-              </div>
-            </Link>
-          </motion.div>
+          {content.food.categories.map((category, i) => (
+            <CategoryCard
+              key={category.id}
+              category={category}
+              delay={0.12 + i * 0.06}
+              inView={inView}
+            />
+          ))}
         </div>
       </div>
     </section>
@@ -275,7 +284,8 @@ export default function FoodPage() {
         <main>
           <HubHero />
           <HubGrid />
-          <ParentContact />
+          <OperationalDisclaimer />
+          <FoodContact />
         </main>
         <ParentFooter />
       </div>

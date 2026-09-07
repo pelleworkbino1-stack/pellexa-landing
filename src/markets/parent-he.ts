@@ -1,14 +1,18 @@
 import type { ParentContent } from './types'
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Cacao Derivatives Portfolio — Phase 1 data plumbing.
+// Cacao Derivatives Portfolio — Hebrew registry.
 //
-// Sourced verbatim from `docs/cocoa_knowlage.md` (Sections 1, 2, 3, 5). Operational
-// descriptions, batch chemistry markers, and CTAs are NOT translated in this
-// phase — the Phase 1 contract forbids altering, expanding, summarizing, or
-// inventing technical operational text. The Hebrew translation pass is
-// deferred to a later phase; the registry shape stays identical so any future
-// localization swap is a pure-content replacement with no type churn.
+// Sourced from `docs/cocoa_knowlage.md` (Sections 1, 2, 3, 5). Technical
+// descriptors (grade labels, batch chemistry markers, application rows) remain
+// in English pending a full localization pass; the registry shape is identical
+// to `parent-en.ts` so that swap stays pure-content with no type churn.
+//
+// EXCEPTION — every operational claim IS translated and must stay that way:
+// logistics, MOQ thresholds, certifications, and the customs/import boundary
+// are compliance-bearing copy. They are written to match
+// `docs/Pellexa Profile&Operating Model.MD` §§1/3: FCL-and-above only, and
+// Pellexa is never the freight forwarder, customs broker, or importer of record.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const parentHeCocoa: ParentContent['cocoa'] = {
@@ -136,13 +140,13 @@ const parentHeCocoa: ParentContent['cocoa'] = {
   qualityControl: {
     title: 'Trust Infrastructure: Quality-Control & Corporate Certifications',
     intro:
-      'Pellexa frameworks raw technical data sheet parameters into elite corporate compliance metrics that showcase ironclad regulatory readiness and institutional trust badges across our digital portfolio:',
+      'Pellexa frameworks raw technical data sheet parameters into elite corporate compliance metrics that showcase documented regulatory readiness and institutional trust badges across our digital portfolio:',
     analyticalTitle: 'Quality-Control Benchmarks & Analytical Parameters',
     analyticalGroups: [
       {
         title: 'Chemical & Physical Testing',
         summary:
-          'Our entire supply chain is independently tested and verified against rigorous laboratory and analytical criteria to ensure frictionless entry into major international ports.',
+          'כל אצווה חוזית נבדקת באופן עצמאי מול קריטריונים מעבדתיים ואנליטיים, כך שחבילת התיעוד שמגיעה לעמיל המכס ולרשות הרגולטורית שלכם תהיה מלאה ועמידה בנקודת הכניסה לנמל.',
         metrics: [
           'Precise monitoring of moisture tolerances (maximum 3.0% – 4.0%)',
           'FFA (Free Fatty Acid) baselines',
@@ -162,7 +166,7 @@ const parentHeCocoa: ParentContent['cocoa'] = {
       {
         title: 'Microbiological Screening',
         summary:
-          'Mandatory sterilization validation and independent laboratory screening across every single contract run.',
+          'אימות תהליכי חיטוי וסינון מעבדתי עצמאי בכל סבב ייצור חוזי.',
         metrics: [
           'Salmonella — absolute negative markers (/25g)',
           'Strict upper limits on standard plate counts',
@@ -181,7 +185,7 @@ const parentHeCocoa: ParentContent['cocoa'] = {
       {
         title: 'Global Market Access',
         description:
-          'Full US-FDA and Local FDA Compliance ensures frictionless customs clearance and regulatory entry.',
+          'שותפי הייצור רשומים ב-US-FDA וברשויות הבריאות המקומיות, ותיעוד רגולטורי לכל משלוח נבדק ומאומת לפני היציאה מהמפעל. שחרור מהמכס והגשת הצהרות הייבוא מבוצעים על ידי עמיל המכס שלכם תחת רישיון הייבוא שלכם, או דרך שותף ייבוא מקומי — Pellexa אינה היבואן הרשמי.',
       },
       {
         title: 'Dietary, Cultural, and Ethical Inclusivity',
@@ -194,26 +198,226 @@ const parentHeCocoa: ParentContent['cocoa'] = {
       'Selections are routed to our specification desk together with your contact details so the issued technical pack matches your validation pipeline 1:1.',
   },
   logistics: {
-    title: 'Supply Continuity & Global Maritime Logistics Statement',
+    title: 'רציפות אספקה ותיאום לוגיסטי',
     paragraphs: [
-      'Pellexa operates with a highly strategic, localized network to insulate your corporate supply chain from regional market volatility. While our standard pipeline is structurally optimized around high-volume enterprise distribution and Full Container Load (FCL 20ft and 40ft maritime shipping models), routing directly to strategic major marine hubs including Ashdod Port, Israel, and beyond—we recognize that market-leading brands often scale over time. To insulate your brand from restrictive volume requirements, our logistical framework accommodates customized, low-MOQ options and flexible wholesale volume entries tailored to your specific supply phase. To review exact minimum order parameters, clients are required to schedule a technical consultation directly with our logistics team.',
-      'Operating predominantly on professional CIF (Cost, Insurance, and Freight) incoterms to client ports of destination, our logistics framework takes full accountability for origin processing—from initial export declarations and strict pre-shipment phytosanitary inspections to marine cargo insurance and ocean transit routing. Featuring a standard 24-month unopened shelf stability across our powder and liquor lines, we assist your procurement division in structuring stable forward-contracts that lock in volume and insulate your corporate operations against spot-price surges. We ensure your raw materials arrive with their technical integrity entirely intact.',
+      'Pellexa בונה את שרשרת האספקה דרך רשת שותפים מקומית כדי לבודד את הרכש שלכם מתנודתיות בשוק האזורי. הפעילות מתבצעת אך ורק בהיקפי מכולה מלאה (FCL) ומעלה — מודלים ימיים של 20 ו-40 רגל — בניתוב לנמלי ים מרכזיים ובכללם נמל אשדוד, ישראל. איננו מציעים משלוחי LCL, כמויות מתחת למכולה מלאה או מינימומים נמוכים; היקף מכולה מלאה הוא סף הכניסה לכל קו קקאו. מינימומים מדויקים לכל דרגה, חלוקת הקצאות ולוחות זמנים לחוזים עתידיים נסגרים מול דסק הרכש שלנו בשלב ההסמכה המסחרית.',
+      'משלוחים ימיים מתואמים בתנאי CIF או DDP, בהתאם למבנה רישיון הייבוא שלכם ולשותפי הייבוא המקומיים, ומבוצעים על ידי משלחים בינלאומיים מוכרים יחד עם מחלקת הייצוא של הספק. Pellexa מתאמת ומאמתת את השרשרת הזו, אך אינה משלח בינלאומי, עמיל מכס או היבואן הרשמי; כאשר נעשה שימוש ב-DDP, הייבוא מבוצע על ידי שותף ייבוא מקומי מורשה. הצהרות הייצוא במקור והבדיקות הפיטוסניטריות טרם המשלוח מבוצעות על ידי מפעל הייצוא והמשלח מטעמו; ביטוח מטען ALL RISK נרכש דרך חברת ביטוח צד-שלישי. עם יציבות מדף סטנדרטית של 24 חודשים באריזה סגורה בקווי האבקה והליקר, אנו מסייעים למחלקת הרכש שלכם לבנות חוזים עתידיים שנועלים כמות מול זינוקי מחיר בשוק הספוט.',
     ],
   },
   masterCTA: {
     sectionLabel: 'Conversion-Oriented Lead Generation (The Master CTA)',
     headline: 'Architect Your Custom Factory Run: Optimize Your Supply Chain',
     paragraphs: [
-      'In global ingredient sourcing, standard configurations rarely satisfy the strict requirements of a market-leading product line. At Pellexa, we do not simply sell off-the-shelf commodities—we engineer dedicated, high-margin ingredient pipelines and align factory-level production metrics to your precise corporate formulation targets. Whether your brand requires unique specifications regarding fat melting curves, precise color intensities, specific fat-to-moisture ratios, particular alkalization depths, pH balancing, or localized forward-contract logistical scheduling, our team is equipped to tailor your run.',
-      'Our deployment models are engineered for absolute flexibility; we support high-volume container placements as well as customized, lower-volume runs through adaptive MOQ frameworks designed around your operating reality. To evaluate how we can map factory metrics to your production needs without restrictive volume ceilings, book an exploratory advisory call today.',
+      'In global ingredient sourcing, standard configurations rarely satisfy the strict requirements of a market-leading product line. At Pellexa, we do not place off-the-shelf commodity orders—we engineer dedicated, high-margin ingredient pipelines and align factory-level production metrics to your precise corporate formulation targets. Whether your brand requires unique specifications regarding fat melting curves, precise color intensities, specific fat-to-moisture ratios, particular alkalization depths, pH balancing, or localized forward-contract logistical scheduling, our team is equipped to tailor your run.',
+      'כל התקשרות מתבצעת בהיקפי מכולה מלאה (FCL) ומעלה. סף זה קבוע, והוא בדיוק מה שמאפשר תמחור ברמת המפעל וסבבי ייצור ייעודיים. בתוך המסגרת הזו, חלוקת ההקצאה בין הדרגות, לוחות אספקה מדורגים וחוזים עתידיים מרובי-מכולות נבנים סביב קצב הייצור שלכם. לבניית תוכנית המכולות שלכם — קבעו שיחת ייעוץ ראשונית.',
       "Do not leave your product chemistry or supply continuity to chance. Contact Pellexa's sourcing division today to register your technical requirements, review comprehensive specification sheets, arrange local sample evaluations, and design a scalable container-load infrastructure engineered directly for your brand.",
     ],
     cta: 'Schedule a Corporate Sourcing Consultation',
   },
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// תיק רכש מזון — קטלוג ציבורי לעמוד /food.
+//
+// תואם לרשימת הקטגוריות ב-`docs/Pellexa Profile&Operating Model.MD` §5.
+// כל קו פועל אך ורק בהיקפי מכולה מלאה (FCL) ומעלה (§1); אין להציג בבלוק הזה
+// כרטיס, תגית או קריאה לפעולה שמרמזים על כמויות מתחת למכולה מלאה.
+// כל תשע הקטגוריות מפנות לעוגן המקומי '#contact' — עמודי המאצ׳ה והקקאו
+// אוחדו בחזרה לתוך עמוד המרכז.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const parentHeFood: ParentContent['food'] = {
+  sectionLabel: 'Pellexa Agri-Food',
+  title: 'תיק רכש מזון B2B בתפזורת',
+  subtitle:
+    'תשע קטגוריות מזון יבש ובתפזורת, ישירות ממפעלים מורשים. כל קו פועל בהיקפי מכולה מלאה (FCL) ומעלה, תחת בקרת איכות צד-שלישי ומסגרת חוזי גב-אל-גב.',
+  fclBadge: 'מינימום FCL — מכולות 20 ו-40 רגל בלבד',
+  email: 'agri-food.sales@pellexa.com',
+  categories: [
+    {
+      id: 'matcha',
+      title: 'מאצ׳ה',
+      description:
+        'רכש מדורג בדרגות טקסיות, משקה ותעשייה ממפעלי טחינה מורשים. קווים אורגניים מוסמכים וקווים לא-אורגניים בעקביות גבוהה, מותאמים לדרישות הטחינה, פרופיל הכוס והיציבות התרמית שלכם — בחוזה בהיקפי מכולה מלאה בלבד.',
+      chips: [
+        'דרגה טקסית',
+        'דרגת משקה',
+        'תעשייתי',
+        'JAS / NOP / EU Organic',
+        'FCL בלבד',
+      ],
+      tag: 'קו מוצר פעיל',
+      cta: 'בקשת הצעת מחיר FCL',
+      href: '#contact',
+    },
+    {
+      id: 'tea',
+      title: 'תה תעשייתי',
+      description:
+        'תה עלים וקצוץ בתפזורת לבתי מיזוג, יצרני משקאות ואורזים פרטיים. המקור, הדרגה והחיתוך נבחרים מול פרופיל הכוס ופרמטרי המיצוי שלכם, וננעלים בחוזי מכולה עתידיים.',
+      chips: ['שחור', 'ירוק', 'אולונג', 'CTC / אורתודוקסי', 'FCL בלבד'],
+      tag: 'סיטונאות בתפזורת',
+      cta: 'בקשת הצעת מחיר FCL',
+      href: '#contact',
+    },
+    {
+      id: 'cacao',
+      title: 'נגזרות קקאו',
+      description:
+        'קקאו פיליפיני ממקור יחיד בשלושה עמודי תווך טכניים — אבקה, חמאה וליקר — עם פרמטרים אנליטיים מאומתים לתעשיית השוקולד ולקווי משקאות ייעודיים. מפרטים, דגימות ואצווה ניסיונית קודמים לייצור ההמוני.',
+      chips: [
+        'אבקת קקאו',
+        'חמאת קקאו',
+        'ליקר קקאו',
+        'בקרת איכות צד-שלישי',
+        'FCL בלבד',
+      ],
+      tag: 'מסלול הקקאו',
+      cta: 'בקשת הצעת מחיר FCL',
+      href: '#contact',
+    },
+    {
+      id: 'coconut',
+      title: 'קוקוס',
+      description:
+        'רכש סיטונאי מחגורת הקוקוס הפיליפינית — פורמטים של שמן, מיובש ותרכיז, בחוזים בתמחור תעשייתי מול מפרטי הזיקוק והפורמולציה שלכם, בהיקף מכולות 20 / 40 רגל.',
+      chips: [
+        'קופרה',
+        'שמן קוקוס כתית',
+        'מיובש',
+        'תרכיז מי קוקוס',
+        'FCL בלבד',
+      ],
+      tag: 'סיטונאות בתפזורת',
+      cta: 'בקשת הצעת מחיר FCL',
+      href: '#contact',
+    },
+    {
+      id: 'seed-oils',
+      title: 'שמני זרעים',
+      description:
+        'שמני מאכל גולמיים ומזוקקים בפלקסיטנק או בחביות במכולה מלאה, במפרט מול ערכי חומצות שומן חופשיות, ערך פרוקסיד וסף צבע לתעשיית עיבוד המזון.',
+      chips: ['חמניות', 'סויה', 'דקלים', 'מזוקק / גולמי', 'FCL בלבד'],
+      tag: 'סיטונאות בתפזורת',
+      cta: 'בקשת הצעת מחיר FCL',
+      href: '#contact',
+    },
+    {
+      id: 'rice',
+      title: 'אורז',
+      description:
+        'אורז מולבן בחוזה לפי אורך גרגר, אחוז שברים וסף לחות — לאורזים מחדש, מפיצי מוסדי וקווי עיבוד תעשייתיים, במשלוח מכולה מלאה בלבד.',
+      chips: ['גרגר ארוך', 'יסמין', 'מאודה', 'דרגות שברים', 'FCL בלבד'],
+      tag: 'סיטונאות בתפזורת',
+      cta: 'בקשת הצעת מחיר FCL',
+      href: '#contact',
+    },
+    {
+      id: 'pasta',
+      title: 'פסטה',
+      description:
+        'פסטת סולת דורום בפורמטים של תפזורת ואריזה קמעונאית, כולל סבבי ייצור למותג פרטי במפרט החיתוך, האריזה וסבילות הבישול שלכם תחת חוזי גב-אל-גב עם המפעל.',
+      chips: [
+        'סולת דורום',
+        'חיתוך קצר',
+        'חיתוך ארוך',
+        'מותג פרטי',
+        'FCL בלבד',
+      ],
+      tag: 'סיטונאות בתפזורת',
+      cta: 'בקשת הצעת מחיר FCL',
+      href: '#contact',
+    },
+    {
+      id: 'canned',
+      title: 'שימורים',
+      description:
+        'ייצור שימורים יציבי מדף ממפעלים מבוקרים — אריזות במלח, בשמן וברוטב, במפרט לפי גודל פחית, משקל מסונן ותוכנית תווית, עם שתי בדיקות בקרת איכות צד-שלישי לפני המשלוח.',
+      chips: ['ירקות', 'פירות', 'דגים', 'קטניות', 'FCL בלבד'],
+      tag: 'סיטונאות בתפזורת',
+      cta: 'בקשת הצעת מחיר FCL',
+      href: '#contact',
+    },
+    {
+      id: 'dry-goods',
+      title: 'מזון יבש כללי',
+      description:
+        'ערוץ המזון היבש הרחב — מוצרי יסוד ורכיבים יבשים דרך ספקים מורשים בלבד, בחוזה בהיקף מכולה מול המפרט הטכני ורשימת התיעוד שלכם.',
+      chips: ['קטניות', 'קמחים', 'סוכר', 'תערובות יבשות', 'FCL בלבד'],
+      tag: 'סיטונאות בתפזורת',
+      cta: 'בקשת הצעת מחיר FCL',
+      href: '#contact',
+    },
+  ],
+  contact: {
+    sectionLabel: 'פניית רכש מוסדית',
+    title: 'העריכו את',
+    titleHighlight: 'מעורבות ה-Agri-Food שלכם',
+    subtitle:
+      'הגישו פרופיל רכש מובנה על פני תשע קטגוריות התיק. חשבונות מאושרים מקבלים תיק מסחרי מיושר למכולה וגישה לצינור האימות המדורג.',
+    benefits: [
+      'תשע קטגוריות יבשות ובתפזורת תחת מודל FCL אחד',
+      'תמחור ישיר מהמפעל — ללא מרווח מלאי או עלויות אחזקה',
+      'אימות מדורג: מפרטים ותעודות, דגימות, אצווה ניסיונית וייצור המוני',
+      'בקרת איכות צד-שלישי וביטוח מטען ALL RISK בכל משלוח בחוזה',
+    ],
+    emailCardLabel: 'יצירת קשר ישירה לרכש מזון וחקלאות',
+    copy: 'העתק',
+    copied: 'הועתק',
+    categorySectionTitle: 'קטגוריות התיק',
+    categorySectionDesc:
+      'בחרו את קווי הקטגוריה שאתם מעריכים. השאירו ריק אם תרצו לקבל המלצה מ-Pellexa.',
+    categoryNotePlaceholder: 'הערות על העדפת קטגוריה, דרגה או שאלות פתוחות…',
+  },
+  operatingModel: {
+    sectionLabel: 'מודל התפעול',
+    title: 'כיצד Pellexa מבצעת אספקת מזון וחקלאות',
+    subtitle:
+      'תהליך B2B קבוע מהפנייה הראשונה ועד מכולות בחוזה — FCL בלבד, מאומת על ידי צד שלישי, ומשוקף מסחרית בין הלקוח למפעל.',
+    stages: [
+      {
+        label: '01',
+        title: 'רצפת נפח FCL',
+        body: 'כל התקשרות פועלת בהיקפי מכולה מלאה ומעלה — מכולות ימיות 20 ו-40 רגל. איננו מציעים LCL, כמויות מתחת למכולה או כניסה ב-MOQ נמוך.',
+      },
+      {
+        label: '02',
+        title: 'צינור אימות מדורג',
+        body: 'מפרטים טכניים ותעודות, לאחר מכן דגימות פיזיות, לאחר מכן אצווה ניסיונית, ולבסוף ייצור המוני. כל שער חייב לעבור לפני שחרור השלב הבא.',
+      },
+      {
+        label: '03',
+        title: 'מסגרת משפטית ומסחרית',
+        body: 'תחילה NCNDA, ולאחר מכן חוזי גב-אל-גב עם תנאי תשלום משוקפים בין הלקוח למפעל — בדרך כלל 70/30, או 100% מקדמה כאשר המפעל דורש זאת.',
+      },
+      {
+        label: '04',
+        title: 'בקרת איכות וביטוח צד-שלישי',
+        body: 'שתי בדיקות עצמאיות סטנדרטיות: לפני הייצור ולפני המשלוח בשלב האריזה. המטען מבוטח בפוליסת ALL RISK דרך חברת ביטוח צד-שלישי.',
+      },
+      {
+        label: '05',
+        title: 'תנאי שילוח — CIF או DDP',
+        body: 'משלוחים ימיים מתואמים בתנאי CIF או DDP בהתאם למבנה רישיון הייבוא שלכם ולשותפי הייבוא המקומיים. השילוח מתבצע דרך משלחים בינלאומיים מוכרים; Pellexa אינה משלח בינלאומי, עמיל מכס או היבואן הרשמי.',
+      },
+    ],
+  },
+  disclaimer: {
+    title: 'גבולות הפעילות',
+    body: 'Pellexa היא שותפה לרכש, בקרת איכות וניהול שרשרת אספקה. איננו משלח בינלאומי, עמיל מכס או היבואן הרשמי.',
+    points: [
+      'הייבוא מתבצע תחת רישיון הייבוא שלכם, או דרך שותף ייבוא מקומי כאשר אינכם היבואן הרשמי.',
+      'משלוחים ימיים מתואמים בתנאי CIF או DDP בהתאם למבנה רישיון הייבוא ולשותפי הייבוא המקומיים; השילוח מתבצע דרך משלחים בינלאומיים מוכרים או המשלח של הספק.',
+      'שחרור מהמכס מבוצע על ידי עמיל מכס מורשה — לעולם לא על ידי Pellexa.',
+      'בקרת האיכות מתבצעת בשטח על ידי צד שלישי עצמאי — שתי בדיקות סטנדרטיות, בתחילת הייצור ובשלב האריזה.',
+      'המטען מבוטח בפוליסת ALL RISK דרך חברת ביטוח צד-שלישי.',
+      'כל הקטגוריות פועלות אך ורק בהיקפי מכולה מלאה (FCL) ומעלה — מכולות 20 / 40 רגל בלבד.',
+    ],
+  },
+}
+
 export const parentHe: ParentContent = {
-  meta: { title: 'Pellexa — פתרונות טכנולוגיים אסטרטגיים' },
+  meta: { title: 'Pellexa — רכש B2B אסטרטגי, בקרת איכות וניהול שרשרת אספקה' },
   nav: {
     links: [
       { label: 'פתרונות', href: '#solutions' },
@@ -224,12 +428,12 @@ export const parentHe: ParentContent = {
     cta: 'צור קשר',
   },
   hero: {
-    badge: 'שותף טכנולוגי אסטרטגי',
+    badge: 'שותף אסטרטגי לרכש B2B ושרשרת אספקה',
     headlineTop: 'הגשר שלך אל',
-    headlineHighlight: 'פתרונות טכנולוגיים',
+    headlineHighlight: 'רכש ושרשראות אספקה',
     headlineBottom: 'ברמה עולמית',
     subtitle:
-      'Pellexa מחברת יצרנים גלובליים מובילים עם השוק שלך. ממסכי LED מדויקים ועד ורטיקלים טכנולוגיים חדשים — אנחנו מטפלים ברכש, לוגיסטיקה ויישום מקומי.',
+      'Pellexa מתמחה ברכש B2B, בקרת איכות צד-שלישי וניהול שרשראות אספקה בינלאומיות. אנחנו מחברים יצרנים גלובליים מאומתים עם השוק שלכם ומוזילים את עלויות הרכש והייבוא בתהליך מובנה ומחושב.',
     cta1: 'הפתרונות שלנו',
     cta2: 'צור קשר',
   },
@@ -237,19 +441,24 @@ export const parentHe: ParentContent = {
     sectionLabel: 'הוורטיקלים שלנו',
     title: 'תיק פתרונות',
     subtitle:
-      'כל ורטיקל מגובה בשותפי ייצור Tier-1 ייעודיים, שרשראות אספקה מותאמות ומומחיות מקומית.',
+      'כל ורטיקל מגובה בשותפי ייצור Tier-1 ייעודיים, תהליך אימות מובנה ובקרת איכות צד-שלישי.',
     ledTitle: 'Pellexa LED',
     ledDescription:
-      'פתרונות תצוגת LED בהתאמה אישית — פנים, חוץ, השכרה והתקנות לאירועים. ייצור מדויק, משלוח והתקנה מקצועית.',
+      'פתרונות תצוגת LED בהתאמה אישית — פנים, חוץ, השכרה ואירועים — בייצור מדויק של שותף הנדסי, עם מינימום הזמנה דינמי לפי פרויקט. Pellexa אינה מבצעת התקנות: לפי בקשה נוכל להפנות לקבלני התקנה מקומיים מאומתים, וההתקשרות, הביצוע והאחריות להתקנה הם ישירות בין הלקוח לקבלן.',
     foodTitle: 'Pellexa Agri-Food',
     foodDescription:
-      'רכש וסורסינג מדויק למוצרי מזון גלובליים, חומרי גלם ושרשראות אספקה חקלאיות — ישירות ממפעלים מוסמכים לשווקים מוסדיים וארגוניים.',
+      'רכש מזון וחקלאות בתפזורת — מאצ׳ה, תה תעשייתי, קקאו, קוקוס, שמני זרעים, אורז, פסטה, שימורים ומזון יבש — ישירות ממפעלים מורשים, בהיקפי מכולה מלאה (FCL) ומעלה.',
     generalTitle: 'Pellexa General Sourcing',
     generalDescription:
-      'ערוץ ייצור המוני אופורטוניסטי ישירות ממרכזי הייצור באסיה — קופסאות מותאמות, רהיטים, צעצועים ואקססוריז לייפסטייל. מותאם למותגים גלובליים, מלונות יוקרה וחשבונות ארגוניים גדולים. כמויות ההזמנה נקבעות לפי קטגוריה וסקטור — צרו קשר עם צוות הסורסינג להתאמת פרופיל ייצור ייעודי לפרויקט.',
-    generalCategories: ['קופסאות מותאמות', 'רהיטים', 'צעצועים', 'לייפסטייל'],
+      'רכש תעשייתי וצרכני ממפעלי שותפים מאומתים באסיה — ציוד כבד ומכונות, חומרי בניין ובנייה, מארזי אקריל ו-TCG בהתאמה אישית, ואריזות מותג יוקרה. מינימום בהיקף מכולה מלאה (FCL) לקווים תעשייתיים סטנדרטיים; MOQ דינמי לפי פרויקט לקווי ייצור מותאם/ייעודי (כגון מארזי אקריל בהתאמה אישית ואריזות מותג יוקרה). צרו קשר עם צוות הרכש להגדרת ההזמנה.',
+    generalCategories: [
+      'ציוד כבד ומכונות',
+      'חומרי בניין ובנייה',
+      'מארזי אקריל ו-TCG בהתאמה אישית',
+      'אריזות מותג יוקרה',
+    ],
     generalOriginLabel: 'מרכזי ייצור באסיה',
-    generalMOQBadge: 'MOQ משתנה — בהתאם לדרישות הפרויקט',
+    generalMOQBadge: 'מינימום FCL — MOQ דינמי לקווים ייעודיים',
     generalTargetLabel: 'חשבונות ארגוניים ויוקרתיים',
     learnMore: 'למידע נוסף',
     newVertical: 'ורטיקל חדש',
@@ -258,29 +467,29 @@ export const parentHe: ParentContent = {
   about: {
     sectionLabel: 'היתרון של Pellexa',
     titleMain: 'הגשר האסטרטגי בין',
-    titleFaded: 'הנדסה גלובלית לביצוע מקומי',
+    titleFaded: 'מפעלים גלובליים מאומתים לשוק שלך',
     subtitle:
-      'Pellexa הוא הצומת שמחבר יכולות ייצור ברמה עולמית עם הדרישות הייחודיות של השוק שלך. אנחנו לא רק מייבאים מוצרים — אנחנו מספקים פתרונות מנוהלים מקומית.',
+      'Pellexa מחברת ייצור ברמה עולמית עם השוק שלך בתהליך מובנה ושקוף. אנחנו לא משלח בינלאומי, עמיל מכס או היבואן הרשמי — אנחנו בונים, מאמתים ומתאמים כל עסקה במסגרת הסכמי NCNDA וחוזי גב-אל-גב.',
     pillars: [
       {
-        title: 'שותפי ייצור Tier-1',
+        title: 'ספקים מאומתים ומסגרת חוזית',
         description:
-          'אנחנו עובדים אך ורק עם מפעלים מוסמכי ISO, מוכרים גלובלית עם 28+ שנות מורשת הנדסית.',
+          'מפעלים מורשים ומוסמכים עם חשיפת ספק מלאה — מוגנים בהסכמי NCNDA, חוזי גב-אל-גב ותנאי תשלום מובנים (70/30 או 100% מראש).',
       },
       {
-        title: 'לוגיסטיקה מקצה לקצה',
+        title: 'תיאום שרשרת אספקה ולוגיסטיקה',
         description:
-          'שילוח בינלאומי, שחרור מכס ומשלוח עד הדלת — עם מעקב בזמן אמת על כל משלוח.',
+          'תיאום לוגיסטי המבוצע תחת רישיון הייבוא שלכם או דרך שותפי ייבוא מקומיים — כולל אפשרות ל-Blind Shipping ללקוחות מוסדיים.',
       },
       {
-        title: 'אבטחת איכות',
+        title: 'בקרת איכות צד-שלישי וביטוח ALL RISK',
         description:
-          'בקרת איכות מלאה במפעל, בדיקה לפני משלוח, ואחריות מקיפה עם תמיכה טכנית מקומית.',
+          'בקרת איכות עצמאית בשטח (שתי בדיקות סטנדרטיות: בתחילת הייצור ובסיומו באריזה) לצד ביטוח מטען ALL RISK מקיף דרך מבטח צד-שלישי.',
       },
       {
-        title: 'יישום מקומי',
+        title: 'תהליך אימות מדורג',
         description:
-          'צוותים מקומיים להתקנה מקצועית, כיול, הדרכה ותחזוקה שוטפת.',
+          'אישור מפרטים טכניים ותעודות, דגימות פיזיות, אצוות פיילוט בעת הצורך — ומעבר לייצור המוני רק לאחר אישור מלא.',
       },
     ],
   },
@@ -292,11 +501,24 @@ export const parentHe: ParentContent = {
     cta1: 'שלחו לנו מייל',
     cta2: 'טופס פנייה LED',
   },
+  scopeDisclaimer: {
+    title: 'גבולות הפעילות',
+    body: 'Pellexa היא שותפה לרכש, בקרת איכות וניהול שרשרת אספקה. איננו משלח בינלאומי, עמיל מכס או היבואן הרשמי.',
+    points: [
+      'הייבוא מתבצע תחת רישיון הייבוא שלכם, או דרך שותף ייבוא מקומי כאשר אינכם היבואן הרשמי.',
+      'משלוחים ימיים מתואמים בתנאי CIF או DDP בהתאם למבנה רישיון הייבוא ולשותפי הייבוא המקומיים; השילוח מתבצע דרך משלחים בינלאומיים מוכרים או המשלח של הספק.',
+      'שחרור מהמכס מבוצע על ידי עמיל מכס מורשה — לעולם לא על ידי Pellexa.',
+      'בקרת האיכות מתבצעת בשטח על ידי צד שלישי עצמאי — שתי בדיקות סטנדרטיות, בתחילת הייצור ובשלב האריזה.',
+      'המטען מבוטח בפוליסת ALL RISK דרך חברת ביטוח צד-שלישי.',
+      'מינימום בהיקף מכולה מלאה (FCL) חל על קווים תעשייתיים סטנדרטיים; קווי ייצור מותאם/ייעודי (כגון מארזי אקריל בהתאמה אישית ואריזות מותג יוקרה) פועלים ב-MOQ דינמי לפי פרויקט, המאושר בשלב הייעוץ.',
+    ],
+  },
   footer: {
-    tagline: 'הצומת האסטרטגי בין הנדסה גלובלית ברמה עולמית לביצוע מקומי.',
+    tagline: 'הצומת האסטרטגי בין ייצור ברמה עולמית לשרשראות אספקה B2B מובנות ומאומתות.',
     copyright: '© {year} Pellexa. כל הזכויות שמורות.',
     privacy: 'פרטיות',
     terms: 'תנאי שימוש',
   },
   cocoa: parentHeCocoa,
+  food: parentHeFood,
 }
