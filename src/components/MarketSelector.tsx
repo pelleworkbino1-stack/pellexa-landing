@@ -4,13 +4,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Globe, X } from 'lucide-react'
 import { useMarket } from '../hooks/useMarket'
 import type { MarketId } from '../markets/types'
+import { isPublicMarket } from '../markets'
 import { isLedSubdomain } from '../lib/site'
 
-const markets: { id: MarketId; flag: string; label: string }[] = [
+const allMarkets: { id: MarketId; flag: string; label: string }[] = [
   { id: 'il', flag: '🇮🇱', label: 'Israel' },
   { id: 'ph', flag: '🇵🇭', label: 'Philippines' },
   { id: 'global', flag: '🌍', label: 'Other' },
 ]
+
+const markets = allMarkets.filter((m) => isPublicMarket(m.id))
+const globalMarketOption = markets.find((m) => m.id === 'global')!
 
 function MarketToggle() {
   const { marketId, setMarketId } = useMarket()
@@ -18,7 +22,7 @@ function MarketToggle() {
   const location = useLocation()
   const [open, setOpen] = useState(false)
 
-  const current = markets.find((m) => m.id === marketId) ?? markets[2]
+  const current = markets.find((m) => m.id === marketId) ?? globalMarketOption
 
   const select = (id: MarketId) => {
     setMarketId(id)

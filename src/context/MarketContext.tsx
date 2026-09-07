@@ -1,7 +1,8 @@
 import { createContext, useEffect, useMemo, type ReactNode } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useLocation, useParams } from 'react-router-dom'
 import type { MarketConfig, MarketId } from '../markets/types'
-import { getMarket, isValidMarket } from '../markets'
+import { getMarket, isPublicMarket } from '../markets'
+import { isLedSubdomain } from '../lib/site'
 
 const COOKIE_KEY = 'pellexa_market'
 
@@ -36,12 +37,13 @@ interface MarketProviderProps {
 
 export function MarketProvider({ children, override }: MarketProviderProps) {
   const { market: urlMarket } = useParams<{ market?: string }>()
+  const location = useLocation()
 
   const marketId = useMemo<MarketId>(() => {
     if (override) return override.id
-    if (urlMarket && isValidMarket(urlMarket)) return urlMarket
+    if (urlMarket && isPublicMarket(urlMarket)) return urlMarket
     const saved = getCookie(COOKIE_KEY)
-    if (saved && isValidMarket(saved)) return saved
+    if (saved && isPublicMarket(saved)) return saved
     return 'global'
   }, [urlMarket, override])
 
@@ -60,8 +62,13 @@ export function MarketProvider({ children, override }: MarketProviderProps) {
     setCookie(COOKIE_KEY, id)
   }
 
+  const redirectHiddenPh =
+    !override && urlMarket === 'ph' && !isPublicMarket('ph')
+  const redirectTo = `${isLedSubdomain() ? '/' : '/led'}${location.hash}`
+
   return (
     <MarketContext.Provider value={{ market, marketId, setMarketId }}>
+      {redirectHiddenPh && <Navigate to={redirectTo} replace />}
       {children}
     </MarketContext.Provider>
   )
