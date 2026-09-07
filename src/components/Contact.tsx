@@ -7,256 +7,33 @@ import {
   Check,
   ExternalLink,
   ChevronDown,
-  ArrowLeft,
-  Camera,
   MessageCircle,
 } from 'lucide-react'
 import { useMarket } from '../hooks/useMarket'
 
 const EMAIL = 'led.sales@pellexa.com'
 
-interface D {
-  environment: string
-  environmentCustom: string
-  primaryUse: string
-  primaryUseCustom: string
-  viewingDistance: string
-  width: string
-  height: string
-  measurementType: string
-  shape: string
-  shapeCustom: string
-  mounting: string
-  mountingCustom: string
-  maintenanceAccess: string
-  reinforced: string
-  transparent: boolean
-  flexible: boolean
-  ultraBright: boolean
-  featureNote: string
-  contentLive: boolean
-  contentStatic: boolean
-  content4k: boolean
-  contentNote: string
-  deliveryLocation: string
-  targetDate: string
-  contactName: string
-  contactEmail: string
-  contactPhone: string
-  notes: string
+interface Inquiry {
+  name: string
+  email: string
+  company: string
+  country: string
+  projectType: string
+  screenSize: string
+  specs: string
 }
 
-const init: D = {
-  environment: '',
-  environmentCustom: '',
-  primaryUse: '',
-  primaryUseCustom: '',
-  viewingDistance: '',
-  width: '',
-  height: '',
-  measurementType: '',
-  shape: '',
-  shapeCustom: '',
-  mounting: '',
-  mountingCustom: '',
-  maintenanceAccess: '',
-  reinforced: '',
-  transparent: false,
-  flexible: false,
-  ultraBright: false,
-  featureNote: '',
-  contentLive: false,
-  contentStatic: false,
-  content4k: false,
-  contentNote: '',
-  deliveryLocation: '',
-  targetDate: '',
-  contactName: '',
-  contactEmail: '',
-  contactPhone: '',
-  notes: '',
+const init: Inquiry = {
+  name: '',
+  email: '',
+  company: '',
+  country: '',
+  projectType: '',
+  screenSize: '',
+  specs: '',
 }
 
-function val(selected: string, custom: string) {
-  if (selected === 'Other' && custom) return custom
-  return selected || '—'
-}
-
-function buildEmail(d: D): string {
-  const l: string[] = []
-  l.push('LED DISPLAY INQUIRY')
-  l.push('='.repeat(40))
-  l.push('')
-
-  if (d.contactName || d.contactEmail || d.contactPhone) {
-    l.push('CONTACT INFORMATION')
-    if (d.contactName) l.push(`  Name:  ${d.contactName}`)
-    if (d.contactEmail) l.push(`  Email: ${d.contactEmail}`)
-    if (d.contactPhone) l.push(`  Phone: ${d.contactPhone}`)
-    l.push('')
-  }
-
-  l.push('1. PROJECT ENVIRONMENT & PURPOSE')
-  l.push(`   Installation:     ${val(d.environment, d.environmentCustom)}`)
-  l.push(`   Primary Use:      ${val(d.primaryUse, d.primaryUseCustom)}`)
-  l.push(`   Viewing Distance: ${d.viewingDistance ? `${d.viewingDistance} meters` : '—'}`)
-  l.push('')
-
-  l.push('2. DIMENSIONS & SHAPE')
-  const size =
-    d.width && d.height
-      ? `${d.width}m (W) × ${d.height}m (H)`
-      : d.width || d.height
-        ? `${d.width || '?'}m × ${d.height || '?'}m`
-        : '—'
-  l.push(`   Desired Size:     ${size}`)
-  l.push(`   Measurement:      ${d.measurementType || '—'}`)
-  l.push(`   Shape:            ${val(d.shape, d.shapeCustom)}`)
-  l.push('')
-
-  l.push('3. INSTALLATION & MAINTENANCE')
-  l.push(`   Mounting:            ${val(d.mounting, d.mountingCustom)}`)
-  l.push(`   Maintenance Access:  ${d.maintenanceAccess || '—'}`)
-  l.push(`   Structure Reinforced: ${d.reinforced || '—'}`)
-  l.push('')
-
-  const features = [
-    d.transparent && 'Transparent screen',
-    d.flexible && 'Flexible LED',
-    d.ultraBright && 'Ultra-high brightness',
-    d.featureNote && d.featureNote,
-  ].filter(Boolean)
-  const content = [
-    d.contentLive && 'Live video / camera feeds',
-    d.contentStatic && 'Static images / slideshows',
-    d.content4k && '4K / high-resolution content',
-    d.contentNote && d.contentNote,
-  ].filter(Boolean)
-
-  l.push('4. SPECIAL REQUIREMENTS')
-  l.push(`   Custom Features: ${features.length ? features.join(', ') : 'None specified'}`)
-  l.push(`   Content Type:    ${content.length ? content.join(', ') : 'Not specified yet'}`)
-  l.push('')
-
-  l.push('5. LOGISTICS')
-  l.push(`   Delivery Location: ${d.deliveryLocation || '—'}`)
-  l.push(`   Target Date:       ${d.targetDate || '—'}`)
-
-  if (d.notes) {
-    l.push('')
-    l.push('ADDITIONAL NOTES')
-    l.push(`   ${d.notes}`)
-  }
-
-  l.push('')
-  l.push('—'.repeat(40))
-  l.push('Attached: site photos and/or architectural drawings (if available).')
-
-  return l.join('\n')
-}
-
-function OptionCard({
-  label,
-  desc,
-  selected,
-  onClick,
-}: {
-  label: string
-  desc: string
-  selected: boolean
-  onClick: () => void
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`flex-1 min-w-[140px] text-left rtl:text-right px-5 py-4.5 rounded-xl border-2 transition-all ${
-        selected
-          ? 'bg-brand-500/10 border-brand-500/40 shadow-lg shadow-brand-500/5'
-          : 'bg-canvas-elevated/50 border-silver-anchor/8 hover:border-silver-anchor/20'
-      }`}
-    >
-      <span className={`block text-base font-semibold ${selected ? 'text-brand-400' : 'text-ink-primary'}`}>
-        {label}
-      </span>
-      <span className="block text-sm text-ink-dim mt-1 leading-snug">{desc}</span>
-    </button>
-  )
-}
-
-function BigCheckbox({
-  checked,
-  onChange,
-  label,
-  desc,
-}: {
-  checked: boolean
-  onChange: (v: boolean) => void
-  label: string
-  desc: string
-}) {
-  return (
-    <button
-      type="button"
-      onClick={() => onChange(!checked)}
-      className={`w-full flex items-start gap-4 p-4.5 rounded-xl border-2 text-left rtl:text-right transition-all ${
-        checked
-          ? 'bg-brand-500/8 border-brand-500/30'
-          : 'bg-canvas-elevated/40 border-silver-anchor/8 hover:border-silver-anchor/15'
-      }`}
-    >
-      <div
-        className={`mt-0.5 w-6 h-6 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
-          checked
-            ? 'bg-brand-500/25 border-brand-500/60'
-            : 'border-silver-anchor/20 bg-canvas-elevated/60'
-        }`}
-      >
-        {checked && <Check size={14} className="text-brand-400" />}
-      </div>
-      <div className="min-w-0">
-        <span className={`block text-base font-medium ${checked ? 'text-brand-300' : 'text-ink-primary'}`}>
-          {label}
-        </span>
-        <span className="block text-sm text-ink-dim mt-1 leading-snug">{desc}</span>
-      </div>
-    </button>
-  )
-}
-
-function Section({
-  num,
-  title,
-  desc,
-  children,
-}: {
-  num: number
-  title: string
-  desc: string
-  children: React.ReactNode
-}) {
-  return (
-    <div className="mt-10 first:mt-0">
-      <div className="flex items-center gap-3.5 mb-2">
-        <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-brand-500/15 text-base font-bold text-brand-500 shrink-0">
-          {num}
-        </span>
-        <h4 className="text-lg sm:text-xl font-semibold text-white">{title}</h4>
-      </div>
-      <p className="text-sm sm:text-base text-ink-dim mb-5 ms-[3.15rem]">{desc}</p>
-      <div className="space-y-5 ms-0 sm:ms-[3.15rem]">{children}</div>
-    </div>
-  )
-}
-
-function Label({ children, hint }: { children: React.ReactNode; hint?: string }) {
-  return (
-    <div className="mb-2.5">
-      <label className="block text-base font-medium text-ink-primary">{children}</label>
-      {hint && <p className="text-sm text-silver-trace mt-1 leading-snug">{hint}</p>}
-    </div>
-  )
-}
+type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 function SelectWrap({ children }: { children: React.ReactNode }) {
   return (
@@ -266,6 +43,26 @@ function SelectWrap({ children }: { children: React.ReactNode }) {
         size={18}
         className="absolute end-4 top-1/2 -translate-y-1/2 text-ink-dim pointer-events-none"
       />
+    </div>
+  )
+}
+
+function Label({
+  children,
+  hint,
+  required,
+}: {
+  children: React.ReactNode
+  hint?: string
+  required?: boolean
+}) {
+  return (
+    <div className="mb-2.5">
+      <label className="block text-base font-medium text-ink-primary">
+        {children}
+        {required && <span className="text-brand-400 ms-1">*</span>}
+      </label>
+      {hint && <p className="text-sm text-silver-trace mt-1 leading-snug">{hint}</p>}
     </div>
   )
 }
@@ -281,16 +78,30 @@ export default function Contact() {
 
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
-  const [d, setD] = useState<D>(init)
-  const [preview, setPreview] = useState(false)
+  const [d, setD] = useState<Inquiry>(init)
+  const [status, setStatus] = useState<Status>('idle')
   const [copied, setCopied] = useState(false)
   const [copiedEmail, setCopiedEmail] = useState(false)
 
-  const set = <K extends keyof D>(key: K, v: D[K]) =>
+  const set = <K extends keyof Inquiry>(key: K, v: Inquiry[K]) =>
     setD((prev) => ({ ...prev, [key]: v }))
 
-  const emailBody = buildEmail(d)
-  const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent('LED Display Inquiry')}&body=${encodeURIComponent(emailBody)}`
+  /** Plain-text rendering of the inquiry, used by the mail-client fallback. */
+  const inquiryText = [
+    `${f.nameLabel}: ${d.name || '—'}`,
+    `${f.emailLabel}: ${d.email || '—'}`,
+    `${f.companyLabel}: ${d.company || '—'}`,
+    `${f.countryLabel}: ${d.country || '—'}`,
+    `${f.projectTypeLabel}: ${d.projectType || '—'}`,
+    `${f.screenSizeLabel}: ${d.screenSize || '—'}`,
+    '',
+    `${f.specsLabel}:`,
+    d.specs || '—',
+  ].join('\n')
+
+  const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
+    f.title,
+  )}&body=${encodeURIComponent(inquiryText)}`
 
   const doCopy = async (text: string) => {
     try {
@@ -303,6 +114,34 @@ export default function Contact() {
       ta.select()
       document.execCommand('copy')
       document.body.removeChild(ta)
+    }
+  }
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setStatus('submitting')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: d.name,
+          email: d.email,
+          company: d.company,
+          location: d.country,
+          projectType: d.projectType,
+          screenSize: d.screenSize,
+          details: d.specs,
+          market: market.id,
+          timezone: market.timezone,
+          locale: market.locale,
+        }),
+      })
+      const payload = (await res.json().catch(() => null)) as { success?: boolean } | null
+      if (!res.ok || !payload?.success) throw new Error('submission failed')
+      setStatus('success')
+    } catch {
+      setStatus('error')
     }
   }
 
@@ -394,6 +233,13 @@ export default function Contact() {
                 </div>
               </div>
             )}
+
+            <div className="rounded-xl border border-silver-anchor/10 bg-canvas-overlay/30 p-5 mt-4">
+              <p className="text-xs font-semibold uppercase tracking-wider text-silver-anchor mb-2">
+                {t.disclaimer.title}
+              </p>
+              <p className="text-sm text-ink-dim leading-relaxed">{t.disclaimer.body}</p>
+            </div>
           </motion.div>
 
           {/* Right column */}
@@ -403,363 +249,176 @@ export default function Contact() {
             transition={{ duration: 0.7, delay: 0.15 }}
           >
             <div className="rounded-2xl border border-silver-anchor/5 bg-canvas-overlay/40 backdrop-blur-sm p-6 sm:p-8">
-              {preview ? (
-                <>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-11 h-11 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                      <Check size={22} className="text-emerald-400" />
-                    </div>
-                    <div>
-                      <h3 className="font-display font-semibold text-xl text-white">
-                        {t.preview.ready}
-                      </h3>
-                      <p className="text-sm text-ink-dim">
-                        {t.preview.readySub}
-                      </p>
-                    </div>
+              {status === 'success' ? (
+                <div className="text-center py-6">
+                  <div className="w-14 h-14 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-5">
+                    <CheckCircle size={28} className="text-emerald-400" />
                   </div>
-
-                  <div className="rounded-xl bg-canvas-elevated/80 border border-silver-anchor/5 p-5 max-h-96 overflow-y-auto mb-5" dir="ltr">
-                    <pre className="text-sm text-ink-muted whitespace-pre-wrap font-mono leading-relaxed">
-                      {emailBody}
-                    </pre>
-                  </div>
-
-                  <p className="text-sm text-ink-dim mb-5">
-                    {t.preview.sendTo}{' '}
-                    <span className="text-white font-semibold">{EMAIL}</span>
+                  <h3 className="font-display font-semibold text-2xl text-white mb-3">
+                    {f.successTitle}
+                  </h3>
+                  <p className="text-base text-ink-dim leading-relaxed mb-7 max-w-md mx-auto">
+                    {f.successBody}
                   </p>
-
-                  <div className="flex flex-col sm:flex-row gap-3 mb-5">
-                    <button
-                      onClick={async () => {
-                        await doCopy(emailBody)
-                        setCopied(true)
-                        setTimeout(() => setCopied(false), 2500)
-                      }}
-                      className={`flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl px-5 py-4 text-base font-semibold transition-all duration-300 ${
-                        copied
-                          ? 'bg-emerald-500/20 border-2 border-emerald-500/30 text-emerald-400'
-                          : 'bg-gradient-to-r from-brand-500 to-brand-400 text-canvas-base hover:shadow-lg hover:shadow-brand-500/20 hover:scale-[1.01]'
-                      }`}
-                    >
-                      {copied ? (
-                        <>
-                          <Check size={18} /> {t.preview.copiedClipboard}
-                        </>
-                      ) : (
-                        <>
-                          <Copy size={18} /> {t.preview.copyText}
-                        </>
-                      )}
-                    </button>
-
-                    <a
-                      href={mailtoHref}
-                      className="flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl border-2 border-brand-500/30 bg-brand-500/5 px-5 py-4 text-base font-semibold text-brand-400 hover:bg-brand-500/10 hover:border-brand-500/50 transition-all duration-300 hover:scale-[1.01]"
-                    >
-                      <ExternalLink size={18} /> {t.preview.openEmail}
-                    </a>
-                  </div>
-
                   <button
-                    onClick={() => setPreview(false)}
-                    className="inline-flex items-center gap-2 text-sm text-ink-dim hover:text-ink-primary transition-colors"
+                    type="button"
+                    onClick={() => {
+                      setD(init)
+                      setStatus('idle')
+                    }}
+                    className="inline-flex items-center gap-2 rounded-xl border-2 border-brand-500/30 bg-brand-500/5 px-6 py-3.5 text-base font-semibold text-brand-400 hover:bg-brand-500/10 hover:border-brand-500/50 transition-all"
                   >
-                    <ArrowLeft size={15} className="rtl:rotate-180" /> {t.preview.goBack}
+                    {f.sendAnother}
                   </button>
-
-                  <div className="mt-6 rounded-xl bg-brand-500/5 border-2 border-brand-500/15 px-5 py-4 flex items-start gap-3.5">
-                    <Camera size={20} className="text-brand-500 mt-0.5 shrink-0" />
-                    <div>
-                      <p className="text-sm font-semibold text-brand-400 mb-1">
-                        {t.preview.attachTitle}
-                      </p>
-                      <ul className="text-sm text-ink-dim space-y-0.5 list-disc list-inside">
-                        <li>{t.preview.attachPhotos}</li>
-                        <li>{t.preview.attachDrawings}</li>
-                      </ul>
-                    </div>
-                  </div>
-                </>
+                </div>
               ) : (
-                <>
+                <form onSubmit={submit} noValidate={false}>
                   <div className="flex items-center gap-3 mb-1.5">
                     <Mail size={22} className="text-brand-400" />
                     <h3 className="font-display font-semibold text-xl text-white">
                       {f.title}
                     </h3>
                   </div>
-                  <p className="text-base text-ink-dim mb-2">
-                    {f.subtitle}
-                  </p>
-                  <p className="text-sm text-silver-trace mb-5 italic">
-                    {f.allOptional}
-                  </p>
+                  <p className="text-base text-ink-dim mb-2">{f.subtitle}</p>
+                  <p className="text-sm text-silver-trace mb-7 italic">{f.requiredNote}</p>
 
-                  {/* Section 1: Environment */}
-                  <Section num={1} title={f.sections[0].title} desc={f.sections[0].desc}>
-                    <div>
-                      <Label hint={f.installHint}>{f.installLabel}</Label>
-                      <div className="flex flex-wrap gap-3">
-                        <OptionCard
-                          label={f.indoorLabel}
-                          desc={f.indoorDesc}
-                          selected={d.environment === 'Indoor'}
-                          onClick={() => set('environment', 'Indoor')}
-                        />
-                        <OptionCard
-                          label={f.outdoorLabel}
-                          desc={f.outdoorDesc}
-                          selected={d.environment === 'Outdoor'}
-                          onClick={() => set('environment', 'Outdoor')}
-                        />
-                        <OptionCard
-                          label={f.otherLabel}
-                          desc={f.otherDesc}
-                          selected={d.environment === 'Other'}
-                          onClick={() => set('environment', 'Other')}
-                        />
-                      </div>
-                      {d.environment === 'Other' && (
-                        <input
-                          type="text"
-                          value={d.environmentCustom}
-                          onChange={(e) => set('environmentCustom', e.target.value)}
-                          placeholder={f.describePlaceholder}
-                          className={`${inputClass} mt-3`}
-                        />
-                      )}
-                    </div>
-
-                    <div>
-                      <Label hint={f.primaryUseHint}>{f.primaryUseLabel}</Label>
-                      <SelectWrap>
-                        <select
-                          value={d.primaryUse}
-                          onChange={(e) => set('primaryUse', e.target.value)}
-                          className={selectClass}
-                        >
-                          <option value="">{f.chooseOption}</option>
-                          {f.primaryUseOptions.map((opt) => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                          ))}
-                        </select>
-                      </SelectWrap>
-                      {d.primaryUse === 'Other' && (
-                        <input
-                          type="text"
-                          value={d.primaryUseCustom}
-                          onChange={(e) => set('primaryUseCustom', e.target.value)}
-                          placeholder={f.describeUse}
-                          className={`${inputClass} mt-3`}
-                        />
-                      )}
-                    </div>
-
-                    <div>
-                      <Label hint={f.viewingHint}>{f.viewingLabel}</Label>
-                      <div className="flex items-center gap-3">
-                        <input
-                          type="text"
-                          value={d.viewingDistance}
-                          onChange={(e) => set('viewingDistance', e.target.value)}
-                          placeholder={f.viewingPlaceholder}
-                          className={inputClass}
-                        />
-                        <span className="text-base text-ink-dim font-medium shrink-0">{f.meters}</span>
-                      </div>
-                    </div>
-                  </Section>
-
-                  {/* Section 2: Dimensions */}
-                  <Section num={2} title={f.sections[1].title} desc={f.sections[1].desc}>
-                    <div>
-                      <Label hint={f.sizeHint}>{f.sizeLabel}</Label>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div>
-                          <span className="block text-sm text-ink-dim font-medium mb-1.5">{f.widthLabel}</span>
-                          <div className="flex items-center gap-2.5">
-                            <input type="text" value={d.width} onChange={(e) => set('width', e.target.value)} placeholder={f.sizePlaceholder} className={inputClass} />
-                            <span className="text-base text-ink-dim font-medium shrink-0">{f.mUnit}</span>
-                          </div>
-                        </div>
-                        <div>
-                          <span className="block text-sm text-ink-dim font-medium mb-1.5">{f.heightLabel}</span>
-                          <div className="flex items-center gap-2.5">
-                            <input type="text" value={d.height} onChange={(e) => set('height', e.target.value)} placeholder={f.sizePlaceholder} className={inputClass} />
-                            <span className="text-base text-ink-dim font-medium shrink-0">{f.mUnit}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label hint={f.measureHint}>{f.measureLabel}</Label>
-                      <div className="flex flex-wrap gap-3">
-                        <OptionCard label={f.displayArea} desc={f.displayAreaDesc} selected={d.measurementType === 'Display Area only'} onClick={() => set('measurementType', 'Display Area only')} />
-                        <OptionCard label={f.totalWall} desc={f.totalWallDesc} selected={d.measurementType === 'Total Wall Space'} onClick={() => set('measurementType', 'Total Wall Space')} />
-                        <OptionCard label={f.notSureLabel} desc={f.notSureDesc} selected={d.measurementType === 'Not Sure'} onClick={() => set('measurementType', 'Not Sure')} />
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label hint={f.shapeHint}>{f.shapeLabel}</Label>
-                      <SelectWrap>
-                        <select value={d.shape} onChange={(e) => set('shape', e.target.value)} className={selectClass}>
-                          <option value="">{f.chooseOption}</option>
-                          {f.shapeOptions.map((opt) => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                          ))}
-                        </select>
-                      </SelectWrap>
-                      {d.shape === 'Other' && (
-                        <input type="text" value={d.shapeCustom} onChange={(e) => set('shapeCustom', e.target.value)} placeholder={f.describeShape} className={`${inputClass} mt-3`} />
-                      )}
-                    </div>
-                  </Section>
-
-                  {/* Section 3: Installation */}
-                  <Section num={3} title={f.sections[2].title} desc={f.sections[2].desc}>
-                    <div>
-                      <Label hint={f.mountHint}>{f.mountLabel}</Label>
-                      <SelectWrap>
-                        <select value={d.mounting} onChange={(e) => set('mounting', e.target.value)} className={selectClass}>
-                          <option value="">{f.chooseOption}</option>
-                          {f.mountOptions.map((opt) => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                          ))}
-                        </select>
-                      </SelectWrap>
-                      {d.mounting === 'Other' && (
-                        <input type="text" value={d.mountingCustom} onChange={(e) => set('mountingCustom', e.target.value)} placeholder={f.describeMount} className={`${inputClass} mt-3`} />
-                      )}
-                    </div>
-
-                    <div>
-                      <Label hint={f.maintenanceHint}>{f.maintenanceLabel}</Label>
-                      <div className="flex flex-wrap gap-3">
-                        <OptionCard label={f.frontAccess} desc={f.frontAccessDesc} selected={d.maintenanceAccess === 'Front access'} onClick={() => set('maintenanceAccess', 'Front access')} />
-                        <OptionCard label={f.rearAccess} desc={f.rearAccessDesc} selected={d.maintenanceAccess === 'Rear access'} onClick={() => set('maintenanceAccess', 'Rear access')} />
-                        <OptionCard label={f.maintenanceNotSure} desc={f.maintenanceNotSureDesc} selected={d.maintenanceAccess === 'Not sure'} onClick={() => set('maintenanceAccess', 'Not sure')} />
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label hint={f.reinforcedHint}>{f.reinforcedLabel}</Label>
-                      <div className="flex flex-wrap gap-3">
-                        {([
-                          [f.yes, 'Yes'],
-                          [f.no, 'No'],
-                          [f.notSure, 'Not Sure'],
-                        ] as const).map(([label, value]) => (
-                          <button
-                            key={value}
-                            type="button"
-                            onClick={() => set('reinforced', value)}
-                            className={`px-6 py-3.5 rounded-xl border-2 text-base font-semibold transition-all ${
-                              d.reinforced === value
-                                ? 'bg-brand-500/10 border-brand-500/40 text-brand-400'
-                                : 'bg-canvas-elevated/50 border-silver-anchor/8 text-ink-muted hover:border-silver-anchor/20'
-                            }`}
-                          >
-                            {label}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </Section>
-
-                  {/* Section 4: Special Requirements */}
-                  <Section num={4} title={f.sections[3].title} desc={f.sections[3].desc}>
-                    <div>
-                      <Label>{f.featuresLabel}</Label>
-                      <div className="space-y-2.5">
-                        <BigCheckbox checked={d.transparent} onChange={(v) => set('transparent', v)} label={f.transparentLabel} desc={f.transparentDesc} />
-                        <BigCheckbox checked={d.flexible} onChange={(v) => set('flexible', v)} label={f.flexibleLabel} desc={f.flexibleDesc} />
-                        <BigCheckbox checked={d.ultraBright} onChange={(v) => set('ultraBright', v)} label={f.ultraBrightLabel} desc={f.ultraBrightDesc} />
-                      </div>
-                      <input type="text" value={d.featureNote} onChange={(e) => set('featureNote', e.target.value)} placeholder={f.otherFeatures} className={`${inputClass} mt-3`} />
-                    </div>
-
-                    <div>
-                      <Label hint={f.contentTypeHint}>{f.contentTypeLabel}</Label>
-                      <div className="space-y-2.5">
-                        <BigCheckbox checked={d.contentLive} onChange={(v) => set('contentLive', v)} label={f.liveVideoLabel} desc={f.liveVideoDesc} />
-                        <BigCheckbox checked={d.contentStatic} onChange={(v) => set('contentStatic', v)} label={f.staticLabel} desc={f.staticDesc} />
-                        <BigCheckbox checked={d.content4k} onChange={(v) => set('content4k', v)} label={f.highResLabel} desc={f.highResDesc} />
-                      </div>
-                      <input type="text" value={d.contentNote} onChange={(e) => set('contentNote', e.target.value)} placeholder={f.otherContent} className={`${inputClass} mt-3`} />
-                    </div>
-                  </Section>
-
-                  {/* Section 5: Logistics */}
-                  <Section num={5} title={f.sections[4].title} desc={f.sections[4].desc}>
-                    <div>
-                      <Label hint={f.locationHint}>{f.locationLabel}</Label>
-                      <input type="text" value={d.deliveryLocation} onChange={(e) => set('deliveryLocation', e.target.value)} placeholder={f.locationPlaceholder} className={inputClass} />
-                    </div>
-                    <div>
-                      <Label hint={f.dateHint}>{f.dateLabel}</Label>
-                      <input type="text" value={d.targetDate} onChange={(e) => set('targetDate', e.target.value)} placeholder={f.datePlaceholder} className={inputClass} />
-                    </div>
-                  </Section>
-
-                  {/* Section 6: Contact Info */}
-                  <Section num={6} title={f.sections[5].title} desc={f.sections[5].desc}>
-                    <div>
-                      <Label>{f.nameLabel}</Label>
-                      <input type="text" value={d.contactName} onChange={(e) => set('contactName', e.target.value)} placeholder={f.namePlaceholder} className={inputClass} />
-                    </div>
+                  <div className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <Label>{f.emailLabel}</Label>
-                        <input type="email" value={d.contactEmail} onChange={(e) => set('contactEmail', e.target.value)} placeholder={f.emailPlaceholder} className={inputClass} />
+                        <Label required>{f.nameLabel}</Label>
+                        <input
+                          type="text"
+                          required
+                          value={d.name}
+                          onChange={(e) => set('name', e.target.value)}
+                          placeholder={f.namePlaceholder}
+                          className={inputClass}
+                        />
                       </div>
                       <div>
-                        <Label>{f.phoneLabel}</Label>
-                        <input type="tel" value={d.contactPhone} onChange={(e) => set('contactPhone', e.target.value)} placeholder={f.phonePlaceholder} className={inputClass} />
+                        <Label required>{f.emailLabel}</Label>
+                        <input
+                          type="email"
+                          required
+                          value={d.email}
+                          onChange={(e) => set('email', e.target.value)}
+                          placeholder={f.emailPlaceholder}
+                          className={inputClass}
+                        />
                       </div>
                     </div>
-                    <div>
-                      <Label hint={f.notesHint}>{f.notesLabel}</Label>
-                      <textarea value={d.notes} onChange={(e) => set('notes', e.target.value)} rows={3} placeholder={f.notesPlaceholder} className={`${inputClass} resize-none`} />
-                    </div>
-                  </Section>
 
-                  {/* Attachment reminder */}
-                  <div className="mt-8 rounded-xl bg-brand-500/5 border-2 border-brand-500/15 px-5 py-4 flex items-start gap-3.5">
-                    <Camera size={20} className="text-brand-500 mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-sm font-semibold text-brand-400 mb-1">
-                        {f.importantAttach}
-                      </p>
-                      <ul className="text-sm text-ink-dim space-y-1 list-disc list-inside">
-                        <li>
-                          <span className="font-medium text-ink-muted">{f.sitePhotos}</span> — {f.sitePhotosDetail}
-                        </li>
-                        <li>
-                          <span className="font-medium text-ink-muted">{f.archDrawings}</span> — {f.archDrawingsDetail}
-                        </li>
-                      </ul>
+                      <Label>{f.companyLabel}</Label>
+                      <input
+                        type="text"
+                        value={d.company}
+                        onChange={(e) => set('company', e.target.value)}
+                        placeholder={f.companyPlaceholder}
+                        className={inputClass}
+                      />
+                    </div>
+
+                    <div>
+                      <Label hint={f.countryHint}>{f.countryLabel}</Label>
+                      <input
+                        type="text"
+                        value={d.country}
+                        onChange={(e) => set('country', e.target.value)}
+                        placeholder={f.countryPlaceholder}
+                        className={inputClass}
+                      />
+                    </div>
+
+                    <div>
+                      <Label hint={f.projectTypeHint}>{f.projectTypeLabel}</Label>
+                      <SelectWrap>
+                        <select
+                          value={d.projectType}
+                          onChange={(e) => set('projectType', e.target.value)}
+                          className={selectClass}
+                        >
+                          <option value="">—</option>
+                          {f.projectTypeOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>
+                              {opt.label}
+                            </option>
+                          ))}
+                        </select>
+                      </SelectWrap>
+                    </div>
+
+                    <div>
+                      <Label hint={f.screenSizeHint}>{f.screenSizeLabel}</Label>
+                      <input
+                        type="text"
+                        value={d.screenSize}
+                        onChange={(e) => set('screenSize', e.target.value)}
+                        placeholder={f.screenSizePlaceholder}
+                        className={inputClass}
+                      />
+                    </div>
+
+                    <div>
+                      <Label hint={f.specsHint}>{f.specsLabel}</Label>
+                      <textarea
+                        value={d.specs}
+                        onChange={(e) => set('specs', e.target.value)}
+                        rows={5}
+                        placeholder={f.specsPlaceholder}
+                        className={`${inputClass} resize-none`}
+                      />
                     </div>
                   </div>
 
-                  {/* Generate button */}
+                  {status === 'error' && (
+                    <div className="mt-7 rounded-xl border-2 border-amber-500/25 bg-amber-500/5 p-5">
+                      <p className="text-sm text-ink-muted leading-relaxed mb-4">
+                        {f.errorGeneric}
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            await doCopy(inquiryText)
+                            setCopied(true)
+                            setTimeout(() => setCopied(false), 2500)
+                          }}
+                          className={`flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-base font-semibold transition-all ${
+                            copied
+                              ? 'bg-emerald-500/20 border-2 border-emerald-500/30 text-emerald-400'
+                              : 'border-2 border-silver-anchor/15 bg-silver-anchor/5 text-white hover:bg-silver-anchor/10'
+                          }`}
+                        >
+                          {copied ? (
+                            <>
+                              <Check size={17} /> {t.copied}
+                            </>
+                          ) : (
+                            <>
+                              <Copy size={17} /> {f.errorCopy}
+                            </>
+                          )}
+                        </button>
+                        <a
+                          href={mailtoHref}
+                          className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl border-2 border-brand-500/30 bg-brand-500/5 px-5 py-3.5 text-base font-semibold text-brand-400 hover:bg-brand-500/10 hover:border-brand-500/50 transition-all"
+                        >
+                          <ExternalLink size={17} /> {f.errorMailto}
+                        </a>
+                      </div>
+                    </div>
+                  )}
+
                   <button
-                    type="button"
-                    onClick={async () => {
-                      setPreview(true)
-                      await doCopy(emailBody)
-                      setCopied(true)
-                      setTimeout(() => setCopied(false), 2500)
-                    }}
-                    className="group mt-10 w-full inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 px-6 py-5 text-lg font-bold text-canvas-base hover:shadow-xl hover:shadow-brand-500/20 transition-all duration-300 hover:scale-[1.01]"
+                    type="submit"
+                    disabled={status === 'submitting'}
+                    className="group mt-8 w-full inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 px-6 py-5 text-lg font-bold text-canvas-base hover:shadow-xl hover:shadow-brand-500/20 transition-all duration-300 hover:scale-[1.01] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
-                    <Copy size={20} />
-                    {f.generateBtn}
+                    <Mail size={20} />
+                    {status === 'submitting' ? f.submittingBtn : f.submitBtn}
                   </button>
-                </>
+                </form>
               )}
             </div>
           </motion.div>

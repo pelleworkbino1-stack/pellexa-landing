@@ -10,7 +10,7 @@ import {
   ArrowLeft,
   Leaf,
 } from 'lucide-react'
-import { useMarket } from '../../hooks/useMarket'
+import { useLang } from '../../context/LangContext'
 
 const EMAIL = 'matcha.sales@pellexa.com'
 
@@ -312,8 +312,8 @@ const inputClass =
 const selectClass = `${inputClass} pe-11 appearance-none cursor-pointer`
 
 export default function FoodContact() {
-  const { market } = useMarket()
-  const t = market.contact
+  const { content } = useLang()
+  const t = content.food.contact
 
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
