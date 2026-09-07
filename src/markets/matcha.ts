@@ -213,7 +213,7 @@ export const matcha: MarketConfig = {
         number: '03',
         title: 'Commercial Contract Execution',
         description:
-          'Custom pricing, batch allocation, logistics mode (air freight or maritime LCL/FCL), and compliance documentation requirements are codified into a contracted supply agreement with the selected manufacturing facility.',
+          'Custom pricing, batch allocation, logistics routing, and compliance documentation requirements are codified into a contracted supply agreement with the selected manufacturing facility. Technical sample verification and pilot evaluations are supported via expedited air dispatch, while contracted commercial production scales into coordinated maritime container routing — 20ft and 40ft allocations under CIF or DDP terms.',
       },
       {
         number: '04',
@@ -233,7 +233,7 @@ export const matcha: MarketConfig = {
       {
         question: 'What are the minimum order volumes?',
         answer:
-          'Minimum order volumes (MOVs) are variable and dependent entirely on your specific formulation requirements, certification scope, and selected production origin. Because we structure custom, asset-light procurement pipelines directly with international manufacturers, volume thresholds are reviewed and aligned on an individual account basis during our commercial qualification phase.',
+          'Commercial matcha procurement programs are structured around enterprise-scale container volume (FCL allocation) to command direct-from-mill pricing, with tailored batch schedules and harvest allocations calibrated to specific client formulations during commercial qualification.',
       },
       {
         question: 'Do you ship retail-sized samples?',
@@ -258,7 +258,7 @@ export const matcha: MarketConfig = {
       {
         question: 'What is the typical timeline from inquiry to shipment arrival?',
         answer:
-          'Timelines are entirely dependent on volume and logistics mode. Technical qualification and sample validation take 1–2 weeks. Once a commercial contract is executed, air freight shipments for validation batches arrive within accelerated transit windows, while high-volume maritime shipments (LCL/FCL) operate on standard production and transit cycles specific to the origin.',
+          'Timelines are driven by allocation scale and routing. Technical qualification and sample validation take 1–2 weeks, with expedited air dispatch supporting sample verification and pilot evaluation inside accelerated transit windows. Contracted commercial production then scales into coordinated maritime container routing — 20ft and 40ft allocations under CIF or DDP terms — operating on standard production and transit cycles specific to the origin.',
       },
     ],
   },
