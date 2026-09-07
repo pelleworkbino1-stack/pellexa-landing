@@ -74,11 +74,17 @@ function HashOrPathLink({
   )
 }
 
+function isLegalRoute(pathname: string) {
+  return /^\/(terms|privacy)(\/|$)/.test(pathname)
+}
+
 export default function ParentNavbar() {
   const { content } = useLang()
+  const { pathname } = useLocation()
   const c = content.nav
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const showLangToggle = !isLegalRoute(pathname)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -114,7 +120,7 @@ export default function ParentNavbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-brand-400 group-hover:w-full transition-all duration-300" />
               </HashOrPathLink>
             ))}
-            <LangToggle />
+            {showLangToggle && <LangToggle />}
             <HashOrPathLink
               href="#contact"
               className="inline-flex items-center gap-2 rounded-full bg-brand-500/10 border border-brand-500/20 px-5 py-2 text-sm font-medium text-brand-400 hover:bg-brand-500/20 hover:border-brand-500/40 transition-all duration-300"
@@ -154,9 +160,11 @@ export default function ParentNavbar() {
                   {link.label}
                 </HashOrPathLink>
               ))}
-              <div className="flex items-center gap-3 px-4 py-3">
-                <LangToggle />
-              </div>
+              {showLangToggle && (
+                <div className="flex items-center gap-3 px-4 py-3">
+                  <LangToggle />
+                </div>
+              )}
               <HashOrPathLink
                 href="#contact"
                 onNavigate={() => setMobileOpen(false)}
