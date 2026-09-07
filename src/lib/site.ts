@@ -12,3 +12,15 @@ export function hubUrl(): string {
   if (isLedSubdomain()) return 'https://pellexa.com'
   return '/'
 }
+
+/**
+ * Canonical URL for a hub-owned path such as `/terms` or `/privacy`.
+ *
+ * The legal pages are registered once, on the parent hub route tree. The LED
+ * subdomain runs a separate route tree where `/:market` would swallow those
+ * paths, so callers there need an absolute apex URL instead of a router path.
+ */
+export function hubPath(path: string): string {
+  const clean = path.startsWith('/') ? path : `/${path}`
+  return isLedSubdomain() ? `https://pellexa.com${clean}` : clean
+}

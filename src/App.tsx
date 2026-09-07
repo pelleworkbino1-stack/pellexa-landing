@@ -6,6 +6,8 @@ import MatchaPage from './pages/MatchaPage'
 import CocoaPage from './pages/CocoaPage'
 import GeneralSourcingPage from './pages/GeneralSourcingPage'
 import AcrylicSourcingPage from './pages/AcrylicSourcingPage'
+import TermsPage from './pages/TermsPage'
+import PrivacyPage from './pages/PrivacyPage'
 import { isLedSubdomain } from './lib/site'
 import { MarketProvider } from './context/MarketContext'
 import { ThemeProvider } from './theme/ThemeProvider'
@@ -37,6 +39,8 @@ function AppRoutes() {
       <Route path="/food/cacao" element={<CocoaPage />} />
       <Route path="/sourcing" element={<GeneralSourcingPage />} />
       <Route path="/acrylic" element={<AcrylicSourcingPage />} />
+      <Route path="/terms" element={<TermsPage />} />
+      <Route path="/privacy" element={<PrivacyPage />} />
     </Routes>
   )
 }

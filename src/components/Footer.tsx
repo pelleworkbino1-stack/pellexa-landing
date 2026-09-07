@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom'
-import { hubUrl, isLedSubdomain } from '../lib/site'
+import { hubPath, hubUrl, isLedSubdomain } from '../lib/site'
 import { useMarket } from '../hooks/useMarket'
 import PellexaLogo from './PellexaLogo'
 
 const logoBlock = <PellexaLogo variant="full" className="justify-center" />
+
+/** Keyed on the route rather than the label, which differs per market locale. */
+const LEGAL_LINKS = [
+  ['privacy', '/privacy'],
+  ['terms', '/terms'],
+] as const
+
+const legalLinkClass =
+  'text-xs text-ink-dim hover:text-white transition-colors'
 
 export default function Footer() {
   const { market } = useMarket()
@@ -32,15 +41,17 @@ export default function Footer() {
               {c.copyright.replace('{year}', String(new Date().getFullYear()))}
             </p>
             <div className="flex items-center gap-6">
-              {[c.privacy, c.terms].map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="text-xs text-ink-dim hover:text-white transition-colors"
-                >
-                  {link}
-                </a>
-              ))}
+              {LEGAL_LINKS.map(([labelKey, to]) =>
+                isLedSubdomain() ? (
+                  <a key={to} href={hubPath(to)} className={legalLinkClass}>
+                    {c[labelKey]}
+                  </a>
+                ) : (
+                  <Link key={to} to={to} className={legalLinkClass}>
+                    {c[labelKey]}
+                  </Link>
+                ),
+              )}
             </div>
           </div>
         </div>

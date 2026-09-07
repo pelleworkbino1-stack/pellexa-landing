@@ -35,7 +35,8 @@ export interface BrandProfile {
  *
  * - `/led`, `/led/...`           → Electric Cyan
  * - `/food`, `/food/...`         → Matcha + Cocoa (Agri)
- * - `/`, `/sourcing`, `/acrylic` → Premium Sky Blue + Bronze runway (parent
+ * - `/`, `/sourcing`, `/acrylic`,
+ *   `/terms`, `/privacy`         → Premium Sky Blue + Bronze runway (parent
  *                                   core). The General Sourcing + dedicated
  *                                   Acrylic verticals both cascade from the
  *                                   parent token profile by design — adding
@@ -63,9 +64,9 @@ export const brandRegistry: readonly BrandProfile[] = [
   {
     key: 'parent',
     className: 'theme-parent',
-    match: /^\/(sourcing(\/|$)|acrylic(\/|$)|$)/,
+    match: /^\/(sourcing(\/|$)|acrylic(\/|$)|terms(\/|$)|privacy(\/|$)|$)/,
     label:
-      'Pellexa Corporate — Premium Sky Blue + Bronze (root / sourcing / acrylic)',
+      'Pellexa Corporate — Premium Sky Blue + Bronze (root / sourcing / acrylic / legal)',
   },
 ] as const
 

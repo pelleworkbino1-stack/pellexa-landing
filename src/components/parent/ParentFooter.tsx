@@ -1,5 +1,12 @@
+import { Link } from 'react-router-dom'
 import { useLang } from '../../context/LangContext'
 import PellexaLogo from '../PellexaLogo'
+
+/** Keyed on the route rather than the label, which changes with the EN/HE toggle. */
+const LEGAL_LINKS = [
+  ['privacy', '/privacy'],
+  ['terms', '/terms'],
+] as const
 
 export default function ParentFooter() {
   const { content } = useLang()
@@ -20,14 +27,14 @@ export default function ParentFooter() {
               {c.copyright.replace('{year}', String(new Date().getFullYear()))}
             </p>
             <div className="flex items-center gap-6">
-              {[c.privacy, c.terms].map((link) => (
-                <a
-                  key={link}
-                  href="#"
+              {LEGAL_LINKS.map(([labelKey, to]) => (
+                <Link
+                  key={to}
+                  to={to}
                   className="text-xs text-ink-dim hover:text-white transition-colors"
                 >
-                  {link}
-                </a>
+                  {c[labelKey]}
+                </Link>
               ))}
             </div>
           </div>
