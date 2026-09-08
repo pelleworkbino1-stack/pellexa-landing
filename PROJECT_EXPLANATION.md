@@ -387,7 +387,7 @@ pellexa-landing-master/
 |---|---|
 | `ParentNavbar` / `ParentHero` / `SolutionsGrid` / `ParentAbout` / `ParentContact` / `ParentFooter` | Corporate hub |
 | `CocoaPortfolio` | Full cacao marketing body |
-| `FoodContact` | Matcha / food intake form |
+| `FoodContact` | Agri-Food enterprise procurement CTA |
 
 ---
 

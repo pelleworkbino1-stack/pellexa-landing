@@ -426,12 +426,10 @@ export interface FoodOperatingModelContent {
 }
 
 /**
- * Header copy for the Agri-Food procurement intake form on /food.
+ * Copy for the Agri-Food enterprise procurement CTA on /food and /food/matcha.
  *
- * `FoodContact` previously read these fields off `MarketConfig['contact']` via
- * `useMarket()`, which coupled the hub-wide form to the matcha market config
- * and left it English-only. Sourcing them here keeps the form under
- * `LangProvider` alone and gives it real Hebrew parity.
+ * Sourced under `LangProvider` so English and Hebrew stay at compile-enforced
+ * parity. The inbox lives on `FoodPortfolioContent.email`, not here.
  */
 export interface FoodContactContent {
   sectionLabel: string
@@ -442,10 +440,18 @@ export interface FoodContactContent {
   emailCardLabel: string
   copy: string
   copied: string
-  /** Section 2 heading — the nine-category portfolio multi-select. */
-  categorySectionTitle: string
-  categorySectionDesc: string
-  categoryNotePlaceholder: string
+  /** Heading above the portfolio-scope pillars in the CTA panel. */
+  scopeTitle: string
+  /** Portfolio scope pillars. Exactly three, matched 1:1 to icons in FoodContact. */
+  scopePoints: { title: string; body: string }[]
+  /** Primary mailto CTA label. */
+  ctaLabel: string
+  /** Subject line for the mailto: link. */
+  mailtoSubject: string
+  /** Shown under the CTA when no mail client opens. */
+  fallbackNote: string
+  /** States that lab documentation and COA are released on commercial qualification. */
+  qualificationNote: string
 }
 
 /** Top-level Agri-Food portfolio registry mounted on `ParentContent.food`. */

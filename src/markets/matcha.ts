@@ -12,8 +12,8 @@ import type { MarketConfig } from './types'
  * section components (`Hero`, `WhyPellexa`, `Advantage`, `Solutions`, `Process`,
  * `FAQ`) can render against it without modification. The `contact` block is a
  * structural stub — `MatchaPage` renders the dedicated `FoodContact` component
- * instead of the LED `Contact` component, so most form fields are never
- * consumed at runtime.
+ * instead of the LED `Contact` component, and that CTA reads copy from
+ * `content.food` under `LangProvider`.
  *
  * Brand identity for the matcha product line is now resolved by the route-based
  * ThemeProvider, which emits `.theme-agri` on `<html>` for any `/food/*` path.
@@ -263,9 +263,8 @@ export const matcha: MarketConfig = {
     ],
   },
 
-  // Structural stub: MatchaPage renders <FoodContact /> instead of the LED <Contact />.
-  // Only the top-level header fields (sectionLabel, title, titleHighlight, subtitle,
-  // benefits, emailCardLabel, copy, copied) are consumed by FoodContact at runtime.
+  // Structural stub: MatchaPage renders <FoodContact />, which reads copy from
+  // `content.food` under LangProvider — not from this market-config contact block.
   contact: {
     sectionLabel: 'Institutional Procurement Inquiry',
     title: 'Qualify Your',

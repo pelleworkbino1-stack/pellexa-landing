@@ -347,7 +347,7 @@ const parentEnFood: ParentContent['food'] = {
     title: 'Qualify Your',
     titleHighlight: 'Agri-Food Engagement',
     subtitle:
-      'Submit a structured procurement profile across our nine-category portfolio. Qualified accounts receive a container-aligned commercial brief and access to the staged verification pipeline.',
+      'Route a commercial inquiry across our dry-food portfolio. Qualified accounts receive a container-aligned brief and access to the staged verification pipeline.',
     benefits: [
       'Nine dry and bulk categories under one FCL operating model',
       'Direct factory pricing — no inventory markup or holding costs',
@@ -357,11 +357,27 @@ const parentEnFood: ParentContent['food'] = {
     emailCardLabel: 'Direct agri-food procurement contact',
     copy: 'Copy',
     copied: 'Copied',
-    categorySectionTitle: 'Portfolio Categories',
-    categorySectionDesc:
-      'Select the category line(s) you are evaluating. Leave blank if you would like a Pellexa recommendation.',
-    categoryNotePlaceholder:
-      'Notes on category preference, grade, or open questions…',
+    scopeTitle: 'Dry-food portfolio scope',
+    scopePoints: [
+      {
+        title: 'FCL allocations',
+        body: 'Every engagement runs at Full Container Load volumes and above — 20ft and 40ft maritime only. No LCL, sub-container, or low-MOQ entry.',
+      },
+      {
+        title: 'Direct-from-origin milling and refining',
+        body: 'Sourced from authorized origin facilities under back-to-back factory contracts. Direct factory pricing — no inventory markup or holding costs.',
+      },
+      {
+        title: 'Lab documentation and COA',
+        body: 'Batch-level certificates of analysis and supporting lab documentation are released upon commercial qualification.',
+      },
+    ],
+    ctaLabel: 'Open procurement inquiry',
+    mailtoSubject: 'Pellexa Agri-Food — Procurement Inquiry',
+    fallbackNote:
+      'If your mail client does not open, copy the address and send your brief directly.',
+    qualificationNote:
+      'Lab documentation and COA are issued after commercial qualification. Inquiries are routed to agri-food.sales@pellexa.com.',
   },
   operatingModel: {
     sectionLabel: 'Operating Model',
