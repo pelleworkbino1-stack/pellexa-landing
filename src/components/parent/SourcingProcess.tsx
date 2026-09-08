@@ -5,8 +5,8 @@ import { motion, useInView } from 'framer-motion'
  * Five-stage partner-production pipeline for `/sourcing` and `/acrylic`.
  * English-only; must live inside `<main dir="ltr" lang="en">`.
  *
- * Stage 05 is a first-class shipping card (CIF / DDP via recognized
- * forwarders). Pellexa coordinates; it is not the freight forwarder,
+ * Stage 05 is a first-class shipping card (CIF-baseline FCL to destination
+ * container terminals). Pellexa coordinates; it is not the freight forwarder,
  * customs broker, or importer of record.
  */
 const STAGES = [
@@ -32,8 +32,8 @@ const STAGES = [
   },
   {
     label: '05',
-    title: 'Shipping terms — CIF or DDP',
-    body: 'Coordinated maritime shipping under CIF or DDP terms via recognized freight forwarders to the client destination port or facility, selected against your import-license setup and local importer partners. Pellexa coordinates and verifies this chain; we are not the freight forwarder, customs broker, or importer of record.',
+    title: 'Managed freight — CIF baseline',
+    body: 'Full Container Load (FCL) maritime freight coordinated to destination container terminals — including US, European, and Israeli commercial ports (CIF baseline) — with clearance documentation aligned alongside licensed local brokers. Pellexa coordinates this chain; we are not the freight forwarder, customs broker, or importer of record.',
   },
 ] as const
 

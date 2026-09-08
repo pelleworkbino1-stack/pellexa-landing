@@ -407,8 +407,8 @@ const parentEnFood: ParentContent['food'] = {
       },
       {
         label: '05',
-        title: 'Shipping Terms — CIF or DDP',
-        body: 'Maritime shipments are coordinated under CIF or DDP terms depending on your import-license setup and local importer partners. Freight moves via recognized forwarders; Pellexa is not the freight forwarder, customs broker, or importer of record.',
+        title: 'Managed Freight — CIF baseline',
+        body: 'Full Container Load (FCL) maritime freight coordinated to destination container terminals — including US, European, and Israeli commercial ports (CIF baseline) — with clearance documentation aligned alongside licensed local brokers. Pellexa coordinates this chain; we are not the freight forwarder, customs broker, or importer of record.',
       },
     ],
   },
@@ -479,7 +479,7 @@ export const parentEn: ParentContent = {
     titleMain: 'The Strategic Bridge Between',
     titleFaded: 'Verified Global Factories & Your Market',
     subtitle:
-      'Pellexa connects world-class manufacturing with your market through a structured, transparent process. We are not a freight forwarder, customs broker, or importer of record — we structure, verify, and coordinate every transaction under NCNDA and back-to-back contract frameworks.',
+      'Pellexa International LLC coordinates institutional B2B procurement programs, structuring direct-from-mill supply chains to primary destination ports across North America, Europe, Israel, and global commercial hubs. We are not a freight forwarder, customs broker, or importer of record — we structure, verify, and coordinate every transaction under NCNDA and back-to-back contract frameworks.',
     pillars: [
       {
         title: 'Verified Suppliers & Contract Framework',
