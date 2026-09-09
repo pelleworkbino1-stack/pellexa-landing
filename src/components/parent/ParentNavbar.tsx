@@ -22,9 +22,12 @@ function LangToggle() {
   )
 }
 
+function hashId(hash: string) {
+  return hash.replace(/^\/?#/, '')
+}
+
 function scrollToId(hash: string) {
-  const id = hash.startsWith('#') ? hash.slice(1) : hash
-  const el = document.getElementById(id)
+  const el = document.getElementById(hashId(hash))
   if (!el) return false
   el.scrollIntoView({ behavior: 'smooth' })
   return true
@@ -53,16 +56,17 @@ function HashOrPathLink({
   }
 
   const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    const homeOnly = HOME_ONLY_HASHES.has(href)
-    if (homeOnly && pathname !== '/') {
-      e.preventDefault()
-      onNavigate?.()
+    e.preventDefault()
+    onNavigate?.()
+
+    // The legal routes render no #contact section, so without a local target
+    // the click would be inert. Fall back to the home page anchor.
+    const missingLocally = !document.getElementById(hashId(href))
+    if (pathname !== '/' && (HOME_ONLY_HASHES.has(href) || missingLocally)) {
       navigate({ pathname: '/', hash: href })
       return
     }
 
-    e.preventDefault()
-    onNavigate?.()
     scrollToId(href)
     navigate({ hash: href }, { replace: true })
   }

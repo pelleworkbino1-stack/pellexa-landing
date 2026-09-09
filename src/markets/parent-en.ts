@@ -431,7 +431,6 @@ export const parentEn: ParentContent = {
   nav: {
     links: [
       { label: 'Solutions', href: '#solutions' },
-      { label: 'Agri-Food Sourcing', href: '/food' },
       { label: 'About', href: '#about' },
       { label: 'Contact', href: '#contact' },
     ],
@@ -512,7 +511,6 @@ export const parentEn: ParentContent = {
       'Whether you need LED displays, agri-food sourcing, or want to explore any of our upcoming verticals — reach out directly and we\'ll get back to you personally.',
     email: 'pelle@pellexa.com',
     cta1: 'Send Us an Email',
-    cta2: 'LED Inquiry Form',
   },
   scopeDisclaimer: {
     title: 'Operational Scope',
@@ -529,7 +527,7 @@ export const parentEn: ParentContent = {
   footer: {
     tagline:
       'The strategic nexus between world-class manufacturing and structured, verified B2B supply chains.',
-    copyright: '© {year} Pellexa. All rights reserved.',
+    copyright: '© {year} Pellexa International LLC. All rights reserved.',
     privacy: 'Privacy',
     terms: 'Terms',
   },

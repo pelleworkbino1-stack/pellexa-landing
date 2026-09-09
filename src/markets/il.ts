@@ -328,7 +328,7 @@ export const il: MarketConfig = {
   footer: {
     tagline:
       'שותף רכש B2B למערכות תצוגת LED — ייצור Tier-1, בקרת איכות צד-שלישי ומשלוח מבוטח.',
-    copyright: '© {year} Pellexa LED Solutions. כל הזכויות שמורות.',
+    copyright: '© {year} Pellexa International LLC. כל הזכויות שמורות.',
     privacy: 'פרטיות',
     terms: 'תנאי שימוש',
   },

@@ -323,7 +323,7 @@ export const ph: MarketConfig = {
   footer: {
     tagline:
       'B2B sourcing partner for LED display systems in the Philippines — Tier-1 manufacturing, third-party QC, insured freight.',
-    copyright: '© {year} Pellexa LED Solutions. All rights reserved.',
+    copyright: '© {year} Pellexa International LLC. All rights reserved.',
     privacy: 'Privacy',
     terms: 'Terms',
   },

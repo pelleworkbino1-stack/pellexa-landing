@@ -323,7 +323,7 @@ export const globalMarket: MarketConfig = {
   footer: {
     tagline:
       'B2B sourcing partner for LED display systems — Tier-1 manufacturing, third-party QC, insured freight.',
-    copyright: '© {year} Pellexa LED Solutions. All rights reserved.',
+    copyright: '© {year} Pellexa International LLC. All rights reserved.',
     privacy: 'Privacy',
     terms: 'Terms',
   },

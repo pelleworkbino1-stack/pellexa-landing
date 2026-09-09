@@ -327,7 +327,7 @@ export const matcha: MarketConfig = {
   footer: {
     tagline:
       'Global supply chain agency for matcha procurement — specification-driven, zero spot inventory, direct factory access.',
-    copyright: '© {year} Pellexa Matcha Sourcing. All rights reserved.',
+    copyright: '© {year} Pellexa International LLC. All rights reserved.',
     privacy: 'Privacy',
     terms: 'Terms',
   },

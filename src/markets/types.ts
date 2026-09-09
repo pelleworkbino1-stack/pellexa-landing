@@ -522,7 +522,7 @@ export interface ParentContent {
     leadership: string
     pillars: { title: string; description: string }[]
   }
-  contact: { title: string; subtitle: string; email: string; cta1: string; cta2: string }
+  contact: { title: string; subtitle: string; email: string; cta1: string }
   footer: { tagline: string; copyright: string; privacy: string; terms: string }
   /**
    * Operational-scope disclaimer for industrial sourcing verticals (`/sourcing`,

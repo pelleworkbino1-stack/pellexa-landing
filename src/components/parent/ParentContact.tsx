@@ -50,12 +50,6 @@ export default function ParentContact() {
               />
               <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
-            <a
-              href="/led#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-silver-anchor/15 bg-silver-anchor/5 backdrop-blur-sm px-7 py-3.5 text-sm font-medium text-white hover:bg-silver-anchor/10 hover:border-silver-anchor/25 transition-all duration-300"
-            >
-              {c.cta2}
-            </a>
           </div>
         </motion.div>
       </div>

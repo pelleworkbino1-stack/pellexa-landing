@@ -438,7 +438,6 @@ export const parentHe: ParentContent = {
   nav: {
     links: [
       { label: 'פתרונות', href: '#solutions' },
-      { label: 'רכש מזון וחקלאות', href: '/food' },
       { label: 'אודות', href: '#about' },
       { label: 'צור קשר', href: '#contact' },
     ],
@@ -521,7 +520,6 @@ export const parentHe: ParentContent = {
       'בין אם מסכי LED, רכש מזון, או כל פנייה אחרת — שלחו מייל ישירות ונחזור אליכם באופן אישי.',
     email: 'pelle@pellexa.com',
     cta1: 'שלחו לנו מייל',
-    cta2: 'טופס פנייה LED',
   },
   scopeDisclaimer: {
     title: 'גבולות הפעילות',
@@ -537,7 +535,7 @@ export const parentHe: ParentContent = {
   },
   footer: {
     tagline: 'הצומת האסטרטגי בין ייצור ברמה עולמית לשרשראות אספקה B2B מובנות ומאומתות.',
-    copyright: '© {year} Pellexa. כל הזכויות שמורות.',
+    copyright: '© {year} Pellexa International LLC. כל הזכויות שמורות.',
     privacy: 'פרטיות',
     terms: 'תנאי שימוש',
   },
