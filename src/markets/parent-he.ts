@@ -684,26 +684,32 @@ const parentHeAcrylic: ParentContent['acrylic'] = {
       heading: 'PELLEXA ACRYLIC — תיק ייעוץ לפרויקט',
       orgTitle: '1. ארגון',
       orgFields: ['חברה', 'תעשייה / מגזר', 'שוק יעד'],
-      surfaceTitle: '2. משטח יכולת (סמנו כל מה שמתאים)',
+      // Labels below are deliberately terse. Each Hebrew letter costs six
+      // characters once percent-encoded, so this brief is what decides whether
+      // the /acrylic mailto URL clears the mail-client limit. Measured total
+      // after this trim: 1,794 characters. Lengthening a label here spends
+      // roughly 6 characters per letter against ~250 of remaining headroom —
+      // check with the mailto probe before expanding any of them.
+      surfaceTitle: '2. משטח יכולת (סמנו)',
       surfaceOptions: [
-        'שימור ארכיוני ואספנות',
-        'מסגרות הגנה למוזיאונים וגלריות',
-        'חלונות תצוגה למותגי יוקרה',
-        'רכיבי \u2066PMMA\u2069 ארכיטקטוניים ותעשייתיים',
-        'אחר (תיאור למטה)',
+        'שימור ארכיוני',
+        'מוזיאונים וגלריות',
+        'תצוגת יוקרה',
+        'רכיבי \u2066PMMA\u2069',
+        'אחר',
       ],
       profileTitle: '3. פרופיל הפרויקט',
       profileFields: [
-        'מידות / מעטפת (רוחב × גובה × עומק)',
-        'עובי חומר / דינמיקת עומסים',
-        'יעדי גימור ואסתטיקה',
-        'היקף סבב חזוי',
-        'זמן אספקה מבוקש',
-        'אילוצים רגולטוריים / מגזריים',
+        'מידות (רוחב × גובה × עומק)',
+        'עובי חומר ועומסים',
+        'גימור ואסתטיקה',
+        'היקף סבב',
+        'זמן אספקה',
+        'אילוצים רגולטוריים',
       ],
       contactTitle: '4. יצירת קשר',
       contactFields: ['שם', 'דוא"ל', 'טלפון'],
-      signoff: 'נשלח דרך ייעוץ הרכש של Pellexa Acrylic.',
+      signoff: 'נשלח דרך Pellexa Acrylic.',
     },
   },
 }
@@ -859,5 +865,9 @@ export const parentHe: ParentContent = {
     copied: 'הועתק',
     // Reproduced verbatim from `food.contact.fallbackNote`.
     fallbackNote: 'אם תוכנת הדואר לא נפתחת, העתיקו את הכתובת ושלחו את הפנייה ישירות.',
+    copyBrief: 'העתקת התיק המלא',
+    copiedBrief: 'התיק הועתק',
+    oversizeNote:
+      'התיק ארוך מדי למילוי אוטומטי אמין בכל תוכנות הדואר, ולכן הכפתור פותח הודעה ריקה עם שורת הנושא בלבד. השתמשו ב״העתקת התיק המלא״ והדביקו אותו בגוף ההודעה.',
   },
 }

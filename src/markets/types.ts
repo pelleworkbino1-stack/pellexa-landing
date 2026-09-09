@@ -683,6 +683,15 @@ export interface MailtoFallbackContent {
   copy: string
   copied: string
   fallbackNote: string
+  /** Copy button label when the oversize guard has stripped the brief body. */
+  copyBrief: string
+  /** Confirmation for `copyBrief`. */
+  copiedBrief: string
+  /**
+   * Replaces `fallbackNote` when the guard trips, telling the buyer the mail
+   * client opened with the subject only and the brief is on the clipboard.
+   */
+  oversizeNote: string
 }
 
 export interface ParentContent {

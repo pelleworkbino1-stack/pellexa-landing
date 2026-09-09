@@ -13,7 +13,9 @@ import ParentNavbar from '../components/parent/ParentNavbar'
 import ParentFooter from '../components/parent/ParentFooter'
 import SourcingProcess from '../components/parent/SourcingProcess'
 import ScopeDisclaimer from '../components/parent/ScopeDisclaimer'
-import MailtoFallback from '../components/parent/MailtoFallback'
+import MailtoFallback, {
+  buildGuardedMailto,
+} from '../components/parent/MailtoFallback'
 import { LangProvider, useLang } from '../context/LangContext'
 import type {
   AcrylicBriefContent,
@@ -296,17 +298,23 @@ function TechSpecs() {
 /**
  * Assembles the pre-filled consultation email.
  *
- * The ASCII rule/box frame is identical in every locale — only the labels are
- * translated. Field labels are not space-padded to a fixed column: that
- * alignment only works in LTR monospace and mangles the brief under RTL.
+ * Deliberately plain. Field labels are not space-padded to a fixed column:
+ * that alignment only works in LTR monospace and mangles the brief under RTL.
+ *
+ * The two 48-character ASCII rule frames this used to draw were removed
+ * because they were the single largest contributor to the Hebrew URL blowing
+ * past the mail-client limit — `encodeURIComponent` expands each em-dash to
+ * nine characters, so the `'—'.repeat(48)` line alone cost 432 of them, and
+ * the pair cost 582. `'- '` bullets replace `'   [ ] '` for the same reason
+ * (12 encoded characters per row down to 4), and the three-space indents are
+ * gone at 9 characters each.
  */
 function buildBriefBody(brief: AcrylicBriefContent) {
-  const field = (label: string) => `   ${label}: `
-  const option = (label: string) => `   [ ] ${label}`
+  const field = (label: string) => `${label}: `
+  const option = (label: string) => `- ${label}`
 
   return [
     brief.heading,
-    '='.repeat(48),
     '',
     brief.orgTitle,
     ...brief.orgFields.map(field),
@@ -320,7 +328,6 @@ function buildBriefBody(brief: AcrylicBriefContent) {
     brief.contactTitle,
     ...brief.contactFields.map(field),
     '',
-    '—'.repeat(48),
     brief.signoff,
   ].join('\n')
 }
@@ -332,8 +339,11 @@ function QuoteIntake() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
-  const subject = encodeURIComponent(t.mailtoSubject)
-  const body = encodeURIComponent(buildBriefBody(t.brief))
+  const mailto = buildGuardedMailto(
+    a.email,
+    t.mailtoSubject,
+    buildBriefBody(t.brief),
+  )
 
   return (
     <section id="contact" className="relative py-16 sm:py-24">
@@ -367,7 +377,8 @@ function QuoteIntake() {
 
           <MailtoFallback
             email={a.email}
-            mailtoHref={`mailto:${a.email}?subject=${subject}&body=${body}`}
+            mailtoHref={mailto.href}
+            oversizeBrief={mailto.oversizeBrief}
             ctaLabel={t.ctaLabel}
             secondaryHref={`mailto:${a.email}`}
             secondaryLabel={t.secondaryLabel}

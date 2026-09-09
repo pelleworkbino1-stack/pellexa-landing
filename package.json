@@ -8,6 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "check:routes": "node scripts/ssr-check.mjs",
+    "check:mailto": "node scripts/mailto-guard-check.mjs",
     "brand:extract": "node scripts/extract-brand.mjs"
   },
   "devDependencies": {

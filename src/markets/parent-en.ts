@@ -829,5 +829,9 @@ export const parentEn: ParentContent = {
     copied: 'Copied',
     fallbackNote:
       'If your mail client does not open, copy the address and send your brief directly.',
+    copyBrief: 'Copy full brief',
+    copiedBrief: 'Brief copied',
+    oversizeNote:
+      'This brief is too long to pre-fill reliably in every mail client, so the button opens a blank message with the subject line only. Use “Copy full brief” and paste it into the message body.',
   },
 }
