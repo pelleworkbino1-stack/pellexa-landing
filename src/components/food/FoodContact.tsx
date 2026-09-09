@@ -49,8 +49,13 @@ export default function FoodContact() {
     <section id="contact" className="relative py-24 sm:py-32 bg-canvas-elevated/50">
       <div className="mx-auto max-w-7xl px-5 sm:px-8" ref={ref}>
         <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-14 items-start">
+          {/* x offset is 10, not 30: at <=412px a 30px slide-in pushed this
+              card 10px past the viewport edge, which showed up as
+              scrollWidth exceeding clientWidth until the animation settled.
+              The container padding absorbs 10px, so the entrance still reads
+              without producing that transient overflow. */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -10 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
             className="lg:sticky lg:top-24"
@@ -109,8 +114,9 @@ export default function FoodContact() {
             </div>
           </motion.div>
 
+          {/* Clamped to 10 for the same reason as the sticky column above. */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 10 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >

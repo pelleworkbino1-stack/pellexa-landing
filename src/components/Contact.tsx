@@ -150,8 +150,13 @@ export default function Contact() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8" ref={ref}>
         <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-14 items-start">
           {/* Left column */}
+          {/* x offset is 10, not 30: at <=412px a 30px slide-in pushed this
+              card 10px past the viewport edge, which showed up as
+              scrollWidth exceeding clientWidth until the animation settled.
+              The container padding absorbs 10px, so the entrance still reads
+              without producing that transient overflow. */}
           <motion.div
-            initial={{ opacity: 0, x: market.dir === 'rtl' ? 30 : -30 }}
+            initial={{ opacity: 0, x: market.dir === 'rtl' ? 10 : -10 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7 }}
             className="lg:sticky lg:top-24"
@@ -243,8 +248,9 @@ export default function Contact() {
           </motion.div>
 
           {/* Right column */}
+          {/* Clamped to 10 for the same reason as the left column above. */}
           <motion.div
-            initial={{ opacity: 0, x: market.dir === 'rtl' ? -30 : 30 }}
+            initial={{ opacity: 0, x: market.dir === 'rtl' ? -10 : 10 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
