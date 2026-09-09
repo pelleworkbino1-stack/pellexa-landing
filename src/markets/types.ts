@@ -513,6 +513,13 @@ export interface ParentContent {
     titleMain: string
     titleFaded: string
     subtitle: string
+    /**
+     * Named executive-leadership attribution rendered under the About
+     * subtitle. Required so both locale registries stay at compile-enforced
+     * parity. Single pre-composed string (label + name + role) so each locale
+     * owns its punctuation and bidi ordering.
+     */
+    leadership: string
     pillars: { title: string; description: string }[]
   }
   contact: { title: string; subtitle: string; email: string; cta1: string; cta2: string }

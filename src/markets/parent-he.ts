@@ -434,7 +434,7 @@ const parentHeFood: ParentContent['food'] = {
 }
 
 export const parentHe: ParentContent = {
-  meta: { title: 'Pellexa — רכש B2B אסטרטגי, בקרת איכות וניהול שרשרת אספקה' },
+  meta: { title: 'Pellexa International LLC — רכש B2B גלובלי וניהול שרשרת אספקה' },
   nav: {
     links: [
       { label: 'פתרונות', href: '#solutions' },
@@ -487,6 +487,7 @@ export const parentHe: ParentContent = {
     titleFaded: 'מפעלים גלובליים מאומתים לשוק שלך',
     subtitle:
       'חברת פלקסה אינטרנשיונל מתאמת תוכניות רכש מוסדיות (B2B), ומחברת שרשראות אספקה ישירות מרצפת הייצור אל נמלי יעד מרכזיים בצפון אמריקה, אירופה, ישראל ושווקים בינלאומיים. אנחנו לא משלח בינלאומי, עמיל מכס או היבואן הרשמי — אנחנו בונים, מאמתים ומתאמים כל עסקה במסגרת הסכמי NCNDA וחוזי גב-אל-גב.',
+    leadership: 'הנהלה ראשית: פלה בינו — מייסד ומנהל כללי (Managing Member)',
     pillars: [
       {
         title: 'ספקים מאומתים ומסגרת חוזית',

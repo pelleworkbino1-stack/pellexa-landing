@@ -186,7 +186,7 @@ const SECTIONS: readonly LegalSection[] = [
     points: [
       '**Entity:** Pellexa International LLC',
       '**Registered Address:** 30 N Gould St Ste R, Sheridan, WY 82801, USA',
-      '**Managing Executive:** Pelle Bino, Managing Partner & Commercial Director',
+      '**Managing Executive:** Pelle Bino, Founder & Managing Member',
       '**Executive Contact Email:** pelle@pellexa.com',
       '**Technical Sourcing Inquiries:** led.sales@pellexa.com',
     ],

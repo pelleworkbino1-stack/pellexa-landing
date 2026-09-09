@@ -30,6 +30,23 @@ export default function ParentAbout() {
           <p className="text-ink-dim text-base sm:text-lg leading-relaxed">
             {c.subtitle}
           </p>
+
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <span
+              aria-hidden="true"
+              className="hidden sm:block h-px w-10 bg-silver-anchor/15"
+            />
+            <p
+              dir="auto"
+              className="text-xs sm:text-sm font-medium tracking-wide text-ink-dim/90"
+            >
+              {c.leadership}
+            </p>
+            <span
+              aria-hidden="true"
+              className="hidden sm:block h-px w-10 bg-silver-anchor/15"
+            />
+          </div>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

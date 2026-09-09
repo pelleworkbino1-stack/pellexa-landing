@@ -427,7 +427,7 @@ const parentEnFood: ParentContent['food'] = {
 }
 
 export const parentEn: ParentContent = {
-  meta: { title: 'Pellexa — Strategic B2B Sourcing, QC & Supply Chain Management' },
+  meta: { title: 'Pellexa International LLC — Global B2B Sourcing & Supply Chain' },
   nav: {
     links: [
       { label: 'Solutions', href: '#solutions' },
@@ -480,6 +480,7 @@ export const parentEn: ParentContent = {
     titleFaded: 'Verified Global Factories & Your Market',
     subtitle:
       'Pellexa International LLC coordinates institutional B2B procurement programs, structuring direct-from-mill supply chains to primary destination ports across North America, Europe, Israel, and global commercial hubs. We are not a freight forwarder, customs broker, or importer of record — we structure, verify, and coordinate every transaction under NCNDA and back-to-back contract frameworks.',
+    leadership: 'Executive Leadership: Pelle Bino — Founder & Managing Member',
     pillars: [
       {
         title: 'Verified Suppliers & Contract Framework',
