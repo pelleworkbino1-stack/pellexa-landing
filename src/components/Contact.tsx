@@ -62,13 +62,13 @@ function Label({
         {children}
         {required && <span className="text-brand-400 ms-1">*</span>}
       </label>
-      {hint && <p className="text-sm text-silver-trace mt-1 leading-snug">{hint}</p>}
+      {hint && <p className="text-sm text-ink-muted mt-1 leading-snug">{hint}</p>}
     </div>
   )
 }
 
 const inputClass =
-  'w-full rounded-xl border-2 border-silver-anchor/10 bg-canvas-elevated/60 px-5 py-4 text-lg text-white placeholder:text-silver-trace focus:outline-none focus:border-brand-500/40 focus:ring-2 focus:ring-brand-500/20 transition-all'
+  'w-full rounded-xl border-2 border-silver-anchor/10 bg-canvas-elevated/60 px-5 py-4 text-lg text-white placeholder:text-ink-muted focus:outline-none focus:border-brand-500/40 focus:ring-2 focus:ring-brand-500/20 transition-all'
 const selectClass = `${inputClass} pe-11 appearance-none cursor-pointer`
 
 export default function Contact() {
@@ -179,7 +179,7 @@ export default function Contact() {
             </div>
 
             <div className="rounded-xl border border-silver-anchor/5 bg-canvas-overlay/40 p-5">
-              <p className="text-xs text-silver-trace mb-2.5 font-medium uppercase tracking-wider">
+              <p className="text-xs text-ink-muted mb-2.5 font-medium uppercase tracking-wider">
                 {t.emailCardLabel}
               </p>
               <div className="flex items-center gap-3">
@@ -214,7 +214,7 @@ export default function Contact() {
 
             {t.whatsapp && (
               <div className="rounded-xl border border-silver-anchor/5 bg-canvas-overlay/40 p-5 mt-4">
-                <p className="text-xs text-silver-trace mb-2.5 font-medium uppercase tracking-wider">
+                <p className="text-xs text-ink-muted mb-2.5 font-medium uppercase tracking-wider">
                   {t.whatsapp.label}
                 </p>
                 <div className="flex items-center gap-3">
@@ -280,7 +280,7 @@ export default function Contact() {
                     </h3>
                   </div>
                   <p className="text-base text-ink-dim mb-2">{f.subtitle}</p>
-                  <p className="text-sm text-silver-trace mb-7 italic">{f.requiredNote}</p>
+                  <p className="text-sm text-ink-muted mb-7 italic">{f.requiredNote}</p>
 
                   <div className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-4">

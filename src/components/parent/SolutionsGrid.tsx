@@ -118,7 +118,7 @@ export default function SolutionsGrid() {
                   {c.generalMOQBadge}
                 </span>
               </div>
-              <p className="text-xs text-silver-trace mb-5 italic">
+              <p className="text-xs text-ink-muted mb-5 italic">
                 {c.generalTargetLabel}
               </p>
               <div className="flex items-center gap-2 text-sm font-medium text-brand-400 group-hover:gap-3 transition-all duration-300">

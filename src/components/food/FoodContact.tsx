@@ -78,7 +78,7 @@ export default function FoodContact() {
             </div>
 
             <div className="rounded-xl border border-silver-anchor/5 bg-canvas-overlay/40 p-5">
-              <p className="text-xs text-silver-trace mb-2.5 font-medium uppercase tracking-wider">
+              <p className="text-xs text-ink-muted mb-2.5 font-medium uppercase tracking-wider">
                 {t.emailCardLabel}
               </p>
               <div className="flex items-center gap-3">
@@ -177,7 +177,7 @@ export default function FoodContact() {
               <p className="text-sm font-mono text-white select-all break-all mt-2">
                 {email}
               </p>
-              <p className="text-sm text-silver-trace leading-relaxed mt-4">
+              <p className="text-sm text-ink-muted leading-relaxed mt-4">
                 {t.qualificationNote}
               </p>
             </div>

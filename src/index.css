@@ -70,7 +70,11 @@
   --ink-primary:      #F4F5F7;
   --ink-body:         #C7CAD1;
   --ink-muted:        #8A8F99;
-  --ink-dim:          #5A5F6B;
+  /* WCAG 2.1 AA floor. #5A5F6B measured 3.06:1 on --canvas-base and failed the
+   * 4.5:1 normal-text bar in 344 places. This value clears 4.5:1 on every
+   * canvas surface, including an opaque --canvas-overlay card (4.56:1), so it
+   * stays compliant if reused on a lighter surface. Do not darken. */
+  --ink-dim:          #7E8494;
 
   /* ---------------------------------------------------------------------------
    * TIER 3 — Brand (default = Pellexa Parent / Premium Sky Blue)
