@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import {
-  Package,
+  Archive,
   ShieldCheck,
   Gem,
   Container,
@@ -14,33 +14,37 @@ import ParentFooter from '../components/parent/ParentFooter'
 import SourcingProcess from '../components/parent/SourcingProcess'
 import ScopeDisclaimer from '../components/parent/ScopeDisclaimer'
 import MailtoFallback from '../components/parent/MailtoFallback'
-import { LangProvider } from '../context/LangContext'
+import { LangProvider, useLang } from '../context/LangContext'
+import type {
+  AcrylicBriefContent,
+  AcrylicSpecId,
+  AcrylicSurfaceId,
+} from '../markets/types'
 
 /**
  * Pellexa Acrylic Sourcing — dedicated page (`/acrylic`).
  *
  * Cascades from the parent core theme profile (.theme-parent → Sky Blue +
- * Bronze runway). Positioning: Pellexa is a B2B sourcing partner. Acrylic is
- * produced at audited specialized fabrication partners, then verified through
- * staged sampling and dual third-party QC. Pellexa does not own fabrication
- * plants and is not the freight forwarder, customs broker, or importer of record.
+ * Bronze runway). Positioning: precision-engineered PMMA for archival
+ * preservation, museum and gallery protection, luxury retail, and high-value
+ * collector preservation. Produced at audited specialized fabrication
+ * partners, then verified through staged sampling and dual third-party QC.
+ * Pellexa does not own fabrication plants and is not the freight forwarder,
+ * customs broker, or importer of record.
+ *
+ * All copy is sourced from `content.acrylic` so EN and HE stay at
+ * compile-enforced parity.
  *
  * Structure:
  *   1. ParentNavbar
  *   2. Hero (partner-sourced identity + dual-MOQ badge)
- *   3. Product grid: 4 capability surfaces quoted against partner capability
+ *   3. Surface grid: 4 capability surfaces quoted against partner capability
  *   4. Capability spec table — partner baselines, confirmed at consultation
  *   5. Five-stage partner production pipeline
  *   6. Operational-scope disclaimer
  *   7. Consultation intake panel (id="contact", mailto + copy fallback)
  *   8. ParentFooter
  */
-
-const PAGE_TITLE = 'Pellexa Acrylic Sourcing — Partner Fabrication & QC'
-const PAGE_DESCRIPTION =
-  'Custom acrylic sourced from audited specialized fabrication partners — retail boxes, TCG collectible protection, display architecture, and industrial components. Project-based dynamic MOQ as a specialized fabrication line; FCL-scale minimums for standard industrial lines. Staged sampling, dual third-party QC, back-to-back contracts.'
-const EMAIL = 'pelle@pellexa.com'
-const MOQ_BADGE = 'FCL Minimums — Dynamic MOQ for Specialized Lines'
 
 function setMeta(property: string, content: string) {
   const el =
@@ -49,84 +53,45 @@ function setMeta(property: string, content: string) {
   if (el) el.setAttribute('content', content)
 }
 
-const products = [
-  {
-    icon: Package,
-    tag: 'Custom Retail & TCG',
-    title: 'Custom Acrylic Boxes',
-    description:
-      'Partner-fabricated enclosures to client drawings — premium retail packaging, branded gift architecture, and a deep specialization in TCG & Pokémon ETB cases, booster box protectors, graded card displays, and luxury collector formats. Quoted against partner capability, not a fixed catalog.',
-    highlights: ['Any Form Factor', 'TCG / ETB', 'Partner-Fabricated'],
-  },
-  {
-    icon: ShieldCheck,
-    tag: 'Display & Gallery',
-    title: 'Protective Display Architecture',
-    description:
-      'High-clarity protective frameworks sourced for museums, private galleries, collector networks, brand showrooms, and premium display footprints requiring tamper resistance, optical fidelity, and bespoke geometry. UV-filter, anti-static, and tamper-resistant options per partner capability.',
-    highlights: ['UV-Filtered', 'Anti-Static', 'Tamper-Resistant'],
-  },
-  {
-    icon: Gem,
-    tag: 'Luxury Retail & Brand',
-    title: 'Luxury Retail Enclosures',
-    description:
-      'Premium retail display fixtures specified around the merchandise — jewelry, watches, fragrance, hospitality fixtures, and flagship store moments — produced at partner facilities rather than as an off-the-shelf cabinet.',
-    highlights: ['Mirror-Polish', 'LED-Integrated', 'Modular'],
-  },
-  {
-    icon: Container,
-    tag: 'Architectural & Industrial',
-    title: 'Architectural & Industrial Components',
-    description:
-      'Large-format architectural fixtures, custom partitioning, signage substrates, lab and warehouse infrastructure, and industrial acrylic components engineered at partner facilities to your load dynamics, regulatory environment, and operational cycle.',
-    highlights: ['Large-Format', 'Load-Engineered', 'Sector-Agnostic'],
-  },
-] as const
+/** Display order — the registry is a keyed Record and carries no ordering. */
+const SURFACE_ORDER = [
+  'archival-preservation',
+  'museum-gallery',
+  'luxury-retail',
+  'engineered-pmma',
+] as const satisfies readonly AcrylicSurfaceId[]
 
-const techSpecs = [
-  {
-    label: 'Material Thickness',
-    value:
-      'Variable — specified to load dynamics (including 30mm+ / multi-layer where the partner facility supports it)',
-  },
-  {
-    label: 'Sheet Format',
-    value: 'CNC / laser cut to custom dimensions at the partner facility',
-  },
-  {
-    label: 'Optical Clarity',
-    value:
-      'Up to 92% light transmission (premium-grade virgin PMMA, grade confirmed per lot)',
-  },
-  {
-    label: 'Tolerance',
-    value:
-      'Down to ±0.1mm where the partner process allows — confirmed against drawings',
-  },
-  {
-    label: 'Finishes',
-    value:
-      'Diamond-polish, matte-frosted, custom tint, mirror-backing — subject to partner capability',
-  },
-  {
-    label: 'Lead Time',
-    value:
-      'Mapped to project brief and partner load — rush tracks only if the facility can commit',
-  },
-  {
-    label: 'MOQ Tiers',
-    value:
-      'Project-based dynamic MOQ (specialized/custom fabrication line). Standard industrial lines remain FCL-scale.',
-  },
-  {
-    label: 'Compliance',
-    value:
-      'REACH / RoHS / FDA and sector tracks where the partner holds valid certification — verified in the document pack, not assumed',
-  },
-] as const
+const SPEC_ORDER = [
+  'thickness',
+  'format',
+  'clarity',
+  'tolerance',
+  'finishes',
+  'leadTime',
+  'moq',
+  'compliance',
+] as const satisfies readonly AcrylicSpecId[]
+
+/** Tuple wrappers keep these conditionals non-distributive over `never`. */
+type MissingSurface = Exclude<AcrylicSurfaceId, (typeof SURFACE_ORDER)[number]>
+type MissingSpec = Exclude<AcrylicSpecId, (typeof SPEC_ORDER)[number]>
+const _assertEverySurfaceIsOrdered: [MissingSurface] extends [never] ? true : false = true
+const _assertEverySpecIsOrdered: [MissingSpec] extends [never] ? true : false = true
+void _assertEverySurfaceIsOrdered
+void _assertEverySpecIsOrdered
+
+/** Registries are pure `.ts` data modules, so icons are bound here. */
+const SURFACE_ICON: Record<AcrylicSurfaceId, typeof Archive> = {
+  'archival-preservation': Archive,
+  'museum-gallery': ShieldCheck,
+  'luxury-retail': Gem,
+  'engineered-pmma': Container,
+}
 
 function Hero() {
+  const { content } = useLang()
+  const h = content.acrylic.hero
+
   return (
     <section className="relative pt-32 pb-12 sm:pt-40 sm:pb-16 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -157,7 +122,7 @@ function Hero() {
         >
           <ShieldCheck size={14} className="text-brand-secondary-400" />
           <span className="text-xs font-medium tracking-wide text-brand-secondary-400 uppercase">
-            Sourced From Audited Fabrication Partners
+            {h.eyebrow}
           </span>
         </motion.div>
 
@@ -167,9 +132,9 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] as const }}
           className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-tight text-white mb-6"
         >
-          Acrylic Sourcing{' '}
+          {h.headlineTop}{' '}
           <span className="bg-gradient-to-r from-brand-300 via-brand-400 to-brand-500 bg-clip-text text-transparent">
-            Partner Fabrication
+            {h.headlineHighlight}
           </span>
         </motion.h1>
 
@@ -179,11 +144,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
           className="mx-auto max-w-2xl text-base sm:text-lg text-ink-muted leading-relaxed mb-8"
         >
-          We source custom acrylic across retail, TCG, display, architectural,
-          and industrial briefs from audited specialized manufacturing partners.
-          Any layout and form factor is quoted against partner capability —
-          Pellexa structures the brief, verification pipeline, and QC. We do not
-          own fabrication plants.
+          {h.sub}
         </motion.p>
 
         <motion.div
@@ -194,7 +155,7 @@ function Hero() {
         >
           <Info size={14} className="text-brand-secondary-300 shrink-0" />
           <span className="text-xs font-bold tracking-widest uppercase text-brand-secondary-300">
-            {MOQ_BADGE}
+            {h.moqBadge}
           </span>
         </motion.div>
       </div>
@@ -202,7 +163,9 @@ function Hero() {
   )
 }
 
-function ProductGrid() {
+function SurfaceGrid() {
+  const { content } = useLang()
+  const s = content.acrylic.surfaces
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -216,19 +179,20 @@ function ProductGrid() {
           className="text-center max-w-2xl mx-auto mb-12"
         >
           <span className="text-xs font-semibold tracking-widest uppercase text-brand-secondary-400 mb-3 block">
-            Capabilities Spectrum
+            {s.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">
-            Partner-Fabricated Acrylic, Quoted to Brief
+            {s.title}
           </h2>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 gap-5">
-          {products.map((p, i) => {
-            const Icon = p.icon
+          {SURFACE_ORDER.map((id, i) => {
+            const surface = s.items[id]
+            const Icon = SURFACE_ICON[id]
             return (
               <motion.div
-                key={p.title}
+                key={id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{
@@ -244,18 +208,18 @@ function ProductGrid() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <span className="inline-block rounded-full bg-brand-secondary-500/10 border border-brand-secondary-400/20 px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase text-brand-secondary-300 mb-2">
-                      {p.tag}
+                      {surface.tag}
                     </span>
                     <h3 className="font-display font-semibold text-lg text-white">
-                      {p.title}
+                      {surface.title}
                     </h3>
                   </div>
                 </div>
                 <p className="text-sm text-ink-dim leading-relaxed mb-4">
-                  {p.description}
+                  {surface.description}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
-                  {p.highlights.map((h) => (
+                  {surface.highlights.map((h) => (
                     <span
                       key={h}
                       className="inline-block rounded-full bg-silver-anchor/5 border border-silver-anchor/10 px-2.5 py-0.5 text-[11px] text-ink-muted"
@@ -274,6 +238,8 @@ function ProductGrid() {
 }
 
 function TechSpecs() {
+  const { content } = useLang()
+  const s = content.acrylic.specs
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -287,10 +253,10 @@ function TechSpecs() {
           className="text-center mb-10"
         >
           <span className="text-xs font-semibold tracking-widest uppercase text-brand-secondary-400 mb-3 block">
-            Engineering Capability Baselines
+            {s.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-2xl sm:text-3xl text-white leading-tight">
-            Partner Parameters — Confirmed at Consultation
+            {s.title}
           </h2>
         </motion.div>
 
@@ -301,26 +267,25 @@ function TechSpecs() {
           className="rounded-2xl border border-silver-anchor/10 bg-canvas-overlay/40 backdrop-blur-sm overflow-hidden"
         >
           <dl className="divide-y divide-brand-secondary-400/15">
-            {techSpecs.map((spec) => (
-              <div
-                key={spec.label}
-                className="grid grid-cols-1 sm:grid-cols-[1fr_1.5fr] gap-2 sm:gap-6 px-5 sm:px-7 py-4"
-              >
-                <dt className="text-xs sm:text-sm font-semibold tracking-wide uppercase text-brand-secondary-300">
-                  {spec.label}
-                </dt>
-                <dd className="text-sm sm:text-base text-ink-primary font-medium">
-                  {spec.value}
-                </dd>
-              </div>
-            ))}
+            {SPEC_ORDER.map((id) => {
+              const spec = s.rows[id]
+              return (
+                <div
+                  key={id}
+                  className="grid grid-cols-1 sm:grid-cols-[1fr_1.5fr] gap-2 sm:gap-6 px-5 sm:px-7 py-4"
+                >
+                  <dt className="text-xs sm:text-sm font-semibold tracking-wide uppercase text-brand-secondary-300">
+                    {spec.label}
+                  </dt>
+                  <dd className="text-sm sm:text-base text-ink-primary font-medium">
+                    {spec.value}
+                  </dd>
+                </div>
+              )
+            })}
           </dl>
           <p className="border-t border-brand-secondary-400/15 px-5 sm:px-7 py-4 text-xs sm:text-sm text-ink-dim italic leading-relaxed">
-            Every parameter above is a partner-capability baseline, not a
-            Pellexa-owned plant spec. Material, thickness, finish, envelope, run
-            volume, and lead time are confirmed during consultation against the
-            selected facility, then locked through drawings, samples, and dual
-            third-party QC.
+            {s.footnote}
           </p>
         </motion.div>
       </div>
@@ -328,47 +293,47 @@ function TechSpecs() {
   )
 }
 
+/**
+ * Assembles the pre-filled consultation email.
+ *
+ * The ASCII rule/box frame is identical in every locale — only the labels are
+ * translated. Field labels are not space-padded to a fixed column: that
+ * alignment only works in LTR monospace and mangles the brief under RTL.
+ */
+function buildBriefBody(brief: AcrylicBriefContent) {
+  const field = (label: string) => `   ${label}: `
+  const option = (label: string) => `   [ ] ${label}`
+
+  return [
+    brief.heading,
+    '='.repeat(48),
+    '',
+    brief.orgTitle,
+    ...brief.orgFields.map(field),
+    '',
+    brief.surfaceTitle,
+    ...brief.surfaceOptions.map(option),
+    '',
+    brief.profileTitle,
+    ...brief.profileFields.map(field),
+    '',
+    brief.contactTitle,
+    ...brief.contactFields.map(field),
+    '',
+    '—'.repeat(48),
+    brief.signoff,
+  ].join('\n')
+}
+
 function QuoteIntake() {
+  const { content } = useLang()
+  const a = content.acrylic
+  const t = a.intake
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
-  const subject = encodeURIComponent(
-    'Pellexa Acrylic — Project Consultation Brief',
-  )
-  const body = encodeURIComponent(
-    [
-      'PELLEXA ACRYLIC — PROJECT CONSULTATION BRIEF',
-      '='.repeat(48),
-      '',
-      '1. ORGANIZATION',
-      '   Company:           ',
-      '   Industry / Sector: ',
-      '   Target Market:     ',
-      '',
-      '2. CAPABILITY SURFACE (select any that fit)',
-      '   [ ] Custom Retail / TCG / Collectibles',
-      '   [ ] Display & Gallery Architecture',
-      '   [ ] Luxury Retail & Brand Fixtures',
-      '   [ ] Architectural & Industrial Components',
-      '   [ ] Other (describe below)',
-      '',
-      '3. PROJECT PROFILE',
-      '   Dimensions / Envelope (W × H × D):',
-      '   Material Thickness / Load Dynamics:',
-      '   Finish & Aesthetic Goals:           ',
-      '   Projected Run Footprint:            ',
-      '   Target Lead Time:                   ',
-      '   Regulatory / Sector Constraints:    ',
-      '',
-      '4. CONTACT',
-      '   Name:   ',
-      '   Email:  ',
-      '   Phone:  ',
-      '',
-      '—'.repeat(48),
-      'Submitted via Pellexa Acrylic sourcing consultation.',
-    ].join('\n'),
-  )
+  const subject = encodeURIComponent(t.mailtoSubject)
+  const body = encodeURIComponent(buildBriefBody(t.brief))
 
   return (
     <section id="contact" className="relative py-16 sm:py-24">
@@ -385,22 +350,14 @@ function QuoteIntake() {
             </div>
             <div>
               <h3 className="font-display font-semibold text-xl sm:text-2xl text-white">
-                Acrylic Project Consultation
+                {t.title}
               </h3>
-              <p className="text-sm text-ink-dim">
-                Open the consultation brief in your email client — we map your
-                physical, dimensional, and aesthetic goals onto a partner
-                production track.
-              </p>
+              <p className="text-sm text-ink-dim">{t.subtitle}</p>
             </div>
           </div>
 
           <ul className="space-y-2 mb-6 text-sm text-ink-muted">
-            {[
-              'Pre-filled consultation brief covering organization, capability surface, and project profile',
-              'Sourcing desk response within 3 business days',
-              'Partner production track scoped to your project footprint — no catalog SKU assumption',
-            ].map((b) => (
+            {t.benefits.map((b) => (
               <li key={b} className="flex items-start gap-2.5">
                 <Check size={16} className="text-brand-400 mt-0.5 shrink-0" />
                 <span>{b}</span>
@@ -409,11 +366,11 @@ function QuoteIntake() {
           </ul>
 
           <MailtoFallback
-            email={EMAIL}
-            mailtoHref={`mailto:${EMAIL}?subject=${subject}&body=${body}`}
-            ctaLabel="Open Consultation Brief"
-            secondaryHref={`mailto:${EMAIL}`}
-            secondaryLabel="Email Direct"
+            email={a.email}
+            mailtoHref={`mailto:${a.email}?subject=${subject}&body=${body}`}
+            ctaLabel={t.ctaLabel}
+            secondaryHref={`mailto:${a.email}`}
+            secondaryLabel={t.secondaryLabel}
           />
         </motion.div>
       </div>
@@ -421,32 +378,48 @@ function QuoteIntake() {
   )
 }
 
-export default function AcrylicSourcingPage() {
+/**
+ * Page body. Lives inside `LangProvider` so `dir`, `lang`, and the SEO meta
+ * tags follow the EN/HE toggle.
+ */
+function AcrylicBody() {
+  const { lang, content } = useLang()
+  const meta = content.acrylic.meta
+
   useEffect(() => {
-    document.title = PAGE_TITLE
-    setMeta('description', PAGE_DESCRIPTION)
-    setMeta('og:title', PAGE_TITLE)
-    setMeta('og:description', PAGE_DESCRIPTION)
+    document.title = meta.title
+    setMeta('description', meta.description)
+    setMeta('og:title', meta.title)
+    setMeta('og:description', meta.description)
     setMeta('og:url', `${window.location.origin}/acrylic`)
-    setMeta('twitter:title', PAGE_TITLE)
-    setMeta('twitter:description', PAGE_DESCRIPTION)
+    setMeta('twitter:title', meta.title)
+    setMeta('twitter:description', meta.description)
+  }, [meta])
+
+  useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   return (
+    <div className="min-h-screen bg-canvas-base text-white antialiased">
+      <ParentNavbar />
+      <main dir={lang === 'he' ? 'rtl' : 'ltr'} lang={lang}>
+        <Hero />
+        <SurfaceGrid />
+        <TechSpecs />
+        <SourcingProcess />
+        <ScopeDisclaimer />
+        <QuoteIntake />
+      </main>
+      <ParentFooter />
+    </div>
+  )
+}
+
+export default function AcrylicSourcingPage() {
+  return (
     <LangProvider>
-      <div className="min-h-screen bg-canvas-base text-white antialiased">
-        <ParentNavbar />
-        <main dir="ltr" lang="en">
-          <Hero />
-          <ProductGrid />
-          <TechSpecs />
-          <SourcingProcess />
-          <ScopeDisclaimer />
-          <QuoteIntake />
-        </main>
-        <ParentFooter />
-      </div>
+      <AcrylicBody />
     </LangProvider>
   )
 }

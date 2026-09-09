@@ -473,6 +473,189 @@ export interface FoodPortfolioContent {
   disclaimer: FoodDisclaimerContent
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Industrial sourcing verticals — `/sourcing` and `/acrylic` content registries.
+//
+// Collections are keyed `Record`s rather than arrays: `Record<Id, T>` makes TS
+// error on BOTH a missing and an extra key, so EN and HE cannot drift in
+// cardinality. Fixed-length chip/highlight groups use tuples for the same
+// reason — `string[]` would silently accept two chips in one locale and four in
+// the other. Presentation order lives in the page components, not here, so the
+// registries stay pure `.ts` data modules with no React import.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Per-route SEO block. Drives `document.title` and the og/twitter meta pair. */
+export interface VerticalMeta {
+  title: string
+  description: string
+}
+
+/** Exactly three capability chips per card, in every locale. */
+export type ChipTriple = readonly [string, string, string]
+
+export type SourcingPillarId =
+  | 'heavy-equipment'
+  | 'construction-materials'
+  | 'precision-acrylic'
+  | 'luxury-packaging'
+
+/**
+ * One of the four equal-weight verticals on `/sourcing`. There is deliberately
+ * no "featured" flag: the pillars carry identical chrome and differ only in
+ * `link`, which is what keeps the grid balanced.
+ */
+export interface SourcingPillar {
+  title: string
+  /** Volume-class eyebrow, e.g. "Industrial / FCL-scale". */
+  tag: string
+  description: string
+  chips: ChipTriple
+  cta: string
+  /**
+   * Internal route target. Present only on 'precision-acrylic' ('/acrylic').
+   * When omitted the card resolves to the page-local '#contact' anchor.
+   */
+  link?: string
+}
+
+export interface GeneralSourcingContent {
+  meta: VerticalMeta
+  email: string
+  hero: {
+    eyebrow: string
+    headlineTop: string
+    headlineHighlight: string
+    sub: string
+    /** Dual-MOQ structural gate: FCL for industrial, dynamic for specialized. */
+    moqBadge: string
+  }
+  pillars: {
+    sectionLabel: string
+    title: string
+    subtitle: string
+    items: Record<SourcingPillarId, SourcingPillar>
+  }
+  contact: {
+    title: string
+    body: string
+    ctaLabel: string
+    /** Kept ASCII in every locale — matches `food.contact.mailtoSubject`. */
+    mailtoSubject: string
+  }
+}
+
+export type AcrylicSurfaceId =
+  | 'archival-preservation'
+  | 'museum-gallery'
+  | 'luxury-retail'
+  | 'engineered-pmma'
+
+export interface AcrylicSurface {
+  tag: string
+  title: string
+  description: string
+  highlights: ChipTriple
+}
+
+export type AcrylicSpecId =
+  | 'thickness'
+  | 'format'
+  | 'clarity'
+  | 'tolerance'
+  | 'finishes'
+  | 'leadTime'
+  | 'moq'
+  | 'compliance'
+
+export interface AcrylicSpecRow {
+  label: string
+  value: string
+}
+
+/**
+ * Pre-filled consultation email brief. The ASCII rule/box frame is assembled in
+ * the page component and stays identical across locales; only these labels are
+ * translated, so a Hebrew brief still renders predictably in an LTR mail client.
+ */
+export interface AcrylicBriefContent {
+  heading: string
+  orgTitle: string
+  orgFields: readonly [string, string, string]
+  surfaceTitle: string
+  surfaceOptions: readonly [string, string, string, string, string]
+  profileTitle: string
+  profileFields: readonly [string, string, string, string, string, string]
+  contactTitle: string
+  contactFields: readonly [string, string, string]
+  signoff: string
+}
+
+export interface AcrylicSourcingContent {
+  meta: VerticalMeta
+  email: string
+  hero: {
+    eyebrow: string
+    headlineTop: string
+    headlineHighlight: string
+    sub: string
+    moqBadge: string
+  }
+  surfaces: {
+    sectionLabel: string
+    title: string
+    items: Record<AcrylicSurfaceId, AcrylicSurface>
+  }
+  specs: {
+    sectionLabel: string
+    title: string
+    rows: Record<AcrylicSpecId, AcrylicSpecRow>
+    /**
+     * States that every row is a partner-capability baseline, not a
+     * Pellexa-owned plant spec. Compliance-bearing — do not soften.
+     */
+    footnote: string
+  }
+  intake: {
+    title: string
+    subtitle: string
+    benefits: readonly [string, string, string]
+    ctaLabel: string
+    secondaryLabel: string
+    mailtoSubject: string
+    brief: AcrylicBriefContent
+  }
+}
+
+export interface SourcingProcessStage {
+  label: string
+  title: string
+  body: string
+}
+
+/**
+ * Five-stage partner-production pipeline shared by `/sourcing` and `/acrylic`.
+ * Stage 05 carries the CIF-baseline and non-importer-of-record boundary; that
+ * sentence is compliance-bearing and its meaning must survive every locale.
+ */
+export interface SourcingProcessContent {
+  sectionLabel: string
+  title: string
+  stages: readonly [
+    SourcingProcessStage,
+    SourcingProcessStage,
+    SourcingProcessStage,
+    SourcingProcessStage,
+    SourcingProcessStage,
+  ]
+}
+
+/** UI strings for the mailto CTA's copy-to-clipboard fallback. */
+export interface MailtoFallbackContent {
+  copy: string
+  copied: string
+  fallbackNote: string
+}
+
 export interface ParentContent {
   meta: { title: string }
   nav: { links: { label: string; href: string }[]; cta: string }
@@ -542,6 +725,14 @@ export interface ParentContent {
    * /food route.
    */
   food: FoodPortfolioContent
+  /** `/sourcing` — four equal institutional verticals under one operating model. */
+  sourcing: GeneralSourcingContent
+  /** `/acrylic` — precision PMMA, archival, museum, luxury, collector surfaces. */
+  acrylic: AcrylicSourcingContent
+  /** Partner-production pipeline shared by `/sourcing` and `/acrylic`. */
+  sourcingProcess: SourcingProcessContent
+  /** Copy-to-clipboard fallback strings shared by both vertical CTAs. */
+  mailtoFallback: MailtoFallbackContent
 }
 
 export interface MarketConfig {

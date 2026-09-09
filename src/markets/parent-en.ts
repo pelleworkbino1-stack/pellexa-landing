@@ -426,6 +426,266 @@ const parentEnFood: ParentContent['food'] = {
   },
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// General Sourcing — `/sourcing`.
+//
+// Four equal-weight institutional verticals. Two run at FCL-scale minimums
+// (heavy equipment, construction materials); two are specialized fabrication
+// lines on a project-based dynamic MOQ (precision acrylic/PMMA, luxury brand
+// packaging). Only the acrylic pillar deep-links out, to `/acrylic`.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const parentEnSourcing: ParentContent['sourcing'] = {
+  meta: {
+    title: 'Pellexa General Sourcing — Asia Manufacturing Partners',
+    description:
+      'Industrial and institutional sourcing from audited Asia manufacturing partners — heavy equipment and machinery, building and construction materials, precision acrylic and engineered PMMA, and luxury brand packaging. FCL-scale minimums for standard industrial lines; project-based dynamic MOQ for specialized fabrication lines.',
+  },
+  email: 'pelle@pellexa.com',
+  hero: {
+    eyebrow: 'Audited Asia Manufacturing Partners',
+    headlineTop: 'General',
+    headlineHighlight: 'Sourcing',
+    sub: 'B2B sourcing from audited Tier-1 and specialized partner facilities across key Asia production hubs. We structure, verify, and coordinate — we do not manufacture in-house.',
+    moqBadge: 'FCL Minimums — Dynamic MOQ for Specialized Lines',
+  },
+  pillars: {
+    sectionLabel: 'Four Sourcing Pillars',
+    title: 'Four Institutional Verticals, One Operating Model',
+    subtitle:
+      'Each pillar is backed by audited partner facilities, a staged verification pipeline, and third-party quality control. The industrial pillars run at Full Container Load volumes; the specialized fabrication lines run on a project-based dynamic MOQ.',
+    items: {
+      'heavy-equipment': {
+        title: 'Heavy Equipment & Machinery',
+        tag: 'Industrial / FCL-scale',
+        description:
+          'Direct-from-factory procurement of industrial machinery, heavy equipment, and production lines — specified against your technical requirements, regulatory environment, and operational cycle. Specifications and certificates are verified before any commercial commitment.',
+        chips: ['Direct From Factory', 'Verified Technical Specs', 'Back-to-Back Contracts'],
+        cta: 'Direct Factory RFQ',
+      },
+      'construction-materials': {
+        title: 'Building & Construction Materials',
+        tag: 'Industrial / FCL-scale',
+        description:
+          'Building materials and raw inputs from authorized facilities at Full Container Load volumes — matched to destination-market standards, material approvals, and your project schedule. Material certificates are verified in the document pack, not assumed.',
+        chips: ['Full Container Load', 'Material Certificates', 'Third-Party QC'],
+        cta: 'Direct Factory RFQ',
+      },
+      'precision-acrylic': {
+        title: 'Precision Acrylic & Engineered PMMA',
+        tag: 'Specialized / Dynamic MOQ',
+        description:
+          'Engineered PMMA enclosures and assemblies for archival preservation, museum and gallery protective frameworks, bespoke luxury brand showcases, and precision collector enclosures. Produced at specialized partner facilities and verified through staged sampling and dual third-party QC.',
+        chips: ['High Optical Clarity', 'CNC / Laser Cut', 'Project-Based Dynamic MOQ'],
+        cta: 'Technical Fabrication Specs',
+        link: '/acrylic',
+      },
+      'luxury-packaging': {
+        title: 'Luxury Brand Packaging',
+        tag: 'Specialized / Dynamic MOQ',
+        description:
+          'Luxury-tier brand packaging and gift architecture specified around the product itself — finish, structure, and substrate — produced at specialized partner facilities rather than drawn from a catalog shelf.',
+        chips: ['Specified to Brand', 'Premium Finishes', 'Staged Sampling'],
+        cta: 'Direct Factory RFQ',
+      },
+    },
+  },
+  contact: {
+    title: 'Enterprise Procurement Inquiry',
+    body: 'Submit volume profile, target market, and category preference. Standard industrial lines run at FCL-scale minimums; specialized fabrication is scoped at a project-based dynamic MOQ. Qualified accounts receive a tier-aligned commercial brief within 2 business days.',
+    ctaLabel: 'Request Sourcing Brief',
+    mailtoSubject: 'Pellexa General Sourcing — Procurement Inquiry',
+  },
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Acrylic Sourcing — `/acrylic`.
+//
+// Positioned as high-precision engineering PMMA: archival preservation,
+// museum/gallery protection, luxury retail, and high-value collector
+// preservation. Graded-collectible and trading-card (TCG) enclosures are named
+// once, as a technical capability under the archival surface, per
+// `docs/Pellexa Profile&Operating Model.MD` §5 — no consumer brand names.
+//
+// Every spec row is a partner-capability baseline. The hedges ("where the
+// partner facility supports it", "confirmed per lot", "subject to partner
+// capability", "verified in the document pack, not assumed") are load-bearing
+// and must not be trimmed: Pellexa owns no fabrication plant and is not the
+// freight forwarder, customs broker, or importer of record.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const parentEnAcrylic: ParentContent['acrylic'] = {
+  meta: {
+    title: 'Pellexa Acrylic Sourcing — Precision PMMA & Partner Fabrication',
+    description:
+      'Precision acrylic and engineered PMMA sourced from audited fabrication partners — high-clarity archival preservation, museum and gallery protective frameworks, bespoke luxury brand showcases, and precision-engineered collector enclosures. Project-based dynamic MOQ as a specialized fabrication line; FCL-scale minimums for standard industrial lines. Staged sampling, dual third-party QC, back-to-back contracts.',
+  },
+  email: 'pelle@pellexa.com',
+  hero: {
+    eyebrow: 'Sourced From Audited Fabrication Partners',
+    headlineTop: 'Precision Acrylic &',
+    headlineHighlight: 'Engineered PMMA',
+    sub: 'We source engineered PMMA enclosures for archival preservation, museums and galleries, luxury brand environments, and high-value collector assets from audited specialized fabrication partners. Any geometry and form factor is quoted against partner capability — Pellexa structures the brief, verification pipeline, and QC. We do not own fabrication plants.',
+    moqBadge: 'FCL Minimums — Dynamic MOQ for Specialized Lines',
+  },
+  surfaces: {
+    sectionLabel: 'Capabilities Spectrum',
+    title: 'Partner-Fabricated PMMA, Quoted to Brief',
+    items: {
+      'archival-preservation': {
+        tag: 'Archival & Collector Preservation',
+        title: 'High-Clarity Archival Enclosures',
+        description:
+          'Engineered enclosures for the preservation of high-value assets — UV-filtered archival housings, graded-collectible and trading-card (TCG) enclosures, and long-term optical-fidelity retention. Fabricated to client drawings and quoted against partner capability, not a fixed catalog.',
+        highlights: ['UV-Filtered', 'Archival-Grade', 'Optical Fidelity'],
+      },
+      'museum-gallery': {
+        tag: 'Museum & Gallery',
+        title: 'Museum & Gallery Protective Frameworks',
+        description:
+          'High-clarity protective frameworks sourced for museums, private galleries, collector networks, and brand showrooms requiring tamper resistance, optical fidelity, and bespoke geometry — vitrines, plinth cases, and artifact housings. UV-filter, anti-static, and tamper-resistant options per partner capability.',
+        highlights: ['Tamper-Resistant', 'Anti-Static', 'Conservation Spec'],
+      },
+      'luxury-retail': {
+        tag: 'Luxury Retail & Brand',
+        title: 'Bespoke Luxury Brand Showcases',
+        description:
+          'Premium retail display fixtures specified around the merchandise — jewelry, watches, fragrance, hospitality fixtures, and flagship store moments — produced at partner facilities rather than as an off-the-shelf cabinet.',
+        highlights: ['Diamond-Polish', 'LED-Integrated', 'Modular'],
+      },
+      'engineered-pmma': {
+        tag: 'Architectural & Industrial',
+        title: 'Precision-Engineered PMMA Components',
+        description:
+          'Large-format architectural fixtures, custom partitioning, signage substrates, lab and warehouse infrastructure, and industrial PMMA components engineered at partner facilities to your load dynamics, regulatory environment, and operational cycle.',
+        highlights: ['Large-Format', 'Load-Engineered', 'CNC / Laser Cut'],
+      },
+    },
+  },
+  specs: {
+    sectionLabel: 'Engineering Capability Baselines',
+    title: 'Partner Parameters — Confirmed at Consultation',
+    rows: {
+      thickness: {
+        label: 'Material Thickness',
+        value:
+          'Variable — specified to load dynamics (including 30mm+ / multi-layer where the partner facility supports it)',
+      },
+      format: {
+        label: 'Sheet Format',
+        value: 'CNC / laser cut to custom dimensions at the partner facility',
+      },
+      clarity: {
+        label: 'Optical Clarity',
+        value:
+          'Up to 92% light transmission (premium-grade virgin PMMA, grade confirmed per lot)',
+      },
+      tolerance: {
+        label: 'Tolerance',
+        value:
+          'Down to ±0.1mm where the partner process allows — confirmed against drawings',
+      },
+      finishes: {
+        label: 'Finishes',
+        value:
+          'Diamond-polish, matte-frosted, custom tint, mirror-backing — subject to partner capability',
+      },
+      leadTime: {
+        label: 'Lead Time',
+        value:
+          'Mapped to project brief and partner load — rush tracks only if the facility can commit',
+      },
+      moq: {
+        label: 'MOQ Tiers',
+        value:
+          'Project-based dynamic MOQ (specialized/custom fabrication line). Standard industrial lines remain FCL-scale.',
+      },
+      compliance: {
+        label: 'Compliance',
+        value:
+          'REACH / RoHS / FDA and sector tracks where the partner holds valid certification — verified in the document pack, not assumed',
+      },
+    },
+    footnote:
+      'Every parameter above is a partner-capability baseline, not a Pellexa-owned plant spec. Material, thickness, finish, envelope, run volume, and lead time are confirmed during consultation against the selected facility, then locked through drawings, samples, and dual third-party QC.',
+  },
+  intake: {
+    title: 'Acrylic Project Consultation',
+    subtitle:
+      'Open the consultation brief in your email client — we map your physical, dimensional, and aesthetic goals onto a partner production track.',
+    benefits: [
+      'Pre-filled consultation brief covering organization, capability surface, and project profile',
+      'Sourcing desk response within 3 business days',
+      'Partner production track scoped to your project footprint — no catalog SKU assumption',
+    ],
+    ctaLabel: 'Open Consultation Brief',
+    secondaryLabel: 'Email Direct',
+    mailtoSubject: 'Pellexa Acrylic — Project Consultation Brief',
+    brief: {
+      heading: 'PELLEXA ACRYLIC — PROJECT CONSULTATION BRIEF',
+      orgTitle: '1. ORGANIZATION',
+      orgFields: ['Company', 'Industry / Sector', 'Target Market'],
+      surfaceTitle: '2. CAPABILITY SURFACE (select any that fit)',
+      surfaceOptions: [
+        'Archival & Collector Preservation',
+        'Museum & Gallery Protective Frameworks',
+        'Bespoke Luxury Brand Showcases',
+        'Architectural & Industrial PMMA Components',
+        'Other (describe below)',
+      ],
+      profileTitle: '3. PROJECT PROFILE',
+      profileFields: [
+        'Dimensions / Envelope (W × H × D)',
+        'Material Thickness / Load Dynamics',
+        'Finish & Aesthetic Goals',
+        'Projected Run Footprint',
+        'Target Lead Time',
+        'Regulatory / Sector Constraints',
+      ],
+      contactTitle: '4. CONTACT',
+      contactFields: ['Name', 'Email', 'Phone'],
+      signoff: 'Submitted via Pellexa Acrylic sourcing consultation.',
+    },
+  },
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Partner-production pipeline shared by `/sourcing` and `/acrylic`.
+// Stage 05 states the CIF baseline and the non-importer-of-record boundary.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const parentEnSourcingProcess: ParentContent['sourcingProcess'] = {
+  sectionLabel: 'Operating Model',
+  title: 'How Pellexa Executes Partner Production',
+  stages: [
+    {
+      label: '01',
+      title: 'Technical drawings and specs',
+      body: 'Partner-facility drawings, material specs, and certificates submitted for client sign-off before any tool-up.',
+    },
+    {
+      label: '02',
+      title: 'Prototype samples',
+      body: 'Physical samples produced at the partner facility and shipped for evaluation.',
+    },
+    {
+      label: '03',
+      title: 'Pilot batch',
+      body: 'When the brief requires it, a limited trial run before mass production is released.',
+    },
+    {
+      label: '04',
+      title: 'Mass production, QC and insurance',
+      body: 'Full run only after sign-off, under back-to-back contracts (typically 70/30, or 100% advance where the facility requires it). Dual third-party on-site QC (pre-production and packing/pre-shipment). Cargo covered by ALL RISK insurance via a third-party insurer.',
+    },
+    {
+      label: '05',
+      title: 'Managed freight — CIF baseline',
+      body: 'Full Container Load (FCL) maritime freight coordinated to destination container terminals — including US, European, and Israeli commercial ports (CIF baseline) — with clearance documentation aligned alongside licensed local brokers. Pellexa coordinates this chain; we are not the freight forwarder, customs broker, or importer of record.',
+    },
+  ],
+}
+
 export const parentEn: ParentContent = {
   meta: { title: 'Pellexa International LLC — Global B2B Sourcing & Supply Chain' },
   nav: {
@@ -459,11 +719,11 @@ export const parentEn: ParentContent = {
       'Bulk agri-food sourcing — matcha, industrial tea, cacao, coconut, seed oils, rice, pasta, canned and dry goods — direct from authorized facilities, at Full Container Load (FCL) volumes and above.',
     generalTitle: 'Pellexa General Sourcing',
     generalDescription:
-      'Industrial and consumer sourcing from audited Asia manufacturing partners — heavy equipment and machinery, building and construction materials, custom acrylic and TCG enclosures, and luxury brand packaging. FCL-scale minimums for standard industrial lines; project-based dynamic MOQ for specialized/custom fabrication lines (such as custom acrylic enclosures and luxury brand packaging). Consult our sourcing team to scope your order.',
+      'Industrial and institutional sourcing from audited Asia manufacturing partners — heavy equipment and machinery, building and construction materials, precision acrylic and engineered PMMA, and luxury brand packaging. FCL-scale minimums for standard industrial lines; project-based dynamic MOQ for specialized/custom fabrication lines (such as precision acrylic and engineered PMMA, and luxury brand packaging). Consult our sourcing team to scope your order.',
     generalCategories: [
       'Heavy Equipment & Machinery',
       'Building & Construction Materials',
-      'Custom Acrylic & TCG Enclosures',
+      'Precision Acrylic & Engineered PMMA',
       'Luxury Brand Packaging',
     ],
     generalOriginLabel: 'Asia Manufacturing Hubs',
@@ -521,7 +781,7 @@ export const parentEn: ParentContent = {
       'Customs clearance is handled by a licensed customs broker — never by Pellexa.',
       'Quality control is performed on-site by an independent third party — two standard inspections, at production start and at packing.',
       'Cargo is covered by ALL RISK insurance placed through a third-party insurer.',
-      'FCL-scale minimums apply to standard industrial lines; specialized/custom fabrication lines (such as custom acrylic enclosures and luxury brand packaging) carry project-based dynamic MOQs confirmed at consultation.',
+      'FCL-scale minimums apply to standard industrial lines; specialized/custom fabrication lines (such as precision acrylic and engineered PMMA, and luxury brand packaging) carry project-based dynamic MOQs confirmed at consultation.',
     ],
   },
   footer: {
@@ -533,4 +793,13 @@ export const parentEn: ParentContent = {
   },
   cocoa: parentEnCocoa,
   food: parentEnFood,
+  sourcing: parentEnSourcing,
+  acrylic: parentEnAcrylic,
+  sourcingProcess: parentEnSourcingProcess,
+  mailtoFallback: {
+    copy: 'Copy address',
+    copied: 'Copied',
+    fallbackNote:
+      'If your mail client does not open, copy the address and send your brief directly.',
+  },
 }

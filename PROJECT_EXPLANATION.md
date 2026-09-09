@@ -16,7 +16,7 @@ The website is not a single product page. It is a **corporate hub** with dedicat
 | **LED Screens** | Custom indoor/outdoor/rental LED displays | `/led`, `/led/:market`, or `led.pellexa.com` |
 | **Agri-Food** | Matcha + cacao derivatives sourcing | `/food`, `/food/matcha`, `/food/cacao` |
 | **General Sourcing** | Industrial & specialized sourcing from Asia partner facilities | `/sourcing` |
-| **Acrylic** | Partner-fabricated acrylic (retail, TCG, architectural, industrial) | `/acrylic` |
+| **Acrylic** | Precision acrylic & engineered PMMA (archival, museum/gallery, luxury retail, industrial) | `/acrylic` |
 
 Public brand URL: **https://pellexa.com**  
 LED subdomain: **https://led.pellexa.com**
@@ -179,9 +179,10 @@ Positioning is **white-label / technical** — grades and specs without naming a
 
 **Page:** `src/pages/GeneralSourcingPage.tsx`
 
-- Categories: heavy equipment & machinery, building & construction materials, custom acrylic & TCG enclosures, luxury brand packaging
+- Four equal-weight pillars in a 2x2 grid: heavy equipment & machinery, building & construction materials, precision acrylic & engineered PMMA, luxury brand packaging
 - Structural gate: **FCL Minimums — Dynamic MOQ for Specialized Lines** (FCL-scale for standard industrial lines; project-based dynamic MOQ for specialized/custom fabrication)
-- Featured deep-link card into Acrylic (`/acrylic`)
+- Pillar chrome is identical across all four; only the acrylic pillar deep-links (to `/acrylic`), the other three resolve to the local `#contact` anchor
+- Fully localized EN/HE via `content.sourcing` — copy, SEO meta, and `<main>` direction all follow the language toggle
 - Five-stage partner production pipeline including CIF/DDP shipping
 - Operational-scope disclaimer (`scopeDisclaimer`)
 - Contact: mailto `pelle@pellexa.com` with copy-to-clipboard fallback
@@ -191,17 +192,17 @@ Positioning is **white-label / technical** — grades and specs without naming a
 
 ### 4.7 Acrylic — `/acrylic`
 
-**Purpose:** Acrylic sourcing vertical — partner fabrication and third-party QC, not an in-house plant.
+**Purpose:** High-precision engineering PMMA sourcing vertical — partner fabrication and third-party QC, not an in-house plant.
 
 **Page:** `src/pages/AcrylicSourcingPage.tsx`
 
 Capability surfaces (quoted against partner capability, not a fixed catalog):
-- Custom acrylic boxes (incl. TCG / ETB specialization)
-- Protective display architecture
-- Luxury retail enclosures
-- Large-format / industrial components
+- High-clarity archival enclosures — UV-filtered archival housings and graded-collectible / trading-card (TCG) enclosures
+- Museum & gallery protective frameworks — vitrines, plinth cases, artifact housings
+- Bespoke luxury brand showcases
+- Precision-engineered PMMA components — architectural and industrial, load-engineered
 
-Specs are framed as **partner-capability baselines** confirmed at consultation. Dual-MOQ badge matches `/sourcing`. Contact: mailto `pelle@pellexa.com` with copy-to-clipboard fallback. Theme: parent.
+Specs are framed as **partner-capability baselines** confirmed at consultation. Dual-MOQ badge matches `/sourcing`. Fully localized EN/HE via `content.acrylic`, including the pre-filled consultation email brief (ASCII frame, localized labels). Contact: mailto `pelle@pellexa.com` with copy-to-clipboard fallback. Theme: parent.
 
 ---
 

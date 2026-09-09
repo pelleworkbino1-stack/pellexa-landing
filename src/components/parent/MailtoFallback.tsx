@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Check, Copy, ExternalLink, Mail } from 'lucide-react'
+import { useLang } from '../../context/LangContext'
 
 async function copyToClipboard(text: string) {
   try {
@@ -26,6 +27,9 @@ type MailtoFallbackProps = {
 /**
  * Mailto primary CTA with a copy-to-clipboard fallback so a missing mail
  * client does not strand the inquiry.
+ *
+ * Reads `content.mailtoFallback` for its own UI strings, so every call site
+ * must sit inside a `LangProvider`. Both do: `/sourcing` and `/acrylic`.
  */
 export default function MailtoFallback({
   email,
@@ -34,6 +38,8 @@ export default function MailtoFallback({
   secondaryHref,
   secondaryLabel,
 }: MailtoFallbackProps) {
+  const { content } = useLang()
+  const t = content.mailtoFallback
   const [copied, setCopied] = useState(false)
 
   const onCopy = async () => {
@@ -67,13 +73,12 @@ export default function MailtoFallback({
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-silver-anchor/15 bg-silver-anchor/5 backdrop-blur-sm px-7 py-3.5 text-sm font-medium text-white hover:bg-silver-anchor/10 hover:border-silver-anchor/25 transition-all duration-300"
         >
           {copied ? <Check size={16} /> : <Copy size={16} />}
-          {copied ? 'Copied' : 'Copy address'}
+          {copied ? t.copied : t.copy}
         </button>
       </div>
 
       <p className="text-xs text-ink-dim leading-relaxed mb-3">
-        If your mail client does not open, copy the address and send your brief
-        directly.
+        {t.fallbackNote}
       </p>
       <p className="text-sm font-mono text-white select-all break-all">{email}</p>
     </div>

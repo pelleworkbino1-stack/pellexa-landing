@@ -61,10 +61,11 @@ const vite = await createServer({
 
 const page = (p) => vite.ssrLoadModule(p).then((m) => m.default)
 
-const [ParentPage, FoodPage, SourcingPage, LedPage] = await Promise.all([
+const [ParentPage, FoodPage, SourcingPage, AcrylicPage, LedPage] = await Promise.all([
   page('/src/pages/ParentPage.tsx'),
   page('/src/pages/FoodPage.tsx'),
   page('/src/pages/GeneralSourcingPage.tsx'),
+  page('/src/pages/AcrylicSourcingPage.tsx'),
   page('/src/pages/LedPage.tsx'),
 ])
 
@@ -77,11 +78,64 @@ const { ThemeProvider } = await vite.ssrLoadModule('/src/theme/ThemeProvider.tsx
 const LEADERSHIP_EN = 'Executive Leadership: Pelle Bino — Founder\u00A0&\u00A0Managing Member'
 const LEADERSHIP_HE = 'הנהלה ראשית: פלה בינו — מייסד ומנהל כללי (Managing\u00A0Member)'
 
+// Bidi protections on the Hebrew sourcing/acrylic registries. Same reasoning as
+// the leadership line: these escapes are the fix, not decoration, so assert the
+// exact shipped bytes.
+//   \u2060 WORD JOINER  -- keeps a Latin acronym attached to its Hebrew maqaf.
+//   \u2066 / \u2069     -- LRI / PDI isolate around a run abutting a neutral.
+//   \u00A0 NBSP         -- binds a multi-token Latin phrase.
+const PMMA_WORD_JOINER_HE = 'אקריל מדויק ו-\u2060PMMA מהונדס'
+const MOQ_ISOLATE_HE = 'ייעודי / \u2066MOQ\u2069 דינמי'
+const PMMA_HEADLINE_HE = 'ו-\u2060PMMA מהונדס'
+const COMPLIANCE_ISOLATE_HE = '\u2066REACH\u00A0/\u00A0RoHS\u00A0/\u00A0FDA\u2069'
+
+// Non-importer-of-record boundary. Compliance-bearing in both locales, and now
+// sourced from the registry rather than hardcoded in SourcingProcess.tsx --
+// assert it so a bad translation edit cannot quietly drop it.
+const NON_IOR_EN =
+  'we are not the freight forwarder, customs broker, or importer of record'
+const NON_IOR_HE = 'איננו חברת השילוח, עמיל המכס או היבואן הרשמי'
+
 const cases = [
-  { name: '/ (en)', path: '/', page: ParentPage, expect: LEADERSHIP_EN },
-  { name: '/ (he)', path: '/', page: ParentPage, cookie: 'pellexa_lang=he', expect: LEADERSHIP_HE },
+  { name: '/ (en)', path: '/', page: ParentPage, expect: [LEADERSHIP_EN] },
+  {
+    name: '/ (he)',
+    path: '/',
+    page: ParentPage,
+    cookie: 'pellexa_lang=he',
+    expect: [LEADERSHIP_HE],
+  },
   { name: '/food', path: '/food', page: FoodPage },
-  { name: '/sourcing', path: '/sourcing', page: SourcingPage },
+  {
+    name: '/sourcing (en)',
+    path: '/sourcing',
+    page: SourcingPage,
+    expect: ['Precision Acrylic & Engineered PMMA', NON_IOR_EN],
+  },
+  {
+    name: '/sourcing (he)',
+    path: '/sourcing',
+    page: SourcingPage,
+    cookie: 'pellexa_lang=he',
+    expect: [PMMA_WORD_JOINER_HE, MOQ_ISOLATE_HE, NON_IOR_HE],
+  },
+  {
+    name: '/acrylic (en)',
+    path: '/acrylic',
+    page: AcrylicPage,
+    expect: [
+      'graded-collectible and trading-card (TCG) enclosures',
+      'partner-capability baseline, not a Pellexa-owned plant spec',
+      NON_IOR_EN,
+    ],
+  },
+  {
+    name: '/acrylic (he)',
+    path: '/acrylic',
+    page: AcrylicPage,
+    cookie: 'pellexa_lang=he',
+    expect: [PMMA_HEADLINE_HE, COMPLIANCE_ISOLATE_HE, NON_IOR_HE],
+  },
   { name: '/led', path: '/led', page: LedPage, wrap: MarketProvider },
 ]
 
@@ -96,10 +150,13 @@ for (const c of cases) {
     const html = renderToString(
       h(StaticRouter, { location: c.path }, h(ThemeProvider, null, inner)),
     )
-    if (c.expect && !decodeEntities(html).includes(c.expect)) {
-      throw new Error(`rendered but missing expected string: ${c.expect}`)
+    const decoded = decodeEntities(html)
+    for (const expected of c.expect ?? []) {
+      if (!decoded.includes(expected)) {
+        throw new Error(`rendered but missing expected string: ${expected}`)
+      }
     }
-    const note = c.expect ? ', leadership line present' : ''
+    const note = c.expect ? `, ${c.expect.length} assertion(s) ok` : ''
     console.log(`  ok    ${c.name} (${html.length} bytes${note})`)
   } catch (err) {
     failed += 1

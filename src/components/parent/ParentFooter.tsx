@@ -23,7 +23,9 @@ export default function ParentFooter() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
-            <p className="text-xs text-silver-trace">
+            {/* ink-muted/90 lands at ~5.07:1 on --canvas-base. silver-trace,
+                the previous value, measured 1.855:1 and failed WCAG AA. */}
+            <p className="text-xs text-ink-muted/90">
               {c.copyright.replace('{year}', String(new Date().getFullYear()))}
             </p>
             <div className="flex items-center gap-6">

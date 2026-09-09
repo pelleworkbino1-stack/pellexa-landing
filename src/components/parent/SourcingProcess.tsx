@@ -1,48 +1,30 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useLang } from '../../context/LangContext'
 
 /**
  * Five-stage partner-production pipeline for `/sourcing` and `/acrylic`.
- * English-only; must live inside `<main dir="ltr" lang="en">`.
+ *
+ * Reads `content.sourcingProcess`, so the section carries its own directional
+ * island and renders correctly whichever direction the host page is in.
  *
  * Stage 05 is a first-class shipping card (CIF-baseline FCL to destination
  * container terminals). Pellexa coordinates; it is not the freight forwarder,
- * customs broker, or importer of record.
+ * customs broker, or importer of record. That sentence is compliance-bearing
+ * in every locale.
  */
-const STAGES = [
-  {
-    label: '01',
-    title: 'Technical drawings and specs',
-    body: 'Partner-facility drawings, material specs, and certificates submitted for client sign-off before any tool-up.',
-  },
-  {
-    label: '02',
-    title: 'Prototype samples',
-    body: 'Physical samples produced at the partner facility and shipped for evaluation.',
-  },
-  {
-    label: '03',
-    title: 'Pilot batch',
-    body: 'When the brief requires it, a limited trial run before mass production is released.',
-  },
-  {
-    label: '04',
-    title: 'Mass production, QC and insurance',
-    body: 'Full run only after sign-off, under back-to-back contracts (typically 70/30, or 100% advance where the facility requires it). Dual third-party on-site QC (pre-production and packing/pre-shipment). Cargo covered by ALL RISK insurance via a third-party insurer.',
-  },
-  {
-    label: '05',
-    title: 'Managed freight — CIF baseline',
-    body: 'Full Container Load (FCL) maritime freight coordinated to destination container terminals — including US, European, and Israeli commercial ports (CIF baseline) — with clearance documentation aligned alongside licensed local brokers. Pellexa coordinates this chain; we are not the freight forwarder, customs broker, or importer of record.',
-  },
-] as const
-
 export default function SourcingProcess() {
+  const { lang, content } = useLang()
+  const p = content.sourcingProcess
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section className="relative py-16 sm:py-20">
+    <section
+      className="relative py-16 sm:py-20"
+      dir={lang === 'he' ? 'rtl' : 'ltr'}
+      lang={lang}
+    >
       <div className="mx-auto max-w-5xl px-5 sm:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -51,15 +33,15 @@ export default function SourcingProcess() {
           className="mb-10 sm:mb-12"
         >
           <span className="text-[11px] font-bold tracking-widest uppercase text-brand-secondary-300 mb-3 block">
-            Operating Model
+            {p.sectionLabel}
           </span>
           <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">
-            How Pellexa Executes Partner Production
+            {p.title}
           </h2>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 gap-4">
-          {STAGES.map((stage, i) => (
+          {p.stages.map((stage, i) => (
             <motion.div
               key={stage.label}
               initial={{ opacity: 0, y: 24 }}
