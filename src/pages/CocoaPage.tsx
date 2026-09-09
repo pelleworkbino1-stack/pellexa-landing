@@ -3,7 +3,7 @@ import ParentNavbar from '../components/parent/ParentNavbar'
 import ParentFooter from '../components/parent/ParentFooter'
 import ParentContact from '../components/parent/ParentContact'
 import CocoaPortfolio from '../components/parent/CocoaPortfolio'
-import { LangProvider } from '../context/LangContext'
+import { LangProvider, useLang } from '../context/LangContext'
 
 /**
  * Pellexa Cacao Derivatives — dedicated product-line page (/food/cacao).
@@ -21,10 +21,6 @@ import { LangProvider } from '../context/LangContext'
  * this page without leaving the route.
  */
 
-const PAGE_TITLE = 'Pellexa Cacao Derivatives — Single-Origin Filipino Sourcing'
-const PAGE_DESCRIPTION =
-  'Single-origin Filipino cacao derivatives portfolio — premium powder, butter, and liquor grades with verified analytical parameters, HACCP + GMP + FDA compliance, and CIF maritime logistics to global enterprise customers.'
-
 function setMeta(property: string, content: string) {
   const el =
     document.querySelector(`meta[property="${property}"]`) ||
@@ -32,28 +28,44 @@ function setMeta(property: string, content: string) {
   if (el) el.setAttribute('content', content)
 }
 
-export default function CocoaPage() {
+/**
+ * Page body. Lives inside `LangProvider` so `dir`, `lang`, and the SEO meta
+ * tags follow the EN/HE toggle — same split as `AcrylicBody`.
+ */
+function CocoaBody() {
+  const { lang, content } = useLang()
+  const meta = content.cocoa.meta
+
   useEffect(() => {
-    document.title = PAGE_TITLE
-    setMeta('description', PAGE_DESCRIPTION)
-    setMeta('og:title', PAGE_TITLE)
-    setMeta('og:description', PAGE_DESCRIPTION)
+    document.title = meta.title
+    setMeta('description', meta.description)
+    setMeta('og:title', meta.title)
+    setMeta('og:description', meta.description)
     setMeta('og:url', `${window.location.origin}/food/cacao`)
-    setMeta('twitter:title', PAGE_TITLE)
-    setMeta('twitter:description', PAGE_DESCRIPTION)
+    setMeta('twitter:title', meta.title)
+    setMeta('twitter:description', meta.description)
+  }, [meta])
+
+  useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   return (
+    <div className="min-h-screen bg-canvas-base text-white antialiased">
+      <ParentNavbar />
+      <main dir={lang === 'he' ? 'rtl' : 'ltr'} lang={lang}>
+        <CocoaPortfolio />
+        <ParentContact />
+      </main>
+      <ParentFooter />
+    </div>
+  )
+}
+
+export default function CocoaPage() {
+  return (
     <LangProvider>
-      <div className="min-h-screen bg-canvas-base text-white antialiased">
-        <ParentNavbar />
-        <main>
-          <CocoaPortfolio />
-          <ParentContact />
-        </main>
-        <ParentFooter />
-      </div>
+      <CocoaBody />
     </LangProvider>
   )
 }

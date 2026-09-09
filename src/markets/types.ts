@@ -330,8 +330,35 @@ export interface CocoaQualityControlContent {
   checklistHelp: string
 }
 
+/**
+ * Section chrome for the Cacao Derivatives Portfolio — the eyebrows, headline
+ * fragments, and standalone CTAs that were previously hardcoded English inside
+ * `CocoaPortfolio.tsx`. Extracted so `/food/cacao` reaches EN/HE parity.
+ *
+ * The headline is stored as three fragments because the middle one carries the
+ * `bg-clip-text` brand gradient; joining them into one string would flatten
+ * that treatment.
+ */
+export interface CocoaShellContent {
+  eyebrow: string
+  headlineLead: string
+  headlineHighlight: string
+  headlineTail: string
+  subtitle: string
+  applicationsEyebrow: string
+  trustEyebrow: string
+  logisticsEyebrow: string
+  procurementGateLabel: string
+  specPackCta: string
+  /** Pill chip above each overview card. Keyed so a family cannot be missed. */
+  familyLabels: Record<CocoaFamilyId, string>
+}
+
 /** Top-level Cacao Derivatives Portfolio content registry mounted on `ParentContent.cocoa`. */
 export interface CocoaPortfolioContent {
+  /** Drives document.title + og/twitter tags on /food/cacao, per locale. */
+  meta: VerticalMeta
+  shell: CocoaShellContent
   grades: CocoaDerivativeGrade[]
   overviews: CocoaFamilyOverview[]
   applications: CocoaApplicationsMatrix
@@ -456,6 +483,8 @@ export interface FoodContactContent {
 
 /** Top-level Agri-Food portfolio registry mounted on `ParentContent.food`. */
 export interface FoodPortfolioContent {
+  /** Drives document.title + og/twitter tags on the /food hub, per locale. */
+  meta: VerticalMeta
   sectionLabel: string
   title: string
   subtitle: string

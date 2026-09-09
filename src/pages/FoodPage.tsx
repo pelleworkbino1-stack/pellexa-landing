@@ -55,10 +55,6 @@ function setMeta(property: string, content: string) {
   if (el) el.setAttribute('content', content)
 }
 
-const HUB_TITLE = 'Pellexa Agri-Food — Bulk B2B Food Sourcing Portfolio'
-const HUB_DESCRIPTION =
-  'Bulk B2B sourcing across matcha, industrial tea, cacao derivatives, coconut, seed oils, rice, pasta, canned goods, and general dry food. Direct from authorized facilities at Full Container Load volumes and above, with third-party QC and maritime shipping coordinated under CIF or DDP terms.'
-
 function HubHero() {
   const { content } = useLang()
   const food = content.food
@@ -265,30 +261,46 @@ function HubGrid() {
   )
 }
 
-export default function FoodPage() {
+/**
+ * Hub body. Lives inside `LangProvider` so `dir`, `lang`, and the SEO meta
+ * tags follow the EN/HE toggle — same split as `AcrylicBody` and `CocoaBody`.
+ */
+function FoodBody() {
+  const { lang, content } = useLang()
+  const meta = content.food.meta
+
   useEffect(() => {
-    document.title = HUB_TITLE
-    setMeta('description', HUB_DESCRIPTION)
-    setMeta('og:title', HUB_TITLE)
-    setMeta('og:description', HUB_DESCRIPTION)
+    document.title = meta.title
+    setMeta('description', meta.description)
+    setMeta('og:title', meta.title)
+    setMeta('og:description', meta.description)
     setMeta('og:url', `${window.location.origin}/food`)
-    setMeta('twitter:title', HUB_TITLE)
-    setMeta('twitter:description', HUB_DESCRIPTION)
+    setMeta('twitter:title', meta.title)
+    setMeta('twitter:description', meta.description)
+  }, [meta])
+
+  useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   return (
+    <div className="min-h-screen bg-canvas-base text-white antialiased">
+      <ParentNavbar />
+      <main dir={lang === 'he' ? 'rtl' : 'ltr'} lang={lang}>
+        <HubHero />
+        <HubGrid />
+        <OperationalDisclaimer />
+        <FoodContact />
+      </main>
+      <ParentFooter />
+    </div>
+  )
+}
+
+export default function FoodPage() {
+  return (
     <LangProvider>
-      <div className="min-h-screen bg-canvas-base text-white antialiased">
-        <ParentNavbar />
-        <main>
-          <HubHero />
-          <HubGrid />
-          <OperationalDisclaimer />
-          <FoodContact />
-        </main>
-        <ParentFooter />
-      </div>
+      <FoodBody />
     </LangProvider>
   )
 }

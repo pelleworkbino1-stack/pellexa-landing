@@ -79,6 +79,6 @@ For questions, compliance requests, or privacy clarifications, contact our desig
 
 * **Entity:** Pellexa International LLC  
 * **Registered Address:** 30 N Gould St Ste R, Sheridan, WY 82801, USA  
-* **Managing Executive:** Pelle Bino, Founder & Managing Member  
+* **Executive Leadership:** Pelle Bino — Founder & Managing Member  
 * **Executive Contact Email:** pelle@pellexa.com  
 * **Technical Sourcing Inquiries:** led.sales@pellexa.com

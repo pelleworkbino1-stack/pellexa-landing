@@ -37,12 +37,6 @@ import type { CocoaFamilyId } from '../../markets/types'
  * same `blur-[130px]` orb strength, same `grid-pulse` 8s interval).
  */
 
-const FAMILY_PILL_LABEL: Record<CocoaFamilyId, string> = {
-  powder: 'Cocoa Powder',
-  butter: 'Cocoa Butter',
-  liquor: 'Cocoa Liquor',
-}
-
 const FAMILY_ICON: Record<CocoaFamilyId, typeof Bean> = {
   powder: Boxes,
   butter: Beaker,
@@ -53,6 +47,7 @@ const FADE_EASE = [0.22, 1, 0.36, 1] as const
 
 function OverviewCard({
   family,
+  familyLabel,
   title,
   overview,
   cta,
@@ -61,6 +56,7 @@ function OverviewCard({
   gradeCount,
 }: {
   family: CocoaFamilyId
+  familyLabel: string
   title: string
   overview: string
   cta: string
@@ -82,7 +78,7 @@ function OverviewCard({
 
       <span className="inline-flex self-start items-center gap-2 rounded-full bg-brand-secondary-500/10 border border-brand-secondary-400/20 px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase text-brand-secondary-300 mb-3">
         <span className="inline-block w-1 h-1 rounded-full bg-brand-secondary-400/70" />
-        {FAMILY_PILL_LABEL[family]}
+        {familyLabel}
         <span className="text-brand-secondary-300/60">· {gradeCount}</span>
       </span>
 
@@ -148,6 +144,7 @@ function CocoaCheckbox({
 export default function CocoaPortfolio() {
   const { content } = useLang()
   const cocoa = content.cocoa
+  const shell = cocoa.shell
 
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
@@ -209,19 +206,19 @@ export default function CocoaPortfolio() {
         >
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-secondary-500/10 border border-brand-secondary-400/20 px-3 py-1 text-[11px] font-bold tracking-widest uppercase text-brand-secondary-300 mb-5">
             <span className="inline-block w-1 h-1 rounded-full bg-brand-secondary-400/80" />
-            Cacao Derivatives Portfolio
+            {shell.eyebrow}
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.1] tracking-tight text-white mb-5">
-            Single-origin{' '}
+          {/* h1, not h2: this section is the top-level heading of /food/cacao,
+              which is the only route that mounts this component. */}
+          <h1 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.1] tracking-tight text-white mb-5">
+            {shell.headlineLead}{' '}
             <span className="bg-gradient-to-r from-brand-300 via-brand-400 to-brand-500 bg-clip-text text-transparent">
-              cacao asset classes
+              {shell.headlineHighlight}
             </span>{' '}
-            for enterprise formulation
-          </h2>
+            {shell.headlineTail}
+          </h1>
           <p className="text-base sm:text-lg text-ink-muted leading-relaxed">
-            Three technical pillars — powder, butter, and liquor — registered as
-            discrete grade SKUs and routed through a unified compliance and
-            logistics gate.
+            {shell.subtitle}
           </p>
         </motion.div>
 
@@ -231,6 +228,7 @@ export default function CocoaPortfolio() {
             <OverviewCard
               key={o.id}
               family={o.id}
+              familyLabel={shell.familyLabels[o.id]}
               title={o.title}
               overview={o.overview}
               cta={o.cta}
@@ -251,7 +249,7 @@ export default function CocoaPortfolio() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
             <div className="max-w-2xl">
               <span className="inline-block text-[11px] font-bold tracking-widest uppercase text-brand-secondary-300 mb-2">
-                Section 03 · Applications Matrix
+                {shell.applicationsEyebrow}
               </span>
               <h3 className="font-display font-bold text-2xl sm:text-3xl text-white leading-tight mb-3">
                 {cocoa.applications.title}
@@ -358,7 +356,7 @@ export default function CocoaPortfolio() {
               <ShieldCheck size={20} className="text-brand-400" />
             </span>
             <span className="text-[11px] font-bold tracking-widest uppercase text-brand-secondary-300">
-              Section 04 · Trust Infrastructure
+              {shell.trustEyebrow}
             </span>
           </div>
           <h3 className="font-display font-bold text-2xl sm:text-3xl text-white leading-tight mb-3">
@@ -425,7 +423,7 @@ export default function CocoaPortfolio() {
             <div>
               <div className="sticky top-24 rounded-2xl border border-brand-secondary-400/20 bg-canvas-elevated/40 p-5 sm:p-6">
                 <p className="text-[10px] font-bold tracking-widest uppercase text-brand-secondary-300 mb-1.5">
-                  Procurement Gate
+                  {shell.procurementGateLabel}
                 </p>
                 <p className="text-base font-semibold text-white mb-2">
                   {cocoa.qualityControl.checklistLabel}
@@ -449,7 +447,7 @@ export default function CocoaPortfolio() {
                   href="#cocoa-cta"
                   className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 px-5 py-3 text-sm font-semibold text-canvas-base hover:shadow-lg hover:shadow-brand-500/20 transition-all duration-300 hover:scale-[1.01]"
                 >
-                  Issue Specification Pack
+                  {shell.specPackCta}
                   <ArrowRight size={15} className="rtl:rotate-180" />
                 </a>
               </div>
@@ -469,7 +467,7 @@ export default function CocoaPortfolio() {
               <Anchor size={20} className="text-brand-400" />
             </span>
             <span className="text-[11px] font-bold tracking-widest uppercase text-brand-secondary-300">
-              Section 05 · Logistical Authority
+              {shell.logisticsEyebrow}
             </span>
           </div>
           <h3 className="font-display font-bold text-2xl sm:text-3xl text-white leading-tight mb-5">

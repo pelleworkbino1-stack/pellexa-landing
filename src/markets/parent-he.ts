@@ -3,10 +3,17 @@ import type { ParentContent } from './types'
 // ─────────────────────────────────────────────────────────────────────────────
 // Cacao Derivatives Portfolio — Hebrew registry.
 //
-// Sourced from `docs/cocoa_knowlage.md` (Sections 1, 2, 3, 5). Technical
-// descriptors (grade labels, batch chemistry markers, application rows) remain
-// in English pending a full localization pass; the registry shape is identical
-// to `parent-en.ts` so that swap stays pure-content with no type churn.
+// Sourced from `docs/cocoa_knowlage.md` (Sections 1, 2, 3, 5). The registry
+// shape is identical to `parent-en.ts`, so `tsc` enforces field-level parity.
+//
+// LOCALIZATION DEPTH — deliberate, not partial. Section chrome, headings, pill
+// chips, column labels, CTAs, and every operational claim are Hebrew. Grade
+// labels, batch-chemistry markers, analytical bounds, and the application
+// matrix rows stay English: those are the recognized international trade and
+// lab terminology a procurement desk cross-references against the supplier's
+// own COA and technical data sheet, and translating them would break that
+// lookup. The long-form `overviews[].overview` prose stays English for the
+// same reason — it is dense process chemistry, not marketing copy.
 //
 // EXCEPTION — every operational claim IS translated and must stay that way:
 // logistics, MOQ thresholds, certifications, and the customs/import boundary
@@ -16,6 +23,29 @@ import type { ParentContent } from './types'
 // ─────────────────────────────────────────────────────────────────────────────
 
 const parentHeCocoa: ParentContent['cocoa'] = {
+  meta: {
+    title: 'Pellexa נגזרות קקאו — רכש ממקור יחיד מהפיליפינים',
+    description:
+      'תיק נגזרות קקאו ממקור יחיד בפיליפינים — דרגות אבקה, חמאה וליקר עם פרמטרים אנליטיים מאומתים, תאימות HACCP, GMP ו-US-FDA, ולוגיסטיקה ימית בתנאי CIF בהיקפי מכולה מלאה בלבד.',
+  },
+  shell: {
+    eyebrow: 'תיק נגזרות קקאו',
+    headlineLead: 'סוגי נכסי',
+    headlineHighlight: 'קקאו ממקור יחיד',
+    headlineTail: 'לפורמולציה תעשייתית',
+    subtitle:
+      'שלושה עמודי תווך טכניים — אבקה, חמאה וליקר — רשומים כמקטים נפרדים לפי דרגה ומנותבים דרך שער תאימות ולוגיסטיקה מאוחד.',
+    applicationsEyebrow: 'מקטע 03 · מטריצת יישומים',
+    trustEyebrow: 'מקטע 04 · תשתית אמון',
+    logisticsEyebrow: 'מקטע 05 · סמכות לוגיסטית',
+    procurementGateLabel: 'שער רכש',
+    specPackCta: 'הפקת חבילת מפרטים',
+    familyLabels: {
+      powder: 'אבקת קקאו',
+      butter: 'חמאת קקאו',
+      liquor: 'ליקר קקאו',
+    },
+  },
   grades: [
     {
       id: 'powder-industrial-10-12',
@@ -70,34 +100,34 @@ const parentHeCocoa: ParentContent['cocoa'] = {
   overviews: [
     {
       id: 'powder',
-      title: 'Cocoa Powder Portfolio Overview',
+      title: 'סקירת תיק אבקת הקקאו',
       overview:
         'Pellexa’s cocoa powder portfolio represents the intersection of agricultural purity and modern industrial functionality. Sourced directly from premier growing regions and processing hubs in the Philippines, our powders are processed under rigid mechanical parameters to yield uniform particle sizes and impeccable color profiles. Available in both rich, unadulterated Natural structures and expertly balanced Alkalized variants, we supply fat content compositions ranging from high-efficiency industrial baselines (10/12%) through premium mid-ranges (22/24%) up to an elite 30% ultra-high fat culinary grade. Because subtle shifts in pH, granulometry, and oil retention dictate the success of your final product run, we customize exact batch chemistry and performance parameters during direct technical consultations.',
-      cta: 'Request Technical Data Sheet & Book Formulation Review',
+      cta: 'בקשת דף נתונים טכני וקביעת סקירת פורמולציה',
     },
     {
       id: 'butter',
-      title: 'Cocoa Butter Portfolio Overview',
+      title: 'סקירת תיק חמאת הקקאו',
       overview:
         'Engineered for superior crystalline stability, Pellexa’s premium cocoa butter provides the exact polymorphic behaviors required by high-end confectionery and cosmetic manufacturing lines. Extracted cleanly through specialized physical expression, our deodorized and natural butter grades showcase immaculate moisture control and clean melting points. Formatted as efficient, easy-to-scale processing coins, this ingredient ensures reliable tempering properties, optimal snap, low free fatty acids, and uniform glossy finishes. Exact melting profiles, iodine values, and acid value thresholds are calibrated to match specific geographic shipping environments and factory processing conditions upon request.',
-      cta: 'Inquire About Container Load Allocation',
+      cta: 'בירור על הקצאת מכולות',
     },
     {
       id: 'liquor',
-      title: 'Cocoa Liquor & Mass Portfolio Overview',
+      title: 'סקירת תיק ליקר ומסת הקקאו',
       overview:
         "The pure essence of single-origin flavor, Pellexa's Cocoa Liquor (Mass) is composed entirely of finely milled, perfectly fermented cacao beans. Free from artificial emulsifiers, additives, binders, or flavor enhancers, this zero-sugar liquor naturally retains its full, decadent cocoa butter ratio. Available in versatile, high-surface-area coin shapes optimized for automated industrial melting, our liquor options preserve deep, authentic origin terroir. Detailed flavor wheel matrices, microbiological data sheets, particle size distributions (fineness), and custom grinding parameters are engineered exclusively through individual client formulation briefs.",
-      cta: 'Schedule an Enterprise Sourcing Consultation',
+      cta: 'קביעת ייעוץ רכש מוסדי',
     },
   ],
   applications: {
-    title: 'High-Value Industrial & Commercial Applications Matrix',
+    title: 'מטריצת יישומים תעשייתיים ומסחריים בעלי ערך גבוה',
     intro:
-      "To attract corporate R&D, product development managers, and food-beverage innovation teams, this matrix maps Pellexa's supply capabilities directly to profitable industrial applications and specific value propositions:",
+      'המטריצה ממפה את יכולות האספקה של Pellexa אל יישומים תעשייתיים רווחיים והצעות ערך מוגדרות, עבור מחלקות מחקר ופיתוח, מנהלי פיתוח מוצר וצוותי חדשנות בתעשיית המזון והמשקאות. שורות המטריצה נשמרות באנגלית כמונחי סחר בינלאומיים מוכרים:',
     columns: {
-      derivative: 'Derivative Grade / Classification',
-      application: 'High-Value Application Target',
-      valueProposition: 'Corporate Value Proposition',
+      derivative: 'דרגת נגזרת / סיווג',
+      application: 'יעד יישום בעל ערך גבוה',
+      valueProposition: 'הצעת הערך הארגונית',
     },
     rows: [
       {
@@ -138,13 +168,13 @@ const parentHeCocoa: ParentContent['cocoa'] = {
     ],
   },
   qualityControl: {
-    title: 'Trust Infrastructure: Quality-Control & Corporate Certifications',
+    title: 'תשתית אמון: בקרת איכות והסמכות ארגוניות',
     intro:
-      'Pellexa frameworks raw technical data sheet parameters into elite corporate compliance metrics that showcase documented regulatory readiness and institutional trust badges across our digital portfolio:',
-    analyticalTitle: 'Quality-Control Benchmarks & Analytical Parameters',
+      'Pellexa ממסגרת פרמטרים גולמיים מדפי הנתונים הטכניים למדדי תאימות ארגוניים, המציגים מוכנות רגולטורית מתועדת ותגי אמון מוסדיים לאורך כל תיק הפעילות. ערכי הבקרה עצמם נשמרים באנגלית כפי שהם מופיעים בתעודות המעבדה:',
+    analyticalTitle: 'אמות מידה לבקרת איכות ופרמטרים אנליטיים',
     analyticalGroups: [
       {
-        title: 'Chemical & Physical Testing',
+        title: 'בדיקות כימיות ופיזיקליות',
         summary:
           'כל אצווה חוזית נבדקת באופן עצמאי מול קריטריונים מעבדתיים ואנליטיים, כך שחבילת התיעוד שמגיעה לעמיל המכס ולרשות הרגולטורית שלכם תהיה מלאה ועמידה בנקודת הכניסה לנמל.',
         metrics: [
@@ -155,16 +185,16 @@ const parentHeCocoa: ParentContent['cocoa'] = {
         ],
       },
       {
-        title: 'Heavy Metal & Chemical Controls',
+        title: 'בקרת מתכות כבדות וכימיה',
         summary:
-          'Rigid monitoring of volcanic and geographic soil markers ensures all derivatives stay securely within strict international regulatory benchmarks for heavy metals.',
+          'ניטור קפדני של סמני קרקע וולקניים וגיאוגרפיים מבטיח שכל הנגזרות נשארות בתוך אמות המידה הרגולטוריות הבינלאומיות המחמירות למתכות כבדות.',
         metrics: [
           'Cadmium — Maximum 0.6 – 0.8 mg/kg',
           'Lead — Maximum 0.1 mg/kg',
         ],
       },
       {
-        title: 'Microbiological Screening',
+        title: 'סינון מיקרוביולוגי',
         summary:
           'אימות תהליכי חיטוי וסינון מעבדתי עצמאי בכל סבב ייצור חוזי.',
         metrics: [
@@ -175,27 +205,27 @@ const parentHeCocoa: ParentContent['cocoa'] = {
         ],
       },
     ],
-    certificationsTitle: 'Institutional Trust & Global Market Badges',
+    certificationsTitle: 'אמון מוסדי ותגי גישה לשווקים גלובליים',
     certifications: [
       {
-        title: 'Global Food Safety Standards',
+        title: 'תקני בטיחות מזון גלובליים',
         description:
-          'Our manufacturing partners operate under internationally certified food safety management systems, fully compliant with HACCP (Hazard Analysis Critical Control Point) and GMP (Good Manufacturing Practices) protocols.',
+          'שותפי הייצור שלנו פועלים תחת מערכות ניהול בטיחות מזון בהסמכה בינלאומית, בתאימות מלאה לפרוטוקולי \u2066HACCP\u00A0(Hazard\u00A0Analysis\u00A0Critical\u00A0Control\u00A0Point)\u2069 ו-\u2060\u2066GMP\u00A0(Good\u00A0Manufacturing\u00A0Practices)\u2069.',
       },
       {
-        title: 'Global Market Access',
+        title: 'גישה לשווקים גלובליים',
         description:
           'שותפי הייצור רשומים ב-US-FDA וברשויות הבריאות המקומיות, ותיעוד רגולטורי לכל משלוח נבדק ומאומת לפני היציאה מהמפעל. שחרור מהמכס והגשת הצהרות הייבוא מבוצעים על ידי עמיל המכס שלכם תחת רישיון הייבוא שלכם, או דרך שותף ייבוא מקומי — Pellexa אינה היבואן הרשמי.',
       },
       {
-        title: 'Dietary, Cultural, and Ethical Inclusivity',
+        title: 'הכללה תזונתית, תרבותית ואתית',
         description:
-          'Verifiable Halal Certification and comprehensive Non-GMO validation confirming pure, clean-label manufacturing origins, with dedicated pathways available for onboarding market-specific Kosher certifications tailored to your region’s retail mandates.',
+          'הסמכת \u2066Halal\u2069 בת-אימות ואימות \u2066Non-GMO\u2069 מקיף, המאשרים מקורות ייצור נקיים בתווית שקופה, לצד מסלולים ייעודיים להוספת הסמכות כשרות ספציפיות לשוק בהתאם לדרישות הקמעונאות באזורכם.',
       },
     ],
-    checklistLabel: 'Flag the parameters required for your procurement gate',
+    checklistLabel: 'סמנו את הפרמטרים הנדרשים לשער הרכש שלכם',
     checklistHelp:
-      'Selections are routed to our specification desk together with your contact details so the issued technical pack matches your validation pipeline 1:1.',
+      'הבחירות מנותבות לדסק המפרטים שלנו יחד עם פרטי הקשר שלכם, כך שחבילת המפרטים שתופק תתאים לצינור האימות שלכם אחד לאחד.',
   },
   logistics: {
     title: 'רציפות אספקה ותיאום לוגיסטי',
@@ -205,14 +235,14 @@ const parentHeCocoa: ParentContent['cocoa'] = {
     ],
   },
   masterCTA: {
-    sectionLabel: 'Conversion-Oriented Lead Generation (The Master CTA)',
-    headline: 'Architect Your Custom Factory Run: Optimize Your Supply Chain',
+    sectionLabel: 'פניית רכש מוסדית',
+    headline: 'תכננו את סבב הייצור הייעודי שלכם ומטבו את שרשרת האספקה',
     paragraphs: [
-      'In global ingredient sourcing, standard configurations rarely satisfy the strict requirements of a market-leading product line. At Pellexa, we do not place off-the-shelf commodity orders—we engineer dedicated, high-margin ingredient pipelines and align factory-level production metrics to your precise corporate formulation targets. Whether your brand requires unique specifications regarding fat melting curves, precise color intensities, specific fat-to-moisture ratios, particular alkalization depths, pH balancing, or localized forward-contract logistical scheduling, our team is equipped to tailor your run.',
+      'ברכש רכיבים גלובלי, תצורות מדף כמעט אינן עונות על הדרישות המחמירות של קו מוצרים מוביל בשוק. ב-\u2060Pellexa איננו מבצעים הזמנות סחורה מקטלוג — אנו בונים צינורות רכיבים ייעודיים ומיישרים את מדדי הייצור ברמת המפעל אל יעדי הפורמולציה המדויקים שלכם. בין אם המותג שלכם נדרש למפרטים ייחודיים בעקומות המסת שומן, בעצמות צבע מדויקות, ביחסי שומן-לחות, בעומק אלקליזציה, באיזון \u2066pH\u2069 או בתכנון לוגיסטי של חוזים עתידיים מקומיים — הצוות שלנו מותאם להנדסת הסבב שלכם.',
       'כל התקשרות מתבצעת בהיקפי מכולה מלאה (FCL) ומעלה. סף זה קבוע, והוא בדיוק מה שמאפשר תמחור ברמת המפעל וסבבי ייצור ייעודיים. בתוך המסגרת הזו, חלוקת ההקצאה בין הדרגות, לוחות אספקה מדורגים וחוזים עתידיים מרובי-מכולות נבנים סביב קצב הייצור שלכם. לבניית תוכנית המכולות שלכם — קבעו שיחת ייעוץ ראשונית.',
-      "Do not leave your product chemistry or supply continuity to chance. Contact Pellexa's sourcing division today to register your technical requirements, review comprehensive specification sheets, arrange local sample evaluations, and design a scalable container-load infrastructure engineered directly for your brand.",
+      'אל תשאירו את כימיית המוצר או את רציפות האספקה שלכם ליד המקרה. פנו לחטיבת הרכש של Pellexa כדי לרשום את הדרישות הטכניות שלכם, לעבור על דפי מפרטים מלאים, לתאם הערכת דגימות מקומית ולתכנן תשתית מכולות ניתנת להרחבה, מהונדסת ישירות עבור המותג שלכם.',
     ],
-    cta: 'Schedule a Corporate Sourcing Consultation',
+    cta: 'קביעת ייעוץ רכש מוסדי',
   },
 }
 
@@ -227,6 +257,11 @@ const parentHeCocoa: ParentContent['cocoa'] = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const parentHeFood: ParentContent['food'] = {
+  meta: {
+    title: 'Pellexa מזון וחקלאות — תיק רכש מזון B2B בתפזורת',
+    description:
+      'רכש B2B בתפזורת במאצ׳ה, תה תעשייתי, נגזרות קקאו, קוקוס, שמני זרעים, אורז, פסטה, שימורים ומזון יבש כללי. ישירות ממפעלים מורשים בהיקפי מכולה מלאה (FCL) ומעלה, עם בקרת איכות צד-שלישי ושילוח ימי בתנאי CIF או DDP.',
+  },
   sectionLabel: 'Pellexa Agri-Food',
   title: 'תיק רכש מזון B2B בתפזורת',
   subtitle:

@@ -9,6 +9,29 @@ import type { ParentContent } from './types'
 // ─────────────────────────────────────────────────────────────────────────────
 
 const parentEnCocoa: ParentContent['cocoa'] = {
+  meta: {
+    title: 'Pellexa Cacao Derivatives — Single-Origin Filipino Sourcing',
+    description:
+      'Single-origin Filipino cacao derivatives portfolio — premium powder, butter, and liquor grades with verified analytical parameters, HACCP + GMP + FDA compliance, and CIF maritime logistics to global enterprise customers.',
+  },
+  shell: {
+    eyebrow: 'Cacao Derivatives Portfolio',
+    headlineLead: 'Single-origin',
+    headlineHighlight: 'cacao asset classes',
+    headlineTail: 'for enterprise formulation',
+    subtitle:
+      'Three technical pillars — powder, butter, and liquor — registered as discrete grade SKUs and routed through a unified compliance and logistics gate.',
+    applicationsEyebrow: 'Section 03 · Applications Matrix',
+    trustEyebrow: 'Section 04 · Trust Infrastructure',
+    logisticsEyebrow: 'Section 05 · Logistical Authority',
+    procurementGateLabel: 'Procurement Gate',
+    specPackCta: 'Issue Specification Pack',
+    familyLabels: {
+      powder: 'Cocoa Powder',
+      butter: 'Cocoa Butter',
+      liquor: 'Cocoa Liquor',
+    },
+  },
   grades: [
     {
       id: 'powder-industrial-10-12',
@@ -220,6 +243,11 @@ const parentEnCocoa: ParentContent['cocoa'] = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const parentEnFood: ParentContent['food'] = {
+  meta: {
+    title: 'Pellexa Agri-Food — Bulk B2B Food Sourcing Portfolio',
+    description:
+      'Bulk B2B sourcing across matcha, industrial tea, cacao derivatives, coconut, seed oils, rice, pasta, canned goods, and general dry food. Direct from authorized facilities at Full Container Load volumes and above, with third-party QC and maritime shipping coordinated under CIF or DDP terms.',
+  },
   sectionLabel: 'Pellexa Agri-Food',
   title: 'Bulk B2B Food Sourcing Portfolio',
   subtitle:
