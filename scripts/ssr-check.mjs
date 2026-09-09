@@ -71,8 +71,11 @@ const [ParentPage, FoodPage, SourcingPage, LedPage] = await Promise.all([
 const { MarketProvider } = await vite.ssrLoadModule('/src/context/MarketContext.tsx')
 const { ThemeProvider } = await vite.ssrLoadModule('/src/theme/ThemeProvider.tsx')
 
-const LEADERSHIP_EN = 'Executive Leadership: Pelle Bino — Founder & Managing Member'
-const LEADERSHIP_HE = 'הנהלה ראשית: פלה בינו — מייסד ומנהל כללי (Managing Member)'
+// The U+00A0 escapes must mirror the registries exactly -- they are load-bearing
+// there (bidi bracket integrity in Hebrew, ampersand orphaning in English), so a
+// plain space here would silently stop asserting the shipped strings.
+const LEADERSHIP_EN = 'Executive Leadership: Pelle Bino — Founder\u00A0&\u00A0Managing Member'
+const LEADERSHIP_HE = 'הנהלה ראשית: פלה בינו — מייסד ומנהל כללי (Managing\u00A0Member)'
 
 const cases = [
   { name: '/ (en)', path: '/', page: ParentPage, expect: LEADERSHIP_EN },

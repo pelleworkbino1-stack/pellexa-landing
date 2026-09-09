@@ -38,7 +38,7 @@ export default function ParentAbout() {
             />
             <p
               dir="auto"
-              className="text-xs sm:text-sm font-medium tracking-wide text-ink-dim/90"
+              className="text-xs sm:text-sm font-medium tracking-wide text-ink-muted/90"
             >
               {c.leadership}
             </p>

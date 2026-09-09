@@ -487,7 +487,11 @@ export const parentHe: ParentContent = {
     titleFaded: 'מפעלים גלובליים מאומתים לשוק שלך',
     subtitle:
       'חברת פלקסה אינטרנשיונל מתאמת תוכניות רכש מוסדיות (B2B), ומחברת שרשראות אספקה ישירות מרצפת הייצור אל נמלי יעד מרכזיים בצפון אמריקה, אירופה, ישראל ושווקים בינלאומיים. אנחנו לא משלח בינלאומי, עמיל מכס או היבואן הרשמי — אנחנו בונים, מאמתים ומתאמים כל עסקה במסגרת הסכמי NCNDA וחוזי גב-אל-גב.',
-    leadership: 'הנהלה ראשית: פלה בינו — מייסד ומנהל כללי (Managing Member)',
+    // U+00A0 keeps the Latin parenthetical unbreakable. If a line break lands
+    // inside it, bidi mirroring inverts the brackets and the line renders as
+    // "Managing)" / "(Member" — reproduced at 360-412px, the most common
+    // phone widths. Do not replace with a plain space.
+    leadership: 'הנהלה ראשית: פלה בינו — מייסד ומנהל כללי (Managing\u00A0Member)',
     pillars: [
       {
         title: 'ספקים מאומתים ומסגרת חוזית',

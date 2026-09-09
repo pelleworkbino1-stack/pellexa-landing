@@ -480,7 +480,9 @@ export const parentEn: ParentContent = {
     titleFaded: 'Verified Global Factories & Your Market',
     subtitle:
       'Pellexa International LLC coordinates institutional B2B procurement programs, structuring direct-from-mill supply chains to primary destination ports across North America, Europe, Israel, and global commercial hubs. We are not a freight forwarder, customs broker, or importer of record — we structure, verify, and coordinate every transaction under NCNDA and back-to-back contract frameworks.',
-    leadership: 'Executive Leadership: Pelle Bino — Founder & Managing Member',
+    // U+00A0 binds "Founder & Managing" into one unbreakable phrase so the
+    // ampersand can neither orphan at the end of a line nor start one.
+    leadership: 'Executive Leadership: Pelle Bino — Founder\u00A0&\u00A0Managing Member',
     pillars: [
       {
         title: 'Verified Suppliers & Contract Framework',
