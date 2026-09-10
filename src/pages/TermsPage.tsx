@@ -13,9 +13,12 @@ import { LangProvider } from '../context/LangContext'
  * `docs/TERMS_AND_CONDITIONS.md`, which is the legal source of truth. Edit the
  * markdown first, then mirror it here — never the other way around.
  *
- * The body is deliberately pinned to `dir="ltr" lang="en"`: `LangProvider`
- * flips `<html>` to RTL when the navbar toggle is set to Hebrew, and the legal
- * text must stay left-to-right regardless of that chrome state.
+ * The whole route is pinned to `dir="ltr" lang="en"`, chrome included.
+ * `LangProvider` takes `force="en"` so the navbar and footer stay English even
+ * for a visitor carrying `pellexa_lang=he` — English clauses framed in Hebrew
+ * chrome read as an inconsistency under bank review. The pin is non-destructive:
+ * `force` also suppresses the cookie write, so the stored Hebrew preference
+ * survives and resumes on every other route.
  *
  * Unlike the vertical pages, section content carries no scroll-reveal
  * animation. Opacity-gated legal text would break in-page search and would
@@ -335,8 +338,8 @@ export default function TermsPage() {
   }, [])
 
   return (
-    <LangProvider>
-      <div className="min-h-screen bg-canvas-base text-white antialiased">
+    <LangProvider force="en">
+      <div dir="ltr" lang="en" className="min-h-screen bg-canvas-base text-white antialiased">
         <ParentNavbar />
         <main dir="ltr" lang="en">
           <LegalHero />

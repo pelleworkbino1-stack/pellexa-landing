@@ -144,6 +144,23 @@ const CACAO_METRIC_KEPT_EN = 'Cadmium — Maximum 0.6 – 0.8 mg/kg'
 // legal text stays LTR even while LangProvider has flipped <html> to RTL.
 const PINNED_LTR = '<main dir="ltr" lang="en">'
 
+// The legal routes now pin their chrome too, via LangProvider force="en". The
+// wrapper carries the pin so the navbar and footer are LTR on first paint,
+// before the <html> effect runs.
+const PINNED_LTR_ROOT = '<div dir="ltr" lang="en"'
+
+// English nav labels and the Hebrew ones they must never fall back to. Asserted
+// on the Hebrew legal cases specifically: those are the ones that used to render
+// an English legal body inside a Hebrew navbar and footer.
+const LEGAL_CHROME_EN = ['>Contact<', '>Get in Touch<']
+const LEGAL_CHROME_HE_FORBID = [
+  'צור קשר',        // nav link + CTA
+  'פתרונות',        // nav link
+  'אודות',          // nav link
+  'תנאי שימוש',     // footer legal link
+  'הצומת האסטרטגי', // footer tagline
+]
+
 // Cross-vertical contamination guard. The LED markets carried an acrylic
 // solution card that deep-linked to /acrylic and shipped a "High-Margin"
 // highlight pill. Both the vertical bleed and the margin claim are now gone,
@@ -260,20 +277,33 @@ const cases = [
   // pinned dir="ltr" lang="en" and the navbar toggle is suppressed, so the
   // Hebrew case asserts the copy does NOT switch. `/privacy` also pins the
   // unified founder title.
-  { name: '/terms (en)', path: '/terms', page: TermsPage, expect: [PINNED_LTR], h1: 1 },
+  {
+    name: '/terms (en)',
+    path: '/terms',
+    page: TermsPage,
+    expect: [PINNED_LTR, PINNED_LTR_ROOT, ...LEGAL_CHROME_EN],
+    h1: 1,
+  },
   {
     name: '/terms (he)',
     path: '/terms',
     page: TermsPage,
     cookie: 'pellexa_lang=he',
-    expect: [PINNED_LTR, 'Terms and Conditions'],
+    expect: [PINNED_LTR, PINNED_LTR_ROOT, 'Terms and Conditions', ...LEGAL_CHROME_EN],
+    forbid: LEGAL_CHROME_HE_FORBID,
     h1: 1,
   },
   {
     name: '/privacy (en)',
     path: '/privacy',
     page: PrivacyPage,
-    expect: [PINNED_LTR, LEADERSHIP_PRIVACY_LABEL, LEADERSHIP_PRIVACY_VALUE],
+    expect: [
+      PINNED_LTR,
+      PINNED_LTR_ROOT,
+      LEADERSHIP_PRIVACY_LABEL,
+      LEADERSHIP_PRIVACY_VALUE,
+      ...LEGAL_CHROME_EN,
+    ],
     h1: 1,
   },
   {
@@ -281,7 +311,14 @@ const cases = [
     path: '/privacy',
     page: PrivacyPage,
     cookie: 'pellexa_lang=he',
-    expect: [PINNED_LTR, LEADERSHIP_PRIVACY_LABEL, LEADERSHIP_PRIVACY_VALUE],
+    expect: [
+      PINNED_LTR,
+      PINNED_LTR_ROOT,
+      LEADERSHIP_PRIVACY_LABEL,
+      LEADERSHIP_PRIVACY_VALUE,
+      ...LEGAL_CHROME_EN,
+    ],
+    forbid: LEGAL_CHROME_HE_FORBID,
     h1: 1,
   },
 ]
