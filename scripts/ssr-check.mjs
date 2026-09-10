@@ -90,7 +90,7 @@ const { ThemeProvider } = await vite.ssrLoadModule('/src/theme/ThemeProvider.tsx
 // there (bidi bracket integrity in Hebrew, ampersand orphaning in English), so a
 // plain space here would silently stop asserting the shipped strings.
 const LEADERSHIP_EN = 'Executive Leadership: Pelle Bino — Founder\u00A0&\u00A0Managing Member'
-const LEADERSHIP_HE = 'הנהלה ראשית: פלה בינו — מייסד ומנהל כללי (Managing\u00A0Member)'
+const LEADERSHIP_HE = 'הנהלה ראשית: פלא בינו — מייסד ומנהל כללי (Managing\u00A0Member)'
 
 // PrivacyPage carries the same standardized title, but as a markdown bullet
 // whose "**Executive Leadership:**" label becomes its own <strong>. The label
@@ -143,6 +143,14 @@ const CACAO_METRIC_KEPT_EN = 'Cadmium — Maximum 0.6 – 0.8 mg/kg'
 // TermsPage and PrivacyPage both render `<main dir="ltr" lang="en">` so the
 // legal text stays LTR even while LangProvider has flipped <html> to RTL.
 const PINNED_LTR = '<main dir="ltr" lang="en">'
+
+// Cross-vertical contamination guard. The LED markets carried an acrylic
+// solution card that deep-linked to /acrylic and shipped a "High-Margin"
+// highlight pill. Both the vertical bleed and the margin claim are now gone,
+// so each LED route asserts its three core cards and forbids any acrylic or
+// margin string returning through a registry edit.
+const LED_ACRYLIC_FORBID = ['Acrylic', 'acrylic', 'High-Margin']
+const LED_ACRYLIC_FORBID_HE = ['אקריל', 'מרווח גבוה']
 
 const cases = [
   { name: '/ (en)', path: '/', page: ParentPage, expect: [LEADERSHIP_EN] },
@@ -230,7 +238,23 @@ const cases = [
     cookie: 'pellexa_lang=he',
     expect: [PMMA_HEADLINE_HE, COMPLIANCE_ISOLATE_HE, NON_IOR_HE],
   },
-  { name: '/led', path: '/led', page: LedPage, wrap: MarketProvider },
+  {
+    name: '/led (global)',
+    path: '/led',
+    page: LedPage,
+    wrap: MarketProvider,
+    expect: ['Crystal-Clear Indoor Displays', 'Stage-Ready Event Displays'],
+    forbid: LED_ACRYLIC_FORBID,
+  },
+  {
+    name: '/led/il (he)',
+    path: '/led/il',
+    page: LedPage,
+    wrap: MarketProvider,
+    cookie: 'pellexa_market=il',
+    expect: ['תצוגות פנימיות חדות', 'תצוגות לבמה ואירועים'],
+    forbid: LED_ACRYLIC_FORBID_HE,
+  },
 
   // Legal routes are English-authoritative by design (answer 1B): the body is
   // pinned dir="ltr" lang="en" and the navbar toggle is suppressed, so the

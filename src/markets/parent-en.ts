@@ -109,7 +109,7 @@ const parentEnCocoa: ParentContent['cocoa'] = {
   applications: {
     title: 'High-Value Industrial & Commercial Applications Matrix',
     intro:
-      "To attract corporate R&D, product development managers, and food-beverage innovation teams, this matrix maps Pellexa's supply capabilities directly to profitable industrial applications and specific value propositions:",
+      "To attract corporate R&D, product development managers, and food-beverage innovation teams, this matrix maps Pellexa's supply capabilities directly to commercial-scale industrial applications and specific value propositions:",
     columns: {
       derivative: 'Derivative Grade / Classification',
       application: 'High-Value Application Target',
@@ -224,7 +224,7 @@ const parentEnCocoa: ParentContent['cocoa'] = {
     sectionLabel: 'Conversion-Oriented Lead Generation (The Master CTA)',
     headline: 'Architect Your Custom Factory Run: Optimize Your Supply Chain',
     paragraphs: [
-      'In global ingredient sourcing, standard configurations rarely satisfy the strict requirements of a market-leading product line. At Pellexa, we do not place off-the-shelf commodity orders—we engineer dedicated, high-margin ingredient pipelines and align factory-level production metrics to your precise corporate formulation targets. Whether your brand requires unique specifications regarding fat melting curves, precise color intensities, specific fat-to-moisture ratios, particular alkalization depths, pH balancing, or localized forward-contract logistical scheduling, our team is equipped to tailor your run.',
+      'In global ingredient sourcing, standard configurations rarely satisfy the strict requirements of a market-leading product line. At Pellexa, we do not place off-the-shelf commodity orders—we engineer dedicated, specification-grade ingredient pipelines and align factory-level production metrics to your precise corporate formulation targets. Whether your brand requires unique specifications regarding fat melting curves, precise color intensities, specific fat-to-moisture ratios, particular alkalization depths, pH balancing, or localized forward-contract logistical scheduling, our team is equipped to tailor your run.',
       'Every engagement runs at Full Container Load volumes and above. That threshold is fixed, and it is precisely what makes factory-level pricing and dedicated production runs possible. Within it, grade allocation, staged delivery schedules, and multi-container forward contracts are structured around your production cadence. To scope your container plan, book an exploratory advisory call.',
       "Do not leave your product chemistry or supply continuity to chance. Contact Pellexa's sourcing division today to register your technical requirements, review comprehensive specification sheets, arrange local sample evaluations, and design a scalable container-load infrastructure engineered directly for your brand.",
     ],
