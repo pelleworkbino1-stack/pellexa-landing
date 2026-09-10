@@ -469,7 +469,7 @@ const parentEnSourcing: ParentContent['sourcing'] = {
     description:
       'Industrial and institutional sourcing from audited Asia manufacturing partners — heavy equipment and machinery, building and construction materials, precision acrylic and engineered PMMA, and luxury brand packaging. FCL-scale minimums for standard industrial lines; project-based dynamic MOQ for specialized fabrication lines.',
   },
-  email: 'pelle@pellexa.com',
+  email: 'tech.sales@pellexa.com',
   hero: {
     eyebrow: 'Audited Asia Manufacturing Partners',
     headlineTop: 'General',

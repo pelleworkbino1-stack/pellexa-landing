@@ -508,7 +508,7 @@ const parentHeSourcing: ParentContent['sourcing'] = {
     description:
       'רכש תעשייתי ומוסדי משותפי ייצור מבוקרים באסיה — ציוד כבד ומכונות, חומרי בניין ובנייה, אקריל מדויק ו-\u2060PMMA מהונדס, ואריזות מותג יוקרה. מינימום בהיקף מכולה מלאה (\u2066FCL\u2069) לקווים תעשייתיים סטנדרטיים; \u2066MOQ\u2069 דינמי לפי פרויקט לקווי ייצור ייעודיים.',
   },
-  email: 'pelle@pellexa.com',
+  email: 'tech.sales@pellexa.com',
   hero: {
     eyebrow: 'שותפי ייצור מבוקרים באסיה',
     headlineTop: 'רכש',
